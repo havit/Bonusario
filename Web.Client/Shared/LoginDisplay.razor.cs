@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Havit.NewProjectTemplate.Web.Client.Shared
+namespace Havit.Bonusario.Web.Client.Shared
 {
 	public partial class LoginDisplay
 	{

@@ -12,10 +12,10 @@ using Havit.Blazor.Components.Web.Bootstrap;
 using Havit.Blazor.Grpc.Client;
 using Havit.Blazor.Grpc.Client.ServerExceptions;
 using Havit.Blazor.Grpc.Client.WebAssembly;
-using Havit.NewProjectTemplate.Contracts;
-using Havit.NewProjectTemplate.Contracts.System;
-using Havit.NewProjectTemplate.Web.Client.Infrastructure.Grpc;
-using Havit.NewProjectTemplate.Web.Client.Infrastructure.Security;
+using Havit.Bonusario.Contracts;
+using Havit.Bonusario.Contracts.System;
+using Havit.Bonusario.Web.Client.Infrastructure.Grpc;
+using Havit.Bonusario.Web.Client.Infrastructure.Security;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
@@ -23,7 +23,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace Havit.NewProjectTemplate.Web.Client
+namespace Havit.Bonusario.Web.Client
 {
 	public class Program
 	{
@@ -45,8 +45,8 @@ namespace Havit.NewProjectTemplate.Web.Client
 			builder.Services.AddHxServices();
 			builder.Services.AddHxMessenger();
 			builder.Services.AddHxMessageBoxHost();
-			Havit.NewProjectTemplate.Web.Client.Resources.ResourcesServiceCollectionInstaller.AddGeneratedResourceWrappers(builder.Services);
-			Havit.NewProjectTemplate.Resources.ResourcesServiceCollectionInstaller.AddGeneratedResourceWrappers(builder.Services);
+			Havit.Bonusario.Web.Client.Resources.ResourcesServiceCollectionInstaller.AddGeneratedResourceWrappers(builder.Services);
+			Havit.Bonusario.Resources.ResourcesServiceCollectionInstaller.AddGeneratedResourceWrappers(builder.Services);
 			SetHxComponents();
 
 			AddGrpcClient(builder);
@@ -77,7 +77,7 @@ namespace Havit.NewProjectTemplate.Web.Client
 						var backendUrl = navigationManager.BaseUri;
 
 						return provider.GetRequiredService<AuthorizationMessageHandler>()
-							.ConfigureHandler(authorizedUrls: new[] { backendUrl }); // TODO? as neede: , scopes: new[] { "havit-NewProjectTemplate-api" });
+							.ConfigureHandler(authorizedUrls: new[] { backendUrl }); // TODO? as neede: , scopes: new[] { "havit-Bonusario-api" });
 					})
 					.AddInterceptor<AuthorizationGrpcClientInterceptor>();
 				});

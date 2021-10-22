@@ -5,13 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Havit.Data.EntityFrameworkCore;
 using Havit.Data.Patterns.DataSeeds;
-using Havit.NewProjectTemplate.DataLayer.Seeds.Core;
+using Havit.Bonusario.DataLayer.Seeds.Core;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Havit.NewProjectTemplate.DependencyInjection;
+using Havit.Bonusario.DependencyInjection;
 
-namespace Havit.NewProjectTemplate.TestHelpers
+namespace Havit.Bonusario.TestHelpers
 {
 	public class IntegrationTestBase
 	{

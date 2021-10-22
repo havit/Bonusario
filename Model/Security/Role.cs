@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Havit.NewProjectTemplate.Model.Security
+namespace Havit.Bonusario.Model.Security
 {
 	[Cache(Priority = CacheItemPriority.High)]
 	public class Role

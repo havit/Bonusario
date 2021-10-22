@@ -1,8 +1,8 @@
-﻿using Havit.NewProjectTemplate.Model.Localizations;
+﻿using Havit.Bonusario.Model.Localizations;
 using Havit.Model.Localizations;
 using System.ComponentModel.DataAnnotations;
 
-namespace Havit.NewProjectTemplate.Model.Common
+namespace Havit.Bonusario.Model.Common
 {
 	public class CountryLocalization : ILocalization<Country>
 	{

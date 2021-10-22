@@ -3,8 +3,8 @@
 	<PropertyGroup>
 		<TargetFramework>net5.0</TargetFramework>
 		<IsPackable>false</IsPackable>
-		<AssemblyName>Havit.NewProjectTemplate.DataLayer.Tests</AssemblyName>
-		<RootNamespace>Havit.NewProjectTemplate.DataLayer.Tests</RootNamespace>
+		<AssemblyName>Havit.Bonusario.DataLayer.Tests</AssemblyName>
+		<RootNamespace>Havit.Bonusario.DataLayer.Tests</RootNamespace>
 		<PublishDir>obj\$(Configuration)\publish</PublishDir>
 	</PropertyGroup>
 

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Havit.NewProjectTemplate.Model.Common
+namespace Havit.Bonusario.Model.Common
 {
 	public class ApplicationSettings
 	{

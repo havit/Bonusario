@@ -1,11 +1,11 @@
 ﻿using Havit.Data.Patterns.DataSeeds;
-using Havit.NewProjectTemplate.Model.Common;
-using Havit.NewProjectTemplate.Model.Localizations;
+using Havit.Bonusario.Model.Common;
+using Havit.Bonusario.Model.Localizations;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Havit.NewProjectTemplate.DataLayer.Seeds.Core.Common
+namespace Havit.Bonusario.DataLayer.Seeds.Core.Common
 {
 	public class CountrySeed : DataSeed<CoreProfile>
 	{

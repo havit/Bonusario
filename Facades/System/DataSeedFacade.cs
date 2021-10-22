@@ -6,17 +6,17 @@ using Havit;
 using Havit.Data.Patterns.DataSeeds;
 using Havit.Data.Patterns.DataSeeds.Profiles;
 using Havit.Extensions.DependencyInjection.Abstractions;
-using Havit.NewProjectTemplate.Contracts;
-using Havit.NewProjectTemplate.Contracts.System;
-using Havit.NewProjectTemplate.DataLayer.Seeds.Core;
-using Havit.NewProjectTemplate.Facades.Infrastructure.Security;
-using Havit.NewProjectTemplate.Facades.Infrastructure.Security.Authorization;
-using Havit.NewProjectTemplate.Model.Security;
-using Havit.NewProjectTemplate.Services.Infrastructure;
+using Havit.Bonusario.Contracts;
+using Havit.Bonusario.Contracts.System;
+using Havit.Bonusario.DataLayer.Seeds.Core;
+using Havit.Bonusario.Facades.Infrastructure.Security;
+using Havit.Bonusario.Facades.Infrastructure.Security.Authorization;
+using Havit.Bonusario.Model.Security;
+using Havit.Bonusario.Services.Infrastructure;
 using Havit.Services.Caching;
 using Microsoft.AspNetCore.Authorization;
 
-namespace Havit.NewProjectTemplate.Facades.System
+namespace Havit.Bonusario.Facades.System
 {
 	/// <summary>
 	/// Fasáda k seedování dat.

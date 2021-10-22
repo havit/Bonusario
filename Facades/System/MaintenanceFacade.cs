@@ -5,12 +5,12 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Havit.Extensions.DependencyInjection.Abstractions;
-using Havit.NewProjectTemplate.Contracts.System;
-using Havit.NewProjectTemplate.Model.Security;
+using Havit.Bonusario.Contracts.System;
+using Havit.Bonusario.Model.Security;
 using Havit.Services.Caching;
 using Microsoft.AspNetCore.Authorization;
 
-namespace Havit.NewProjectTemplate.Facades.System
+namespace Havit.Bonusario.Facades.System
 {
 	[Service]
 	[Authorize(Roles = nameof(Role.Entry.SystemAdministrator))]

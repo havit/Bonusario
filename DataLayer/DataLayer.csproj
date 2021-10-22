@@ -2,8 +2,8 @@
 
 	<PropertyGroup>
 		<TargetFramework>net5.0</TargetFramework>
-		<AssemblyName>Havit.NewProjectTemplate.DataLayer</AssemblyName>
-		<RootNamespace>Havit.NewProjectTemplate.DataLayer</RootNamespace>
+		<AssemblyName>Havit.Bonusario.DataLayer</AssemblyName>
+		<RootNamespace>Havit.Bonusario.DataLayer</RootNamespace>
 	</PropertyGroup>
 
 	<ItemGroup>

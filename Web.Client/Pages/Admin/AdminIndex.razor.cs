@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 using Blazored.LocalStorage;
 using Havit.Blazor.Components.Web;
 using Havit.Blazor.Components.Web.Bootstrap;
-using Havit.NewProjectTemplate.Contracts.System;
-using Havit.NewProjectTemplate.Web.Client.Pages.Admin.Components;
-using Havit.NewProjectTemplate.Web.Client.Resources;
-using Havit.NewProjectTemplate.Web.Client.Resources.Pages.Admin;
+using Havit.Bonusario.Contracts.System;
+using Havit.Bonusario.Web.Client.Pages.Admin.Components;
+using Havit.Bonusario.Web.Client.Resources;
+using Havit.Bonusario.Web.Client.Resources.Pages.Admin;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Localization;
 
-namespace Havit.NewProjectTemplate.Web.Client.Pages.Admin
+namespace Havit.Bonusario.Web.Client.Pages.Admin
 {
 	public partial class AdminIndex : ComponentBase
 	{

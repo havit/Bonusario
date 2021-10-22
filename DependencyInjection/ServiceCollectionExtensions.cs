@@ -6,14 +6,14 @@ using Havit.Data.EntityFrameworkCore.Patterns.DependencyInjection;
 using Havit.Data.EntityFrameworkCore.Patterns.UnitOfWorks.EntityValidation;
 using Havit.Extensions.DependencyInjection;
 using Havit.Extensions.DependencyInjection.Abstractions;
-using Havit.NewProjectTemplate.DataLayer.DataSources.Common;
-using Havit.NewProjectTemplate.DataLayer.Repositories.Common;
-using Havit.NewProjectTemplate.DependencyInjection.ConfigrationOptions;
-using Havit.NewProjectTemplate.Entity;
-using Havit.NewProjectTemplate.Services.Infrastructure;
-using Havit.NewProjectTemplate.Services.Infrastructure.FileStorages;
-using Havit.NewProjectTemplate.Services.Jobs;
-using Havit.NewProjectTemplate.Services.TimeServices;
+using Havit.Bonusario.DataLayer.DataSources.Common;
+using Havit.Bonusario.DataLayer.Repositories.Common;
+using Havit.Bonusario.DependencyInjection.ConfigrationOptions;
+using Havit.Bonusario.Entity;
+using Havit.Bonusario.Services.Infrastructure;
+using Havit.Bonusario.Services.Infrastructure.FileStorages;
+using Havit.Bonusario.Services.Jobs;
+using Havit.Bonusario.Services.TimeServices;
 using Havit.Services.Azure.FileStorage;
 using Havit.Services.Caching;
 using Havit.Services.FileStorage;
@@ -23,7 +23,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Havit.NewProjectTemplate.DependencyInjection
+namespace Havit.Bonusario.DependencyInjection
 {
 	public static class ServiceCollectionExtensions
 	{
@@ -96,13 +96,13 @@ namespace Havit.NewProjectTemplate.DependencyInjection
 		private static void InstallHavitEntityFramework(IServiceCollection services, InstallConfiguration configuration)
 		{
 			DbContextOptions options = configuration.UseInMemoryDb
-				? new DbContextOptionsBuilder<NewProjectTemplateDbContext>().UseInMemoryDatabase(nameof(NewProjectTemplateDbContext)).Options
-				: new DbContextOptionsBuilder<NewProjectTemplateDbContext>().UseSqlServer(configuration.DatabaseConnectionString, c => c.MaxBatchSize(30)).Options;
+				? new DbContextOptionsBuilder<BonusarioDbContext>().UseInMemoryDatabase(nameof(BonusarioDbContext)).Options
+				: new DbContextOptionsBuilder<BonusarioDbContext>().UseSqlServer(configuration.DatabaseConnectionString, c => c.MaxBatchSize(30)).Options;
 
 			services.WithEntityPatternsInstaller()
 				.AddEntityPatterns()
 				//.AddLocalizationServices<Language>()
-				.AddDbContext<NewProjectTemplateDbContext>(options)
+				.AddDbContext<BonusarioDbContext>(options)
 				.AddDataLayer(typeof(IApplicationSettingsDataSource).Assembly)
 				.AddLookupService<ICountryByIsoCodeLookupService, CountryByIsoCodeLookupService>();
 
@@ -119,14 +119,14 @@ namespace Havit.NewProjectTemplate.DependencyInjection
 
 		private static void InstallByServiceAttribute(IServiceCollection services, InstallConfiguration configuration)
 		{
-			services.AddByServiceAttribute(typeof(Havit.NewProjectTemplate.DataLayer.Properties.AssemblyInfo).Assembly, configuration.ServiceProfiles);
-			services.AddByServiceAttribute(typeof(Havit.NewProjectTemplate.Services.Properties.AssemblyInfo).Assembly, configuration.ServiceProfiles);
-			services.AddByServiceAttribute(typeof(Havit.NewProjectTemplate.Facades.Properties.AssemblyInfo).Assembly, configuration.ServiceProfiles);
+			services.AddByServiceAttribute(typeof(Havit.Bonusario.DataLayer.Properties.AssemblyInfo).Assembly, configuration.ServiceProfiles);
+			services.AddByServiceAttribute(typeof(Havit.Bonusario.Services.Properties.AssemblyInfo).Assembly, configuration.ServiceProfiles);
+			services.AddByServiceAttribute(typeof(Havit.Bonusario.Facades.Properties.AssemblyInfo).Assembly, configuration.ServiceProfiles);
 		}
 
 		private static void InstallAuthorizationHandlers(IServiceCollection services)
 		{
-			services.Scan(scan => scan.FromAssemblyOf<Havit.NewProjectTemplate.Services.Properties.AssemblyInfo>()
+			services.Scan(scan => scan.FromAssemblyOf<Havit.Bonusario.Services.Properties.AssemblyInfo>()
 				.AddClasses(classes => classes.AssignableTo<IAuthorizationHandler>())
 				.As<IAuthorizationHandler>()
 				.WithScopedLifetime()

@@ -8,9 +8,9 @@ using Havit.Data.EntityFrameworkCore.Patterns.Repositories;
 using Havit.Data.EntityFrameworkCore.Patterns.SoftDeletes;
 using Havit.Data.Patterns.DataEntries;
 using Havit.Data.Patterns.DataLoaders;
-using Havit.NewProjectTemplate.Model.Common;
+using Havit.Bonusario.Model.Common;
 
-namespace Havit.NewProjectTemplate.DataLayer.Repositories.Common
+namespace Havit.Bonusario.DataLayer.Repositories.Common
 {
 	public partial class ApplicationSettingsDbRepository : IApplicationSettingsRepository
 	{

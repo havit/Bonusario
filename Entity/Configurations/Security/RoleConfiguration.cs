@@ -1,4 +1,4 @@
-﻿using Havit.NewProjectTemplate.Model.Security;
+﻿using Havit.Bonusario.Model.Security;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Havit.NewProjectTemplate.Entity.Configurations.Security
+namespace Havit.Bonusario.Entity.Configurations.Security
 {
 	public class RoleConfiguration : IEntityTypeConfiguration<Role>
 	{

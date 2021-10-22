@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Havit.Data.Patterns.Repositories;
 
-namespace Havit.NewProjectTemplate.DataLayer.Repositories.Common
+namespace Havit.Bonusario.DataLayer.Repositories.Common
 {
 	public partial interface ICountryLocalizationRepository
 	{

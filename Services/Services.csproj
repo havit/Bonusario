@@ -2,12 +2,12 @@
 
 	<PropertyGroup>
 		<TargetFramework>net5.0</TargetFramework>
-		<AssemblyName>Havit.NewProjectTemplate.Services</AssemblyName>
-		<RootNamespace>Havit.NewProjectTemplate.Services</RootNamespace>
+		<AssemblyName>Havit.Bonusario.Services</AssemblyName>
+		<RootNamespace>Havit.Bonusario.Services</RootNamespace>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<InternalsVisibleTo Include="Havit.NewProjectTemplate.Services.Tests" />
+		<InternalsVisibleTo Include="Havit.Bonusario.Services.Tests" />
 	</ItemGroup>
 	
 	<ItemGroup>

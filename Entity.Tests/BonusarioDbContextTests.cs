@@ -1,21 +1,21 @@
 ﻿using System;
-using Havit.NewProjectTemplate.Entity;
+using Havit.Bonusario.Entity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Havit.NewProjectTemplate.Entity.Tests
+namespace Havit.Bonusario.Entity.Tests
 {
 	[TestClass]
-	public class NewProjectTemplateDbContextTests
+	public class BonusarioDbContextTests
 	{
 		[TestMethod]
-		public void NewProjectTemplateDbContext_CheckModelConventions()
+		public void BonusarioDbContext_CheckModelConventions()
 		{
 			// Arrange
-			DbContextOptions<NewProjectTemplateDbContext> options = new DbContextOptionsBuilder<NewProjectTemplateDbContext>()
-				.UseInMemoryDatabase(nameof(NewProjectTemplateDbContext))
+			DbContextOptions<BonusarioDbContext> options = new DbContextOptionsBuilder<BonusarioDbContext>()
+				.UseInMemoryDatabase(nameof(BonusarioDbContext))
 				.Options;
-			NewProjectTemplateDbContext dbContext = new NewProjectTemplateDbContext(options);
+			BonusarioDbContext dbContext = new BonusarioDbContext(options);
 
 			// Act
 			Havit.Data.EntityFrameworkCore.ModelValidation.ModelValidator modelValidator = new Havit.Data.EntityFrameworkCore.ModelValidation.ModelValidator();

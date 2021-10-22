@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Havit.NewProjectTemplate.Entity.Migrations
+namespace Havit.Bonusario.Entity.Migrations
 {
     public partial class Initial : Migration
     {

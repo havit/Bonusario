@@ -10,10 +10,10 @@ using Havit.Data.Patterns.DataSources;
 using Havit.Data.Patterns.Infrastructure;
 using Havit.Data.Patterns.Repositories;
 using Havit.Diagnostics.Contracts;
-using Havit.NewProjectTemplate.DataLayer.Repositories.Common;
-using Havit.NewProjectTemplate.Model.Common;
+using Havit.Bonusario.DataLayer.Repositories.Common;
+using Havit.Bonusario.Model.Common;
 
-namespace Havit.NewProjectTemplate.DataLayer.Repositories.Common
+namespace Havit.Bonusario.DataLayer.Repositories.Common
 {
 	public class CountryByIsoCodeLookupService : LookupServiceBase<string, Country>, ICountryByIsoCodeLookupService
 	{

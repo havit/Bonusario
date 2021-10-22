@@ -2,16 +2,16 @@
 using Hangfire;
 using Hangfire.Dashboard;
 using Havit.Blazor.Grpc.Server;
-using Havit.NewProjectTemplate.Contracts;
-using Havit.NewProjectTemplate.Contracts.System;
-using Havit.NewProjectTemplate.DependencyInjection;
-using Havit.NewProjectTemplate.Facades.Infrastructure.Security;
-using Havit.NewProjectTemplate.Model.Security;
-using Havit.NewProjectTemplate.Services.HealthChecks;
-using Havit.NewProjectTemplate.Web.Server.Infrastructure.ApplicationInsights;
-using Havit.NewProjectTemplate.Web.Server.Infrastructure.ConfigurationExtensions;
-using Havit.NewProjectTemplate.Web.Server.Infrastructure.HealthChecks;
-using Havit.NewProjectTemplate.Web.Server.Tools;
+using Havit.Bonusario.Contracts;
+using Havit.Bonusario.Contracts.System;
+using Havit.Bonusario.DependencyInjection;
+using Havit.Bonusario.Facades.Infrastructure.Security;
+using Havit.Bonusario.Model.Security;
+using Havit.Bonusario.Services.HealthChecks;
+using Havit.Bonusario.Web.Server.Infrastructure.ApplicationInsights;
+using Havit.Bonusario.Web.Server.Infrastructure.ConfigurationExtensions;
+using Havit.Bonusario.Web.Server.Infrastructure.HealthChecks;
+using Havit.Bonusario.Web.Server.Tools;
 using Microsoft.ApplicationInsights.DependencyCollector;
 using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.AspNetCore.Builder;
@@ -24,7 +24,7 @@ using ProtoBuf.Grpc.Configuration;
 using ProtoBuf.Grpc.Server;
 using ProtoBuf.Meta;
 
-namespace Havit.NewProjectTemplate.Web.Server
+namespace Havit.Bonusario.Web.Server
 {
 	public class Startup
 	{
@@ -73,7 +73,7 @@ namespace Havit.NewProjectTemplate.Web.Server
 
 			// Health checks
 			services.AddHealthChecks()
-				.AddCheck<NewProjectTemplateDbContextHealthCheck>("Database");
+				.AddCheck<BonusarioDbContextHealthCheck>("Database");
 
 			// Hangfire
 			services.AddCustomizedHangfire(configuration);
@@ -132,7 +132,7 @@ namespace Havit.NewProjectTemplate.Web.Server
 				{
 					Authorization = new List<IDashboardAuthorizationFilter>() { }, // see https://sahansera.dev/securing-hangfire-dashboard-with-endpoint-routing-auth-policy-aspnetcore/
 					DisplayStorageConnectionString = false,
-					DashboardTitle = "NewProjectTemplate - Jobs",
+					DashboardTitle = "Bonusario - Jobs",
 					StatsPollingInterval = 60_000 // once a minute
 				})
 				.RequireAuthorization(PolicyNames.HangfireDashboardAcccessPolicy);

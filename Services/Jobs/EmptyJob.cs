@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Havit.Extensions.DependencyInjection.Abstractions;
 using Microsoft.Extensions.Logging;
 
-namespace Havit.NewProjectTemplate.Services.Jobs
+namespace Havit.Bonusario.Services.Jobs
 {
 	[Service(Profile = Jobs.ProfileName)]
 	public class EmptyJob : IEmptyJob

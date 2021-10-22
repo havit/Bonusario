@@ -3,7 +3,7 @@ using System.ServiceModel;
 using System.Threading.Tasks;
 using Havit.ComponentModel;
 
-namespace Havit.NewProjectTemplate.Contracts.System
+namespace Havit.Bonusario.Contracts.System
 {
 	[ApiContract]
 	public interface IDataSeedFacade

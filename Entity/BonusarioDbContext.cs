@@ -3,15 +3,15 @@ using Havit.Data.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 
-namespace Havit.NewProjectTemplate.Entity
+namespace Havit.Bonusario.Entity
 {
-	public class NewProjectTemplateDbContext : Havit.Data.EntityFrameworkCore.DbContext
+	public class BonusarioDbContext : Havit.Data.EntityFrameworkCore.DbContext
 	{
 		/// <summary>
 		/// Konstruktor.
 		/// Pro použití v unit testech, jiné použití nemá.
 		/// </summary>
-		internal NewProjectTemplateDbContext()
+		internal BonusarioDbContext()
 		{
 			// NOOP
 		}
@@ -19,7 +19,7 @@ namespace Havit.NewProjectTemplate.Entity
 		/// <summary>
 		/// Konstruktor.
 		/// </summary>
-		public NewProjectTemplateDbContext(DbContextOptions options) : base(options)
+		public BonusarioDbContext(DbContextOptions options) : base(options)
 		{
 			// NOOP
 		}
@@ -31,7 +31,7 @@ namespace Havit.NewProjectTemplate.Entity
 
 			modelBuilder.HasSequence<int>("ContactSequence");
 
-			modelBuilder.RegisterModelFromAssembly(typeof(Havit.NewProjectTemplate.Model.Localizations.Language).Assembly);
+			modelBuilder.RegisterModelFromAssembly(typeof(Havit.Bonusario.Model.Localizations.Language).Assembly);
 			modelBuilder.ApplyConfigurationsFromAssembly(this.GetType().Assembly);
 		}
 	}

@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-//using Havit.NewProjectTemplate.Model.Metadata.Security;
-using Havit.NewProjectTemplate.Model.Security;
+//using Havit.Bonusario.Model.Metadata.Security;
+using Havit.Bonusario.Model.Security;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Havit.NewProjectTemplate.Entity.Configurations.Security
+namespace Havit.Bonusario.Entity.Configurations.Security
 {
 	public class UserConfiguration : IEntityTypeConfiguration<User>
 	{

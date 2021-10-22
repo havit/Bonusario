@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace Havit.NewProjectTemplate.Web.Server
+namespace Havit.Bonusario.Web.Server
 {
 	public class Program
 	{
@@ -23,7 +23,7 @@ namespace Havit.NewProjectTemplate.Web.Server
 					webBuilder.UseStartup<Startup>();
 #if DEBUG
 					webBuilder.UseEnvironment("Development"); // pro Red-Gate ANTS Performance Profiler
-					webBuilder.UseUrls("http://localhost:9900"); // pro Red-Gate ANTS Performance Profiler
+					webBuilder.UseUrls("http://localhost:9981"); // pro Red-Gate ANTS Performance Profiler
 #endif
 				})
 				.ConfigureAppConfiguration((hostContext, config) =>

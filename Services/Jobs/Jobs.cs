@@ -1,4 +1,4 @@
-﻿namespace Havit.NewProjectTemplate.Services.Jobs
+﻿namespace Havit.Bonusario.Services.Jobs
 {
 	public static class Jobs
 	{

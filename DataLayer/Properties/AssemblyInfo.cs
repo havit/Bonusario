@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace Havit.NewProjectTemplate.DataLayer.Properties
+namespace Havit.Bonusario.DataLayer.Properties
 {
 	public class AssemblyInfo
 	{

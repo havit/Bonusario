@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Havit.NewProjectTemplate.Resources
+namespace Havit.Bonusario.Resources
 {
 	/// <summary>
 	/// Marker file for RESX source generator.

@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-	  <AssemblyName>Havit.NewProjectTemplate.Resources</AssemblyName>
-	  <RootNamespace>Havit.NewProjectTemplate.Resources</RootNamespace>
+	  <AssemblyName>Havit.Bonusario.Resources</AssemblyName>
+	  <RootNamespace>Havit.Bonusario.Resources</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

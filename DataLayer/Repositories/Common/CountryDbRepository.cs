@@ -9,7 +9,7 @@ using Havit.Data.EntityFrameworkCore.Patterns.SoftDeletes;
 using Havit.Data.Patterns.DataEntries;
 using Havit.Data.Patterns.DataLoaders;
 
-namespace Havit.NewProjectTemplate.DataLayer.Repositories.Common
+namespace Havit.Bonusario.DataLayer.Repositories.Common
 {
 	public partial class CountryDbRepository : ICountryRepository
 	{

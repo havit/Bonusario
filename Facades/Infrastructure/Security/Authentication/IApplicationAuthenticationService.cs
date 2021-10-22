@@ -1,7 +1,7 @@
 ﻿using System.Security.Claims;
-using Havit.NewProjectTemplate.Model.Security;
+using Havit.Bonusario.Model.Security;
 
-namespace Havit.NewProjectTemplate.Facades.Infrastructure.Security.Authentication
+namespace Havit.Bonusario.Facades.Infrastructure.Security.Authentication
 {
 	/// <summary>
 	/// Vrací aktuálně přihlášeného uživatele jako ClaimsPrincipal nebo LoginAccount.

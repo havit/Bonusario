@@ -14,25 +14,25 @@ using Havit.Data.EntityFrameworkCore.Patterns;
 using Havit.Data.Patterns.DataEntries;
 using Havit.Data.Patterns.Repositories;
 
-namespace Havit.NewProjectTemplate.DataLayer.DataEntries.Common
+namespace Havit.Bonusario.DataLayer.DataEntries.Common
 {
 	[System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
-	public class ApplicationSettingsEntries : DataEntries<Havit.NewProjectTemplate.Model.Common.ApplicationSettings>, IApplicationSettingsEntries 
+	public class ApplicationSettingsEntries : DataEntries<Havit.Bonusario.Model.Common.ApplicationSettings>, IApplicationSettingsEntries 
 	{
-		public Havit.NewProjectTemplate.Model.Common.ApplicationSettings Current
+		public Havit.Bonusario.Model.Common.ApplicationSettings Current
         {
             get
             {
 				if (current == null)
 				{
-					current = GetEntry(Havit.NewProjectTemplate.Model.Common.ApplicationSettings.Entry.Current);
+					current = GetEntry(Havit.Bonusario.Model.Common.ApplicationSettings.Entry.Current);
 				}
 				return current;
             }
         }
-		private Havit.NewProjectTemplate.Model.Common.ApplicationSettings current;
+		private Havit.Bonusario.Model.Common.ApplicationSettings current;
 
-		public ApplicationSettingsEntries(Havit.NewProjectTemplate.DataLayer.Repositories.Common.IApplicationSettingsRepository repository)
+		public ApplicationSettingsEntries(Havit.Bonusario.DataLayer.Repositories.Common.IApplicationSettingsRepository repository)
 			: base(repository)
 		{
 		}

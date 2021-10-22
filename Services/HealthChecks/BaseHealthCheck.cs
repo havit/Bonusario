@@ -6,7 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 
-namespace Havit.NewProjectTemplate.Services.HealthChecks
+namespace Havit.Bonusario.Services.HealthChecks
 {
 	public abstract class BaseHealthCheck : IHealthCheck
 	{

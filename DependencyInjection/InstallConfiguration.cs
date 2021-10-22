@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Havit.NewProjectTemplate.DependencyInjection
+namespace Havit.Bonusario.DependencyInjection
 {
 	internal class InstallConfiguration
 	{

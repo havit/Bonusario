@@ -12,12 +12,12 @@ using System.Text;
 using System.Threading.Tasks;
 using Havit.Data.Patterns.DataEntries;
 
-namespace Havit.NewProjectTemplate.DataLayer.DataEntries.Common
+namespace Havit.Bonusario.DataLayer.DataEntries.Common
 {
 	[System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
 	public interface IApplicationSettingsEntries : IDataEntries
 	{
-		Havit.NewProjectTemplate.Model.Common.ApplicationSettings Current { get; }
+		Havit.Bonusario.Model.Common.ApplicationSettings Current { get; }
 			
 	}
 }

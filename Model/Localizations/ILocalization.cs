@@ -1,4 +1,4 @@
-﻿namespace Havit.NewProjectTemplate.Model.Localizations
+﻿namespace Havit.Bonusario.Model.Localizations
 {
 	/// <summary>
 	/// Lokalizace.

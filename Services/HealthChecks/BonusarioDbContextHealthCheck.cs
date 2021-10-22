@@ -7,18 +7,18 @@ using System.Threading.Tasks;
 using Havit.Data.EntityFrameworkCore;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 
-namespace Havit.NewProjectTemplate.Services.HealthChecks
+namespace Havit.Bonusario.Services.HealthChecks
 {
 	/// <summary>
 	/// Kontroluje dostupnost databáze.
 	/// De facto jen pro inpiraci pro další health checks, jinak je kontrola dostupnosti databáze pomocí DbContextu vestavěna - viz
 	/// metoda AddDbContextCheck(nuget balíček Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore).
 	/// </summary>
-	public class NewProjectTemplateDbContextHealthCheck : BaseHealthCheck
+	public class BonusarioDbContextHealthCheck : BaseHealthCheck
 	{
 		private readonly IDbContextTransient dbContext;
 
-		public NewProjectTemplateDbContextHealthCheck(IDbContextTransient dbContext)
+		public BonusarioDbContextHealthCheck(IDbContextTransient dbContext)
 		{
 			this.dbContext = dbContext;
 		}

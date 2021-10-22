@@ -4,12 +4,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 
-namespace Havit.NewProjectTemplate.Entity
+namespace Havit.Bonusario.Entity
 {
 
-	public class NewProjectTemplateDesignTimeDbContextFactory : IDesignTimeDbContextFactory<NewProjectTemplateDbContext>
+	public class BonusarioDesignTimeDbContextFactory : IDesignTimeDbContextFactory<BonusarioDbContext>
 	{
-		public NewProjectTemplateDbContext CreateDbContext(string[] args)
+		public BonusarioDbContext CreateDbContext(string[] args)
 		{
 			// Příkazy pro tooling EF Core Migrations (Add-Migration, ...) tooling získávají DbContext z této metody.
 			// Stejně tak  CodeGenerator.
@@ -27,7 +27,7 @@ namespace Havit.NewProjectTemplate.Entity
 
 			string connectionString = configuration.GetConnectionString("Database");
 
-			return new NewProjectTemplateDbContext(new DbContextOptionsBuilder<NewProjectTemplateDbContext>().UseSqlServer(connectionString).Options);
+			return new BonusarioDbContext(new DbContextOptionsBuilder<BonusarioDbContext>().UseSqlServer(connectionString).Options);
 		}
 	}
 }

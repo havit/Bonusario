@@ -14,18 +14,18 @@ using Havit.Data.EntityFrameworkCore.Patterns.DataSources.Fakes;
 using Havit.Data.EntityFrameworkCore.Patterns.SoftDeletes;
 using Havit.Data.Patterns.Attributes;
 
-namespace Havit.NewProjectTemplate.DataLayer.DataSources.Common.Fakes
+namespace Havit.Bonusario.DataLayer.DataSources.Common.Fakes
 {
 	[Fake]
 	[System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
-	public class FakeCountryDataSource : FakeDataSource<Havit.NewProjectTemplate.Model.Common.Country>, Havit.NewProjectTemplate.DataLayer.DataSources.Common.ICountryDataSource
+	public class FakeCountryDataSource : FakeDataSource<Havit.Bonusario.Model.Common.Country>, Havit.Bonusario.DataLayer.DataSources.Common.ICountryDataSource
 	{
-		public FakeCountryDataSource(params Havit.NewProjectTemplate.Model.Common.Country[] data)
-			: this((IEnumerable<Havit.NewProjectTemplate.Model.Common.Country>)data)
+		public FakeCountryDataSource(params Havit.Bonusario.Model.Common.Country[] data)
+			: this((IEnumerable<Havit.Bonusario.Model.Common.Country>)data)
 		{			
 		}
 
-		public FakeCountryDataSource(IEnumerable<Havit.NewProjectTemplate.Model.Common.Country> data, ISoftDeleteManager softDeleteManager = null)
+		public FakeCountryDataSource(IEnumerable<Havit.Bonusario.Model.Common.Country> data, ISoftDeleteManager softDeleteManager = null)
 			: base(data, softDeleteManager)
 		{
 		}

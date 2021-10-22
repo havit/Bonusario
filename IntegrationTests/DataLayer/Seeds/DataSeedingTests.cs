@@ -1,15 +1,15 @@
 ﻿using System.Linq;
 using Havit.Data.Patterns.DataSeeds;
-using Havit.NewProjectTemplate.DataLayer.Seeds.Core;
-using Havit.NewProjectTemplate.Model.Common;
+using Havit.Bonusario.DataLayer.Seeds.Core;
+using Havit.Bonusario.Model.Common;
 using Havit.Data.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.Extensions.DependencyInjection;
 using Havit.Services.Caching;
-using Havit.NewProjectTemplate.TestHelpers;
+using Havit.Bonusario.TestHelpers;
 
-namespace Havit.NewProjectTemplate.IntegrationTests.DataLayer.Seeds
+namespace Havit.Bonusario.IntegrationTests.DataLayer.Seeds
 {
 	[TestClass]
 	public class DataSeedingTests : IntegrationTestBase

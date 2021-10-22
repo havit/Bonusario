@@ -8,9 +8,9 @@ using Havit.Data.EntityFrameworkCore.Patterns.Repositories;
 using Havit.Data.EntityFrameworkCore.Patterns.SoftDeletes;
 using Havit.Data.Patterns.DataEntries;
 using Havit.Data.Patterns.DataLoaders;
-using Havit.NewProjectTemplate.Model.Security;
+using Havit.Bonusario.Model.Security;
 
-namespace Havit.NewProjectTemplate.DataLayer.Repositories.Security
+namespace Havit.Bonusario.DataLayer.Repositories.Security
 {
 	public partial class RoleDbRepository : IRoleRepository
 	{

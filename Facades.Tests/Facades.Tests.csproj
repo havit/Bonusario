@@ -3,8 +3,8 @@
 	<PropertyGroup>
 		<TargetFramework>net5.0</TargetFramework>
 		<IsPackable>false</IsPackable>
-		<AssemblyName>Havit.NewProjectTemplate.Facades.Tests</AssemblyName>
-		<RootNamespace>Havit.NewProjectTemplate.Facades.Tests</RootNamespace>
+		<AssemblyName>Havit.Bonusario.Facades.Tests</AssemblyName>
+		<RootNamespace>Havit.Bonusario.Facades.Tests</RootNamespace>
 		<PublishDir>obj\$(Configuration)\publish</PublishDir>
 	</PropertyGroup>
 

@@ -1,4 +1,4 @@
-﻿using Havit.NewProjectTemplate.Model.Localizations;
+﻿using Havit.Bonusario.Model.Localizations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Havit.NewProjectTemplate.Entity.Configurations.Localizations
+namespace Havit.Bonusario.Entity.Configurations.Localizations
 {
 	public class LanguageConfiguration : IEntityTypeConfiguration<Language>
 	{

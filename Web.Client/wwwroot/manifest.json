@@ -1,6 +1,6 @@
 ﻿{
-	"name": "NewProjectTemplate",
-	"short_name": "NewProjectTemplate",
+	"name": "Bonusario",
+	"short_name": "Bonusario",
 	"start_url": "./",
 	"display": "standalone",
 	"background_color": "#ffffff",

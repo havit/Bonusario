@@ -12,10 +12,10 @@ using System.Text;
 using System.Threading.Tasks;
 using Havit.Data.Patterns.DataSources;
 
-namespace Havit.NewProjectTemplate.DataLayer.DataSources.Security
+namespace Havit.Bonusario.DataLayer.DataSources.Security
 {
 	[System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
-	public interface IRoleDataSource : IDataSource<Havit.NewProjectTemplate.Model.Security.Role>
+	public interface IRoleDataSource : IDataSource<Havit.Bonusario.Model.Security.Role>
 	{
 	}
 }

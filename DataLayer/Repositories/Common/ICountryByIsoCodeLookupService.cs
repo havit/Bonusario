@@ -1,7 +1,7 @@
 ﻿
-using Havit.NewProjectTemplate.Model.Common;
+using Havit.Bonusario.Model.Common;
 
-namespace Havit.NewProjectTemplate.DataLayer.Repositories.Common
+namespace Havit.Bonusario.DataLayer.Repositories.Common
 {
 	public interface ICountryByIsoCodeLookupService
 	{

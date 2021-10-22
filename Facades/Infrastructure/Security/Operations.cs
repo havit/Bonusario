@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization.Infrastructure;
 
-namespace Havit.NewProjectTemplate.Facades.Infrastructure.Security
+namespace Havit.Bonusario.Facades.Infrastructure.Security
 {
 	/// <summary>
 	/// Aplikační requirements pro ověření oprávnění k resource.

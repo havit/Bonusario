@@ -2,12 +2,12 @@
 
 	<PropertyGroup>
 		<TargetFramework>net5.0</TargetFramework>
-		<AssemblyName>Havit.NewProjectTemplate.Entity</AssemblyName>
-		<RootNamespace>Havit.NewProjectTemplate.Entity</RootNamespace>
+		<AssemblyName>Havit.Bonusario.Entity</AssemblyName>
+		<RootNamespace>Havit.Bonusario.Entity</RootNamespace>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<InternalsVisibleTo Include="Havit.NewProjectTemplate.Entity.Tests" />
+		<InternalsVisibleTo Include="Havit.Bonusario.Entity.Tests" />
 	</ItemGroup>
 
 	<ItemGroup>

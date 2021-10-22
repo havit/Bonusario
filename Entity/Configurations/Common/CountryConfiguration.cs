@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Havit.NewProjectTemplate.Model.Common;
+using Havit.Bonusario.Model.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Havit.NewProjectTemplate.Entity.Configurations.Common
+namespace Havit.Bonusario.Entity.Configurations.Common
 {
 	public class CountryConfiguration : IEntityTypeConfiguration<Country>
 	{

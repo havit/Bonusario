@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using System.Runtime.CompilerServices;
 
-namespace Havit.NewProjectTemplate.Facades.Properties
+namespace Havit.Bonusario.Facades.Properties
 {
 	public class AssemblyInfo
 	{

@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
 using Havit.Diagnostics.Contracts;
-using Havit.NewProjectTemplate.Facades.Infrastructure.Security.Authentication;
-using Havit.NewProjectTemplate.Model.Security;
+using Havit.Bonusario.Facades.Infrastructure.Security.Authentication;
+using Havit.Bonusario.Model.Security;
 using Microsoft.AspNetCore.Authorization.Infrastructure;
-using Havit.NewProjectTemplate.DataLayer.Repositories.Security;
+using Havit.Bonusario.DataLayer.Repositories.Security;
 
-namespace Havit.NewProjectTemplate.Web.Server.Infrastructure.Security
+namespace Havit.Bonusario.Web.Server.Infrastructure.Security
 {
 	/// <summary>
 	/// Poskytuje uživatele z HttpContextu.

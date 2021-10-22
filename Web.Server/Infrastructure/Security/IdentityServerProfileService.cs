@@ -4,13 +4,13 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using Havit.NewProjectTemplate.Model.Security;
+using Havit.Bonusario.Model.Security;
 using IdentityModel;
 using IdentityServer4.Models;
 using IdentityServer4.Services;
 using Microsoft.AspNetCore.Identity;
 
-namespace Havit.NewProjectTemplate.Web.Server.Infrastructure.Security
+namespace Havit.Bonusario.Web.Server.Infrastructure.Security
 {
 	/// <summary>
 	/// Adding roles and other claims to claims returned by IdentityServer.

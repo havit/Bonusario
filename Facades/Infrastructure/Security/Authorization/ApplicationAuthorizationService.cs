@@ -3,10 +3,10 @@ using System.Security;
 using System.Security.Claims;
 using Havit.Diagnostics.Contracts;
 using Havit.Extensions.DependencyInjection.Abstractions;
-using Havit.NewProjectTemplate.Facades.Infrastructure.Security.Authentication;
+using Havit.Bonusario.Facades.Infrastructure.Security.Authentication;
 using Microsoft.AspNetCore.Authorization;
 
-namespace Havit.NewProjectTemplate.Facades.Infrastructure.Security.Authorization
+namespace Havit.Bonusario.Facades.Infrastructure.Security.Authorization
 {
 	[Service]
 	public class ApplicationAuthorizationService : IApplicationAuthorizationService
