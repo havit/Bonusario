@@ -1,0 +1,15 @@
+﻿<Project>
+
+	<PropertyGroup>
+		<Company>HAVIT</Company>
+		<Copyright>Copyright HAVIT, 2021</Copyright>
+		<FileVersion>1.0.0.0</FileVersion>
+		<AssemblyVersion>1.0.0.0</AssemblyVersion>
+		<Product>NewProjectTemplate</Product>
+		<LangVersion>latest</LangVersion>
+		<EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+		<DisableTransitiveProjectReferences>true</DisableTransitiveProjectReferences>
+	</PropertyGroup>
+
+	<Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))" Condition="Exists($([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../')))"/>
+</Project>

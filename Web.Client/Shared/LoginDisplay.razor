@@ -1,0 +1,25 @@
+﻿@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+
+@inject NavigationManager Navigation
+@inject SignOutSessionStateManager SignOutManager
+
+<div class="login-display d-flex align-items-center w-100 p-3">
+	<AuthorizeView>
+		<Authorized>
+
+			<div class="initials rounded-circle text-primary p-1">@NameToInitials(@context.User?.Identity?.Name)</div>
+			<a class="login-display-nickname text-truncate mx-2">@context?.User?.Identity?.Name</a>
+			<div class="ms-auto">
+				<HxContextMenu>
+					<CultureSelector />
+					<HxContextMenuItem Text="Log out" OnClick="BeginSignOut" />
+				</HxContextMenu>
+			</div>
+
+		</Authorized>
+		<NotAuthorized>
+			<span><a href="authentication/register">Register</a> or <a href="authentication/login">Log in</a></span>
+		</NotAuthorized>
+	</AuthorizeView>
+</div>
