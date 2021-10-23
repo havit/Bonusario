@@ -103,8 +103,7 @@ namespace Havit.Bonusario.DependencyInjection
 				.AddEntityPatterns()
 				//.AddLocalizationServices<Language>()
 				.AddDbContext<BonusarioDbContext>(options)
-				.AddDataLayer(typeof(IApplicationSettingsDataSource).Assembly)
-				.AddLookupService<ICountryByIsoCodeLookupService, CountryByIsoCodeLookupService>();
+				.AddDataLayer(typeof(IApplicationSettingsDataSource).Assembly);
 
 			services.AddSingleton<IEntityValidator<object>, ValidatableObjectEntityValidator>();
 		}

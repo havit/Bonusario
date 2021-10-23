@@ -34,22 +34,6 @@ namespace Havit.Bonusario.Entity.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Country",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    IsoCode = table.Column<string>(type: "nvarchar(2)", maxLength: 2, nullable: false),
-                    IsoCode3 = table.Column<string>(type: "nvarchar(3)", maxLength: 3, nullable: false),
-                    PhoneCountryCode = table.Column<string>(type: "nvarchar(6)", maxLength: 6, nullable: true),
-                    UiOrder = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Country", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Language",
                 columns: table => new
                 {
@@ -104,33 +88,6 @@ namespace Havit.Bonusario.Entity.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CountryLocalization",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ParentId = table.Column<int>(type: "int", nullable: false),
-                    LanguageId = table.Column<int>(type: "int", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CountryLocalization", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_CountryLocalization_Country_ParentId",
-                        column: x => x.ParentId,
-                        principalTable: "Country",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_CountryLocalization_Language_LanguageId",
-                        column: x => x.LanguageId,
-                        principalTable: "Language",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "UserRole",
                 columns: table => new
                 {
@@ -153,28 +110,6 @@ namespace Havit.Bonusario.Entity.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Country_IsoCode",
-                table: "Country",
-                column: "IsoCode",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Country_IsoCode3",
-                table: "Country",
-                column: "IsoCode3",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_CountryLocalization_LanguageId",
-                table: "CountryLocalization",
-                column: "LanguageId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_CountryLocalization_ParentId",
-                table: "CountryLocalization",
-                column: "ParentId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_User_NormalizedEmail",
@@ -205,16 +140,10 @@ namespace Havit.Bonusario.Entity.Migrations
                 name: "ApplicationSettings");
 
             migrationBuilder.DropTable(
-                name: "CountryLocalization");
+                name: "Language");
 
             migrationBuilder.DropTable(
                 name: "UserRole");
-
-            migrationBuilder.DropTable(
-                name: "Country");
-
-            migrationBuilder.DropTable(
-                name: "Language");
 
             migrationBuilder.DropTable(
                 name: "Role");
