@@ -1,5 +1,4 @@
 ﻿using System.Security.Claims;
-using Havit.Bonusario.Model.Security;
 
 namespace Havit.Bonusario.Facades.Infrastructure.Security.Authentication
 {
@@ -10,6 +9,6 @@ namespace Havit.Bonusario.Facades.Infrastructure.Security.Authentication
 	public interface IApplicationAuthenticationService
 	{
 		ClaimsPrincipal GetCurrentClaimsPrincipal();
-		User GetCurrentUser();
+		//User GetCurrentUser();
 	}
 }

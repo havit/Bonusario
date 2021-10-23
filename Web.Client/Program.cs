@@ -15,7 +15,6 @@ using Havit.Blazor.Grpc.Client.WebAssembly;
 using Havit.Bonusario.Contracts;
 using Havit.Bonusario.Contracts.System;
 using Havit.Bonusario.Web.Client.Infrastructure.Grpc;
-using Havit.Bonusario.Web.Client.Infrastructure.Security;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
@@ -35,9 +34,11 @@ namespace Havit.Bonusario.Web.Client
 
 			builder.RootComponents.Add<App>("app");
 
-			builder.Services.AddSingleton(new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
-			builder.Services.AddScoped(typeof(AccountClaimsPrincipalFactory<RemoteUserAccount>), typeof(RolesAccountClaimsPrincipalFactory)); // multiple roles workaround
-			builder.Services.AddApiAuthorization();
+			builder.Services.AddHttpClient("Havit.Bonusario.Web.Server", client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress))
+				.AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
+			builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>()
+				.CreateClient("Havit.Bonusario.Web.Server"));
+			AddAuth(builder);
 
 			builder.Services.AddBlazoredLocalStorage();
 			builder.Services.AddValidatorsFromAssemblyContaining<Dto<object>>();
@@ -57,6 +58,19 @@ namespace Havit.Bonusario.Web.Client
 
 			await webAssemblyHost.RunAsync();
 		}
+
+		private static void AddAuth(WebAssemblyHostBuilder builder)
+		{
+			builder.Services.AddMsalAuthentication(options =>
+			{
+				builder.Configuration.Bind("AzureAd", options.ProviderOptions);
+				options.ProviderOptions.LoginMode = "redirect";
+			});
+
+			//builder.Services.AddScoped(typeof(AccountClaimsPrincipalFactory<RemoteUserAccount>), typeof(CustomAccountClaimsPrincipalFactory));
+			builder.Services.AddApiAuthorization();
+		}
+
 		private static void SetHxComponents()
 		{
 			// HxProgressIndicator.DefaultDelay = 0;

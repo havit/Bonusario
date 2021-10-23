@@ -6,14 +6,13 @@ using System.Threading;
 using System.Threading.Tasks;
 using Havit.Extensions.DependencyInjection.Abstractions;
 using Havit.Bonusario.Contracts.System;
-using Havit.Bonusario.Model.Security;
 using Havit.Services.Caching;
 using Microsoft.AspNetCore.Authorization;
 
 namespace Havit.Bonusario.Facades.System
 {
 	[Service]
-	[Authorize(Roles = nameof(Role.Entry.SystemAdministrator))]
+	[Authorize] // TODO Auth
 	public class MaintenanceFacade : IMaintenanceFacade
 	{
 		private readonly ICacheService cacheService;

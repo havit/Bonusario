@@ -11,7 +11,6 @@ using Havit.Bonusario.Contracts.System;
 using Havit.Bonusario.DataLayer.Seeds.Core;
 using Havit.Bonusario.Facades.Infrastructure.Security;
 using Havit.Bonusario.Facades.Infrastructure.Security.Authorization;
-using Havit.Bonusario.Model.Security;
 using Havit.Bonusario.Services.Infrastructure;
 using Havit.Services.Caching;
 using Microsoft.AspNetCore.Authorization;
@@ -22,7 +21,7 @@ namespace Havit.Bonusario.Facades.System
 	/// Fasáda k seedování dat.
 	/// </summary>
 	[Service]
-	[Authorize(Roles = nameof(Role.Entry.SystemAdministrator))]
+	[Authorize] // TODO Auth
 
 	public class DataSeedFacade : IDataSeedFacade
 	{

@@ -6,16 +6,15 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using Havit.Bonusario.Facades.Infrastructure.Security.Authentication;
-using Havit.Bonusario.Facades.Infrastructure.Security.Identity;
-using Havit.Bonusario.Model.Security;
 using Havit.Bonusario.Web.Server.Infrastructure.Security;
-using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Identity.Web;
 using Microsoft.Net.Http.Headers;
 
 namespace Havit.Bonusario.Web.Server.Infrastructure.ConfigurationExtensions
@@ -24,14 +23,15 @@ namespace Havit.Bonusario.Web.Server.Infrastructure.ConfigurationExtensions
 	{
 		public static void AddCustomizedAuth(this IServiceCollection services, IConfiguration configuration)
 		{
-			// Authentication, Authorization, Identity
-			services.AddAuthentication(options =>
+			services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+				.AddMicrosoftIdentityWebApi(configuration.GetSection("AzureAd"));
+
+			services.Configure<JwtBearerOptions>(JwtBearerDefaults.AuthenticationScheme, options =>
 			{
-				options.DefaultScheme = IdentityConstants.ApplicationScheme;
-				options.DefaultSignInScheme = IdentityConstants.ExternalScheme;
-			})
-				.AddIdentityServerJwt()
-				.AddIdentityCookies();
+				options.TokenValidationParameters.NameClaimType = "name";
+			});
+
+			services.AddScoped<IApplicationAuthenticationService, ApplicationAuthenticationService>();
 
 			services.ConfigureApplicationCookie(configuration =>
 			{
@@ -41,38 +41,6 @@ namespace Havit.Bonusario.Web.Server.Infrastructure.ConfigurationExtensions
 				configuration.Events.OnRedirectToAccessDenied = (context) => RedirectOrApiStatus(context, HttpStatusCode.Forbidden);
 			});
 
-			services.AddIdentityCore<User>(options =>
-			{
-				options.Stores.MaxLengthForKeys = 128;
-				options.SignIn.RequireConfirmedAccount = true;
-			})
-				.AddDefaultUI()
-				.AddDefaultTokenProviders()
-				.AddRoles<Role>()
-				.AddUserStore<UserStore>()
-				.AddRoleStore<RoleStore>();
-
-			services.AddIdentityServer()
-				.AddAspNetIdentity<User>()
-				.AddClients()
-				.AddSigningCredentials()
-				.AddIdentityResources()
-				.AddApiResources()
-				.AddProfileService<IdentityServerProfileService>();
-
-			services.PostConfigure<ApiAuthorizationOptions>(options =>
-			{
-				options.Clients["Havit.Bonusario.Web.Client"].AlwaysIncludeUserClaimsInIdToken = true;
-				options.IdentityResources["openid"].UserClaims.Add("name");
-				options.ApiResources.Single().UserClaims.Add("name");
-				options.IdentityResources["openid"].UserClaims.Add("role");
-				options.ApiResources.Single().UserClaims.Add("role");
-			});
-
-
-			// server-side support for User.IsInRole(), see https://leastprivilege.com/2016/08/21/why-does-my-authorize-attribute-not-work/
-			// https://docs.microsoft.com/en-us/aspnet/core/blazor/security/webassembly/hosted-with-identity-server?view=aspnetcore-5.0&tabs=visual-studio#api-authorization-options
-			JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 			services.AddScoped<IApplicationAuthenticationService, ApplicationAuthenticationService>();
 		}
 

@@ -6,7 +6,6 @@ using Havit.Bonusario.Contracts;
 using Havit.Bonusario.Contracts.System;
 using Havit.Bonusario.DependencyInjection;
 using Havit.Bonusario.Facades.Infrastructure.Security;
-using Havit.Bonusario.Model.Security;
 using Havit.Bonusario.Services.HealthChecks;
 using Havit.Bonusario.Web.Server.Infrastructure.ApplicationInsights;
 using Havit.Bonusario.Web.Server.Infrastructure.ConfigurationExtensions;
@@ -59,8 +58,7 @@ namespace Havit.Bonusario.Web.Server
 			services.AddAuthorization(options =>
 			{
 				options.AddPolicy(PolicyNames.HangfireDashboardAcccessPolicy, policy => policy
-					.RequireAuthenticatedUser()
-					.RequireRole(nameof(Role.Entry.SystemAdministrator)));
+					.RequireAuthenticatedUser()); // TODO Auth
 			});
 			services.AddCustomizedAuth(configuration);
 
@@ -104,7 +102,6 @@ namespace Havit.Bonusario.Web.Server
 			app.UseRouting();
 
 			app.UseAuthentication();
-			app.UseIdentityServer();
 			app.UseAuthorization();
 
 			app.UseGrpcWeb(new GrpcWebOptions() { DefaultEnabled = true });

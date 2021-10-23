@@ -7,9 +7,6 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
 using Havit.Diagnostics.Contracts;
 using Havit.Bonusario.Facades.Infrastructure.Security.Authentication;
-using Havit.Bonusario.Model.Security;
-using Microsoft.AspNetCore.Authorization.Infrastructure;
-using Havit.Bonusario.DataLayer.Repositories.Security;
 
 namespace Havit.Bonusario.Web.Server.Infrastructure.Security
 {
@@ -20,13 +17,13 @@ namespace Havit.Bonusario.Web.Server.Infrastructure.Security
 	{
 		private readonly IHttpContextAccessor httpContextAccessor;
 
-		private readonly Lazy<User> userLazy;
+		//private readonly Lazy<User> userLazy;
 
-		public ApplicationAuthenticationService(IHttpContextAccessor httpContextAccessor, IUserRepository userRepository)
+		public ApplicationAuthenticationService(IHttpContextAccessor httpContextAccessor) //, IUserRepository userRepository)
 		{
 			this.httpContextAccessor = httpContextAccessor;
 
-			userLazy = new Lazy<User>(() => userRepository.GetObject(GetCurrentUserId()));
+			//userLazy = new Lazy<User>(() => userRepository.GetObject(GetCurrentUserId()));
 		}
 
 		public ClaimsPrincipal GetCurrentClaimsPrincipal()
@@ -34,7 +31,7 @@ namespace Havit.Bonusario.Web.Server.Infrastructure.Security
 			return httpContextAccessor.HttpContext.User;
 		}
 
-		public User GetCurrentUser() => userLazy.Value;
+		//public User GetCurrentUser() => userLazy.Value;
 
 		public int GetCurrentUserId()
 		{
