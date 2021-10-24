@@ -11,6 +11,7 @@ namespace Havit.Bonusario.Contracts
 	[ApiContract]
 	public interface IEntryFacade
 	{
-		Task<List<EntryDto>> GetMyEntries(CancellationToken cancellationToken = default);
+		Task<List<EntryDto>> GetMyEntriesAsync(CancellationToken cancellationToken = default);
+		Task DeleteEntryAsync(Dto<int> entryId, CancellationToken cancellationToken = default);
 	}
 }

@@ -17,12 +17,17 @@ namespace Havit.Bonusario.Web.Client.Pages.Entries
 		protected override async Task OnInitializedAsync()
 		{
 			entries ??= await LoadEntries();
-			StateHasChanged();
 		}
 
 		private async Task<List<EntryDto>> LoadEntries()
 		{
-			return await EntryFacade.GetMyEntries();
+			var data = await EntryFacade.GetMyEntriesAsync();
+			return data.OrderByDescending(e => e.Created).ToList();
+		}
+
+		private async Task HandleEntryDeleted()
+		{
+			entries = await LoadEntries();
 		}
 	}
 }

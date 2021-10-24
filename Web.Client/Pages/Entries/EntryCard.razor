@@ -3,19 +3,30 @@
 	<EditForm Model="@Entry">
 		<HxFormState Enabled="@(Entry.Submitted is null)">
 			<HxCard CssClass="d-inline-flex me-2 mb-2" style="width:350px">
-				<HeaderTemplate>
-					@EmployeesDataStore.GetByKey(Entry.RecipientId).Name
-					<HxBadge Color="ThemeColor.Info">@Entry.Value</HxBadge>
-				</HeaderTemplate>
 				<BodyTemplate>
+
+					<HxCardTitle>
+						@EmployeesDataStore.GetByKey(Entry.RecipientId).Name
+						<HxBadge Color="@(Entry.Submitted is null ? ThemeColor.Light : ThemeColor.Info)">+@Entry.Value</HxBadge>
+					</HxCardTitle>
+
 					<div style="height: 50px; overflow: auto">
 						@Entry.Text
 					</div>
-				</BodyTemplate>
-				<FooterTemplate>
+
 					<HxInputTags @bind-Value="@Entry.Tags" Naked="true" ShowAddButton="true" AddButtonText="tag" />
-				</FooterTemplate>
-			</HxCard>
-		</HxFormState>
-	</EditForm>
-}
+
+					@if (Entry.Submitted is not null)
+					{
+						<small class="text-muted">@Entry.Submitted.Value.ToShortDateString()	</small>
+					}
+					else
+					{
+						<small class="text-muted">koncept</small>
+						<HxButton Icon="BootstrapIcon.Trash" OnClick="HandleDeleteClick" />
+					}
+					</BodyTemplate>
+				</HxCard>
+			</HxFormState>
+		</EditForm>
+	}

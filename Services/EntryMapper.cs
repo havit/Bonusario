@@ -20,6 +20,7 @@ namespace Havit.Bonusario.Services
 				Id = entry.Id,
 				Text = entry.Text,
 				CreatedById = entry.CreatedById,
+				Created = entry.Created,
 				RecipientId = entry.RecipientId,
 				Submitted = entry.Submitted,
 				Value = entry.Value,

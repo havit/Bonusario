@@ -7,10 +7,13 @@ using System.Threading.Tasks;
 using Havit.Bonusario.Contracts;
 using Havit.Bonusario.DataLayer.Repositories;
 using Havit.Extensions.DependencyInjection.Abstractions;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Havit.Bonusario.Facades
 {
 	[Service]
+	[Authorize]
+
 	public class EmployeeFacade : IEmployeeFacade
 	{
 		private readonly IEmployeeRepository employeeRepository;
