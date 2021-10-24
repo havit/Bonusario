@@ -7,6 +7,9 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
 using Havit.Diagnostics.Contracts;
 using Havit.Bonusario.Facades.Infrastructure.Security.Authentication;
+using Havit.Bonusario.Model;
+using Havit.Bonusario.DataLayer.Repositories;
+using System.Threading;
 
 namespace Havit.Bonusario.Web.Server.Infrastructure.Security
 {
@@ -16,14 +19,14 @@ namespace Havit.Bonusario.Web.Server.Infrastructure.Security
 	public class ApplicationAuthenticationService : IApplicationAuthenticationService
 	{
 		private readonly IHttpContextAccessor httpContextAccessor;
+		private readonly IEmployeeRepository employeeRepository;
 
-		//private readonly Lazy<User> userLazy;
+		private Employee employee;
 
-		public ApplicationAuthenticationService(IHttpContextAccessor httpContextAccessor) //, IUserRepository userRepository)
+		public ApplicationAuthenticationService(IHttpContextAccessor httpContextAccessor, IEmployeeRepository employeeRepository)
 		{
 			this.httpContextAccessor = httpContextAccessor;
-
-			//userLazy = new Lazy<User>(() => userRepository.GetObject(GetCurrentUserId()));
+			this.employeeRepository = employeeRepository;
 		}
 
 		public ClaimsPrincipal GetCurrentClaimsPrincipal()
@@ -31,13 +34,18 @@ namespace Havit.Bonusario.Web.Server.Infrastructure.Security
 			return httpContextAccessor.HttpContext.User;
 		}
 
-		//public User GetCurrentUser() => userLazy.Value;
+		public async Task<Employee> GetCurrentEmployeeAsync(CancellationToken cancellationToken = default)
+		{
+			employee ??= await employeeRepository.GetByEmailAsync(GetCurrentUserEmail(), cancellationToken);
+			return employee;
+		}
 
-		public int GetCurrentUserId()
+		public string GetCurrentUserEmail()
 		{
 			var principal = GetCurrentClaimsPrincipal();
-			Claim userIdClaim = principal.Claims.Single(claim => (claim.Type == "sub"));
-			return Int32.Parse(userIdClaim.Value);
+			Claim claim = principal.Claims.Single(claim => (claim.Type == ClaimTypes.Upn));
+			Debug.Assert(claim.Value.Contains("@"));
+			return claim.Value;
 		}
 	}
 }

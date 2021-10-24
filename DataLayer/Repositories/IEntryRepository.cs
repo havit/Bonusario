@@ -5,11 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using Havit.Data.Patterns.Repositories;
 using Havit.Bonusario.Model;
+using System.Threading;
 
 namespace Havit.Bonusario.DataLayer.Repositories
 {
 	public partial interface IEntryRepository
 	{
-
+		Task<List<Entry>> GetEntriesCreatedByAsync(int createdByEmployeeId, CancellationToken cancellationToken = default);
 	}
 }

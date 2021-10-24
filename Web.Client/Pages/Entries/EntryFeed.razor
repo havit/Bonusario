@@ -1,0 +1,21 @@
+﻿<HxCard>
+	<HeaderTemplate>
+		<HxCardTitle>My Entries</HxCardTitle>
+	</HeaderTemplate>
+	<BodyTemplate>
+		@if (entries is not null)
+		{
+			<HxRepeater Data="entries" Context="entry">
+				<ItemTemplate>
+					<EntryCard Entry="entry" />
+				</ItemTemplate>
+			</HxRepeater>
+		}
+		else
+		{
+			<HxPlaceholderContainer Animation="PlaceholderAnimation.Glow">
+
+			</HxPlaceholderContainer>
+		}
+	</BodyTemplate>
+</HxCard>

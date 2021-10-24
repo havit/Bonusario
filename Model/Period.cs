@@ -17,5 +17,7 @@ namespace Havit.Bonusario.Model
 		public DateTime StartDate { get; set; }
 
 		public DateTime EndDate { get; set; }
+
+		public DateTime Created { get; set; }
 	}
 }

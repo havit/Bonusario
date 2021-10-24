@@ -16,5 +16,9 @@ namespace Havit.Bonusario.Model
 
 		[MaxLength(255)]
 		public string Email { get; set; }
+
+		public DateTime Created { get; set; }
+
+		public DateTime? Deleted { get; set; }
 	}
 }
