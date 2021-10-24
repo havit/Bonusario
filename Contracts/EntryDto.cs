@@ -20,7 +20,7 @@ namespace Havit.Bonusario.Contracts
 
 		public int Value { get; set; }
 
-		public List<string> Tags { get; set; }
+		public List<string> Tags { get; set; } = new();
 
 		public DateTime? Submitted { get; set; }
 		public DateTime? Created { get; set; }

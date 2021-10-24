@@ -65,6 +65,14 @@ namespace Havit.Bonusario.Facades
 			Contract.Requires<ArgumentException>(newEntryDto.Id == default, nameof(newEntryDto.Id));
 
 			var currentEmployee = await applicationAuthenticationService.GetCurrentEmployeeAsync(cancellationToken);
+
+			var pointsAssigned = await entryRepository.GetPointsAssignedSumAsync(newEntryDto.PeriodId, currentEmployee.Id, cancellationToken);
+			int maxPoints = PointsAvailable - pointsAssigned;
+			if (newEntryDto.Value > maxPoints)
+			{
+				throw new OperationFailedException($"Maximální počet přidělitelných bodů překročen. K dispozici zbývá {maxPoints} bodů");
+			}
+
 			Entry newEntry = new Entry()
 			{
 				CreatedBy = currentEmployee,
