@@ -23,5 +23,7 @@ namespace Havit.Bonusario.Model
 		public int Value { get; set; }
 
 		public List<EntryTag> Tags { get; set; }
+
+		public DateTime Submitted { get; set; }
 	}
 }
