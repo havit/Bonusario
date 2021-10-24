@@ -6,5 +6,6 @@ namespace Havit.Bonusario.Services
 	public interface IEntryMapper
 	{
 		EntryDto MapToEntryDto(Entry entry);
+		void MapFromEntryDto(EntryDto newEntryDto, Entry newEntry);
 	}
 }

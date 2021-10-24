@@ -1,11 +1,14 @@
 ﻿<HxCard>
 	<HeaderTemplate>
-		<HxCardTitle>My Entries</HxCardTitle>
+		My Entries
 	</HeaderTemplate>
 	<BodyTemplate>
 		@if (entries is not null)
 		{
 			<HxRepeater Data="entries" Context="entry">
+				<HeaderTemplate>
+					<EntryCard Entry="newEntry" OnEntryCreated="HandleEntryCreated" />
+				</HeaderTemplate>
 				<ItemTemplate>
 					<EntryCard Entry="entry" OnEntryDeleted="HandleEntryDeleted" />
 				</ItemTemplate>
@@ -14,7 +17,7 @@
 		else
 		{
 			<HxPlaceholderContainer Animation="PlaceholderAnimation.Glow">
-
+				@* TODO *@
 			</HxPlaceholderContainer>
 		}
 	</BodyTemplate>

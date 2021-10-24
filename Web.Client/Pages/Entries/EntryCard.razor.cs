@@ -14,6 +14,7 @@ namespace Havit.Bonusario.Web.Client.Pages.Entries
 	{
 		[Parameter] public EntryDto Entry { get; set; }
 		[Parameter] public EventCallback OnEntryDeleted { get; set; }
+		[Parameter] public EventCallback<EntryDto> OnEntryCreated { get; set; }
 
 		[Inject] protected IEmployeesDataStore EmployeesDataStore { get; set; }
 		[Inject] protected IEntryFacade EntryFacade { get; set; }
@@ -29,6 +30,22 @@ namespace Havit.Bonusario.Web.Client.Pages.Entries
 			Contract.Assert(Entry.Submitted is null, "Nelze smazat odeslaný záznam.");
 			await EntryFacade.DeleteEntryAsync(Dto.FromValue(Entry.Id));
 			await OnEntryDeleted.InvokeAsync();
+		}
+
+		private async Task HandleNewClick()
+		{
+			Contract.Assert(Entry.Id == default, "Záznam již není nový.");
+			Contract.Assert(Entry.PeriodId != default, "PeriodId musí být nastaven.");
+
+			try
+			{
+				this.Entry.Id = (await EntryFacade.CreateEntryAsync(this.Entry)).Value;
+				await OnEntryCreated.InvokeAsync(this.Entry);
+			}
+			catch (OperationFailedException)
+			{
+				// NOOP
+			}
 		}
 	}
 }

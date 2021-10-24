@@ -11,6 +11,6 @@ namespace Havit.Bonusario.DataLayer.Repositories
 {
 	public partial interface IEntryRepository
 	{
-		Task<List<Entry>> GetEntriesCreatedByAsync(int createdByEmployeeId, CancellationToken cancellationToken = default);
+		Task<List<Entry>> GetEntriesCreatedByAsync(int periodId, int createdByEmployeeId, CancellationToken cancellationToken = default);
 	}
 }

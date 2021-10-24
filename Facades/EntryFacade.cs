@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Havit.Bonusario.Contracts;
 using Havit.Bonusario.DataLayer.Repositories;
 using Havit.Bonusario.Facades.Infrastructure.Security.Authentication;
+using Havit.Bonusario.Model;
 using Havit.Bonusario.Services;
 using Havit.Data.Patterns.UnitOfWorks;
 using Havit.Diagnostics.Contracts;
@@ -37,10 +38,10 @@ namespace Havit.Bonusario.Facades
 			this.applicationAuthenticationService = applicationAuthenticationService;
 		}
 
-		public async Task<List<EntryDto>> GetMyEntriesAsync(CancellationToken cancellationToken = default)
+		public async Task<List<EntryDto>> GetMyEntriesAsync(Dto<int> periodId, CancellationToken cancellationToken = default)
 		{
 			var currentEmployee = await applicationAuthenticationService.GetCurrentEmployeeAsync(cancellationToken);
-			var entries = await entryRepository.GetEntriesCreatedByAsync(currentEmployee.Id, cancellationToken);
+			var entries = await entryRepository.GetEntriesCreatedByAsync(periodId.Value, currentEmployee.Id, cancellationToken);
 
 			return entries.Select(e => entryMapper.MapToEntryDto(e)).ToList();
 		}
@@ -54,6 +55,25 @@ namespace Havit.Bonusario.Facades
 
 			unitOfWork.AddForDelete(entry);
 			await unitOfWork.CommitAsync(cancellationToken);
+		}
+
+		public async Task<Dto<int>> CreateEntryAsync(EntryDto newEntryDto, CancellationToken cancellationToken = default)
+		{
+			Contract.Requires<ArgumentNullException>(newEntryDto is not null, nameof(newEntryDto));
+			Contract.Requires<ArgumentException>(newEntryDto.Id == default, nameof(newEntryDto.Id));
+
+			var currentEmployee = await applicationAuthenticationService.GetCurrentEmployeeAsync(cancellationToken);
+			Entry newEntry = new Entry()
+			{
+				CreatedBy = currentEmployee,
+				CreatedById = currentEmployee.Id
+			};
+			entryMapper.MapFromEntryDto(newEntryDto, newEntry);
+
+			unitOfWork.AddForInsert(newEntry);
+			await unitOfWork.CommitAsync(cancellationToken);
+
+			return Dto.FromValue(newEntry.Id);
 		}
 	}
 }

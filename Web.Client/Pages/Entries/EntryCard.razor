@@ -6,13 +6,13 @@
 				<BodyTemplate>
 
 					<HxCardTitle>
-						@EmployeesDataStore.GetByKey(Entry.RecipientId).Name
-						<HxBadge Color="@(Entry.Submitted is null ? ThemeColor.Light : ThemeColor.Info)">+@Entry.Value</HxBadge>
+						<EmployeePicker @bind-Value="Entry.RecipientId" />
+						<HxBadge Color="@(Entry.Submitted is null ? ThemeColor.Light : ThemeColor.Info)">
+							<HxInputNumber @bind-Value="@Entry.Value" InputSize="InputSize.Small" style="width:2.25rem" />
+						</HxBadge>
 					</HxCardTitle>
 
-					<div style="height: 50px; overflow: auto">
-						@Entry.Text
-					</div>
+					<HxInputTextArea @bind-Value="@Entry.Text" style="height: 50px; overflow: auto" />
 
 					<HxInputTags @bind-Value="@Entry.Tags" Naked="true" ShowAddButton="true" AddButtonText="tag" />
 
@@ -22,11 +22,19 @@
 					}
 					else
 					{
-						<small class="text-muted">koncept</small>
-						<HxButton Icon="BootstrapIcon.Trash" OnClick="HandleDeleteClick" />
+						@if (Entry.Id != default)
+						{
+							<small class="text-muted">koncept</small>
+							<HxButton Icon="BootstrapIcon.Trash" OnClick="HandleDeleteClick" />
+						}
+						else
+						{
+							<small class="text-muted">nový</small>
+							<HxButton Icon="BootstrapIcon.PlusCircle" OnClick="HandleNewClick" />
+						}
 					}
-					</BodyTemplate>
-				</HxCard>
-			</HxFormState>
-		</EditForm>
-	}
+				</BodyTemplate>
+			</HxCard>
+		</HxFormState>
+	</EditForm>
+}

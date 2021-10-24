@@ -17,9 +17,10 @@ namespace Havit.Bonusario.DataLayer.Repositories
 {
 	public partial class EntryDbRepository : IEntryRepository
 	{
-		public Task<List<Entry>> GetEntriesCreatedByAsync(int createdByEmployeeId, CancellationToken cancellationToken = default)
+		public Task<List<Entry>> GetEntriesCreatedByAsync(int periodId, int createdByEmployeeId, CancellationToken cancellationToken = default)
 		{
 			return Data
+				.Where(e => e.PeriodId == periodId)
 				.Where(e => e.CreatedById == createdByEmployeeId)
 				.Include(GetLoadReferences)
 				.ToListAsync(cancellationToken);

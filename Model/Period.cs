@@ -4,9 +4,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Havit.Data.EntityFrameworkCore.Attributes;
 
 namespace Havit.Bonusario.Model
 {
+	[Cache]
 	public class Period
 	{
 		public int Id { get; set; }

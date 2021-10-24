@@ -54,6 +54,7 @@ namespace Havit.Bonusario.Web.Client
 			AddGrpcClient(builder);
 
 			builder.Services.AddSingleton<IEmployeesDataStore, EmployeesDataStore>();
+			builder.Services.AddSingleton<IPeriodsDataStore, PeriodsDataStore>();
 
 			WebAssemblyHost webAssemblyHost = builder.Build();
 

@@ -11,9 +11,9 @@ namespace Havit.Bonusario.Contracts
 	{
 		public int Id { get; set; }
 
-		public int CreatedById { get; set; }
+		public int? CreatedById { get; set; }
 
-		public int RecipientId { get; set; }
+		public int? RecipientId { get; set; }
 
 		public string Text { get; set; }
 
@@ -22,6 +22,7 @@ namespace Havit.Bonusario.Contracts
 		public List<string> Tags { get; set; }
 
 		public DateTime? Submitted { get; set; }
-		public DateTime Created { get; set; }
+		public DateTime? Created { get; set; }
+		public int PeriodId { get; set; }
 	}
 }
