@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FluentValidation;
 
 namespace Havit.Bonusario.Contracts
 {
@@ -24,5 +25,14 @@ namespace Havit.Bonusario.Contracts
 		public DateTime? Submitted { get; set; }
 		public DateTime? Created { get; set; }
 		public int PeriodId { get; set; }
+
+		public class EntryDtoValidator : AbstractValidator<EntryDto>
+		{
+			public EntryDtoValidator()
+			{
+				RuleFor(e => e.RecipientId).NotNull();
+				RuleFor(e => e.Value).InclusiveBetween(0, 100);
+			}
+		}
 	}
 }

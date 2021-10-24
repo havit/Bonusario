@@ -33,6 +33,7 @@ namespace Havit.Bonusario.Web.Client.Components
 		{
 			this.ValueSelectorImpl = (c => c.PeriodId);
 			this.TextSelectorImpl = (c => c.Name);
+			this.AutoSortImpl = false;
 		}
 
 		protected override async Task OnInitializedAsync()

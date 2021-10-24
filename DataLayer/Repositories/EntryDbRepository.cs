@@ -26,6 +26,14 @@ namespace Havit.Bonusario.DataLayer.Repositories
 				.ToListAsync(cancellationToken);
 		}
 
+		public Task<int> GetPointsAssignedSumAsync(int periodId, int createdByEmployeeId, CancellationToken cancellationToken = default)
+		{
+			return Data
+				.Where(e => e.PeriodId == periodId)
+				.Where(e => e.CreatedById == createdByEmployeeId)
+				.SumAsync(e => e.Value);
+		}
+
 		protected override IEnumerable<Expression<Func<Entry, object>>> GetLoadReferences()
 		{
 			yield return e => e.Tags;

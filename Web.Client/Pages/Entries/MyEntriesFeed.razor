@@ -1,24 +1,40 @@
-﻿<HxCard>
-	<HeaderTemplate>
-		My Entries
-	</HeaderTemplate>
-	<BodyTemplate>
-		@if (entries is not null)
+﻿<HxPlaceholderContainer Animation="PlaceholderAnimation.Glow">
+	@if (remainingPoints is null)
+	{
+		<HxPlaceholder Columns="2" />
+	}
+	else
+	{
+		if (remainingPoints.Value > 0)
 		{
-			<HxRepeater Data="entries" Context="entry">
-				<HeaderTemplate>
-					<EntryCard Entry="newEntry" OnEntryCreated="HandleEntryCreated" />
-				</HeaderTemplate>
-				<ItemTemplate>
-					<EntryCard Entry="entry" OnEntryDeleted="HandleEntryDeleted" />
-				</ItemTemplate>
-			</HxRepeater>
+			<p>Máš ještě <strong>@remainingPoints bodů</strong> k přidělení.</p>
 		}
 		else
 		{
-			<HxPlaceholderContainer Animation="PlaceholderAnimation.Glow">
-				@* TODO *@
-			</HxPlaceholderContainer>
+			<p>Všechny body jsi již rozdal.</p>
 		}
-	</BodyTemplate>
-</HxCard>
+	}
+
+	<HxCard>
+		<HeaderTemplate>
+			My Entries
+		</HeaderTemplate>
+		<BodyTemplate>
+			@if (entries is not null)
+			{
+				<HxRepeater Data="entries" Context="entry">
+					<HeaderTemplate>
+						<EntryCard Entry="newEntry" OnEntryCreated="HandleEntryCreated" />
+					</HeaderTemplate>
+					<ItemTemplate>
+						<EntryCard Entry="entry" OnEntryDeleted="HandleEntryDeleted" />
+					</ItemTemplate>
+				</HxRepeater>
+			}
+			else
+			{
+				@* TODO *@
+			}
+		</BodyTemplate>
+	</HxCard>
+</HxPlaceholderContainer>

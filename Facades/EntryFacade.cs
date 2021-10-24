@@ -21,6 +21,8 @@ namespace Havit.Bonusario.Facades
 	[Authorize]
 	public class EntryFacade : IEntryFacade
 	{
+		private const int PointsAvailable = 100;
+
 		private readonly IEntryRepository entryRepository;
 		private readonly IEntryMapper entryMapper;
 		private readonly IUnitOfWork unitOfWork;
@@ -74,6 +76,15 @@ namespace Havit.Bonusario.Facades
 			await unitOfWork.CommitAsync(cancellationToken);
 
 			return Dto.FromValue(newEntry.Id);
+		}
+
+		public async Task<Dto<int>> GetMyRemainingPoints(Dto<int> periodId, CancellationToken cancellationToken = default)
+		{
+			var currentEmployee = await applicationAuthenticationService.GetCurrentEmployeeAsync(cancellationToken);
+
+			var pointsAssigned = await entryRepository.GetPointsAssignedSumAsync(periodId.Value, currentEmployee.Id, cancellationToken);
+
+			return Dto.FromValue(PointsAvailable - pointsAssigned);
 		}
 	}
 }

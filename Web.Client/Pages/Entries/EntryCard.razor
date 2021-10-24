@@ -1,6 +1,7 @@
 ﻿@if ((Entry is not null) && EmployeesDataStore.IsLoaded)
 {
 	<EditForm Model="@Entry">
+		<FluentValidationValidator />
 		<HxFormState Enabled="@(Entry.Submitted is null)">
 			<HxCard CssClass="d-inline-flex me-2 mb-2" style="width:350px">
 				<BodyTemplate>
@@ -8,7 +9,9 @@
 					<HxCardTitle>
 						<EmployeePicker @bind-Value="Entry.RecipientId" />
 						<HxBadge Color="@(Entry.Submitted is null ? ThemeColor.Light : ThemeColor.Info)">
-							<HxInputNumber @bind-Value="@Entry.Value" InputSize="InputSize.Small" style="width:2.25rem" />
+							<HxInputNumber @bind-Value="@Entry.Value"
+										   InputSize="InputSize.Small"
+										   style="width:3rem" />
 						</HxBadge>
 					</HxCardTitle>
 
@@ -18,7 +21,7 @@
 
 					@if (Entry.Submitted is not null)
 					{
-						<small class="text-muted">@Entry.Submitted.Value.ToShortDateString()	</small>
+						<small class="text-muted">vloženo @Entry.Submitted.Value.ToShortDateString()	</small>
 					}
 					else
 					{
@@ -30,7 +33,11 @@
 						else
 						{
 							<small class="text-muted">nový</small>
-							<HxButton Icon="BootstrapIcon.PlusCircle" OnClick="HandleNewClick" />
+							<HxButton Icon="BootstrapIcon.PlusCircle"
+									  Color="ThemeColor.Primary"
+									  OnValidClick="HandleNewClick"
+									  Size="ButtonSize.Small"
+									  Text="přidej" />
 						}
 					}
 				</BodyTemplate>
