@@ -70,7 +70,7 @@ namespace Havit.Bonusario.Facades
 			int maxPoints = PointsAvailable - pointsAssigned;
 			if (newEntryDto.Value > maxPoints)
 			{
-				throw new OperationFailedException($"Maximální počet přidělitelných bodů překročen. K dispozici zbývá {maxPoints} bodů");
+				throw new OperationFailedException($"Maximální počet přidělitelných bodů překročen. K dispozici zbývá {maxPoints} bodů.");
 			}
 
 			Entry newEntry = new Entry()
@@ -84,6 +84,29 @@ namespace Havit.Bonusario.Facades
 			await unitOfWork.CommitAsync(cancellationToken);
 
 			return Dto.FromValue(newEntry.Id);
+		}
+
+		public async Task UpdateEntryAsync(EntryDto entryDto, CancellationToken cancellationToken = default)
+		{
+			Contract.Requires<ArgumentNullException>(entryDto is not null, nameof(entryDto));
+			Contract.Requires<ArgumentException>(entryDto.Id != default, nameof(entryDto.Id));
+
+			var currentEmployee = await applicationAuthenticationService.GetCurrentEmployeeAsync(cancellationToken);
+			var entry = await entryRepository.GetObjectAsync(entryDto.Id, cancellationToken);
+
+			Contract.Requires<SecurityException>(entry.CreatedById == currentEmployee.Id);
+
+			var pointsAssigned = await entryRepository.GetPointsAssignedSumAsync(entryDto.PeriodId, currentEmployee.Id, cancellationToken);
+			int maxPoints = PointsAvailable - pointsAssigned + entry.Value;
+			if (entryDto.Value > maxPoints)
+			{
+				throw new OperationFailedException($"Maximální počet přidělitelných bodů překročen. K dispozici zbývá {maxPoints} bodů.");
+			}
+
+			entryMapper.MapFromEntryDto(entryDto, entry);
+
+			unitOfWork.AddForUpdate(entry);
+			await unitOfWork.CommitAsync(cancellationToken);
 		}
 
 		public async Task<Dto<int>> GetMyRemainingPoints(Dto<int> periodId, CancellationToken cancellationToken = default)

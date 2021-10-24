@@ -38,6 +38,11 @@ namespace Havit.Bonusario.Web.Client.Pages.Entries
 			await LoadData();
 		}
 
+		private async Task HandleEntryUpdated()
+		{
+			await LoadData();
+		}
+
 		private async Task HandleEntryCreated()
 		{
 			newEntry = new EntryDto() { PeriodId = PeriodId.Value };

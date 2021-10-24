@@ -1,6 +1,6 @@
 ﻿@if ((Entry is not null) && EmployeesDataStore.IsLoaded)
 {
-	<EditForm Model="@Entry">
+	<EditForm EditContext="editContext">
 		<FluentValidationValidator />
 		<HxFormState Enabled="@(Entry.Submitted is null)">
 			<HxCard CssClass="d-inline-flex me-2 mb-2" style="width:350px">

@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Havit.Bonusario.Contracts;
 using Havit.Bonusario.Web.Client.DataStores;
 using Havit.Diagnostics.Contracts;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Forms;
 
 namespace Havit.Bonusario.Web.Client.Pages.Entries
 {
@@ -15,10 +17,37 @@ namespace Havit.Bonusario.Web.Client.Pages.Entries
 		[Parameter] public EntryDto Entry { get; set; }
 		[Parameter] public EventCallback OnEntryDeleted { get; set; }
 		[Parameter] public EventCallback<EntryDto> OnEntryCreated { get; set; }
+		[Parameter] public EventCallback<EntryDto> OnEntryUpdated { get; set; }
 
 		[Inject] protected IEmployeesDataStore EmployeesDataStore { get; set; }
 		[Inject] protected IEntryFacade EntryFacade { get; set; }
 
+		private EditContext editContext;
+
+		protected override void OnParametersSet()
+		{
+			editContext = new EditContext(Entry);
+			editContext.OnFieldChanged += EditContext_OnFieldChanged;
+		}
+
+		private void EditContext_OnFieldChanged(object sender, FieldChangedEventArgs e)
+		{
+			if (editContext.Validate())
+			{
+				InvokeAsync(async () =>
+				{
+					try
+					{
+						await EntryFacade.UpdateEntryAsync(this.Entry);
+						await OnEntryUpdated.InvokeAsync(this.Entry);
+					}
+					catch (OperationFailedException)
+					{
+						// NOOP
+					}
+				});
+			}
+		}
 
 		protected override async Task OnInitializedAsync()
 		{
