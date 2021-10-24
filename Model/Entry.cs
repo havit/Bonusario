@@ -27,7 +27,7 @@ namespace Havit.Bonusario.Model
 
 		public List<EntryTag> Tags { get; } = new List<EntryTag>();
 
-		public DateTime Submitted { get; set; }
+		public DateTime? Submitted { get; set; }
 
 		public DateTime Created { get; set; }
 

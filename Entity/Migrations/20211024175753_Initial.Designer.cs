@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Havit.Bonusario.Entity.Migrations
 {
     [DbContext(typeof(BonusarioDbContext))]
-    [Migration("20211024105646_InitialAdjusments")]
-    partial class InitialAdjusments
+    [Migration("20211024175753_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -85,7 +85,7 @@ namespace Havit.Bonusario.Entity.Migrations
                     b.Property<int>("RecipientId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("Submitted")
+                    b.Property<DateTime?>("Submitted")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Text")

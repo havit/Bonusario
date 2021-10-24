@@ -21,6 +21,6 @@ namespace Havit.Bonusario.Contracts
 
 		public List<string> Tags { get; set; }
 
-		public DateTime Submitted { get; set; }
+		public DateTime? Submitted { get; set; }
 	}
 }

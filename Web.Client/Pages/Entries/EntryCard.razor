@@ -1,19 +1,21 @@
-﻿@if (Entry is not null)
+﻿@if ((Entry is not null) && EmployeesDataStore.IsLoaded)
 {
 	<EditForm Model="@Entry">
-		<HxCard CssClass="d-inline-flex me-2 mb-2" style="width:350px">
-			<HeaderTemplate>
-				@Entry.RecipientId
-				<HxBadge Color="ThemeColor.Light">@Entry.Value</HxBadge>
-			</HeaderTemplate>
-			<BodyTemplate>
-				<div style="height: 50px; overflow: auto">
-					@Entry.Text
-				</div>
-			</BodyTemplate>
-			<FooterTemplate>
-				<HxInputTags @bind-Value="@Entry.Tags" Naked="true" ShowAddButton="true" AddButtonText="tag" />
-			</FooterTemplate>
-		</HxCard>
+		<HxFormState Enabled="@(Entry.Submitted is null)">
+			<HxCard CssClass="d-inline-flex me-2 mb-2" style="width:350px">
+				<HeaderTemplate>
+					@EmployeesDataStore.GetByKey(Entry.RecipientId).Name
+					<HxBadge Color="ThemeColor.Info">@Entry.Value</HxBadge>
+				</HeaderTemplate>
+				<BodyTemplate>
+					<div style="height: 50px; overflow: auto">
+						@Entry.Text
+					</div>
+				</BodyTemplate>
+				<FooterTemplate>
+					<HxInputTags @bind-Value="@Entry.Tags" Naked="true" ShowAddButton="true" AddButtonText="tag" />
+				</FooterTemplate>
+			</HxCard>
+		</HxFormState>
 	</EditForm>
 }

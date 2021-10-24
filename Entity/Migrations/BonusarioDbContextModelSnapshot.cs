@@ -83,7 +83,7 @@ namespace Havit.Bonusario.Entity.Migrations
                     b.Property<int>("RecipientId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("Submitted")
+                    b.Property<DateTime?>("Submitted")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Text")

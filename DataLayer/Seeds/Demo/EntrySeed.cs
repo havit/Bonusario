@@ -41,8 +41,8 @@ namespace Havit.Bonusario.DataLayer.Seeds.Demo
 					Tags =
 					{
 						new EntryTag() { Tag = "team" },
-						new EntryTag() { Tag = "passion" },
-						new EntryTag() { Tag = "knowledge" }
+						new EntryTag() { Tag = "vášeň" },
+						new EntryTag() { Tag = "znalosti" }
 					},
 					Created = now
 				},
@@ -61,7 +61,22 @@ namespace Havit.Bonusario.DataLayer.Seeds.Demo
 					PeriodId = currentPeriod.Id,
 					Value = 15,
 					Created = now
-				}
+				},
+				new Entry()
+				{
+					CreatedById = employees.Single(e => e.Email == "haken@havit.cz").Id,
+					RecipientId = employees.Single(e => e.Email == "gregor@havit.cz").Id,
+					PeriodId = currentPeriod.Id,
+					Text = "Líbí se mi, že ses ujal organizace lyžarské akce.",
+					Value = 3,
+					Submitted = now,
+					Tags =
+					{
+						new EntryTag() { Tag = "team" },
+						new EntryTag() { Tag = "potěšení" },
+					},
+					Created = now
+				},
 			};
 
 			Seed(For(entries)

@@ -14,6 +14,7 @@ using Havit.Blazor.Grpc.Client.ServerExceptions;
 using Havit.Blazor.Grpc.Client.WebAssembly;
 using Havit.Bonusario.Contracts;
 using Havit.Bonusario.Contracts.System;
+using Havit.Bonusario.Web.Client.DataStores;
 using Havit.Bonusario.Web.Client.Infrastructure.Grpc;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
@@ -51,6 +52,8 @@ namespace Havit.Bonusario.Web.Client
 			SetHxComponents();
 
 			AddGrpcClient(builder);
+
+			builder.Services.AddSingleton<IEmployeesDataStore, EmployeesDataStore>();
 
 			WebAssemblyHost webAssemblyHost = builder.Build();
 

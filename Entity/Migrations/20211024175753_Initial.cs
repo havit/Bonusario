@@ -40,7 +40,9 @@ namespace Havit.Bonusario.Entity.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true)
+                    Email = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Deleted = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -69,7 +71,8 @@ namespace Havit.Bonusario.Entity.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -84,8 +87,12 @@ namespace Havit.Bonusario.Entity.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CreatedById = table.Column<int>(type: "int", nullable: false),
                     RecipientId = table.Column<int>(type: "int", nullable: false),
+                    PeriodId = table.Column<int>(type: "int", nullable: false),
                     Text = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Value = table.Column<int>(type: "int", nullable: false)
+                    Value = table.Column<int>(type: "int", nullable: false),
+                    Submitted = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Deleted = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -100,6 +107,12 @@ namespace Havit.Bonusario.Entity.Migrations
                         name: "FK_Entry_Employee_RecipientId",
                         column: x => x.RecipientId,
                         principalTable: "Employee",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Entry_Period_PeriodId",
+                        column: x => x.PeriodId,
+                        principalTable: "Period",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -125,9 +138,21 @@ namespace Havit.Bonusario.Entity.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Employee_Email",
+                table: "Employee",
+                column: "Email",
+                unique: true,
+                filter: "[Email] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Entry_CreatedById",
                 table: "Entry",
                 column: "CreatedById");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Entry_PeriodId",
+                table: "Entry",
+                column: "PeriodId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Entry_RecipientId",
@@ -155,13 +180,13 @@ namespace Havit.Bonusario.Entity.Migrations
                 name: "Language");
 
             migrationBuilder.DropTable(
-                name: "Period");
-
-            migrationBuilder.DropTable(
                 name: "Entry");
 
             migrationBuilder.DropTable(
                 name: "Employee");
+
+            migrationBuilder.DropTable(
+                name: "Period");
 
             migrationBuilder.DropSequence(
                 name: "ContactSequence");
