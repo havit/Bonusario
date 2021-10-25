@@ -1,0 +1,11 @@
+﻿@* TODO Horizontal stacking *@
+<HxRepeater Data="Entries" Context="entry">
+	<ItemTemplate>
+		<EntryCard Entry="entry" OnEntryDeleted="this.OnEntryDeleted" OnEntryUpdated="this.OnEntryUpdated" />
+	</ItemTemplate>
+</HxRepeater>
+
+@if (RemainingPoints > 0)
+{
+	<EntryCard Entry="newEntry" OnEntryCreated="HandleEntryCreated" />
+}

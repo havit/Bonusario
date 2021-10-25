@@ -30,6 +30,7 @@ namespace Havit.Bonusario.Facades
 			{
 				EmployeeId = e.Id,
 				Name = e.Name,
+				Email = e.Email,
 				IsDeleted = e.Deleted is not null,
 			}).ToList();
 		}

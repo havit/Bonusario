@@ -1,0 +1,40 @@
+﻿@if (remainingPoints is null)
+{
+	<HxPlaceholder Columns="2" />
+}
+else
+{
+	if (remainingPoints.Value > 0)
+	{
+		<p>Máš ještě <strong>@remainingPoints bodů</strong> k přidělení.</p>
+	}
+	else
+	{
+		<p>Všechny body jsi již rozdal.</p>
+	}
+}
+
+@if (employees is not null)
+{
+	<AuthorizeView>
+		<Authorized>
+			<HxRepeater Data="@(employees.Where(e => e.Email != context.User.FindFirst("preferred_username")?.Value).OrderBy(e => e.Email))" Context="employee">
+				<ItemTemplate>
+					<h6>@employee.Name</h6>
+					@if (remainingPoints is not null)
+					{
+						<RecipientEntries RecipientId="employee.EmployeeId"
+										  PeriodId="PeriodId"
+										  RemainingPoints="@remainingPoints.Value"
+										  Entries="entries.Where(e => e.RecipientId == employee.EmployeeId)" />
+					}
+					<hr />
+				</ItemTemplate>
+			</HxRepeater>
+		</Authorized>
+	</AuthorizeView>
+}
+else
+{
+	@* TODO Placeholders *@
+}

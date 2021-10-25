@@ -1,3 +1,8 @@
 ﻿@attribute [Route(Routes.Submission)]
 
 <PeriodPicker @bind-Value="periodId" Nullable="false" />
+
+@if (periodId is not null)
+{
+	<EntriesBoard PeriodId="periodId.Value" />
+}
