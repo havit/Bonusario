@@ -44,6 +44,10 @@ namespace Havit.Bonusario.Facades.System
 		{
 			// applicationAuthorizationService.VerifyCurrentUserAuthorization(Operations.SystemAdministration); // TODO alternative authorization approach
 
+			// Individual seeds do not invalidate cache. If there are any cached entries (incl. empty-GetAll),
+			// they get seeded and another seed asks for GetAll(), the newly seeded entities are not included.
+			cacheService.Clear();
+
 			Type type = GetProfileTypes().FirstOrDefault(item => String.Equals(item.Name, profileName, StringComparison.InvariantCultureIgnoreCase));
 
 			if (type == null)
