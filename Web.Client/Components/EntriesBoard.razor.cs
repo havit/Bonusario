@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Havit.Blazor.Components.Web;
 using Havit.Bonusario.Contracts;
 using Havit.Bonusario.Web.Client.DataStores;
 using Microsoft.AspNetCore.Components;
@@ -15,6 +16,7 @@ namespace Havit.Bonusario.Web.Client.Components
 
 		[Inject] protected IEmployeesDataStore EmployeesDataStore { get; set; }
 		[Inject] protected IEntryFacade EntryFacade { get; set; }
+		[Inject] protected IHxMessageBoxService MessageBox { get; set; }
 
 		private IEnumerable<EmployeeReferenceDto> employees;
 		private List<EntryDto> entries;
@@ -39,19 +41,24 @@ namespace Havit.Bonusario.Web.Client.Components
 			remainingPoints = (await EntryFacade.GetMyRemainingPoints(Dto.FromValue(PeriodId))).Value;
 		}
 
-		private async Task HandleEntryDeleted()
-		{
-			await LoadData();
-		}
+		private async Task HandleEntryDeleted() => await LoadData();
+		private async Task HandleEntryUpdated() => await LoadData();
+		private async Task HandleEntryCreated() => await LoadData();
 
-		private async Task HandleEntryUpdated()
+		private async Task HandleSubmitAllClick()
 		{
-			await LoadData();
-		}
-
-		private async Task HandleEntryCreated()
-		{
-			await LoadData();
+			if (await MessageBox.ConfirmAsync("Potvrzení", "Opravdu si přejete všechny koncepty potvrdit?"))
+			{
+				try
+				{
+					await EntryFacade.SubmitEntriesAsync(entries.Where(e => e.Submitted is null).Select(e => e.Id).ToList());
+					await LoadData();
+				}
+				catch (OperationFailedException)
+				{
+					// NOOP
+				}
+			}
 		}
 	}
 }

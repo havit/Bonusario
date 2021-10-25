@@ -16,5 +16,6 @@ namespace Havit.Bonusario.Contracts
 		Task DeleteEntryAsync(Dto<int> entryId, CancellationToken cancellationToken = default);
 		Task<Dto<int>> CreateEntryAsync(EntryDto newEntry, CancellationToken cancellationToken = default);
 		Task UpdateEntryAsync(EntryDto entryDto, CancellationToken cancellationToken = default);
+		Task SubmitEntriesAsync(List<int> entryDtos, CancellationToken cancellationToken = default);
 	}
 }

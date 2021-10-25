@@ -13,6 +13,7 @@ using Havit.Bonusario.Services;
 using Havit.Data.Patterns.UnitOfWorks;
 using Havit.Diagnostics.Contracts;
 using Havit.Extensions.DependencyInjection.Abstractions;
+using Havit.Services.TimeServices;
 using Microsoft.AspNetCore.Authorization;
 
 namespace Havit.Bonusario.Facades
@@ -26,17 +27,20 @@ namespace Havit.Bonusario.Facades
 		private readonly IEntryRepository entryRepository;
 		private readonly IEntryMapper entryMapper;
 		private readonly IUnitOfWork unitOfWork;
+		private readonly ITimeService timeService;
 		private readonly IApplicationAuthenticationService applicationAuthenticationService;
 
 		public EntryFacade(
 			IEntryRepository entryRepository,
 			IEntryMapper entryMapper,
 			IUnitOfWork unitOfWork,
+			ITimeService timeService,
 			IApplicationAuthenticationService applicationAuthenticationService)
 		{
 			this.entryRepository = entryRepository;
 			this.entryMapper = entryMapper;
 			this.unitOfWork = unitOfWork;
+			this.timeService = timeService;
 			this.applicationAuthenticationService = applicationAuthenticationService;
 		}
 
@@ -116,6 +120,35 @@ namespace Havit.Bonusario.Facades
 			var pointsAssigned = await entryRepository.GetPointsAssignedSumAsync(periodId.Value, currentEmployee.Id, cancellationToken);
 
 			return Dto.FromValue(PointsAvailable - pointsAssigned);
+		}
+
+		public async Task SubmitEntriesAsync(List<int> entryIds, CancellationToken cancellationToken = default)
+		{
+			Contract.Requires<ArgumentNullException>(entryIds is not null, nameof(entryIds));
+			Contract.Requires<ArgumentException>(entryIds.Any(), nameof(entryIds));
+
+			var currentEmployee = await applicationAuthenticationService.GetCurrentEmployeeAsync(cancellationToken);
+
+			var entries = await entryRepository.GetObjectsAsync(entryIds.ToArray(), cancellationToken);
+
+			Contract.Requires<SecurityException>(entries.TrueForAll(e => e.CreatedById == currentEmployee.Id), nameof(Entry.CreatedById));
+
+			var periodId = entries.First().PeriodId;
+			Contract.Requires<OperationFailedException>(entries.TrueForAll(e => e.PeriodId == periodId), "Potvrzované záznamy musí být ze stejného období.");
+
+			var pointsAssigned = await entryRepository.GetPointsAssignedSumAsync(periodId, currentEmployee.Id, cancellationToken);
+			Contract.Requires<OperationFailedException>(pointsAssigned <= PointsAvailable, "Limit celkového počtu bodů za období překročen, zkontrolujte záznamy.");
+
+			Contract.Requires<OperationFailedException>(entries.TrueForAll(e => e.RecipientId != currentEmployee.Id), "Nelze potrvrdit záznam, který přiřazuje body aktuálnímu uživateli.");
+			Contract.Requires<OperationFailedException>(entries.TrueForAll(e => e.RecipientId != e.CreatedById), "Nelze potrvrdit záznam, který přiřazuje body sám sobě.");
+
+			foreach (var entry in entries)
+			{
+				entry.Submitted = timeService.GetCurrentTime();
+				unitOfWork.AddForUpdate(entry);
+			}
+
+			await unitOfWork.CommitAsync();
 		}
 	}
 }

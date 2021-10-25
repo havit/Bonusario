@@ -44,3 +44,8 @@ else
 {
 	@* TODO Placeholders *@
 }
+
+@if (entries?.Any(e => e.Submitted is null) ?? false)
+{
+	<HxButton OnClick="HandleSubmitAllClick" Text="Potvrdit vše" Color="ThemeColor.Danger" />
+}
