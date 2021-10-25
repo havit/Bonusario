@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using FluentValidation;
 using Hangfire;
 using Hangfire.Dashboard;
 using Havit.Blazor.Grpc.Server;
@@ -43,6 +44,8 @@ namespace Havit.Bonusario.Web.Server
 			services.AddDatabaseDeveloperPageExceptionFilter();
 
 			services.AddOptions();
+
+			services.AddValidatorsFromAssemblyContaining<EntryDto>();
 
 			services.AddCustomizedMailing(configuration);
 

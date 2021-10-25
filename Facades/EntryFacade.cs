@@ -5,6 +5,7 @@ using System.Security;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using FluentValidation;
 using Havit.Bonusario.Contracts;
 using Havit.Bonusario.DataLayer.Repositories;
 using Havit.Bonusario.Facades.Infrastructure.Security.Authentication;
@@ -28,6 +29,7 @@ namespace Havit.Bonusario.Facades
 		private readonly IEntryMapper entryMapper;
 		private readonly IUnitOfWork unitOfWork;
 		private readonly ITimeService timeService;
+		private readonly IValidator<EntryDto> entryDtoValidator;
 		private readonly IApplicationAuthenticationService applicationAuthenticationService;
 
 		public EntryFacade(
@@ -35,12 +37,14 @@ namespace Havit.Bonusario.Facades
 			IEntryMapper entryMapper,
 			IUnitOfWork unitOfWork,
 			ITimeService timeService,
+			IValidator<EntryDto> entryDtoValidator,
 			IApplicationAuthenticationService applicationAuthenticationService)
 		{
 			this.entryRepository = entryRepository;
 			this.entryMapper = entryMapper;
 			this.unitOfWork = unitOfWork;
 			this.timeService = timeService;
+			this.entryDtoValidator = entryDtoValidator;
 			this.applicationAuthenticationService = applicationAuthenticationService;
 		}
 
@@ -67,6 +71,7 @@ namespace Havit.Bonusario.Facades
 		{
 			Contract.Requires<ArgumentNullException>(newEntryDto is not null, nameof(newEntryDto));
 			Contract.Requires<ArgumentException>(newEntryDto.Id == default, nameof(newEntryDto.Id));
+			entryDtoValidator.ValidateAndThrow(newEntryDto);
 
 			var currentEmployee = await applicationAuthenticationService.GetCurrentEmployeeAsync(cancellationToken);
 
@@ -94,6 +99,7 @@ namespace Havit.Bonusario.Facades
 		{
 			Contract.Requires<ArgumentNullException>(entryDto is not null, nameof(entryDto));
 			Contract.Requires<ArgumentException>(entryDto.Id != default, nameof(entryDto.Id));
+			entryDtoValidator.ValidateAndThrow(entryDto);
 
 			var currentEmployee = await applicationAuthenticationService.GetCurrentEmployeeAsync(cancellationToken);
 			var entry = await entryRepository.GetObjectAsync(entryDto.Id, cancellationToken);
@@ -141,6 +147,7 @@ namespace Havit.Bonusario.Facades
 
 			Contract.Requires<OperationFailedException>(entries.TrueForAll(e => e.RecipientId != currentEmployee.Id), "Nelze potrvrdit záznam, který přiřazuje body aktuálnímu uživateli.");
 			Contract.Requires<OperationFailedException>(entries.TrueForAll(e => e.RecipientId != e.CreatedById), "Nelze potrvrdit záznam, který přiřazuje body sám sobě.");
+			Contract.Requires<OperationFailedException>(entries.TrueForAll(e => e.Value >= 0), "Nelze potrvrdit záznam, který má záporné body.");
 
 			foreach (var entry in entries)
 			{
