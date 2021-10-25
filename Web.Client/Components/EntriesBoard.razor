@@ -20,7 +20,10 @@ else
 		<Authorized>
 			<HxRepeater Data="@(employees.Where(e => e.Email != context.User.FindFirst("preferred_username")?.Value).OrderBy(e => e.Email))" Context="employee">
 				<ItemTemplate>
-					<h6>@employee.Name</h6>
+					<h6>
+						@employee.Name
+						(@entries.Where(e => e.RecipientId == employee.EmployeeId).Sum(e => e.Value))
+					</h6>
 					@if (remainingPoints is not null)
 					{
 						<RecipientEntries RecipientId="employee.EmployeeId"

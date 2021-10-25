@@ -20,17 +20,18 @@
 			My Entries
 		</HeaderTemplate>
 		<BodyTemplate>
+			@if (remainingPoints > 0)
+			{
+				<EntryCard Entry="newEntry" OnEntryCreated="HandleEntryCreated" />
+			}
 			@if (entries is not null)
 			{
 				<HxRepeater Data="entries" Context="entry">
-					<HeaderTemplate>
-						@if (remainingPoints.Value > 0)
-						{
-							<EntryCard Entry="newEntry" OnEntryCreated="HandleEntryCreated" />
-						}
-					</HeaderTemplate>
 					<ItemTemplate>
-						<EntryCard Entry="entry" OnEntryDeleted="HandleEntryDeleted" OnEntryUpdated="HandleEntryUpdated" />
+						<EntryCard Entry="entry"
+								   RecipientLocked="true"
+								   OnEntryDeleted="HandleEntryDeleted"
+								   OnEntryUpdated="HandleEntryUpdated" />
 					</ItemTemplate>
 				</HxRepeater>
 			}
