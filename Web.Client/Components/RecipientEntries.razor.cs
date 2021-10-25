@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Havit.Bonusario.Contracts;
 using Microsoft.AspNetCore.Components;
 
-namespace Havit.Bonusario.Web.Client.Pages
+namespace Havit.Bonusario.Web.Client.Components
 {
 	public partial class RecipientEntries
 	{
