@@ -26,7 +26,10 @@ else
 						<RecipientEntries RecipientId="employee.EmployeeId"
 										  PeriodId="PeriodId"
 										  RemainingPoints="@remainingPoints.Value"
-										  Entries="entries.Where(e => e.RecipientId == employee.EmployeeId)" />
+										  Entries="entries.Where(e => e.RecipientId == employee.EmployeeId)"
+										  OnEntryCreated="HandleEntryCreated"
+										  OnEntryUpdated="HandleEntryUpdated"
+										  OnEntryDeleted="HandleEntryDeleted" />
 					}
 					<hr />
 				</ItemTemplate>

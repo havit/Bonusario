@@ -16,6 +16,7 @@ namespace Havit.Bonusario.Web.Client.Components
 	public partial class EntryCard
 	{
 		[Parameter] public EntryDto Entry { get; set; }
+		[Parameter] public bool RecipientLocked { get; set; } = false;
 		[Parameter] public EventCallback OnEntryDeleted { get; set; }
 		[Parameter] public EventCallback<EntryDto> OnEntryCreated { get; set; }
 		[Parameter] public EventCallback<EntryDto> OnEntryUpdated { get; set; }

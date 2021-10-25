@@ -7,7 +7,7 @@
 				<BodyTemplate>
 
 					<HxCardTitle>
-						<EmployeePicker @bind-Value="Entry.RecipientId" />
+						<EmployeePicker @bind-Value="Entry.RecipientId" Enabled="!RecipientLocked" />
 						<HxBadge Color="@(Entry.Submitted is null ? ThemeColor.Light : ThemeColor.Info)">
 							<HxInputNumber @bind-Value="@Entry.Value"
 										   InputSize="InputSize.Small"
