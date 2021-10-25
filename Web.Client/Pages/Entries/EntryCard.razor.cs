@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Havit.Blazor.Components.Web.Bootstrap;
 using Havit.Bonusario.Contracts;
 using Havit.Bonusario.Web.Client.DataStores;
 using Havit.Diagnostics.Contracts;
@@ -75,6 +76,28 @@ namespace Havit.Bonusario.Web.Client.Pages.Entries
 			{
 				// NOOP
 			}
+		}
+
+		private List<string> preconfiguredTags = new List<string>()
+		{
+			"důvěra",
+			"férovost",
+			"nezávislost",
+			"potěšení",
+			"přátelskost",
+			"radost",
+			"stabilita",
+			"team",
+			"vášeň",
+			"vzdělávání",
+			"znalosti",
+		};
+		private Task<InputTagsDataProviderResult> GetTagSuggestions(InputTagsDataProviderRequest request)
+		{
+			return Task.FromResult(new InputTagsDataProviderResult()
+			{
+				Data = preconfiguredTags.Select(v => v.ToString()).Where(v => !this.Entry.Tags.Contains(v))
+			});
 		}
 	}
 }

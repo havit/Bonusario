@@ -17,7 +17,13 @@
 
 					<HxInputTextArea @bind-Value="@Entry.Text" style="height: 50px; overflow: auto" />
 
-					<HxInputTags @bind-Value="@Entry.Tags" Naked="true" ShowAddButton="true" AddButtonText="tag" />
+					<HxInputTags @bind-Value="@Entry.Tags"
+								 DataProvider="GetTagSuggestions"
+								 SuggestDelay="0"
+								 SuggestMinimumLength="0"
+								 Naked="true"
+								 ShowAddButton="true"
+								 AddButtonText="tag" />
 
 					@if (Entry.Submitted is not null)
 					{
