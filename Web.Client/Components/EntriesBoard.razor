@@ -22,9 +22,9 @@ else
 				<ItemTemplate>
 					<h6>
 						@employee.Name
-						(@entries.Where(e => e.RecipientId == employee.EmployeeId).Sum(e => e.Value))
+						(@entries?.Where(e => e.RecipientId == employee.EmployeeId).Sum(e => e.Value))
 					</h6>
-					@if (remainingPoints is not null)
+					@if ((entries is not null) && (remainingPoints is not null))
 					{
 						<RecipientEntries RecipientId="employee.EmployeeId"
 										  PeriodId="PeriodId"

@@ -1,16 +1,17 @@
-﻿@* TODO Horizontal stacking *@
-<HxRepeater Data="Entries" Context="entry">
-	<ItemTemplate>
-		<EntryCard Entry="entry"
-				   RecipientLocked="true"
-				   OnEntryDeleted="this.OnEntryDeleted"
-				   OnEntryUpdated="this.OnEntryUpdated" />
-	</ItemTemplate>
-</HxRepeater>
+﻿<div class="d-flex">
+	<HxRepeater Data="Entries" Context="entry">
+		<ItemTemplate>
+			<EntryCard Entry="entry"
+					   RecipientLocked="true"
+					   OnEntryDeleted="this.OnEntryDeleted"
+					   OnEntryUpdated="this.OnEntryUpdated" />
+		</ItemTemplate>
+	</HxRepeater>
 
-@if (RemainingPoints > 0)
-{
-	<EntryCard Entry="newEntry"
-			   RecipientLocked="true"
-			   OnEntryCreated="HandleEntryCreated" />
-}
+	@if (RemainingPoints > 0)
+	{
+		<EntryCard Entry="newEntry"
+				   RecipientLocked="true"
+				   OnEntryCreated="HandleEntryCreated" />
+	}
+</div>
