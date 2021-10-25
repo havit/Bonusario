@@ -7,7 +7,7 @@ using Havit.Bonusario.Contracts;
 using Havit.Bonusario.Web.Client.DataStores;
 using Microsoft.AspNetCore.Components;
 
-namespace Havit.Bonusario.Web.Client.Pages.Entries
+namespace Havit.Bonusario.Web.Client.Pages
 {
 	public partial class MyEntriesFeed
 	{

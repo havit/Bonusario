@@ -11,7 +11,7 @@ using Havit.Diagnostics.Contracts;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 
-namespace Havit.Bonusario.Web.Client.Pages.Entries
+namespace Havit.Bonusario.Web.Client.Pages
 {
 	public partial class EntryCard
 	{
