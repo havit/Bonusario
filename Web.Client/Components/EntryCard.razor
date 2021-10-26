@@ -1,60 +1,75 @@
-﻿@if ((Entry is not null) && EmployeesDataStore.IsLoaded)
-{
-	<EditForm EditContext="editContext">
-		<FluentValidationValidator />
-		<HxFormState Enabled="@(Entry.Submitted is null)">
-			<HxCard CssClass="me-2 mb-2" style="width:350px">
-				<BodyTemplate>
-
-					<HxCardTitle>
-						@if (!RecipientLocked)
+﻿<div>
+	@if ((Entry is not null) && EmployeesDataStore.IsLoaded)
+	{
+		<EditForm EditContext="editContext">
+			<FluentValidationValidator />
+			<HxFormState Enabled="@(Entry.Submitted is null)">
+				<HxCard>
+					<BodyTemplate>
+						<div class="row g-4">
+								@if (!RecipientLocked)
+								{
+									<div class="col-lg-9">
+										<EmployeePicker @bind-Value="Entry.RecipientId" />
+									</div>
+								}
+								else if (Entry.RecipientId.HasValue)
+								{
+									<div class="col-lg-9 d-flex align-items-center">
+										<h5 class="mb-0">@EmployeesDataStore.GetByKey(Entry.RecipientId.Value).Name</h5>
+									</div>
+								}
+							<div class="col-lg-3">
+								<HxInputNumber @bind-Value="@Entry.Value" >
+									<InputGroupStartTemplate>
+										<div class="input-group-text">
+											<HxIcon Icon="BootstrapIcon.CurrencyBitcoin"/>
+										</div>
+									</InputGroupStartTemplate>
+								</HxInputNumber>
+							</div>
+							<div class="col-lg-12">
+								<HxInputTextArea Placeholder="Komentář" @bind-Value="@Entry.Text" />
+							</div>
+							<div class="col-lg-12">
+								<HxInputTags @bind-Value="@Entry.Tags"
+											DataProvider="GetTagSuggestions"
+											SuggestDelay="0"
+											SuggestMinimumLength="0"
+											Naked="true"
+											ShowAddButton="true"
+											AddButtonText="tag" />
+							</div>
+						</div>
+						@if (Entry.Submitted is not null)
 						{
-							<EmployeePicker @bind-Value="Entry.RecipientId" />
-						}
-						else if (Entry.RecipientId.HasValue)
-						{
-							@EmployeesDataStore.GetByKey(Entry.RecipientId.Value).Name
-						}
-						<HxBadge Color="@(Entry.Submitted is null ? ThemeColor.Light : ThemeColor.Info)">
-							<HxInputNumber @bind-Value="@Entry.Value"
-										   InputSize="InputSize.Small"
-										   style="width:3rem" />
-						</HxBadge>
-					</HxCardTitle>
-
-					<HxInputTextArea @bind-Value="@Entry.Text" style="height: 50px; overflow: auto" />
-
-					<HxInputTags @bind-Value="@Entry.Tags"
-								 DataProvider="GetTagSuggestions"
-								 SuggestDelay="0"
-								 SuggestMinimumLength="0"
-								 Naked="true"
-								 ShowAddButton="true"
-								 AddButtonText="tag" />
-
-					@if (Entry.Submitted is not null)
-					{
-						<small class="text-muted">vloženo @Entry.Submitted.Value.ToShortDateString()	</small>
-					}
-					else
-					{
-						@if (Entry.Id != default)
-						{
-							<small class="text-muted">koncept</small>
-							<HxButton Icon="BootstrapIcon.Trash" OnClick="HandleDeleteClick" />
+							<small class="text-muted">vloženo @Entry.Submitted.Value.ToShortDateString()</small>
 						}
 						else
 						{
-							<small class="text-muted">nový</small>
-							<HxButton Icon="BootstrapIcon.PlusCircle"
-									  Color="ThemeColor.Primary"
-									  OnValidClick="HandleNewClick"
-									  Size="ButtonSize.Small"
-									  Text="přidej" />
+							<div class="d-flex">
+								@if (Entry.Id != default)
+								{
+									@* <small class="text-muted">koncept</small> *@
+									<HxButton Icon="BootstrapIcon.Trash" 
+											Color="ThemeColor.Light" 
+											Size="ButtonSize.Small"
+											CssClass="ms-auto"
+											OnClick="HandleDeleteClick" />
+								}
+								else
+								{
+									@* <small class="text-muted">nový</small> *@
+									<HxButton Color="ThemeColor.Primary"
+											OnValidClick="HandleNewClick"
+											CssClass="ms-auto"
+											Text="Přidej" />
+								}
+							</div>
 						}
-					}
-				</BodyTemplate>
-			</HxCard>
-		</HxFormState>
-	</EditForm>
-}
+					</BodyTemplate>
+				</HxCard>
+			</HxFormState>
+		</EditForm>
+	}
+</div>
