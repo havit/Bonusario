@@ -4,9 +4,10 @@
 }
 else
 {
-	if (remainingPoints.Value > 0)
+	var points = remainingPoints.Value - (newEntriesModel?.TotalPointsAssigned ?? 0);
+	if (points > 0)
 	{
-		<p>Máš ještě <strong>@remainingPoints bodů</strong> k přidělení.</p>
+		<p>Máš ještě <strong>@points bodů</strong> k přidělení.</p>
 	}
 	else
 	{
@@ -46,7 +47,8 @@ else
 										{
 											foreach (var entry in entries.Where(e => e.RecipientId == employee.EmployeeId).OrderBy(e => e.Created))
 											{
-												<HxBadge Color="@(entry.Submitted is null ? ThemeColor.Light : ThemeColor.Info)" Type="BadgeType.RoundedPill" CssClass="me-1">@entry.Value</HxBadge> @* TODO Popover s EntryCard *@
+												<HxBadge Color="@(entry.Submitted is null ? ThemeColor.Light : ThemeColor.Info)" Type="BadgeType.RoundedPill" CssClass="me-1">@entry.Value</HxBadge>
+												@* TODO Popover s EntryCard *@
 											}
 										}
 									</td>
@@ -70,9 +72,9 @@ else
 			</tbody>
 			<tfoot>
 				<tr>
-					<td></td>
-					<td>@entries.Sum(e => e.Value)</td>
-					<td>@newEntriesModel.TotalPointsAssigned</td>
+					<td>CELKEM</td>
+					<td class="align-center">@entries.Sum(e => e.Value)</td>
+					<td class="align-center">@newEntriesModel.TotalPointsAssigned</td>
 				</tr>
 			</tfoot>
 		</table>

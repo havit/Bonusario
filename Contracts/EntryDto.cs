@@ -34,5 +34,17 @@ namespace Havit.Bonusario.Contracts
 				RuleFor(e => e.Value).InclusiveBetween(0, 100);
 			}
 		}
+
+		public bool HasValues()
+		{
+			if (!String.IsNullOrWhiteSpace(Text)
+				|| (Value != 0)
+				|| (Submitted is not null)
+				|| Tags.Any())
+			{
+				return true;
+			}
+			return false;
+		}
 	}
 }

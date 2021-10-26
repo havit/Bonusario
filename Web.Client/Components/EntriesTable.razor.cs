@@ -8,17 +8,19 @@ using Havit.Blazor.Components.Web;
 using Havit.Bonusario.Contracts;
 using Havit.Bonusario.Web.Client.DataStores;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Forms;
 
 namespace Havit.Bonusario.Web.Client.Components
 {
-	public partial class EntriesTable : IDisposable
+	public partial class EntriesTable
 	{
 		[Parameter] public int PeriodId { get; set; }
 
 		[Inject] protected IEmployeesDataStore EmployeesDataStore { get; set; }
 		[Inject] protected IEntryFacade EntryFacade { get; set; }
 		[Inject] protected IHxMessageBoxService MessageBox { get; set; }
+		[Inject] protected AuthenticationStateProvider AuthenticationStateProvider { get; set; }
 
 		private IEnumerable<EmployeeReferenceDto> employees;
 		private List<EntryDto> entries;
@@ -44,36 +46,34 @@ namespace Havit.Bonusario.Web.Client.Components
 
 			remainingPoints = (await EntryFacade.GetMyRemainingPoints(Dto.FromValue(PeriodId))).Value;
 
+			var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+			var currentUserEmail = authState.User.FindFirst("preferred_username").Value;
+
 			newEntriesModel = new()
 			{
-				Entries = employees.Select(employee => new EntryDto()
+				Entries = employees.Where(e => !String.Equals(e.Email, currentUserEmail, StringComparison.OrdinalIgnoreCase)).Select(employee => new EntryDto()
 				{
-					RecipientId = employee.EmployeeId
+					RecipientId = employee.EmployeeId,
+					PeriodId = this.PeriodId
 				}).ToList()
 			};
-			if (newEntriesEditContext is not null)
-			{
-				newEntriesEditContext.OnFieldChanged -= NewEntriesEditContext_OnFieldChanged;
-			}
 			newEntriesEditContext = new EditContext(newEntriesModel);
-			newEntriesEditContext.OnFieldChanged += NewEntriesEditContext_OnFieldChanged;
 		}
-
-		private void NewEntriesEditContext_OnFieldChanged(object sender, FieldChangedEventArgs e)
-		{
-			// throw new NotImplementedException();
-		}
-
-		private async Task HandleEntryDeleted() => await LoadData();
-		private async Task HandleEntryUpdated() => await LoadData();
-		private async Task HandleEntryCreated() => await LoadData();
 
 		private async Task HandleSubmitAllClick()
 		{
-			if (await MessageBox.ConfirmAsync("Potvrzení", "Opravdu si přejete všechny koncepty potvrdit?"))
+			if (await MessageBox.ConfirmAsync("Potvrzení", "Opravdu si přejete všechny záznamy vložit a potvrdit?"))
 			{
 				try
 				{
+					foreach (var entry in newEntriesModel.Entries)
+					{
+						if (entry.HasValues())
+						{
+							entry.Id = (await EntryFacade.CreateEntryAsync(entry)).Value;
+						}
+					}
+					await LoadData(); // reload new entries
 					await EntryFacade.SubmitEntriesAsync(entries.Where(e => e.Submitted is null).Select(e => e.Id).ToList());
 					await LoadData();
 				}
@@ -96,14 +96,6 @@ namespace Havit.Bonusario.Web.Client.Components
 				{
 					RuleForEach(i => i.Entries).SetValidator(entryDtoValidator);
 				}
-			}
-		}
-
-		public void Dispose()
-		{
-			if (newEntriesEditContext is not null)
-			{
-				newEntriesEditContext.OnFieldChanged -= NewEntriesEditContext_OnFieldChanged;
 			}
 		}
 	}
