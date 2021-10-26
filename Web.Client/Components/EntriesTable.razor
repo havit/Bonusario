@@ -1,0 +1,89 @@
+﻿@if (remainingPoints is null)
+{
+	<HxPlaceholder Columns="2" />
+}
+else
+{
+	if (remainingPoints.Value > 0)
+	{
+		<p>Máš ještě <strong>@remainingPoints bodů</strong> k přidělení.</p>
+	}
+	else
+	{
+		<p>Všechny body jsi již rozdal.</p>
+	}
+}
+
+@if ((employees is not null) && (entries is not null) && (newEntriesModel is not null))
+{
+	<EditForm EditContext="newEntriesEditContext">
+		<FluentValidationValidator  />
+		<table class="table-responsive">
+			<thead>
+				<tr>
+					<th rowspan="2">Jméno</th>
+					<th rowspan="2">Předchozí</th>
+					<th colspan="5">Nový záznam</th>
+				</tr>
+				<tr>
+					<th>Hodnota</th>
+					<th>Text</th>
+					<th>Tagy</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<AuthorizeView>
+					<Authorized Context="authenticationState">
+						<HxRepeater Data="@(employees.Where(e => e.Email != authenticationState.User.FindFirst("preferred_username")?.Value).OrderBy(e => e.Email))" Context="employee">
+							<ItemTemplate>
+								<tr>
+									<td>
+										@employee.Name
+									</td>
+									<td>
+										@if (entries is not null)
+										{
+											foreach (var entry in entries.Where(e => e.RecipientId == employee.EmployeeId).OrderBy(e => e.Created))
+											{
+												<HxBadge Color="@(entry.Submitted is null ? ThemeColor.Light : ThemeColor.Info)" Type="BadgeType.RoundedPill" CssClass="me-1">@entry.Value</HxBadge> @* TODO Popover s EntryCard *@
+											}
+										}
+									</td>
+									@{
+										var newEntry = newEntriesModel.Entries.Single(e => e.RecipientId == employee.EmployeeId);
+									}
+									<td>
+										<HxInputNumber @bind-Value="newEntry.Value" style="width: 5rem;" />
+									</td>
+									<td>
+										<HxInputText @bind-Value="newEntry.Text" style="width:500px;" />
+									</td>
+									<td>
+										<EntryTagsPicker @bind-Value="newEntry.Tags" />
+									</td>
+								</tr>
+							</ItemTemplate>
+						</HxRepeater>
+					</Authorized>
+				</AuthorizeView>
+			</tbody>
+			<tfoot>
+				<tr>
+					<td></td>
+					<td>@entries.Sum(e => e.Value)</td>
+					<td>@newEntriesModel.TotalPointsAssigned</td>
+				</tr>
+			</tfoot>
+		</table>
+	</EditForm>
+}
+else
+{
+	@* TODO Placeholders *@
+}
+
+@if ((entries?.Any(e => e.Submitted is null) ?? false) || (remainingPoints > 0))
+{
+	<HxButton EditContext="newEntriesEditContext" OnValidClick="HandleSubmitAllClick" Text="Potvrdit vše" Color="ThemeColor.Danger" />
+}

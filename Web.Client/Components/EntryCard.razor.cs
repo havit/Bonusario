@@ -78,27 +78,5 @@ namespace Havit.Bonusario.Web.Client.Components
 				// NOOP
 			}
 		}
-
-		private List<string> preconfiguredTags = new List<string>()
-		{
-			"důvěra",
-			"férovost",
-			"nezávislost",
-			"potěšení",
-			"přátelskost",
-			"radost",
-			"stabilita",
-			"team",
-			"vášeň",
-			"vzdělávání",
-			"znalosti",
-		};
-		private Task<InputTagsDataProviderResult> GetTagSuggestions(InputTagsDataProviderRequest request)
-		{
-			return Task.FromResult(new InputTagsDataProviderResult()
-			{
-				Data = preconfiguredTags.Select(v => v.ToString()).Where(v => !this.Entry.Tags.Contains(v))
-			});
-		}
 	}
 }
