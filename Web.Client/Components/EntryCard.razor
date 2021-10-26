@@ -7,7 +7,14 @@
 				<BodyTemplate>
 
 					<HxCardTitle>
-						<EmployeePicker @bind-Value="Entry.RecipientId" Enabled="!RecipientLocked" />
+						@if (!RecipientLocked)
+						{
+							<EmployeePicker @bind-Value="Entry.RecipientId" />
+						}
+						else if (Entry.RecipientId.HasValue)
+						{
+							@EmployeesDataStore.GetByKey(Entry.RecipientId.Value).Name
+						}
 						<HxBadge Color="@(Entry.Submitted is null ? ThemeColor.Light : ThemeColor.Info)">
 							<HxInputNumber @bind-Value="@Entry.Value"
 										   InputSize="InputSize.Small"
