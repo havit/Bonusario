@@ -19,65 +19,68 @@ else
 {
 	<EditForm EditContext="newEntriesEditContext">
 		<FluentValidationValidator  />
-		<table class="table-responsive">
-			<thead>
-				<tr>
-					<th rowspan="2">Jméno</th>
-					<th rowspan="2">Předchozí</th>
-					<th colspan="5">Nový záznam</th>
-				</tr>
-				<tr>
-					<th>Hodnota</th>
-					<th>Text</th>
-					<th>Tagy</th>
-				</tr>
-			</thead>
+		<div class="table-responsive">
+			<table class="table table-bordered table-hover">
+				<thead>
+					<tr>
+						<th rowspan="2">Jméno</th>
+						<th rowspan="2">Předchozí</th>
+						<th colspan="5">Nový záznam</th>
+					</tr>
+					<tr>
+						<th>Hodnota</th>
+						<th>Text</th>
+						<th>Tagy</th>
+					</tr>
+				</thead>
 
-			<tbody>
-				<AuthorizeView>
-					<Authorized Context="authenticationState">
-						<HxRepeater Data="@(employees.Where(e => e.Email != authenticationState.User.FindFirst("preferred_username")?.Value).OrderBy(e => e.Email))" Context="employee">
-							<ItemTemplate>
-								<tr>
-									<td>
-										@employee.Name
-									</td>
-									<td>
-										@if (entries is not null)
-										{
-											foreach (var entry in entries.Where(e => e.RecipientId == employee.EmployeeId).OrderBy(e => e.Created))
+				<tbody>
+					<AuthorizeView>
+						<Authorized Context="authenticationState">
+							<HxRepeater Data="@(employees.Where(e => e.Email != authenticationState.User.FindFirst("preferred_username")?.Value).OrderBy(e => e.Email))" Context="employee">
+								<ItemTemplate>
+									<tr>
+										<td class="text-nowrap">
+											@employee.Name
+										</td>
+										<td>
+											@if (entries is not null)
 											{
-												<HxBadge Color="@(entry.Submitted is null ? ThemeColor.Light : ThemeColor.Info)" Type="BadgeType.RoundedPill" CssClass="me-1">@entry.Value</HxBadge>
-												@* TODO Popover s EntryCard *@
+												foreach (var entry in entries.Where(e => e.RecipientId == employee.EmployeeId).OrderBy(e => e.Created))
+												{
+													<HxBadge Color="@(entry.Submitted is null ? ThemeColor.Light : ThemeColor.Info)" TextColor="ThemeColor.Dark" Type="BadgeType.RoundedPill" CssClass="me-1">@entry.Value</HxBadge>
+													@* TODO Popover s EntryCard *@
+												}
 											}
+										</td>
+										@{
+											var newEntry = newEntriesModel.Entries.Single(e => e.RecipientId == employee.EmployeeId);
 										}
-									</td>
-									@{
-										var newEntry = newEntriesModel.Entries.Single(e => e.RecipientId == employee.EmployeeId);
-									}
-									<td>
-										<HxInputNumber @bind-Value="newEntry.Value" style="width: 5rem;" />
-									</td>
-									<td>
-										<HxInputText @bind-Value="newEntry.Text" style="width:500px;" />
-									</td>
-									<td>
-										<EntryTagsPicker @bind-Value="newEntry.Tags" />
-									</td>
-								</tr>
-							</ItemTemplate>
-						</HxRepeater>
-					</Authorized>
-				</AuthorizeView>
-			</tbody>
-			<tfoot>
-				<tr>
-					<td>CELKEM</td>
-					<td class="align-center">@entries.Sum(e => e.Value)</td>
-					<td class="align-center">@newEntriesModel.TotalPointsAssigned</td>
-				</tr>
-			</tfoot>
-		</table>
+										<td>
+											<HxInputNumber InputSize="InputSize.Small" @bind-Value="newEntry.Value" style="width: 5rem;" />
+										</td>
+										<td>
+											<HxInputText InputSize="InputSize.Small" @bind-Value="newEntry.Text" style="width:500px;" />
+										</td>
+										<td>
+											<EntryTagsPicker @bind-Value="newEntry.Tags" />
+										</td>
+									</tr>
+								</ItemTemplate>
+							</HxRepeater>
+						</Authorized>
+					</AuthorizeView>
+				</tbody>
+				<tfoot>
+					<tr>
+						<td class="fw-bold">CELKEM</td>
+						<td class="fw-bold">@entries.Sum(e => e.Value)</td>
+						<td class="fw-bold">@newEntriesModel.TotalPointsAssigned</td>
+						<td colspan="2"></td>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
 	</EditForm>
 }
 else
