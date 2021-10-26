@@ -9,7 +9,8 @@ namespace Havit.Bonusario.Web.Client
 	public static class Routes
 	{
 		public const string Home = "/";
-		public const string Submission = "/submission";
+		public const string SubmissionBoard = "/submission-board";
+		public const string SubmissionTable = "/submission-table";
 
 		public static class Administration
 		{

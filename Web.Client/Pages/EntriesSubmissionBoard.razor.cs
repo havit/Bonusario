@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Components;
 
 namespace Havit.Bonusario.Web.Client.Pages
 {
-	public partial class EntriesSubmission
+	public partial class EntriesSubmissionBoard
 	{
 		[Inject] protected IPeriodsDataStore PeriodsDataStore { get; set; }
 
