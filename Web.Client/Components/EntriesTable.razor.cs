@@ -60,6 +60,22 @@ namespace Havit.Bonusario.Web.Client.Components
 			newEntriesEditContext = new EditContext(newEntriesModel);
 		}
 
+		private string GetBadgePopoverTitle(EntryDto entry)
+		{
+			return $"₿ {entry.Value}";
+		}
+
+		private string GetBadgePopoverContent(EntryDto entry)
+		{
+			var result = $@"<div class=""d-5"">{(String.IsNullOrWhiteSpace(entry.Text) ? "<i>bez textu</i>" : entry.Text)}</div>";
+			if (entry.Tags.Any())
+			{
+				var tags = entry.Tags.Aggregate<string, string>(String.Empty, (acc, tag) => acc + $"<span class=\"badge bg-light text-dark me-2\">{tag}</span>");
+				result = result + "<div class=\"mt-2\">" + tags + "</div>";
+			}
+			return result;
+		}
+
 		private async Task HandleSubmitAllClick()
 		{
 			if (await MessageBox.ConfirmAsync("Potvrzení", "Opravdu si přejete všechny záznamy vložit a potvrdit?"))

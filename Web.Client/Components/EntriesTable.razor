@@ -18,7 +18,7 @@ else
 @if ((employees is not null) && (entries is not null) && (newEntriesModel is not null))
 {
 	<EditForm EditContext="newEntriesEditContext">
-		<FluentValidationValidator  />
+		<FluentValidationValidator />
 		<div class="table-responsive">
 			<table class="table table-bordered table-hover">
 				<thead>
@@ -48,8 +48,12 @@ else
 											{
 												foreach (var entry in entries.Where(e => e.RecipientId == employee.EmployeeId).OrderBy(e => e.Created))
 												{
-													<HxBadge Color="@(entry.Submitted is null ? ThemeColor.Light : ThemeColor.Info)" TextColor="ThemeColor.Dark" Type="BadgeType.RoundedPill" CssClass="me-1">@entry.Value</HxBadge>
-													@* TODO Popover s EntryCard *@
+													<HxPopover Title="@GetBadgePopoverTitle(entry)"
+															   Content="@GetBadgePopoverContent(entry)"
+															   Html="true"
+															   Trigger="PopoverTrigger.Hover">
+														<HxBadge Color="@(entry.Submitted is null ? ThemeColor.Light : ThemeColor.Info)" TextColor="ThemeColor.Dark" Type="BadgeType.RoundedPill" CssClass="me-1">@entry.Value</HxBadge>
+													</HxPopover>
 												}
 											}
 										</td>
