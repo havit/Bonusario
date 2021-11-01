@@ -7,6 +7,7 @@ using Havit.Blazor.Components.Web.Bootstrap;
 using Havit.Bonusario.Contracts;
 using Havit.Bonusario.Web.Client.DataStores;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 
 namespace Havit.Bonusario.Web.Client.Components
 {
@@ -14,7 +15,10 @@ namespace Havit.Bonusario.Web.Client.Components
 	{
 		[Parameter] public string NullText { get; set; }
 
+		[Parameter] public bool ExcludeCurrentEmployee { get; set; }
+
 		[Inject] protected IEmployeesDataStore EmployeesDataStore { get; set; }
+		[Inject] protected AuthenticationStateProvider AuthenticationStateProvider { get; set; }
 
 		public EmployeePicker()
 		{
@@ -36,6 +40,12 @@ namespace Havit.Bonusario.Web.Client.Components
 		private async Task EnsureDataAsync()
 		{
 			var data = await EmployeesDataStore.GetAllAsync();
+			if (ExcludeCurrentEmployee)
+			{
+				var authenticationState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+				var email = authenticationState.User.FindFirst("preferred_username").Value;
+				data = data.Where(e => !e.Email.Equals(email, StringComparison.OrdinalIgnoreCase));
+			}
 			this.DataImpl = data.Where(e => !e.IsDeleted);
 		}
 

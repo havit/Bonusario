@@ -10,7 +10,7 @@
 								@if (!RecipientLocked)
 								{
 									<div class="col-lg-9">
-										<EmployeePicker @bind-Value="Entry.RecipientId" />
+										<EmployeePicker @bind-Value="Entry.RecipientId" ExcludeCurrentEmployee="true" />
 									</div>
 								}
 								else if (Entry.RecipientId.HasValue)
