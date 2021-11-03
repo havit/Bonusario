@@ -47,7 +47,7 @@ namespace Havit.Bonusario.Web.Client.Components
 
 		private async Task EnsureDataAsync()
 		{
-			this.DataImpl ??= await PeriodsDataStore.GetAllAsync();
+			this.DataImpl ??= (await PeriodsDataStore.GetAllAsync()).OrderBy(p => p.EndDate);
 		}
 
 		protected override async Task OnParametersSetAsync()
