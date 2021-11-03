@@ -1,8 +1,8 @@
 ﻿@attribute [Route(Routes.Home)]
 
-@* <PeriodPicker @bind-Value="periodId" Nullable="false" /> *@
-
 <h1>Průběžný feed</h1>
+
+<div class="mb-3"><PeriodPicker @bind-Value="periodId" Nullable="false" /></div>
 
 @if (periodId.HasValue)
 {
