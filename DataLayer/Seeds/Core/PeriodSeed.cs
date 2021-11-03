@@ -21,7 +21,7 @@ namespace Havit.Bonusario.DataLayer.Seeds.Core
 
 		public override void SeedData()
 		{
-			var date = timeService.GetCurrentDate();
+			var date = timeService.GetCurrentDate().AddMonths(-1);
 
 			var periods = new List<Period>();
 
