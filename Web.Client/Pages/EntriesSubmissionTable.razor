@@ -1,6 +1,6 @@
 ﻿@attribute [Route(Routes.SubmissionTable)]
 
-<PeriodPicker @bind-Value="periodId" Nullable="false" />
+<div class="mb-3"><PeriodPicker @bind-Value="periodId" Nullable="false" /></div>
 
 @if (periodId is not null)
 {

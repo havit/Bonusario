@@ -1,19 +1,17 @@
-﻿@if (remainingPoints is null)
-{
-	<HxPlaceholder Columns="2" />
-}
-else
+﻿@if (remainingPoints is not null)
 {
 	var points = remainingPoints.Value - (newEntriesModel?.TotalPointsAssigned ?? 0);
-	if (points > 0)
-	{
-		<p>Máš ještě <strong>@points bodů</strong> k přidělení.</p>
-	}
-	else
-	{
-		<p>Všechny body jsi již rozdal.</p>
-	}
+	<div class="row">
+		<div class="col-lg-4 offset-lg-8">
+			<RemainingPoints Points="points" />
+		</div>
+	</div>
 }
+
+<div class="d-flex my-2">
+	<HxBadge Color="ThemeColor.Light" TextColor="ThemeColor.Dark" Type="BadgeType.RoundedPill" CssClass="me-1">Koncept</HxBadge>
+	<HxBadge Color="ThemeColor.Info" TextColor="ThemeColor.Dark" Type="BadgeType.RoundedPill" CssClass="me-1">Potvrzené</HxBadge>
+</div>
 
 @if ((employees is not null) && (entries is not null) && (newEntriesModel is not null))
 {

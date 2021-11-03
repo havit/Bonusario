@@ -1,0 +1,10 @@
+<div class="p-4 text-center bg-warning rounded-3 flex-grow-1 d-flex align-items-center justify-content-center flex-column">
+	@if (Points > 0)
+	{
+		<div>Máš ještě <div class="fw-bold fs-2">@Points bodů</div> k rozdělení.</div>
+	}
+	else
+	{
+		<div class="d-flex align-items-center me-3">Všechny body jsi již rozdal <HxIcon CssClass="fs-5" Icon="BootstrapIcon.HandThumbsUp" /></div>
+	}
+</div>

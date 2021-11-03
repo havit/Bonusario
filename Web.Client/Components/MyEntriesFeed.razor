@@ -1,53 +1,38 @@
-﻿<HxPlaceholderContainer Animation="PlaceholderAnimation.Glow">
-	<div class="row mb-4">
-			@if (remainingPoints > 0)
-			{
-				<h2>Přidej odměnu</h2>
-				<div class="col-lg-8">
-					<EntryCard Entry="newEntry" OnEntryCreated="HandleEntryCreated" />
-				</div>
-			}
+﻿<div class="row mb-4">
+		@if (remainingPoints > 0)
+		{
+			<h2>Přidej odměnu</h2>
+			<div class="col-lg-8">
+				<EntryCard Entry="newEntry" OnEntryCreated="HandleEntryCreated" />
+			</div>
+		}
 
-			@if (remainingPoints is null)
-			{
-				<HxPlaceholder Columns="2" />
-			}
-			else
-			{
-				<div class="col-lg-4 d-flex align-items-stretch">
-					<div class="text-center bg-light rounded-3 flex-grow-1 d-flex align-items-center justify-content-center flex-column">
-						@if (remainingPoints.Value > 0)
-						{
-							<div>Máš ještě <div class="fw-bold fs-2">@remainingPoints bodů</div> k rozdělení.</div>
-						}
-						else
-						{
-							<div class="p-4 d-flex align-items-center me-3"><HxIcon CssClass="fs-2" Icon="BootstrapIcon.HandThumbsUp" />Všechny body jsi již rozdal :).</div>
-						}
+		@if (remainingPoints is not null)
+		{
+			<div class="col-lg-4 d-flex align-items-stretch ms-auto">
+				<RemainingPoints Points="remainingPoints.Value"/>
+			</div>
+		}
+</div>
+
+
+<h2>Rozdělené odměny</h2>
+@if (entries is not null)
+{
+	<div class="row">
+			<HxRepeater Data="entries" Context="entry">
+				<ItemTemplate>
+					<div class="col-lg-6 mb-4">
+						<EntryCard Entry="entry"
+							RecipientLocked="true"
+							OnEntryDeleted="HandleEntryDeleted"
+							OnEntryUpdated="HandleEntryUpdated" />
 					</div>
-				</div>
-			}
+				</ItemTemplate>
+			</HxRepeater>
 	</div>
-
-
-	<h2>Rozdělené odměny</h2>
-	@if (entries is not null)
-	{
-		<div class="row">
-				<HxRepeater Data="entries" Context="entry">
-					<ItemTemplate>
-						<div class="col-lg-6 mb-4">
-							<EntryCard Entry="entry"
-								RecipientLocked="true"
-								OnEntryDeleted="HandleEntryDeleted"
-								OnEntryUpdated="HandleEntryUpdated" />
-						</div>
-					</ItemTemplate>
-				</HxRepeater>
-		</div>
-	}
-	else
-	{
-		@* TODO Placeholders *@
-	}
-</HxPlaceholderContainer>
+}
+else
+{
+	@* TODO Placeholders *@
+}
