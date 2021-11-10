@@ -1,0 +1,22 @@
+﻿@if (entries is not null && PeriodId is not null)
+{
+	<div class="row">
+			<HxRepeater Data="entries" Context="entry">
+				<ItemTemplate>
+					<div class="col-lg-6 mb-4">
+						<EntryCard Entry="entry"
+							RecipientLocked="true"
+							Enabled="false" />
+					</div>
+				</ItemTemplate>
+			</HxRepeater>
+	</div>
+}
+else
+{
+	<div class="row">
+		<HxPlaceholderContainer Animation="PlaceholderAnimation.Glow">
+			<EntryPlaceholder />
+		</HxPlaceholderContainer>
+	</div>
+}

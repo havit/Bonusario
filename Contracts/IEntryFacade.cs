@@ -13,6 +13,7 @@ namespace Havit.Bonusario.Contracts
 	{
 		Task<Dto<int>> GetMyRemainingPoints(Dto<int> periodId, CancellationToken cancellationToken = default);
 		Task<List<EntryDto>> GetMyEntriesAsync(Dto<int> periodId, CancellationToken cancellationToken = default);
+		Task<List<EntryDto>> GetReceivedEntriesAsync(Dto<int> periodId, CancellationToken cancellationToken = default);
 		Task DeleteEntryAsync(Dto<int> entryId, CancellationToken cancellationToken = default);
 		Task<Dto<int>> CreateEntryAsync(EntryDto newEntry, CancellationToken cancellationToken = default);
 		Task<List<ResultItemDto>> GetResultsAsync(Dto<int> periodId, CancellationToken cancellationToken = default);
