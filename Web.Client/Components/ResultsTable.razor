@@ -1,0 +1,15 @@
+﻿<HxGrid @ref="gridComponent"
+        DataProvider="GetDataAsync"
+        TItem="ResultItemDto">
+    <Columns>
+        <HxGridColumn HeaderText="Příjemce"
+                      TItem="ResultItemDto"
+                      ItemTextSelector="i => EmployeesDataStore.GetByKey(i.RecipientId)?.Name"
+                      SortKeySelector="i => EmployeesDataStore.GetByKey(i.RecipientId).Name"
+                      IsDefaultSortColumn="true" />
+        <HxGridColumn HeaderText="Celkem"
+                      TItem="ResultItemDto"
+                      ItemTextSelector='i => i.ValueSum.ToString("n0")'
+                      SortKeySelector="i => i.ValueSum" />
+    </Columns>
+</HxGrid>

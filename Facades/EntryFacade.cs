@@ -26,6 +26,7 @@ namespace Havit.Bonusario.Facades
 		private const int PointsAvailable = 100;
 
 		private readonly IEntryRepository entryRepository;
+		private readonly IPeriodRepository periodRepository;
 		private readonly IEntryMapper entryMapper;
 		private readonly IUnitOfWork unitOfWork;
 		private readonly ITimeService timeService;
@@ -34,6 +35,7 @@ namespace Havit.Bonusario.Facades
 
 		public EntryFacade(
 			IEntryRepository entryRepository,
+			IPeriodRepository periodRepository,
 			IEntryMapper entryMapper,
 			IUnitOfWork unitOfWork,
 			ITimeService timeService,
@@ -41,6 +43,7 @@ namespace Havit.Bonusario.Facades
 			IApplicationAuthenticationService applicationAuthenticationService)
 		{
 			this.entryRepository = entryRepository;
+			this.periodRepository = periodRepository;
 			this.entryMapper = entryMapper;
 			this.unitOfWork = unitOfWork;
 			this.timeService = timeService;
@@ -156,6 +159,17 @@ namespace Havit.Bonusario.Facades
 			}
 
 			await unitOfWork.CommitAsync();
+		}
+
+		public async Task<List<ResultItemDto>> GetResultsAsync(Dto<int> periodId, CancellationToken cancellationToken = default)
+		{
+			var period = await periodRepository.GetObjectAsync(periodId.Value, cancellationToken);
+			//if (period.EndDate > timeService.GetCurrentDate()) // (period.ClosureDate >
+			//{
+			//	throw new OperationFailedException("Nelze přistupovat k výsledkům neuzavřeného období.");
+			//}
+
+			return await entryRepository.GetResultsAsync(periodId.Value, cancellationToken);
 		}
 	}
 }
