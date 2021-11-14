@@ -20,10 +20,6 @@ namespace Havit.Bonusario.Web.Client.Components
 		[Parameter] public EventCallback OnEntryDeleted { get; set; }
 		[Parameter] public EventCallback<EntryDto> OnEntryCreated { get; set; }
 		[Parameter] public EventCallback<EntryDto> OnEntryUpdated { get; set; }
-		/// <summary>
-		/// Set as <c>false</c>, when you want to make the card readonly.
-		/// </summary>
-		[Parameter] public bool Enabled { get; set; } = true;
 
 		[Inject] protected IEmployeesDataStore EmployeesDataStore { get; set; }
 		[Inject] protected IEntryFacade EntryFacade { get; set; }

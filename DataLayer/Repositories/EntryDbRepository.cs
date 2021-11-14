@@ -32,6 +32,7 @@ namespace Havit.Bonusario.DataLayer.Repositories
 			return Data
 				.Where(e => e.PeriodId == periodId)
 				.Where(e => e.RecipientId == receivedByEmployeeId)
+				.Where(e => e.Submitted != null)
 				.Include(GetLoadReferences)
 				.ToListAsync(cancellationToken);
 		}

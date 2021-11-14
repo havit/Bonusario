@@ -20,7 +20,7 @@
 									</div>
 								}
 							<div class="col-lg-3">
-								<HxInputNumber @bind-Value="@Entry.Value" Enabled="@Enabled" >
+								<HxInputNumber @bind-Value="@Entry.Value" >
 									<InputGroupStartTemplate>
 										<div class="input-group-text">
 											<HxIcon Icon="BootstrapIcon.CurrencyBitcoin"/>
@@ -29,17 +29,17 @@
 								</HxInputNumber>
 							</div>
 							<div class="col-lg-12">
-								<HxInputTextArea Placeholder="Komentář" @bind-Value="@Entry.Text" Enabled="@Enabled" />
+								<HxInputTextArea Placeholder="Komentář" @bind-Value="@Entry.Text" />
 							</div>
 							<div class="col-lg-12">
-								<EntryTagsPicker @bind-Value="Entry.Tags" Enabled="@Enabled" />
+								<EntryTagsPicker @bind-Value="Entry.Tags" />
 							</div>
 						</div>
-						@if (Entry.Submitted is not null && Enabled)
+						@if (Entry.Submitted is not null)
 						{
 							<small class="text-muted">vloženo @Entry.Submitted.Value.ToShortDateString()</small>
 						}
-						else if (Enabled)
+						else
 						{
 							<div class="d-flex">
 								@if (Entry.Id != default)
