@@ -1,0 +1,7 @@
+﻿@attribute [Route(Routes.ReceivedEntries)]
+
+<h1>Obdržené záznamy</h1>
+
+<div class="mb-3"><PeriodPicker @bind-Value="periodId" Nullable="false" /></div>
+
+<ReceivedEntriesFeed PeriodId="@periodId" />

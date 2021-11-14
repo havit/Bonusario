@@ -59,6 +59,25 @@ namespace Havit.Bonusario.Facades
 			return entries.Select(e => entryMapper.MapToEntryDto(e)).ToList();
 		}
 
+		public async Task<List<EntryDto>> GetReceivedEntriesAsync(Dto<int> periodId, CancellationToken cancellationToken = default)
+		{
+			var currentEmployee = await applicationAuthenticationService.GetCurrentEmployeeAsync(cancellationToken);
+
+			// TODO Pouze ukončené období
+
+			var entries = await entryRepository.GetEntriesReceivedByAsync(periodId.Value, currentEmployee.Id, cancellationToken);
+
+			var entriesDto = entries.Select(e => entryMapper.MapToEntryDto(e)).ToList();
+
+			// Hide creators of the entries.
+			foreach (var entry in entriesDto)
+			{
+				entry.CreatedById = null;
+			}
+
+			return entriesDto;
+		}
+
 		public async Task DeleteEntryAsync(Dto<int> entryId, CancellationToken cancellationToken = default)
 		{
 			var currentEmployee = await applicationAuthenticationService.GetCurrentEmployeeAsync(cancellationToken);

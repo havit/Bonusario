@@ -48,11 +48,35 @@ namespace Havit.Bonusario.DataLayer.Seeds.Demo
 				},
 				new Entry()
 				{
+					CreatedById = employees.Single(e => e.Email == "crha@havit.cz").Id,
+					RecipientId = employees.Single(e => e.Email == "haken@havit.cz").Id,
+					PeriodId = currentPeriod.Id,
+					Text = "Lorem ipsum sut neram, dot per gaham.",
+					Submitted = now,
+					Value = 13,
+					Tags =
+					{
+						new EntryTag() { Tag = "team" },
+						new EntryTag() { Tag = "znalosti" }
+					},
+					Created = now.AddMinutes(-123)
+				},
+				new Entry()
+				{
+					CreatedById = employees.Single(e => e.Email == "hruby@havit.cz").Id,
+					RecipientId = employees.Single(e => e.Email == "haken@havit.cz").Id,
+					PeriodId = currentPeriod.Id,
+					Submitted = now,
+					Value = 15,
+					Created = now
+				},
+				new Entry()
+				{
 					CreatedById = employees.Single(e => e.Email == "haken@havit.cz").Id,
 					RecipientId = employees.Single(e => e.Email == "hruby@havit.cz").Id,
 					PeriodId = currentPeriod.Id,
 					Value = 15,
-					Created = now
+					Created = now.AddMinutes(-32)
 				},
 				new Entry()
 				{
