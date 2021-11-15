@@ -24,9 +24,12 @@ namespace Havit.Bonusario.DataLayer.Seeds.Demo
 		}
 		public override void SeedData()
 		{
-			var now = timeService.GetCurrentTime();
 			var employees = employeeRepository.GetAll();
 			var periods = periodRepository.GetAll();
+
+			var now = timeService.GetCurrentTime();
+			var previousDate = now.AddMonths(-1);
+			var previousPeriod = periods.Single(p => p.Name == previousDate.Month + "/" + previousDate.Year);
 			var currentPeriod = periods.Single(p => p.Name == now.Month + "/" + now.Year);
 
 			var entries = new[]
@@ -50,9 +53,9 @@ namespace Havit.Bonusario.DataLayer.Seeds.Demo
 				{
 					CreatedById = employees.Single(e => e.Email == "crha@havit.cz").Id,
 					RecipientId = employees.Single(e => e.Email == "haken@havit.cz").Id,
-					PeriodId = currentPeriod.Id,
+					PeriodId = previousPeriod.Id,
 					Text = "Lorem ipsum sut neram, dot per gaham.",
-					Submitted = now,
+					Submitted = previousDate,
 					Value = 13,
 					Tags =
 					{
@@ -65,8 +68,8 @@ namespace Havit.Bonusario.DataLayer.Seeds.Demo
 				{
 					CreatedById = employees.Single(e => e.Email == "hruby@havit.cz").Id,
 					RecipientId = employees.Single(e => e.Email == "haken@havit.cz").Id,
-					PeriodId = currentPeriod.Id,
-					Submitted = now,
+					PeriodId = previousPeriod.Id,
+					Submitted = previousDate,
 					Value = 15,
 					Created = now
 				},
@@ -77,6 +80,20 @@ namespace Havit.Bonusario.DataLayer.Seeds.Demo
 					PeriodId = currentPeriod.Id,
 					Value = 15,
 					Created = now.AddMinutes(-32)
+				},
+				new Entry()
+				{
+					CreatedById = employees.Single(e => e.Email == "haken@havit.cz").Id,
+					RecipientId = employees.Single(e => e.Email == "kanda@havit.cz").Id,
+					PeriodId = previousPeriod.Id,
+					Submitted = previousDate,
+					Tags =
+					{
+						new EntryTag() { Tag = "team" },
+						new EntryTag() { Tag = "znalosti" }
+					},
+					Value = 15,
+					Created = now
 				},
 				new Entry()
 				{

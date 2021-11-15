@@ -20,17 +20,18 @@ namespace Havit.Bonusario.DataLayer.Seeds.Demo
 
 		public override void SeedData()
 		{
-			var date = timeService.GetCurrentDate();
+			var date = timeService.GetCurrentDate().AddMonths(-1);
 
 			var periods = new List<Period>();
 
-			for (int i = 0; i < 12; i++)
+			// předchozí + aktuální + budoucí
+			for (int i = 0; i < 3; i++)
 			{
 				periods.Add(new Period()
 				{
 					Name = date.Month + "/" + date.Year,
 					StartDate = new DateTime(date.Year, date.Month, 1),
-					EndDate = new DateTime(date.Year, date.Month, 1).AddMonths(1).AddDays(-1),
+					EndDate = new DateTime(date.Year, date.Month, Math.Max(date.Day, 11)).AddMonths(1).AddDays(-1), // do 10. následujícícho měsíce, nebo dříve (DEMO)
 					Created = timeService.GetCurrentTime(),
 				});
 				date = date.AddMonths(1);
