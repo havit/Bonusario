@@ -16,8 +16,14 @@ namespace Havit.Bonusario.Model
 		[MaxLength(200)]
 		public string Name { get; set; }
 
+		/// <summary>
+		/// Day of opening the period for submissions.
+		/// </summary>
 		public DateTime StartDate { get; set; }
 
+		/// <summary>
+		/// Day of closing the period for submissions.
+		/// </summary>
 		public DateTime EndDate { get; set; }
 
 		public DateTime Created { get; set; }

@@ -15,7 +15,7 @@ namespace Havit.Bonusario.Web.Client.Components
 {
 	public partial class EntriesTable
 	{
-		[Parameter] public int PeriodId { get; set; }
+		[Parameter] public int? PeriodId { get; set; }
 
 		[Inject] protected IEmployeesDataStore EmployeesDataStore { get; set; }
 		[Inject] protected IEntryFacade EntryFacade { get; set; }
@@ -41,23 +41,26 @@ namespace Havit.Bonusario.Web.Client.Components
 
 		private async Task LoadData()
 		{
-			var e = await EntryFacade.GetMyEntriesAsync(Dto.FromValue(PeriodId));
-			entries = e.OrderByDescending(e => e.Created).ToList();
-
-			remainingPoints = (await EntryFacade.GetMyRemainingPoints(Dto.FromValue(PeriodId))).Value;
-
-			var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-			var currentUserEmail = authState.User.FindFirst("preferred_username").Value;
-
-			newEntriesModel = new()
+			if (PeriodId != null)
 			{
-				Entries = employees.Where(e => !String.Equals(e.Email, currentUserEmail, StringComparison.OrdinalIgnoreCase)).Select(employee => new EntryDto()
+				var e = await EntryFacade.GetMyEntriesAsync(Dto.FromValue(PeriodId.Value));
+				entries = e.OrderByDescending(e => e.Created).ToList();
+
+				remainingPoints = (await EntryFacade.GetMyRemainingPoints(Dto.FromValue(PeriodId.Value))).Value;
+
+				var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+				var currentUserEmail = authState.User.FindFirst("preferred_username").Value;
+
+				newEntriesModel = new()
 				{
-					RecipientId = employee.EmployeeId,
-					PeriodId = this.PeriodId
-				}).ToList()
-			};
-			newEntriesEditContext = new EditContext(newEntriesModel);
+					Entries = employees.Where(e => !String.Equals(e.Email, currentUserEmail, StringComparison.OrdinalIgnoreCase)).Select(employee => new EntryDto()
+					{
+						RecipientId = employee.EmployeeId,
+						PeriodId = this.PeriodId.Value
+					}).ToList()
+				};
+				newEntriesEditContext = new EditContext(newEntriesModel);
+			}
 		}
 
 		private string GetBadgePopoverTitle(EntryDto entry)

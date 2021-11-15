@@ -12,6 +12,8 @@ namespace Havit.Bonusario.Web.Client.Components
 {
 	public class PeriodPicker : HxSelectBase<int?, PeriodDto>
 	{
+		[Parameter] public DataMode Mode { get; set; }
+
 		[Parameter] public string NullText { get; set; }
 
 		[Parameter]
@@ -47,7 +49,21 @@ namespace Havit.Bonusario.Web.Client.Components
 
 		private async Task EnsureDataAsync()
 		{
-			this.DataImpl ??= (await PeriodsDataStore.GetAllAsync()).OrderBy(p => p.EndDate);
+			if (this.DataImpl is null)
+			{
+				switch (this.Mode)
+				{
+					case DataMode.All:
+						this.DataImpl ??= (await PeriodsDataStore.GetAllAsync()).OrderBy(p => p.EndDate);
+						break;
+					case DataMode.ActiveForSubmission:
+						this.DataImpl ??= (await PeriodsDataStore.GetActiveForSubmissionAsync()).OrderBy(p => p.EndDate);
+						break;
+					case DataMode.Closed:
+						this.DataImpl ??= (await PeriodsDataStore.GetClosedAsync()).OrderBy(p => p.EndDate);
+						break;
+				}
+			}
 		}
 
 		protected override async Task OnParametersSetAsync()
@@ -75,6 +91,13 @@ namespace Havit.Bonusario.Web.Client.Components
 				return null;
 			}
 			return (await PeriodsDataStore.GetByKeyAsync(id.Value));
+		}
+
+		public enum DataMode
+		{
+			All,
+			ActiveForSubmission,
+			Closed
 		}
 	}
 }

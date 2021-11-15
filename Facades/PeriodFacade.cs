@@ -17,21 +17,16 @@ namespace Havit.Bonusario.Facades
 	public class PeriodFacade : IPeriodFacade
 	{
 		private readonly IPeriodRepository periodRepository;
-		private readonly ITimeService timeService;
 
-		public PeriodFacade(IPeriodRepository periodRepository, ITimeService timeService)
+		public PeriodFacade(IPeriodRepository periodRepository)
 		{
 			this.periodRepository = periodRepository;
-			this.timeService = timeService;
 		}
 
-		public async Task<List<PeriodDto>> GetAllActivePeriodsAsync(CancellationToken cancellationToken = default)
+		public async Task<List<PeriodDto>> GetAllPeriodsAsync(CancellationToken cancellationToken = default)
 		{
-			var today = timeService.GetCurrentDate();
-
 			var data = await periodRepository.GetAllAsync(cancellationToken);
 			return data
-				.Where(p => p.StartDate <= today)
 				.Select(period => new PeriodDto()
 				{
 					PeriodId = period.Id,

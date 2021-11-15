@@ -62,8 +62,11 @@ namespace Havit.Bonusario.Facades
 		public async Task<List<EntryDto>> GetReceivedEntriesAsync(Dto<int> periodId, CancellationToken cancellationToken = default)
 		{
 			var currentEmployee = await applicationAuthenticationService.GetCurrentEmployeeAsync(cancellationToken);
-
-			// TODO Pouze ukončené období
+			var period = await periodRepository.GetObjectAsync(periodId.Value, cancellationToken);
+			if (period.EndDate >= timeService.GetCurrentDate())
+			{
+				throw new OperationFailedException("Nelze přistupovat k výsledkům neuzavřeného období.");
+			}
 
 			var entries = await entryRepository.GetEntriesReceivedByAsync(periodId.Value, currentEmployee.Id, cancellationToken);
 
@@ -97,6 +100,12 @@ namespace Havit.Bonusario.Facades
 
 			var currentEmployee = await applicationAuthenticationService.GetCurrentEmployeeAsync(cancellationToken);
 
+			var period = await periodRepository.GetObjectAsync(newEntryDto.PeriodId, cancellationToken);
+			if ((period.StartDate > timeService.GetCurrentDate()) || (period.EndDate < timeService.GetCurrentDate()))
+			{
+				throw new OperationFailedException("Nelze zapisovat do neotevřeného období.");
+			}
+
 			var pointsAssigned = await entryRepository.GetPointsAssignedSumAsync(newEntryDto.PeriodId, currentEmployee.Id, cancellationToken);
 			int maxPoints = PointsAvailable - pointsAssigned;
 			if (newEntryDto.Value > maxPoints)
@@ -127,6 +136,12 @@ namespace Havit.Bonusario.Facades
 			var entry = await entryRepository.GetObjectAsync(entryDto.Id, cancellationToken);
 
 			Contract.Requires<SecurityException>(entry.CreatedById == currentEmployee.Id);
+
+			var period = await periodRepository.GetObjectAsync(entryDto.PeriodId, cancellationToken);
+			if ((period.StartDate > timeService.GetCurrentDate()) || (period.EndDate < timeService.GetCurrentDate()))
+			{
+				throw new OperationFailedException("Nelze zapisovat do neotevřeného období.");
+			}
 
 			var pointsAssigned = await entryRepository.GetPointsAssignedSumAsync(entryDto.PeriodId, currentEmployee.Id, cancellationToken);
 			int maxPoints = PointsAvailable - pointsAssigned + entry.Value;
@@ -164,6 +179,12 @@ namespace Havit.Bonusario.Facades
 			var periodId = entries.First().PeriodId;
 			Contract.Requires<OperationFailedException>(entries.TrueForAll(e => e.PeriodId == periodId), "Potvrzované záznamy musí být ze stejného období.");
 
+			var period = await periodRepository.GetObjectAsync(periodId, cancellationToken);
+			if ((period.StartDate > timeService.GetCurrentDate()) || (period.EndDate < timeService.GetCurrentDate()))
+			{
+				throw new OperationFailedException("Nelze zapisovat do neotevřeného období.");
+			}
+
 			var pointsAssigned = await entryRepository.GetPointsAssignedSumAsync(periodId, currentEmployee.Id, cancellationToken);
 			Contract.Requires<OperationFailedException>(pointsAssigned <= PointsAvailable, "Limit celkového počtu bodů za období překročen, zkontrolujte záznamy.");
 
@@ -183,10 +204,10 @@ namespace Havit.Bonusario.Facades
 		public async Task<List<ResultItemDto>> GetResultsAsync(Dto<int> periodId, CancellationToken cancellationToken = default)
 		{
 			var period = await periodRepository.GetObjectAsync(periodId.Value, cancellationToken);
-			//if (period.EndDate > timeService.GetCurrentDate()) // (period.ClosureDate >
-			//{
-			//	throw new OperationFailedException("Nelze přistupovat k výsledkům neuzavřeného období.");
-			//}
+			if (period.EndDate >= timeService.GetCurrentDate())
+			{
+				throw new OperationFailedException("Nelze přistupovat k výsledkům neuzavřeného období.");
+			}
 
 			return await entryRepository.GetResultsAsync(periodId.Value, cancellationToken);
 		}

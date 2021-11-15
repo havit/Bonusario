@@ -1,8 +1,12 @@
 ﻿@attribute [Route(Routes.SubmissionBoard)]
 
-<div class="mb-3"><PeriodPicker @bind-Value="periodId" Nullable="false" /></div>
+<div class="mb-3"><PeriodPicker @bind-Value="periodId" Nullable="false" Mode="PeriodPicker.DataMode.ActiveForSubmission" /></div>
 
 @if (periodId is not null)
 {
 	<EntriesBoard PeriodId="periodId.Value" />
+}
+else
+{
+    <p>Žádné období není otevřeno pro zadávání dat.</p>
 }
