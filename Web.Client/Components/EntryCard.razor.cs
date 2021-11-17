@@ -34,6 +34,11 @@ namespace Havit.Bonusario.Web.Client.Components
 
 		private void EditContext_OnFieldChanged(object sender, FieldChangedEventArgs e)
 		{
+			if (Entry.Submitted is not null)
+			{
+				return;
+			}
+
 			if (editContext.Validate())
 			{
 				InvokeAsync(async () =>
