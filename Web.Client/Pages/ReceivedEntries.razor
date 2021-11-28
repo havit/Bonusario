@@ -2,11 +2,19 @@
 
 <h1>Obdržené záznamy</h1>
 
-<div class="mb-3"><PeriodPicker @bind-Value="periodId" Nullable="false"  Mode="PeriodPicker.DataMode.Closed"  /></div>
+<div class="mb-3"><PeriodPicker @bind-Value="periodId" Nullable="false" Mode="PeriodPicker.DataMode.Closed" /></div>
 
 @if (periodId != null)
 {
-    <ReceivedEntriesFeed PeriodId="@periodId" />
+    <HxInputSwitch @bind-Value="displayTable" Label="tabulka" CssClass="mb-3" />
+    if (displayTable)
+    {
+        <ReceivedEntriesTable PeriodId="@periodId" />
+    }
+    else
+    {
+        <ReceivedEntriesFeed PeriodId="@periodId" />
+    }
 }
 else if (PeriodsDataStore.IsLoaded)
 {

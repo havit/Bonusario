@@ -1,0 +1,22 @@
+﻿@if (PeriodId is not null)
+{
+    <HxGrid DataProvider="GetEntries" TItem="EntryDto" Context="item" TableCssClass="table-bordered">
+        <Columns>
+            <HxGridColumn TItem="EntryDto"
+                      HeaderText="Hodnota"
+                      ItemTextSelector="i => i.Value.ToString()"
+                      ItemCssClass="text-center"
+                      FooterCssClass="fw-bold text-center"
+                      FooterText="@(entries?.Sum(e => e.Value).ToString())" />
+            <HxGridColumn TItem="EntryDto" HeaderText="Text" ItemTextSelector="i => i.Text" />
+            <HxGridColumn TItem="EntryDto" HeaderText="Tagy">
+                <ItemTemplate>
+                    @foreach (var tag in context.Tags)
+                    {
+                        <HxBadge Color="ThemeColor.Secondary" CssClass="me-1">@tag</HxBadge>
+                    }
+                </ItemTemplate>
+            </HxGridColumn>
+        </Columns>
+    </HxGrid>
+}

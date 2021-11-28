@@ -10,6 +10,7 @@ namespace Havit.Bonusario.Web.Client.Pages
 		[Inject] protected IPeriodsDataStore PeriodsDataStore { get; set; }
 
 		private int? periodId;
+		private bool displayTable;
 
 		protected override async Task OnInitializedAsync()
 		{
