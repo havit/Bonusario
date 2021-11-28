@@ -29,7 +29,7 @@
                         </tr>
                         <tr>
                             <th>Hodnota</th>
-                            <th>Text</th>
+                            <th>Volitelný text</th>
                             <th>Tagy</th>
                         </tr>
                     </thead>
@@ -64,7 +64,7 @@
                                         <HxInputNumber InputSize="InputSize.Small" @bind-Value="newEntry.Value" style="width: 5rem;" />
                                     </td>
                                     <td>
-                                        <HxInputText InputSize="InputSize.Small" @bind-Value="newEntry.Text" style="width:500px;" />
+                                        <HxInputText Placeholder="Oceňuji..." InputSize="InputSize.Small" @bind-Value="newEntry.Text" style="width:500px;" />
                                     </td>
                                     <td>
                                         <EntryTagsPicker @bind-Value="newEntry.Tags" />
