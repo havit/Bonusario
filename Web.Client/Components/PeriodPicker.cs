@@ -57,6 +57,7 @@ namespace Havit.Bonusario.Web.Client.Components
 						this.DataImpl ??= (await PeriodsDataStore.GetAllAsync()).OrderBy(p => p.EndDate);
 						break;
 					case DataMode.ActiveForSubmission:
+						this.TextSelectorImpl = (p => $"{p.Name} (zápis do {p.EndDate:d})");
 						this.DataImpl ??= (await PeriodsDataStore.GetActiveForSubmissionAsync()).OrderBy(p => p.EndDate);
 						break;
 					case DataMode.Closed:
