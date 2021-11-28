@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Blazored.LocalStorage;
 using Havit.Blazor.Components.Web;
 using Havit.Blazor.Components.Web.Bootstrap;
 using Havit.Bonusario.Contracts.System;
@@ -20,20 +19,10 @@ namespace Havit.Bonusario.Web.Client.Pages.Admin
 		[Inject] protected IMaintenanceFacade MaintenanceFacade { get; set; }
 		[Inject] protected IHxMessengerService Messenger { get; set; }
 		[Inject] protected IHxMessageBoxService MessageBox { get; set; }
-		[Inject] protected ILocalStorageService LocalStorageService { get; set; }
 		[Inject] protected INavigationLocalizer NavigationLocalizer { get; set; }
 		[Inject] protected IAdminIndexLocalizer AdmninIndexLocalizer { get; set; }
 
 		private DataSeeds dataSeedsComponent;
-
-		private async Task RemoveCultureFromLocalStorage()
-		{
-			if (await MessageBox.ConfirmAsync("Do you really want to remove culture cache?"))
-			{
-				await LocalStorageService.RemoveItemAsync("culture");
-				Messenger.AddInformation(AdmninIndexLocalizer["CultureRemoved"]); // TODO Just a demo
-			}
-		}
 
 		private async Task HandleClearCache()
 		{

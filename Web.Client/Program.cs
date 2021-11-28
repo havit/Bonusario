@@ -5,7 +5,6 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using BlazorApplicationInsights;
-using Blazored.LocalStorage;
 using FluentValidation;
 using Havit.Blazor.Components.Web;
 using Havit.Blazor.Components.Web.Bootstrap;
@@ -41,7 +40,6 @@ namespace Havit.Bonusario.Web.Client
 				.CreateClient("Havit.Bonusario.Web.Server"));
 			AddAuth(builder);
 
-			builder.Services.AddBlazoredLocalStorage();
 			builder.Services.AddValidatorsFromAssemblyContaining<Dto<object>>();
 
 			builder.Services.AddHxServices();
@@ -58,7 +56,7 @@ namespace Havit.Bonusario.Web.Client
 
 			WebAssemblyHost webAssemblyHost = builder.Build();
 
-			await SetLanguage(webAssemblyHost);
+			SetLanguage(webAssemblyHost);
 
 			await webAssemblyHost.RunAsync();
 		}
@@ -101,17 +99,11 @@ namespace Havit.Bonusario.Web.Client
 				});
 		}
 
-		private static async ValueTask SetLanguage(WebAssemblyHost webAssemblyHost)
+		private static void SetLanguage(WebAssemblyHost webAssemblyHost)
 		{
-			var localStorageService = webAssemblyHost.Services.GetService<ILocalStorageService>();
-
-			var culture = await localStorageService.GetItemAsStringAsync("culture");
-			if (!String.IsNullOrWhiteSpace(culture))
-			{
-				var cultureInfo = new CultureInfo(culture);
-				CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
-				CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
-			}
+			var cultureInfo = new CultureInfo("cs-CZ");
+			CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
+			CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
 		}
 
 		private static void AddLoggingAndApplicationInsights(WebAssemblyHostBuilder builder)
