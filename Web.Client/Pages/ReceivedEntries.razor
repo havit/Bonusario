@@ -8,7 +8,7 @@
 {
     <ReceivedEntriesFeed PeriodId="@periodId" />
 }
-else
+else if (PeriodsDataStore.IsLoaded)
 {
     <p>Žádné uzavřené období není evidováno.</p>
 }

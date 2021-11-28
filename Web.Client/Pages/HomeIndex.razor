@@ -8,7 +8,7 @@
 {
 	<MyEntriesFeed PeriodId="@periodId" />
 }
-else
+else if (PeriodsDataStore.IsLoaded)
 {
     <p>Žádné období není otevřeno pro zadávání dat.</p>
 }
