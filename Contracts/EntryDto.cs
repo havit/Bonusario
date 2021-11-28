@@ -26,15 +26,6 @@ namespace Havit.Bonusario.Contracts
 		public DateTime? Created { get; set; }
 		public int PeriodId { get; set; }
 
-		public class EntryDtoValidator : AbstractValidator<EntryDto>
-		{
-			public EntryDtoValidator()
-			{
-				RuleFor(e => e.RecipientId).NotNull();
-				RuleFor(e => e.Value).InclusiveBetween(0, 100);
-			}
-		}
-
 		public bool HasValues()
 		{
 			if (!String.IsNullOrWhiteSpace(Text)
@@ -45,6 +36,15 @@ namespace Havit.Bonusario.Contracts
 				return true;
 			}
 			return false;
+		}
+
+		public class EntryDtoValidator : AbstractValidator<EntryDto>
+		{
+			public EntryDtoValidator()
+			{
+				RuleFor(e => e.RecipientId).NotNull().WithMessage("Příjemce musí být určen.");
+				RuleFor(e => e.Value).InclusiveBetween(0, 100).WithMessage("Hodnota musí být v rozmezí 0 až 100.");
+			}
 		}
 	}
 }

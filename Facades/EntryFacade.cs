@@ -51,7 +51,7 @@ namespace Havit.Bonusario.Facades
 			this.applicationAuthenticationService = applicationAuthenticationService;
 		}
 
-		public async Task<List<EntryDto>> GetMyEntriesAsync(Dto<int> periodId, CancellationToken cancellationToken = default)
+		public async Task<List<EntryDto>> GetMyGivenEntriesAsync(Dto<int> periodId, CancellationToken cancellationToken = default)
 		{
 			var currentEmployee = await applicationAuthenticationService.GetCurrentEmployeeAsync(cancellationToken);
 			var entries = await entryRepository.GetEntriesCreatedByAsync(periodId.Value, currentEmployee.Id, cancellationToken);
@@ -59,7 +59,7 @@ namespace Havit.Bonusario.Facades
 			return entries.Select(e => entryMapper.MapToEntryDto(e)).ToList();
 		}
 
-		public async Task<List<EntryDto>> GetReceivedEntriesAsync(Dto<int> periodId, CancellationToken cancellationToken = default)
+		public async Task<List<EntryDto>> GetMyReceivedEntriesAsync(Dto<int> periodId, CancellationToken cancellationToken = default)
 		{
 			var currentEmployee = await applicationAuthenticationService.GetCurrentEmployeeAsync(cancellationToken);
 			var period = await periodRepository.GetObjectAsync(periodId.Value, cancellationToken);
@@ -72,7 +72,7 @@ namespace Havit.Bonusario.Facades
 
 			var entriesDto = entries.Select(e => entryMapper.MapToEntryDto(e)).ToList();
 
-			// Hide creators of the entries.
+			// Anonymize creators of the entries.
 			foreach (var entry in entriesDto)
 			{
 				entry.CreatedById = null;
@@ -87,6 +87,7 @@ namespace Havit.Bonusario.Facades
 			var entry = await entryRepository.GetObjectAsync(entryId.Value, cancellationToken);
 
 			Contract.Requires<SecurityException>(entry.CreatedById == currentEmployee.Id);
+			Contract.Requires<OperationFailedException>(entry.Submitted is null, "Nelze mazat potvrzené záznamy.");
 
 			unitOfWork.AddForDelete(entry);
 			await unitOfWork.CommitAsync(cancellationToken);

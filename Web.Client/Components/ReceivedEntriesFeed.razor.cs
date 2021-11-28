@@ -25,7 +25,7 @@ namespace Havit.Bonusario.Web.Client.Components
 			Console.WriteLine("ReceivedEntriesFeed:" + PeriodId);
 			if (PeriodId != null)
 			{
-				var result = await EntryFacade.GetReceivedEntriesAsync(Dto.FromValue(PeriodId.Value));
+				var result = await EntryFacade.GetMyReceivedEntriesAsync(Dto.FromValue(PeriodId.Value));
 				entries = result.OrderByDescending(e => e.Created).ToList();
 			}
 		}

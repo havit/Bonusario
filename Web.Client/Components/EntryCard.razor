@@ -35,11 +35,11 @@
 								<EntryTagsPicker @bind-Value="Entry.Tags" />
 							</div>
 						</div>
-						@if (Entry.Submitted is not null)
+						@if (Entry.Created is not null)
 						{
-							<small class="text-muted">vloženo @Entry.Submitted.Value.ToShortDateString()</small>
+							<small class="text-muted">vloženo @Entry.Created.Value.ToShortDateString()</small>
 						}
-						else
+						@if (Entry.Submitted is not null)
 						{
 							<div class="d-flex">
 								@if (Entry.Id != default)

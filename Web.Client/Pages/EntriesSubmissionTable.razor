@@ -1,14 +1,14 @@
 ﻿@attribute [Route(Routes.SubmissionTable)]
 
-<h1>Přehled rozdělených odměn v období</h1>
+<h1>Hromadné zadávání odměn</h1>
 
-<div class="mb-3"><PeriodPicker @bind-Value="periodId" Nullable="false" Mode="PeriodPicker.DataMode.ActiveForSubmission"  /></div>
+<PeriodPicker Label="Období" @bind-Value="periodId" Nullable="false" Mode="PeriodPicker.DataMode.ActiveForSubmission" CssClass="mb-3" />
 
 @if (periodId is not null)
 {
 	<EntriesTable PeriodId="periodId.Value" />
 }
-else
+else if (PeriodsDataStore.IsLoaded)
 {
     <p>Žádné období není otevřeno pro zadávání dat.</p>
 }

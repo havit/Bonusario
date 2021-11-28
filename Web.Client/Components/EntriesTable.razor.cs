@@ -43,7 +43,7 @@ namespace Havit.Bonusario.Web.Client.Components
 		{
 			if (PeriodId != null)
 			{
-				var e = await EntryFacade.GetMyEntriesAsync(Dto.FromValue(PeriodId.Value));
+				var e = await EntryFacade.GetMyGivenEntriesAsync(Dto.FromValue(PeriodId.Value));
 				entries = e.OrderByDescending(e => e.Created).ToList();
 
 				remainingPoints = (await EntryFacade.GetMyRemainingPoints(Dto.FromValue(PeriodId.Value))).Value;
@@ -77,6 +77,25 @@ namespace Havit.Bonusario.Web.Client.Components
 				result = result + "<div class=\"mt-2\">" + tags + "</div>";
 			}
 			return result;
+		}
+
+		private async Task HandleInsertAllClick()
+		{
+			try
+			{
+				foreach (var entry in newEntriesModel.Entries)
+				{
+					if (entry.HasValues())
+					{
+						entry.Id = (await EntryFacade.CreateEntryAsync(entry)).Value;
+					}
+				}
+				await LoadData();
+			}
+			catch (OperationFailedException)
+			{
+				// NOOP
+			}
 		}
 
 		private async Task HandleSubmitAllClick()

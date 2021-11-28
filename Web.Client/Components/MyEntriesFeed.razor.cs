@@ -27,7 +27,7 @@ namespace Havit.Bonusario.Web.Client.Components
 
 		private async Task LoadData()
 		{
-			var result = await EntryFacade.GetMyEntriesAsync(Dto.FromValue(PeriodId.Value));
+			var result = await EntryFacade.GetMyGivenEntriesAsync(Dto.FromValue(PeriodId.Value));
 			entries = result.OrderByDescending(e => e.Created).ToList();
 
 			remainingPoints = (await EntryFacade.GetMyRemainingPoints(Dto.FromValue(PeriodId.Value))).Value;

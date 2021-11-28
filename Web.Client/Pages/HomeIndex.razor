@@ -2,7 +2,7 @@
 
 <h1>Průběžný feed</h1>
 
-<div class="mb-3"><PeriodPicker @bind-Value="periodId" Nullable="false" Mode="PeriodPicker.DataMode.ActiveForSubmission" /></div>
+<PeriodPicker Label="Období" @bind-Value="periodId" Nullable="false" Mode="PeriodPicker.DataMode.ActiveForSubmission" CssClass="mb-3" />
 
 @if (periodId.HasValue)
 {
