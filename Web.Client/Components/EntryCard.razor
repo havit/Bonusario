@@ -39,7 +39,7 @@
 						{
 							<small class="text-muted">vloženo @Entry.Created.Value.ToShortDateString()</small>
 						}
-						@if (Entry.Submitted is not null)
+						@if (Entry.Submitted is null)
 						{
 							<div class="d-flex">
 								@if (Entry.Id != default)
