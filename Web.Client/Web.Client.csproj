@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
 
 	<PropertyGroup>
-		<TargetFramework>net5.0</TargetFramework>
+		<TargetFramework>net6.0</TargetFramework>
 		<AssemblyName>Havit.Bonusario.Web.Client</AssemblyName>
 		<RootNamespace>Havit.Bonusario.Web.Client</RootNamespace>
 		<BlazorWebAssemblyLoadAllGlobalizationData>true</BlazorWebAssemblyLoadAllGlobalizationData>
@@ -26,9 +26,9 @@
 		<PackageReference Include="Havit.Blazor.Grpc.Client.WebAssembly" Version="1.0.10" />
 		<PackageReference Include="Havit.Extensions.Localization" Version="1.0.3" />
 		<PackageReference Include="Havit.SourceGenerators.StrongApiStringLocalizers" Version="1.0.6" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="5.0.11" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="5.0.11" PrivateAssets="all" />
-		<PackageReference Include="Microsoft.Authentication.WebAssembly.Msal" Version="5.0.11" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.0" PrivateAssets="all" />
+		<PackageReference Include="Microsoft.Authentication.WebAssembly.Msal" Version="6.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>

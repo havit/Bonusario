@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net5.0</TargetFramework>
+		<TargetFramework>net6.0</TargetFramework>
 		<IsPackable>false</IsPackable>
 		<AssemblyName>Havit.Bonusario.DataLayer.Tests</AssemblyName>
 		<RootNamespace>Havit.Bonusario.DataLayer.Tests</RootNamespace>

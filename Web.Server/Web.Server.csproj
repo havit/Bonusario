@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
 	<PropertyGroup>
-		<TargetFramework>net5.0</TargetFramework>
+		<TargetFramework>net6.0</TargetFramework>
 		<DisableImplicitComponentsAnalyzers>true</DisableImplicitComponentsAnalyzers>
 		<AssemblyName>Havit.Bonusario.Web.Server</AssemblyName>
 		<RootNamespace>Havit.Bonusario.Web.Server</RootNamespace>
@@ -15,9 +15,9 @@
 		<PackageReference Include="Havit.Blazor.Grpc.Server" Version="1.0.10" />
 		<PackageReference Include="Havit.Hangfire.Extensions" Version="2.0.3" />
 		<PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.19.0" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="5.0.11" />
-		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.2" />
-		<PackageReference Include="Microsoft.Extensions.Logging.AzureAppServices" Version="5.0.11" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="6.0.0" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging.AzureAppServices" Version="6.0.0" />
 		<PackageReference Include="Microsoft.Identity.Web" Version="1.21.0" />
 	</ItemGroup>
 
@@ -68,10 +68,10 @@
 	</Target>
 
     <Target Name="EnsureWebJobInPackage" AfterTargets="CreateReadyToRunImages" BeforeTargets="_PrepareForReadyToRunCompilation">
-        <Error Text="WebJob file Havit.Bonusario.Utility.exe not found when preparing web deploy package." Condition="!Exists('..\Utility\bin\Release\net5.0\Havit.Bonusario.Utility.exe')" />
+        <Error Text="WebJob file Havit.Bonusario.Utility.exe not found when preparing web deploy package." Condition="!Exists('..\Utility\bin\Release\net6.0\Havit.Bonusario.Utility.exe')" />
         <ItemGroup>
             <!-- Vybereme soubory k publikaci. Předpokládá, že Utility je závislostí WebAPI nastavené v SLN. -->
-            <WebJobFiles Include="..\Utility\bin\Release\net5.0\**" />
+            <WebJobFiles Include="..\Utility\bin\Release\net6.0\**" />
             <!-- Přidej soubory do ResolvedFileToPublish s nastavením cesty, kam mají být umístěny (složka pro webjoby). -->
             <ResolvedFileToPublish Include="@(WebJobFiles)">
                 <RelativePath>app_data\jobs\continuous\Utility\%(RecursiveDir)%(Filename)%(Extension)</RelativePath>
