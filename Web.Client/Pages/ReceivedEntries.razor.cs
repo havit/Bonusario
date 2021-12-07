@@ -15,7 +15,7 @@ namespace Havit.Bonusario.Web.Client.Pages
 		protected override async Task OnInitializedAsync()
 		{
 			await PeriodsDataStore.EnsureDataAsync();
-			periodId ??= PeriodsDataStore.GetClosed().OrderBy(p => p.EndDate).FirstOrDefault()?.PeriodId;
+			periodId ??= PeriodsDataStore.GetClosed().OrderByDescending(p => p.EndDate).FirstOrDefault()?.PeriodId;
 		}
 	}
 }
