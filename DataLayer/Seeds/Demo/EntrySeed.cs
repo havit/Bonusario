@@ -29,11 +29,28 @@ namespace Havit.Bonusario.DataLayer.Seeds.Demo
 
 			var now = timeService.GetCurrentTime();
 			var previousDate = now.AddMonths(-1);
+			var previousPreviousDate = now.AddMonths(-2);
 			var previousPeriod = periods.Single(p => p.Name == previousDate.Month + "/" + previousDate.Year);
+			var previousPreviousPeriod = periods.Single(p => p.Name == previousPreviousDate.Month + "/" + previousDate.Year);
 			var currentPeriod = periods.Single(p => p.Name == now.Month + "/" + now.Year);
 
 			var entries = new[]
 			{
+				new Entry()
+				{
+					CreatedById = employees.Single(e => e.Email == "haken@havit.cz").Id,
+					RecipientId = employees.Single(e => e.Email == "crha@havit.cz").Id,
+					PeriodId = previousPreviousPeriod.Id,
+					Text = "Pokusníci",
+					Value = 3,
+					Tags =
+					{
+						new EntryTag() { Tag = "team" },
+						new EntryTag() { Tag = "znalosti" }
+					},
+					Created = now.AddMonths(-2),
+					Submitted = now.AddMonths(-2)
+				},
 				new Entry()
 				{
 					CreatedById = employees.Single(e => e.Email == "haken@havit.cz").Id,

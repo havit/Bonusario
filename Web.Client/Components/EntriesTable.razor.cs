@@ -31,7 +31,6 @@ namespace Havit.Bonusario.Web.Client.Components
 		protected override async Task OnInitializedAsync()
 		{
 			employees ??= await EmployeesDataStore.GetAllAsync();
-			await LoadData();
 		}
 
 		protected override async Task OnParametersSetAsync()

@@ -19,11 +19,16 @@ namespace Havit.Bonusario.Web.Client.Components
 
 		private List<ResultItemDto> data;
 		private HxGrid<ResultItemDto> gridComponent;
+		private int? loadedPeriodId;
 
 		protected override async Task OnParametersSetAsync()
 		{
 			await EmployeesDataStore.EnsureDataAsync();
-			//await gridComponent?.RefreshDataAsync();
+
+			if ((loadedPeriodId != PeriodId) && (gridComponent != null))
+			{
+				await gridComponent.RefreshDataAsync();
+			}
 		}
 
 		private async Task<GridDataProviderResult<ResultItemDto>> GetDataAsync(GridDataProviderRequest<ResultItemDto> request)
@@ -31,6 +36,7 @@ namespace Havit.Bonusario.Web.Client.Components
 			try
 			{
 				data = await EntryFacade.GetResultsAsync(Dto.FromValue(PeriodId.Value));
+				loadedPeriodId = PeriodId;
 				return request.ApplyTo(data);
 			}
 			catch (OperationFailedException)

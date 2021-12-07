@@ -1,6 +1,6 @@
 ﻿@if (PeriodId is not null)
 {
-    <HxGrid DataProvider="GetEntries" TItem="EntryDto" Context="item" TableCssClass="table-bordered">
+    <HxGrid @ref="gridComponent" DataProvider="GetEntries" TItem="EntryDto" Context="item" TableCssClass="table-bordered">
         <Columns>
             <HxGridColumn TItem="EntryDto"
                       HeaderText="Hodnota"

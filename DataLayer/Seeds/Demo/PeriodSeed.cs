@@ -20,12 +20,12 @@ namespace Havit.Bonusario.DataLayer.Seeds.Demo
 
 		public override void SeedData()
 		{
-			var date = timeService.GetCurrentDate().AddMonths(-1);
+			var date = timeService.GetCurrentDate().AddMonths(-2);
 
 			var periods = new List<Period>();
 
-			// předchozí + aktuální + budoucí
-			for (int i = 0; i < 3; i++)
+			// 2x předchozí + aktuální + budoucí
+			for (int i = 0; i < 4; i++)
 			{
 				periods.Add(new Period()
 				{
