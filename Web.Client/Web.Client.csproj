@@ -19,10 +19,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="BlazorApplicationInsights" Version="1.4.0" />
+		<PackageReference Include="BlazorApplicationInsights" Version="1.5.0" />
 		<PackageReference Include="Blazored.FluentValidation" Version="2.0.3" />
-		<PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="10.3.4" />
-		<PackageReference Include="Havit.Blazor.Components.Web.Bootstrap" Version="1.6.3" />
+		<PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="10.3.5" />
+		<PackageReference Include="Havit.Blazor.Components.Web.Bootstrap" Version="1.6.5" />
 		<PackageReference Include="Havit.Blazor.Grpc.Client.WebAssembly" Version="1.0.10" />
 		<PackageReference Include="Havit.Extensions.Localization" Version="1.0.3" />
 		<PackageReference Include="Havit.SourceGenerators.StrongApiStringLocalizers" Version="1.0.6" />
