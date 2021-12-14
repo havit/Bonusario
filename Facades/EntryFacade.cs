@@ -212,5 +212,10 @@ namespace Havit.Bonusario.Facades
 
 			return await entryRepository.GetResultsAsync(periodId.Value, cancellationToken);
 		}
+
+		public async Task<List<ResultItemDto>> GetAggregateResultsAsync(CancellationToken cancellationToken = default)
+		{
+			return await entryRepository.GetAggregateResultsAsync(cancellationToken);
+		}
 	}
 }

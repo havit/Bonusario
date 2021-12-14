@@ -13,6 +13,7 @@ namespace Havit.Bonusario.Web.Client
 		public const string SubmissionBoard = "/submission-board";
 		public const string SubmissionTable = "/submission-table";
 		public const string Results = "/results";
+		public const string AggregateResults = "/aggregate-results";
 
 		public static class Administration
 		{

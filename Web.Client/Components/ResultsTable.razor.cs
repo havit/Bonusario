@@ -13,6 +13,7 @@ namespace Havit.Bonusario.Web.Client.Components
 	public partial class ResultsTable
 	{
 		[Parameter] public int? PeriodId { get; set; }
+		[Parameter] public bool Aggregate { get; set; }
 
 		[Inject] protected IEntryFacade EntryFacade { get; set; }
 		[Inject] protected IEmployeesDataStore EmployeesDataStore { get; set; }
@@ -20,6 +21,7 @@ namespace Havit.Bonusario.Web.Client.Components
 		private List<ResultItemDto> data;
 		private HxGrid<ResultItemDto> gridComponent;
 		private int? loadedPeriodId;
+		private decimal grandTotal;
 
 		protected override async Task OnParametersSetAsync()
 		{
@@ -35,9 +37,19 @@ namespace Havit.Bonusario.Web.Client.Components
 		{
 			try
 			{
-				data = await EntryFacade.GetResultsAsync(Dto.FromValue(PeriodId.Value));
-				loadedPeriodId = PeriodId;
-				return request.ApplyTo(data);
+				if (!Aggregate)
+				{
+					data = await EntryFacade.GetResultsAsync(Dto.FromValue(PeriodId.Value));
+					loadedPeriodId = PeriodId;
+					grandTotal = data.Sum(i => i.ValueSum);
+					return request.ApplyTo(data);
+				}
+				else
+				{
+					data = await EntryFacade.GetAggregateResultsAsync();
+					grandTotal = data.Sum(i => i.ValueSum);
+					return request.ApplyTo(data);
+				}
 			}
 			catch (OperationFailedException)
 			{
