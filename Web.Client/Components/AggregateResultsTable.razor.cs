@@ -10,23 +10,26 @@ using Microsoft.AspNetCore.Components;
 
 namespace Havit.Bonusario.Web.Client.Components
 {
-	public partial class ResultsTable
+	public partial class AggregateResultsTable
 	{
-		[Parameter] public int? PeriodId { get; set; }
+		[Parameter] public int? PeriodSetId { get; set; }
 
 		[Inject] protected IEntryFacade EntryFacade { get; set; }
 		[Inject] protected IEmployeesDataStore EmployeesDataStore { get; set; }
+		[Inject] protected IPeriodSetsDataStore PeriodSetsDataStore { get; set; }
 
 		private List<ResultItemDto> data;
 		private HxGrid<ResultItemDto> gridComponent;
-		private int? loadedPeriodId;
+		private int? loadedPeriodSetId;
 		private decimal grandTotal;
+		private decimal budget;
 
 		protected override async Task OnParametersSetAsync()
 		{
 			await EmployeesDataStore.EnsureDataAsync();
+			await PeriodSetsDataStore.EnsureDataAsync();
 
-			if ((loadedPeriodId != PeriodId) && (gridComponent != null))
+			if ((loadedPeriodSetId != PeriodSetId) && (gridComponent != null))
 			{
 				await gridComponent.RefreshDataAsync();
 			}
@@ -36,9 +39,10 @@ namespace Havit.Bonusario.Web.Client.Components
 		{
 			try
 			{
-				data = await EntryFacade.GetResultsAsync(Dto.FromValue(PeriodId.Value));
-				loadedPeriodId = PeriodId;
+				data = await EntryFacade.GetAggregateResultsAsync(Dto.FromValue(PeriodSetId.Value));
+				loadedPeriodSetId = PeriodSetId;
 				grandTotal = data.Sum(i => i.ValueSum);
+				budget = (await PeriodSetsDataStore.GetByKeyAsync(PeriodSetId.Value)).Budget;
 				return request.ApplyTo(data);
 			}
 			catch (OperationFailedException)

@@ -32,12 +32,18 @@ namespace Havit.Bonusario.DataLayer.Seeds.Demo
 					Name = date.Month + "/" + date.Year,
 					StartDate = new DateTime(date.Year, date.Month, 1),
 					EndDate = new DateTime(date.Year, date.Month, Math.Max(date.Day, 11)).AddMonths(1).AddDays(-1), // do 10. následujícícho měsíce, nebo dříve (DEMO)
+					PeriodSetId = 1,
 					Created = timeService.GetCurrentTime(),
 				});
 				date = date.AddMonths(1);
 			};
 
 			Seed(For(periods.ToArray()).PairBy(p => p.Name));
+		}
+
+		public override IEnumerable<Type> GetPrerequisiteDataSeeds()
+		{
+			yield return typeof(PeriodSetSeed);
 		}
 	}
 }

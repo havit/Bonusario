@@ -16,6 +16,6 @@ namespace Havit.Bonusario.DataLayer.Repositories
 		Task<List<Entry>> GetEntriesReceivedByAsync(int periodId, int receivedByEmployeeId, CancellationToken cancellationToken = default);
 		Task<int> GetPointsAssignedSumAsync(int periodId, int createdByEmployeeId, CancellationToken cancellationToken = default);
 		Task<List<ResultItemDto>> GetResultsAsync(int periodId, CancellationToken cancellationToken = default);
-		Task<List<ResultItemDto>> GetAggregateResultsAsync(CancellationToken cancellationToken = default);
+		Task<List<ResultItemDto>> GetAggregateResultsAsync(int periodSetId, CancellationToken cancellationToken = default);
 	}
 }

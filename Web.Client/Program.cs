@@ -53,6 +53,7 @@ namespace Havit.Bonusario.Web.Client
 
 			builder.Services.AddSingleton<IEmployeesDataStore, EmployeesDataStore>();
 			builder.Services.AddSingleton<IPeriodsDataStore, PeriodsDataStore>();
+			builder.Services.AddSingleton<IPeriodSetsDataStore, PeriodSetsDataStore>();
 
 			WebAssemblyHost webAssemblyHost = builder.Build();
 

@@ -16,6 +16,9 @@ namespace Havit.Bonusario.Model
 		[MaxLength(200)]
 		public string Name { get; set; }
 
+		public PeriodSet PeriodSet { get; set; }
+		public int? PeriodSetId { get; set; }
+
 		/// <summary>
 		/// Day of opening the period for submissions.
 		/// </summary>

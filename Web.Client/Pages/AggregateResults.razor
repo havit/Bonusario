@@ -2,8 +2,16 @@
 
 <h1>Souhrnné výsledky za čtvrtletí</h1>
 
-@* TODO PeriodSet picker *@
+<div class="mb-3"><PeriodSetPicker @bind-Value="periodSetId" Nullable="false" /></div>
 
-<ResultsTable Aggregate="true" />
+@if (periodSetId.HasValue)
+{
+    <AggregateResultsTable PeriodSetId="@periodSetId" />
+}
+else
+{
+    <p>Žádné uzavřené období není evidováno.</p>
+}
 
-<p class="text-muted"><small>(Zatím jsou zde výsledky za všechna uzavřená období, zamýšlen je tento výstup "po čtvrtletích". TODO 😁)</small></p>
+
+<p class="text-muted"><small>(Zatím jsou zde výsledky za všechna uzavřená období, zamýšlen je tento výstup "po čtvrtletích". TODO 😁)</small></p>              

@@ -55,9 +55,10 @@ namespace Havit.Bonusario.DataLayer.Repositories
 				.ToListAsync(cancellationToken);
 		}
 
-		public Task<List<ResultItemDto>> GetAggregateResultsAsync(CancellationToken cancellationToken = default)
+		public Task<List<ResultItemDto>> GetAggregateResultsAsync(int periodSetId, CancellationToken cancellationToken = default)
 		{
 			return Data
+				.Where(e => e.Period.PeriodSetId == periodSetId)
 				.Where(e => e.Submitted != null)
 				.GroupBy(e => e.RecipientId)
 				.Select(g => new ResultItemDto() { RecipientId = g.Key, ValueSum = g.Sum(e => e.Value) })
