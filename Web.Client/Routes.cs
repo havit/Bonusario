@@ -10,6 +10,7 @@ namespace Havit.Bonusario.Web.Client
 	{
 		public const string Home = "/";
 		public const string ReceivedEntries = "/received-entries";
+		public const string GivenEntries = "/given-entries";
 		public const string SubmissionBoard = "/submission-board";
 		public const string SubmissionTable = "/submission-table";
 		public const string Results = "/results";

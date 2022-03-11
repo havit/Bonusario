@@ -1,6 +1,6 @@
-﻿@attribute [Route(Routes.ReceivedEntries)]
+﻿@attribute [Route(Routes.GivenEntries)]
 
-<h1>Obdržené záznamy</h1>
+<h1>Vložené záznamy</h1>
 
 <div class="mb-3"><PeriodPicker @bind-Value="periodId" Nullable="false" Mode="PeriodPicker.DataMode.Closed" /></div>
 
@@ -9,11 +9,11 @@
     <HxInputSwitch @bind-Value="displayTable" Label="tabulka" CssClass="mb-3" />
     if (displayTable)
     {
-        <ReadOnlyEntriesTable ReceivedEntries="true" PeriodId="@periodId" />
+        <ReadOnlyEntriesTable ReceivedEntries="false" PeriodId="@periodId" />
     }
     else
     {
-        <ReadOnlyEntriesFeed ReceivedEntries="true" PeriodId="@periodId" />
+        <ReadOnlyEntriesFeed ReceivedEntries="false" PeriodId="@periodId" />
     }
 }
 else if (PeriodsDataStore.IsLoaded)

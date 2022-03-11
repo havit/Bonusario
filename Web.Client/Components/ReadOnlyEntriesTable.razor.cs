@@ -8,9 +8,10 @@ using Microsoft.AspNetCore.Components;
 
 namespace Havit.Bonusario.Web.Client.Components
 {
-	public partial class ReceivedEntriesTable
+	public partial class ReadOnlyEntriesTable
 	{
 		[Parameter] public int? PeriodId { get; set; }
+		[Parameter] public bool ReceivedEntries { get; set; } = true;
 
 		[Inject] protected IEntryFacade EntryFacade { get; set; }
 
@@ -28,7 +29,15 @@ namespace Havit.Bonusario.Web.Client.Components
 
 		private async Task<GridDataProviderResult<EntryDto>> GetEntries(GridDataProviderRequest<EntryDto> request)
 		{
-			entries = await EntryFacade.GetMyReceivedEntriesAsync(Dto.FromValue(PeriodId.Value));
+			if (ReceivedEntries)
+			{
+				entries = await EntryFacade.GetMyReceivedEntriesAsync(Dto.FromValue(PeriodId.Value));
+			}
+			else
+			{
+				entries = await EntryFacade.GetMyGivenEntriesAsync(Dto.FromValue(PeriodId.Value));
+			}
+
 			loadedPeriodId = PeriodId;
 
 			return request.ApplyTo(entries);
