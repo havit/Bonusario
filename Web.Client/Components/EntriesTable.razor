@@ -38,7 +38,7 @@
                     <tbody>
                         <AuthorizeView>
                             <Authorized Context="authenticationState">
-                                <HxRepeater Data="@(employees.Where(e => e.Email != authenticationState.User.FindFirst("preferred_username")?.Value).OrderBy(e => e.Email))" Context="employee">
+                                <HxRepeater Data="@(employees.Where(e => e.Email != authenticationState.User.FindFirst("preferred_username")?.Value && !e.IsDeleted).OrderBy(e => e.Email))" Context="employee">
                                     <ItemTemplate>
                                         <tr>
                                             <td class="text-nowrap">

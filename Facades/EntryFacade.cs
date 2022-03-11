@@ -101,6 +101,11 @@ namespace Havit.Bonusario.Facades
 
 			var currentEmployee = await applicationAuthenticationService.GetCurrentEmployeeAsync(cancellationToken);
 
+			if (currentEmployee.Deleted.HasValue)
+			{
+				throw new OperationFailedException("Smazaný uživatel nemůže vkládat záznamy.");
+			}
+
 			var period = await periodRepository.GetObjectAsync(newEntryDto.PeriodId, cancellationToken);
 			if ((period.StartDate > timeService.GetCurrentDate()) || (period.EndDate < timeService.GetCurrentDate()))
 			{
