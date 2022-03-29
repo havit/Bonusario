@@ -3,11 +3,10 @@ using System.Threading.Tasks;
 using System.Threading;
 using Havit.Bonusario.Model;
 
-namespace Havit.Bonusario.Facades.Infrastructure.Security.Authentication
+namespace Havit.Bonusario.Facades.Infrastructure.Security.Authentication;
+
+public interface IApplicationAuthenticationService
 {
-	public interface IApplicationAuthenticationService
-	{
-		ClaimsPrincipal GetCurrentClaimsPrincipal();
-		Task<Employee> GetCurrentEmployeeAsync(CancellationToken cancellationToken = default);
-	}
+	ClaimsPrincipal GetCurrentClaimsPrincipal();
+	Task<Employee> GetCurrentEmployeeAsync(CancellationToken cancellationToken = default);
 }

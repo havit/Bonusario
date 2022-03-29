@@ -10,30 +10,29 @@ using Havit.Extensions.DependencyInjection.Abstractions;
 using Havit.Services.TimeServices;
 using Microsoft.AspNetCore.Authorization;
 
-namespace Havit.Bonusario.Facades
+namespace Havit.Bonusario.Facades;
+
+[Service]
+[Authorize]
+public class PeriodSetFacade : IPeriodSetFacade
 {
-	[Service]
-	[Authorize]
-	public class PeriodSetFacade : IPeriodSetFacade
+	private readonly IPeriodSetRepository PeriodSetRepository;
+
+	public PeriodSetFacade(IPeriodSetRepository PeriodSetRepository)
 	{
-		private readonly IPeriodSetRepository PeriodSetRepository;
+		this.PeriodSetRepository = PeriodSetRepository;
+	}
 
-		public PeriodSetFacade(IPeriodSetRepository PeriodSetRepository)
-		{
-			this.PeriodSetRepository = PeriodSetRepository;
-		}
-
-		public async Task<List<PeriodSetDto>> GetAllPeriodSetsAsync(CancellationToken cancellationToken = default)
-		{
-			var data = await PeriodSetRepository.GetAllAsync(cancellationToken);
-			return data
-				.Select(ps => new PeriodSetDto()
-				{
-					Id = ps.Id,
-					Name = ps.Name,
-					Budget = ps.Budget,
-				})
-				.ToList();
-		}
+	public async Task<List<PeriodSetDto>> GetAllPeriodSetsAsync(CancellationToken cancellationToken = default)
+	{
+		var data = await PeriodSetRepository.GetAllAsync(cancellationToken);
+		return data
+			.Select(ps => new PeriodSetDto()
+			{
+				Id = ps.Id,
+				Name = ps.Name,
+				Budget = ps.Budget,
+			})
+			.ToList();
 	}
 }

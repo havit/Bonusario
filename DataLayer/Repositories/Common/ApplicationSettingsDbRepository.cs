@@ -10,10 +10,9 @@ using Havit.Data.Patterns.DataEntries;
 using Havit.Data.Patterns.DataLoaders;
 using Havit.Bonusario.Model.Common;
 
-namespace Havit.Bonusario.DataLayer.Repositories.Common
-{
-	public partial class ApplicationSettingsDbRepository : IApplicationSettingsRepository
-	{
+namespace Havit.Bonusario.DataLayer.Repositories.Common;
 
-	}
+public partial class ApplicationSettingsDbRepository : IApplicationSettingsRepository
+{
+
 }

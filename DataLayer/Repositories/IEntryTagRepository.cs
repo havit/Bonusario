@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 using Havit.Data.Patterns.Repositories;
 using Havit.Bonusario.Model;
 
-namespace Havit.Bonusario.DataLayer.Repositories
-{
-	public partial interface IEntryTagRepository
-	{
+namespace Havit.Bonusario.DataLayer.Repositories;
 
-	}
+public partial interface IEntryTagRepository
+{
+
 }

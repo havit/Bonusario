@@ -6,24 +6,23 @@ using System.Threading.Tasks;
 using Havit.Blazor.Components.Web.Services.DataStores;
 using Havit.Bonusario.Contracts;
 
-namespace Havit.Bonusario.Web.Client.DataStores
+namespace Havit.Bonusario.Web.Client.DataStores;
+
+public class PeriodSetsDataStore : DictionaryStaticDataStore<int, PeriodSetDto>, IPeriodSetsDataStore
 {
-	public class PeriodSetsDataStore : DictionaryStaticDataStore<int, PeriodSetDto>, IPeriodSetsDataStore
+	private readonly IPeriodSetFacade PeriodSetFacade;
+
+	public PeriodSetsDataStore(IPeriodSetFacade PeriodSetFacade)
 	{
-		private readonly IPeriodSetFacade PeriodSetFacade;
-
-		public PeriodSetsDataStore(IPeriodSetFacade PeriodSetFacade)
-		{
-			this.PeriodSetFacade = PeriodSetFacade;
-		}
-
-		protected override Func<PeriodSetDto, int> KeySelector { get; } = (dto) => dto.Id;
-
-		protected override async Task<IEnumerable<PeriodSetDto>> LoadDataAsync()
-		{
-			return await PeriodSetFacade.GetAllPeriodSetsAsync();
-		}
-
-		protected override bool ShouldRefresh() => false;
+		this.PeriodSetFacade = PeriodSetFacade;
 	}
+
+	protected override Func<PeriodSetDto, int> KeySelector { get; } = (dto) => dto.Id;
+
+	protected override async Task<IEnumerable<PeriodSetDto>> LoadDataAsync()
+	{
+		return await PeriodSetFacade.GetAllPeriodSetsAsync();
+	}
+
+	protected override bool ShouldRefresh() => false;
 }

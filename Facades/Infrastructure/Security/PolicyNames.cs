@@ -1,7 +1,6 @@
-﻿namespace Havit.Bonusario.Facades.Infrastructure.Security
+﻿namespace Havit.Bonusario.Facades.Infrastructure.Security;
+
+public static class PolicyNames
 {
-	public static class PolicyNames
-	{
-		public const string HangfireDashboardAcccessPolicy = nameof(HangfireDashboardAcccessPolicy);
-	}
+	public const string HangfireDashboardAcccessPolicy = nameof(HangfireDashboardAcccessPolicy);
 }

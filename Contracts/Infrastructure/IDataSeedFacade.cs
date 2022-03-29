@@ -1,12 +1,11 @@
 ﻿using Havit.ComponentModel;
 
-namespace Havit.Bonusario.Contracts.Infrastructure
-{
-	[ApiContract]
-	public interface IDataSeedFacade
-	{
-		Task SeedDataProfile(string profileName);
+namespace Havit.Bonusario.Contracts.Infrastructure;
 
-		Task<Dto<string[]>> GetDataSeedProfiles();
-	}
+[ApiContract]
+public interface IDataSeedFacade
+{
+	Task SeedDataProfile(string profileName);
+
+	Task<Dto<string[]>> GetDataSeedProfiles();
 }

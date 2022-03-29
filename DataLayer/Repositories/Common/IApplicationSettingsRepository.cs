@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 using Havit.Data.Patterns.Repositories;
 using Havit.Bonusario.Model.Common;
 
-namespace Havit.Bonusario.DataLayer.Repositories.Common
-{
-	public partial interface IApplicationSettingsRepository
-	{
+namespace Havit.Bonusario.DataLayer.Repositories.Common;
 
-	}
+public partial interface IApplicationSettingsRepository
+{
+
 }

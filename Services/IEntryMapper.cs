@@ -1,11 +1,10 @@
 ﻿using Havit.Bonusario.Contracts;
 using Havit.Bonusario.Model;
 
-namespace Havit.Bonusario.Services
+namespace Havit.Bonusario.Services;
+
+public interface IEntryMapper
 {
-	public interface IEntryMapper
-	{
-		EntryDto MapToEntryDto(Entry entry);
-		void MapFromEntryDto(EntryDto newEntryDto, Entry newEntry);
-	}
+	EntryDto MapToEntryDto(Entry entry);
+	void MapFromEntryDto(EntryDto newEntryDto, Entry newEntry);
 }

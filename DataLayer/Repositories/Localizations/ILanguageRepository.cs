@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 using Havit.Data.Patterns.Repositories;
 using Havit.Bonusario.Model.Localizations;
 
-namespace Havit.Bonusario.DataLayer.Repositories.Localizations
-{
-	public partial interface ILanguageRepository
-	{
+namespace Havit.Bonusario.DataLayer.Repositories.Localizations;
 
-	}
+public partial interface ILanguageRepository
+{
+
 }

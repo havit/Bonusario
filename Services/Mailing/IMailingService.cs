@@ -5,10 +5,9 @@ using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Havit.Bonusario.Services.Mailing
+namespace Havit.Bonusario.Services.Mailing;
+
+public interface IMailingService
 {
-	public interface IMailingService
-	{
-		void Send(MailMessage mailMessage);
-	}
+	void Send(MailMessage mailMessage);
 }

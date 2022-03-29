@@ -8,97 +8,96 @@ using Havit.Bonusario.Contracts;
 using Havit.Bonusario.Web.Client.DataStores;
 using Microsoft.AspNetCore.Components;
 
-namespace Havit.Bonusario.Web.Client.Components
+namespace Havit.Bonusario.Web.Client.Components;
+
+public class PeriodPicker : HxSelectBase<int?, PeriodDto>
 {
-	public class PeriodPicker : HxSelectBase<int?, PeriodDto>
+	[Parameter] public DataMode Mode { get; set; }
+
+	[Parameter] public string NullText { get; set; }
+
+	[Parameter]
+	public bool? Nullable
 	{
-		[Parameter] public DataMode Mode { get; set; }
-
-		[Parameter] public string NullText { get; set; }
-
-		[Parameter]
-		public bool? Nullable
+		get
 		{
-			get
-			{
-				return NullableImpl;
-			}
-			set
-			{
-				this.NullableImpl = value;
-			}
+			return NullableImpl;
 		}
-
-		[Inject] protected IPeriodsDataStore PeriodsDataStore { get; set; }
-
-		public PeriodPicker()
+		set
 		{
-			this.ValueSelectorImpl = (c => c.PeriodId);
-			this.TextSelectorImpl = (c => c.Name);
-			this.AutoSortImpl = false;
+			this.NullableImpl = value;
 		}
+	}
 
-		protected override async Task OnInitializedAsync()
+	[Inject] protected IPeriodsDataStore PeriodsDataStore { get; set; }
+
+	public PeriodPicker()
+	{
+		this.ValueSelectorImpl = (c => c.PeriodId);
+		this.TextSelectorImpl = (c => c.Name);
+		this.AutoSortImpl = false;
+	}
+
+	protected override async Task OnInitializedAsync()
+	{
+		this.NullTextImpl ??= NullText ?? "-vyberte-";
+		this.NullDataTextImpl ??= "...načítám...";
+
+		await base.OnInitializedAsync();
+		await EnsureDataAsync();
+	}
+
+	private async Task EnsureDataAsync()
+	{
+		if (this.DataImpl is null)
 		{
-			this.NullTextImpl ??= NullText ?? "-vyberte-";
-			this.NullDataTextImpl ??= "...načítám...";
-
-			await base.OnInitializedAsync();
-			await EnsureDataAsync();
-		}
-
-		private async Task EnsureDataAsync()
-		{
-			if (this.DataImpl is null)
+			switch (this.Mode)
 			{
-				switch (this.Mode)
-				{
-					case DataMode.All:
-						this.DataImpl ??= (await PeriodsDataStore.GetAllAsync()).OrderByDescending(p => p.EndDate);
-						break;
-					case DataMode.ActiveForSubmission:
-						this.TextSelectorImpl = (p => $"{p.Name} (zápis do {p.EndDate:d})");
-						this.DataImpl ??= (await PeriodsDataStore.GetActiveForSubmissionAsync()).OrderBy(p => p.EndDate);
-						break;
-					case DataMode.Closed:
-						this.DataImpl ??= (await PeriodsDataStore.GetClosedAsync()).OrderByDescending(p => p.EndDate);
-						break;
-				}
+				case DataMode.All:
+					this.DataImpl ??= (await PeriodsDataStore.GetAllAsync()).OrderByDescending(p => p.EndDate);
+					break;
+				case DataMode.ActiveForSubmission:
+					this.TextSelectorImpl = (p => $"{p.Name} (zápis do {p.EndDate:d})");
+					this.DataImpl ??= (await PeriodsDataStore.GetActiveForSubmissionAsync()).OrderBy(p => p.EndDate);
+					break;
+				case DataMode.Closed:
+					this.DataImpl ??= (await PeriodsDataStore.GetClosedAsync()).OrderByDescending(p => p.EndDate);
+					break;
 			}
 		}
+	}
 
-		protected override async Task OnParametersSetAsync()
+	protected override async Task OnParametersSetAsync()
+	{
+		await EnsureDataAsync();
+		if (this.Value.HasValue && !this.DataImpl.Any(e => e.PeriodId == this.Value))
 		{
-			await EnsureDataAsync();
-			if (this.Value.HasValue && !this.DataImpl.Any(e => e.PeriodId == this.Value))
+			var appendPeriod = await ResolveItemFromId(this.Value);
+			if (appendPeriod != null)
 			{
-				var appendPeriod = await ResolveItemFromId(this.Value);
-				if (appendPeriod != null)
-				{
-					this.DataImpl = this.DataImpl.Append(appendPeriod).OrderBy(u => u.Name);
-				}
-				else
-				{
-					throw new InvalidOperationException("Period nenalezen.");
-				}
+				this.DataImpl = this.DataImpl.Append(appendPeriod).OrderBy(u => u.Name);
 			}
-			await base.OnParametersSetAsync();
-		}
-
-		private async Task<PeriodDto> ResolveItemFromId(int? id)
-		{
-			if (id is null)
+			else
 			{
-				return null;
+				throw new InvalidOperationException("Period nenalezen.");
 			}
-			return (await PeriodsDataStore.GetByKeyAsync(id.Value));
 		}
+		await base.OnParametersSetAsync();
+	}
 
-		public enum DataMode
+	private async Task<PeriodDto> ResolveItemFromId(int? id)
+	{
+		if (id is null)
 		{
-			All,
-			ActiveForSubmission,
-			Closed
+			return null;
 		}
+		return (await PeriodsDataStore.GetByKeyAsync(id.Value));
+	}
+
+	public enum DataMode
+	{
+		All,
+		ActiveForSubmission,
+		Closed
 	}
 }

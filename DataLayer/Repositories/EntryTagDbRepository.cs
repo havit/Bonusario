@@ -10,10 +10,9 @@ using Havit.Data.Patterns.DataEntries;
 using Havit.Data.Patterns.DataLoaders;
 using Havit.Bonusario.Model;
 
-namespace Havit.Bonusario.DataLayer.Repositories
-{
-	public partial class EntryTagDbRepository : IEntryTagRepository
-	{
+namespace Havit.Bonusario.DataLayer.Repositories;
 
-	}
+public partial class EntryTagDbRepository : IEntryTagRepository
+{
+
 }

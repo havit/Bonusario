@@ -3,36 +3,35 @@ using Havit.Data.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 
-namespace Havit.Bonusario.Entity
+namespace Havit.Bonusario.Entity;
+
+public class BonusarioDbContext : Havit.Data.EntityFrameworkCore.DbContext
 {
-	public class BonusarioDbContext : Havit.Data.EntityFrameworkCore.DbContext
+	/// <summary>
+	/// Konstruktor.
+	/// Pro použití v unit testech, jiné použití nemá.
+	/// </summary>
+	internal BonusarioDbContext()
 	{
-		/// <summary>
-		/// Konstruktor.
-		/// Pro použití v unit testech, jiné použití nemá.
-		/// </summary>
-		internal BonusarioDbContext()
-		{
-			// NOOP
-		}
+		// NOOP
+	}
 
-		/// <summary>
-		/// Konstruktor.
-		/// </summary>
-		public BonusarioDbContext(DbContextOptions options) : base(options)
-		{
-			// NOOP
-		}
+	/// <summary>
+	/// Konstruktor.
+	/// </summary>
+	public BonusarioDbContext(DbContextOptions options) : base(options)
+	{
+		// NOOP
+	}
 
-		/// <inheritdoc />
-		protected override void CustomizeModelCreating(ModelBuilder modelBuilder)
-		{
-			base.CustomizeModelCreating(modelBuilder);
+	/// <inheritdoc />
+	protected override void CustomizeModelCreating(ModelBuilder modelBuilder)
+	{
+		base.CustomizeModelCreating(modelBuilder);
 
-			modelBuilder.HasSequence<int>("ContactSequence");
+		modelBuilder.HasSequence<int>("ContactSequence");
 
-			modelBuilder.RegisterModelFromAssembly(typeof(Havit.Bonusario.Model.Localizations.Language).Assembly);
-			modelBuilder.ApplyConfigurationsFromAssembly(this.GetType().Assembly);
-		}
+		modelBuilder.RegisterModelFromAssembly(typeof(Havit.Bonusario.Model.Localizations.Language).Assembly);
+		modelBuilder.ApplyConfigurationsFromAssembly(this.GetType().Assembly);
 	}
 }

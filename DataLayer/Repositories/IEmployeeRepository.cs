@@ -7,11 +7,10 @@ using Havit.Data.Patterns.Repositories;
 using Havit.Bonusario.Model;
 using System.Threading;
 
-namespace Havit.Bonusario.DataLayer.Repositories
+namespace Havit.Bonusario.DataLayer.Repositories;
+
+public partial interface IEmployeeRepository
 {
-	public partial interface IEmployeeRepository
-	{
-		Task<Employee> GetByEmailAsync(string email, CancellationToken cancellationToken = default);
-		Task<List<Employee>> GetAllIncludingDeletedAsync(CancellationToken cancellationToken = default);
-	}
+	Task<Employee> GetByEmailAsync(string email, CancellationToken cancellationToken = default);
+	Task<List<Employee>> GetAllIncludingDeletedAsync(CancellationToken cancellationToken = default);
 }

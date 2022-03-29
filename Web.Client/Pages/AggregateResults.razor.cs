@@ -6,18 +6,17 @@ using System.Threading.Tasks;
 using Havit.Bonusario.Web.Client.DataStores;
 using Microsoft.AspNetCore.Components;
 
-namespace Havit.Bonusario.Web.Client.Pages
+namespace Havit.Bonusario.Web.Client.Pages;
+
+public partial class AggregateResults
 {
-	public partial class AggregateResults
+	[Inject] protected IPeriodSetsDataStore PeriodSetsDataStore { get; set; }
+
+	private int? periodSetId;
+
+	protected override async Task OnInitializedAsync()
 	{
-		[Inject] protected IPeriodSetsDataStore PeriodSetsDataStore { get; set; }
-
-		private int? periodSetId;
-
-		protected override async Task OnInitializedAsync()
-		{
-			await PeriodSetsDataStore.EnsureDataAsync();
-			periodSetId ??= PeriodSetsDataStore.GetAll().FirstOrDefault()?.Id;
-		}
+		await PeriodSetsDataStore.EnsureDataAsync();
+		periodSetId ??= PeriodSetsDataStore.GetAll().FirstOrDefault()?.Id;
 	}
 }

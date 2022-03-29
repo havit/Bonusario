@@ -1,10 +1,9 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 
-namespace Havit.Bonusario.Services.Jobs
+namespace Havit.Bonusario.Services.Jobs;
+
+public interface IRunnableJob
 {
-	public interface IRunnableJob
-	{
-		Task ExecuteAsync(CancellationToken cancellationToken);
-	}
+	Task ExecuteAsync(CancellationToken cancellationToken);
 }

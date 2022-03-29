@@ -1,10 +1,9 @@
 using System;
 using Microsoft.AspNetCore.Components;
 
-namespace Havit.Bonusario.Web.Client.Components
+namespace Havit.Bonusario.Web.Client.Components;
+
+public partial class RemainingPoints
 {
-	public partial class RemainingPoints
-	{
-		[Parameter] public int Points { get; set; }
-	}
+	[Parameter] public int Points { get; set; }
 }

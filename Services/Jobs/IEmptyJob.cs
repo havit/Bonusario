@@ -1,6 +1,5 @@
-﻿namespace Havit.Bonusario.Services.Jobs
+﻿namespace Havit.Bonusario.Services.Jobs;
+
+public interface IEmptyJob : IRunnableJob
 {
-	public interface IEmptyJob : IRunnableJob
-	{
-	}
 }

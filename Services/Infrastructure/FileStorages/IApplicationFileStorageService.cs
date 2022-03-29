@@ -5,9 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Havit.Services.FileStorage;
 
-namespace Havit.Bonusario.Services.Infrastructure.FileStorages
+namespace Havit.Bonusario.Services.Infrastructure.FileStorages;
+
+public interface IApplicationFileStorageService : IFileStorageService<ApplicationFileStorage>
 {
-	public interface IApplicationFileStorageService : IFileStorageService<ApplicationFileStorage>
-	{
-	}
 }

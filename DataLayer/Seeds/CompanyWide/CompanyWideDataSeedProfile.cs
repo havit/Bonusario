@@ -5,9 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Havit.Data.Patterns.DataSeeds.Profiles;
 
-namespace Havit.Bonusario.DataLayer.Seeds.CompanyWide
+namespace Havit.Bonusario.DataLayer.Seeds.CompanyWide;
+
+public class CompanyWideDataSeedProfile : DataSeedProfile
 {
-	public class CompanyWideDataSeedProfile : DataSeedProfile
-	{
-	}
 }

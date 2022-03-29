@@ -6,11 +6,10 @@ using System.Threading;
 using System.Threading.Tasks;
 using Havit.ComponentModel;
 
-namespace Havit.Bonusario.Contracts
+namespace Havit.Bonusario.Contracts;
+
+[ApiContract]
+public interface IEmployeeFacade
 {
-	[ApiContract]
-	public interface IEmployeeFacade
-	{
-		Task<List<EmployeeReferenceDto>> GetAllEmployeeReferencesAsync(CancellationToken cancellationToken = default);
-	}
+	Task<List<EmployeeReferenceDto>> GetAllEmployeeReferencesAsync(CancellationToken cancellationToken = default);
 }

@@ -6,18 +6,17 @@ using System.Threading.Tasks;
 using Havit.Bonusario.Web.Client.DataStores;
 using Microsoft.AspNetCore.Components;
 
-namespace Havit.Bonusario.Web.Client.Pages
+namespace Havit.Bonusario.Web.Client.Pages;
+
+public partial class EntriesSubmissionTable
 {
-	public partial class EntriesSubmissionTable
+	[Inject] protected IPeriodsDataStore PeriodsDataStore { get; set; }
+
+	private int? periodId;
+
+	protected override async Task OnInitializedAsync()
 	{
-		[Inject] protected IPeriodsDataStore PeriodsDataStore { get; set; }
-
-		private int? periodId;
-
-		protected override async Task OnInitializedAsync()
-		{
-			await PeriodsDataStore.EnsureDataAsync();
-			periodId ??= PeriodsDataStore.GetActiveForSubmission().OrderBy(p => p.EndDate).FirstOrDefault()?.PeriodId;
-		}
+		await PeriodsDataStore.EnsureDataAsync();
+		periodId ??= PeriodsDataStore.GetActiveForSubmission().OrderBy(p => p.EndDate).FirstOrDefault()?.PeriodId;
 	}
 }

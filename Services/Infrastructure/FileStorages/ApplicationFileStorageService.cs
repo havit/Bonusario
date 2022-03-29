@@ -5,12 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Havit.Services.FileStorage;
 
-namespace Havit.Bonusario.Services.Infrastructure.FileStorages
+namespace Havit.Bonusario.Services.Infrastructure.FileStorages;
+
+public class ApplicationFileStorageService : FileStorageWrappingService<ApplicationFileStorage>, IApplicationFileStorageService
 {
-	public class ApplicationFileStorageService : FileStorageWrappingService<ApplicationFileStorage>, IApplicationFileStorageService
+	public ApplicationFileStorageService(IFileStorageService<ApplicationFileStorage> fileStorageService) : base(fileStorageService)
 	{
-		public ApplicationFileStorageService(IFileStorageService<ApplicationFileStorage> fileStorageService) : base(fileStorageService)
-		{
-		}
 	}
 }

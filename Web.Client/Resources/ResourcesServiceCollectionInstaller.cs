@@ -5,12 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Havit.Bonusario.Web.Client.Resources
+namespace Havit.Bonusario.Web.Client.Resources;
+
+/// <summary>
+/// Marker file for RESX source generator.
+/// </summary>
+public static partial class ResourcesServiceCollectionInstaller
 {
-	/// <summary>
-	/// Marker file for RESX source generator.
-	/// </summary>
-	public static partial class ResourcesServiceCollectionInstaller
-	{
-	}
 }

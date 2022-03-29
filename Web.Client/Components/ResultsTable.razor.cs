@@ -8,43 +8,42 @@ using Havit.Bonusario.Contracts;
 using Havit.Bonusario.Web.Client.DataStores;
 using Microsoft.AspNetCore.Components;
 
-namespace Havit.Bonusario.Web.Client.Components
+namespace Havit.Bonusario.Web.Client.Components;
+
+public partial class ResultsTable
 {
-	public partial class ResultsTable
+	[Parameter] public int? PeriodId { get; set; }
+
+	[Inject] protected IEntryFacade EntryFacade { get; set; }
+	[Inject] protected IEmployeesDataStore EmployeesDataStore { get; set; }
+
+	private List<ResultItemDto> data;
+	private HxGrid<ResultItemDto> gridComponent;
+	private int? loadedPeriodId;
+	private decimal grandTotal;
+
+	protected override async Task OnParametersSetAsync()
 	{
-		[Parameter] public int? PeriodId { get; set; }
+		await EmployeesDataStore.EnsureDataAsync();
 
-		[Inject] protected IEntryFacade EntryFacade { get; set; }
-		[Inject] protected IEmployeesDataStore EmployeesDataStore { get; set; }
-
-		private List<ResultItemDto> data;
-		private HxGrid<ResultItemDto> gridComponent;
-		private int? loadedPeriodId;
-		private decimal grandTotal;
-
-		protected override async Task OnParametersSetAsync()
+		if ((loadedPeriodId != PeriodId) && (gridComponent != null))
 		{
-			await EmployeesDataStore.EnsureDataAsync();
-
-			if ((loadedPeriodId != PeriodId) && (gridComponent != null))
-			{
-				await gridComponent.RefreshDataAsync();
-			}
+			await gridComponent.RefreshDataAsync();
 		}
+	}
 
-		private async Task<GridDataProviderResult<ResultItemDto>> GetDataAsync(GridDataProviderRequest<ResultItemDto> request)
+	private async Task<GridDataProviderResult<ResultItemDto>> GetDataAsync(GridDataProviderRequest<ResultItemDto> request)
+	{
+		try
 		{
-			try
-			{
-				data = await EntryFacade.GetResultsAsync(Dto.FromValue(PeriodId.Value));
-				loadedPeriodId = PeriodId;
-				grandTotal = data.Sum(i => i.ValueSum);
-				return request.ApplyTo(data);
-			}
-			catch (OperationFailedException)
-			{
-				return new() { Data = null, TotalCount = 0 };
-			}
+			data = await EntryFacade.GetResultsAsync(Dto.FromValue(PeriodId.Value));
+			loadedPeriodId = PeriodId;
+			grandTotal = data.Sum(i => i.ValueSum);
+			return request.ApplyTo(data);
+		}
+		catch (OperationFailedException)
+		{
+			return new() { Data = null, TotalCount = 0 };
 		}
 	}
 }

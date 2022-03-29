@@ -5,16 +5,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Havit.Bonusario.Model.Common
-{
-	public class ApplicationSettings
-	{
-		[DatabaseGenerated(DatabaseGeneratedOption.None)]
-		public int Id { get; set; }
+namespace Havit.Bonusario.Model.Common;
 
-		public enum Entry
-		{
-			Current = -1
-		}
+public class ApplicationSettings
+{
+	[DatabaseGenerated(DatabaseGeneratedOption.None)]
+	public int Id { get; set; }
+
+	public enum Entry
+	{
+		Current = -1
 	}
 }
