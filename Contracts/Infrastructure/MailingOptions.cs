@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Havit.Bonusario.Contracts.Infrastructure;
+﻿namespace Havit.Bonusario.Contracts.Infrastructure;
 
 public class MailingOptions
 {

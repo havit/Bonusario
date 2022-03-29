@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Havit.Bonusario.DependencyInjection;
+﻿namespace Havit.Bonusario.DependencyInjection;
 
 internal class InstallConfiguration
 {

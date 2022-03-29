@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Havit.Blazor.Components.Web.Bootstrap;
-using Microsoft.AspNetCore.Components;
-
-namespace Havit.Bonusario.Web.Client.Components;
+﻿namespace Havit.Bonusario.Web.Client.Components;
 
 public class EntryTagsPicker : HxInputTags
 {

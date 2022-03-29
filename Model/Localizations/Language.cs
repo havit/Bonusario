@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Havit.Model.Localizations;
+﻿using Havit.Model.Localizations;
 
 namespace Havit.Bonusario.Model.Localizations;
 

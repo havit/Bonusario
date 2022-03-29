@@ -1,6 +1,4 @@
-﻿using System;
-using Havit.Bonusario.Entity;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Havit.Bonusario.Entity.Tests;

@@ -1,26 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Globalization;
 using BlazorApplicationInsights;
 using FluentValidation;
-using Havit.Blazor.Components.Web;
-using Havit.Blazor.Components.Web.Bootstrap;
 using Havit.Blazor.Grpc.Client;
 using Havit.Blazor.Grpc.Client.ServerExceptions;
 using Havit.Blazor.Grpc.Client.WebAssembly;
-using Havit.Bonusario.Contracts;
 using Havit.Bonusario.Contracts.Infrastructure;
 using Havit.Bonusario.Web.Client.DataStores;
 using Havit.Bonusario.Web.Client.Infrastructure.Grpc;
-using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 
 namespace Havit.Bonusario.Web.Client;
 

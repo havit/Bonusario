@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Havit.Bonusario.Contracts;
+﻿using Havit.Bonusario.Contracts;
 using Havit.Bonusario.Model;
 using Havit.Data.Patterns.UnitOfWorks;
-using Havit.Diagnostics.Contracts;
 using Havit.Extensions.DependencyInjection.Abstractions;
 using Havit.Linq;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Havit.Bonusario.Services;
 

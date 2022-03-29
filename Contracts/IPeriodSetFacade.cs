@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-using Havit.Bonusario.Contracts;
-using Havit.ComponentModel;
+﻿using Havit.ComponentModel;
 
 namespace Havit.Bonusario.Contracts;
 

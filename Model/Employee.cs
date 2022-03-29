@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Havit.Data.EntityFrameworkCore.Attributes;
+﻿using Havit.Data.EntityFrameworkCore.Attributes;
 
 namespace Havit.Bonusario.Model;
 

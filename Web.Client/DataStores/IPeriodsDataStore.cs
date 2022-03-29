@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using Havit.Blazor.Components.Web.Services.DataStores;
-using Havit.Bonusario.Contracts;
+﻿using Havit.Blazor.Components.Web.Services.DataStores;
 
 namespace Havit.Bonusario.Web.Client.DataStores;
 

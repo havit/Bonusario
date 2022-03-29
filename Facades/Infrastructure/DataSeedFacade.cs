@@ -1,15 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Havit.Data.Patterns.DataSeeds;
-using Havit.Data.Patterns.DataSeeds.Profiles;
+﻿using Havit.Data.Patterns.DataSeeds.Profiles;
 using Havit.Extensions.DependencyInjection.Abstractions;
 using Havit.Bonusario.Contracts;
 using Havit.Bonusario.DataLayer.Seeds.Core;
-using Havit.Bonusario.Facades.Infrastructure.Security;
-using Havit.Bonusario.Facades.Infrastructure.Security.Authorization;
-using Havit.Bonusario.Services.Infrastructure;
 using Havit.Services.Caching;
 using Microsoft.AspNetCore.Authorization;
 using Havit.Bonusario.Contracts.Infrastructure;

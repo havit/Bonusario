@@ -1,7 +1,4 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using Havit.Bonusario.Web.Client.DataStores;
-using Microsoft.AspNetCore.Components;
+﻿using Havit.Bonusario.Web.Client.DataStores;
 
 namespace Havit.Bonusario.Web.Client.Pages;
 

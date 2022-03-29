@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Havit.Bonusario.Web.Client.Shared;
+﻿namespace Havit.Bonusario.Web.Client.Shared;
 
 public partial class LoginDisplay
 {

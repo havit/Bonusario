@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using Havit.Bonusario.Contracts;
+﻿using Havit.Bonusario.Contracts;
 using Havit.Bonusario.DataLayer.Repositories;
 using Havit.Extensions.DependencyInjection.Abstractions;
-using Havit.Services.TimeServices;
 using Microsoft.AspNetCore.Authorization;
 
 namespace Havit.Bonusario.Facades;

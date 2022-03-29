@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using FluentValidation;
+﻿using FluentValidation;
 using Hangfire;
 using Hangfire.Dashboard;
 using Havit.Blazor.Grpc.Server;
@@ -14,15 +13,6 @@ using Havit.Bonusario.Web.Server.Infrastructure.HealthChecks;
 using Havit.Bonusario.Web.Server.Tools;
 using Microsoft.ApplicationInsights.DependencyCollector;
 using Microsoft.ApplicationInsights.Extensibility;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using ProtoBuf.Grpc.Configuration;
-using ProtoBuf.Grpc.Server;
-using ProtoBuf.Meta;
 
 namespace Havit.Bonusario.Web.Server;
 

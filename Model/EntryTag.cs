@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Havit.Bonusario.Model;
+﻿namespace Havit.Bonusario.Model;
 
 public class EntryTag
 {

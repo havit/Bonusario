@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Havit.Blazor.Components.Web;
-using Havit.Bonusario.Contracts;
-using Havit.Bonusario.Web.Client.DataStores;
-using Microsoft.AspNetCore.Components;
+﻿using Havit.Bonusario.Web.Client.DataStores;
 
 namespace Havit.Bonusario.Web.Client.Components;
 

@@ -1,5 +1,4 @@
-﻿using System.IO;
-using System.Runtime.CompilerServices;
+﻿using System.Runtime.CompilerServices;
 using Azure.Identity;
 using Havit.Bonusario.DataLayer.DataSources.Common;
 using Havit.Bonusario.DependencyInjection.ConfigrationOptions;

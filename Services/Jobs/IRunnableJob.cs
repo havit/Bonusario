@@ -1,7 +1,4 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-
-namespace Havit.Bonusario.Services.Jobs;
+﻿namespace Havit.Bonusario.Services.Jobs;
 
 public interface IRunnableJob
 {

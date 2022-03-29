@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 using System.Security.Claims;
-using Microsoft.AspNetCore.Http;
-using Havit.Diagnostics.Contracts;
 using Havit.Bonusario.Facades.Infrastructure.Security.Authentication;
 using Havit.Bonusario.Model;
 using Havit.Bonusario.DataLayer.Repositories;
-using System.Threading;
 
 namespace Havit.Bonusario.Web.Server.Infrastructure.Security;
 

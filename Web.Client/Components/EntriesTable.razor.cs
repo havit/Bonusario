@@ -1,13 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FluentValidation;
-using Havit.Blazor.Components.Web;
-using Havit.Bonusario.Contracts;
+﻿using FluentValidation;
 using Havit.Bonusario.Web.Client.DataStores;
-using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Forms;
 
