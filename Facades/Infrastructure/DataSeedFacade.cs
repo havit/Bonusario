@@ -2,20 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Havit;
 using Havit.Data.Patterns.DataSeeds;
 using Havit.Data.Patterns.DataSeeds.Profiles;
 using Havit.Extensions.DependencyInjection.Abstractions;
 using Havit.Bonusario.Contracts;
-using Havit.Bonusario.Contracts.System;
 using Havit.Bonusario.DataLayer.Seeds.Core;
 using Havit.Bonusario.Facades.Infrastructure.Security;
 using Havit.Bonusario.Facades.Infrastructure.Security.Authorization;
 using Havit.Bonusario.Services.Infrastructure;
 using Havit.Services.Caching;
 using Microsoft.AspNetCore.Authorization;
+using Havit.Bonusario.Contracts.Infrastructure;
 
-namespace Havit.Bonusario.Facades.System
+namespace Havit.Bonusario.Facades.Infrastructure.System
 {
 	/// <summary>
 	/// Fasáda k seedování dat.
@@ -48,7 +47,7 @@ namespace Havit.Bonusario.Facades.System
 			// they get seeded and another seed asks for GetAll(), the newly seeded entities are not included.
 			cacheService.Clear();
 
-			Type type = GetProfileTypes().FirstOrDefault(item => String.Equals(item.Name, profileName, StringComparison.InvariantCultureIgnoreCase));
+			Type type = GetProfileTypes().FirstOrDefault(item => string.Equals(item.Name, profileName, StringComparison.InvariantCultureIgnoreCase));
 
 			if (type == null)
 			{

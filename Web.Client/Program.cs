@@ -12,7 +12,7 @@ using Havit.Blazor.Grpc.Client;
 using Havit.Blazor.Grpc.Client.ServerExceptions;
 using Havit.Blazor.Grpc.Client.WebAssembly;
 using Havit.Bonusario.Contracts;
-using Havit.Bonusario.Contracts.System;
+using Havit.Bonusario.Contracts.Infrastructure;
 using Havit.Bonusario.Web.Client.DataStores;
 using Havit.Bonusario.Web.Client.Infrastructure.Grpc;
 using Microsoft.AspNetCore.Components;

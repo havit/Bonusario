@@ -11,11 +11,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Havit.Bonusario.Model.Metadata
+namespace Havit.Bonusario.Contracts.ModelMetadata
 {
 	[System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
-	public static class EntryMetadata
+	public static class EmployeeMetadata
 	{
-		public const int TextMaxLength = 0;
+		public const int EmailMaxLength = 255;
+		public const int NameMaxLength = 100;
 	}
 }

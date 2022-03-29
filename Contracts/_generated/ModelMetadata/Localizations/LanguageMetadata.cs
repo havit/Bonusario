@@ -11,11 +11,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Havit.Bonusario.Model.Metadata
+namespace Havit.Bonusario.Contracts.ModelMetadata.Localizations
 {
 	[System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
-	public static class EntryTagMetadata
+	public static class LanguageMetadata
 	{
-		public const int TagMaxLength = 100;
+		public const int CultureMaxLength = 10;
+		public const int NameMaxLength = 200;
+		public const int UiCultureMaxLength = 10;
 	}
 }

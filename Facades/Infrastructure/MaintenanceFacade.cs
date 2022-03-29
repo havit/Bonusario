@@ -5,11 +5,11 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Havit.Extensions.DependencyInjection.Abstractions;
-using Havit.Bonusario.Contracts.System;
 using Havit.Services.Caching;
 using Microsoft.AspNetCore.Authorization;
+using Havit.Bonusario.Contracts.Infrastructure;
 
-namespace Havit.Bonusario.Facades.System
+namespace Havit.Bonusario.Facades.Infrastructure.System
 {
 	[Service]
 	[Authorize] // TODO Auth

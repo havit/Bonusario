@@ -4,7 +4,7 @@ using Hangfire;
 using Hangfire.Dashboard;
 using Havit.Blazor.Grpc.Server;
 using Havit.Bonusario.Contracts;
-using Havit.Bonusario.Contracts.System;
+using Havit.Bonusario.Contracts.Infrastructure;
 using Havit.Bonusario.DependencyInjection;
 using Havit.Bonusario.Facades.Infrastructure.Security;
 using Havit.Bonusario.Services.HealthChecks;

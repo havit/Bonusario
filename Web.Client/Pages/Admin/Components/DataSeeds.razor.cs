@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Havit.Blazor.Components.Web;
 using Havit.Blazor.Components.Web.Bootstrap;
-using Havit.Bonusario.Contracts.System;
+using Havit.Bonusario.Contracts.Infrastructure;
 using Havit.Bonusario.Web.Client.DataStores;
 using Microsoft.AspNetCore.Components;
 

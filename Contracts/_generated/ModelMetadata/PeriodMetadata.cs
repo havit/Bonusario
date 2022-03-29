@@ -11,10 +11,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Havit.Bonusario.Model.Metadata.Common
+namespace Havit.Bonusario.Contracts.ModelMetadata
 {
 	[System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
-	public static class ApplicationSettingsMetadata
+	public static class PeriodMetadata
 	{
+		public const int NameMaxLength = 200;
 	}
 }
