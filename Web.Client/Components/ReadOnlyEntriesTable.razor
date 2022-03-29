@@ -2,6 +2,7 @@
 {
     <HxGrid @ref="gridComponent" DataProvider="GetEntries" TItem="EntryDto" Context="item" TableCssClass="table-bordered">
         <Columns>
+            <HxGridColumn TItem="EntryDto" HeaderText="Příjemce" ItemTextSelector="i => EmployeesDataStore.GetByKey(i.RecipientId.Value)?.Name" />
             <HxGridColumn TItem="EntryDto"
                       HeaderText="Hodnota"
                       ItemTextSelector="i => i.Value.ToString()"

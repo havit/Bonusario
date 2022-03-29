@@ -1,4 +1,6 @@
-﻿namespace Havit.Bonusario.Web.Client.Components;
+﻿using Havit.Bonusario.Web.Client.DataStores;
+
+namespace Havit.Bonusario.Web.Client.Components;
 
 public partial class ReadOnlyEntriesTable
 {
@@ -6,10 +8,16 @@ public partial class ReadOnlyEntriesTable
 	[Parameter] public bool ReceivedEntries { get; set; } = true;
 
 	[Inject] protected IEntryFacade EntryFacade { get; set; }
+	[Inject] protected IEmployeesDataStore EmployeesDataStore { get; set; }
 
 	private HxGrid<EntryDto> gridComponent;
 	private List<EntryDto> entries;
 	private int? loadedPeriodId;
+
+	protected override async Task OnInitializedAsync()
+	{
+		await EmployeesDataStore.EnsureDataAsync();
+	}
 
 	protected override async Task OnParametersSetAsync()
 	{
