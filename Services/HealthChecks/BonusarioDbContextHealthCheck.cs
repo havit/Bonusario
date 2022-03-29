@@ -16,9 +16,9 @@ namespace Havit.Bonusario.Services.HealthChecks
 	/// </summary>
 	public class BonusarioDbContextHealthCheck : BaseHealthCheck
 	{
-		private readonly IDbContextTransient dbContext;
+		private readonly IDbContext dbContext;
 
-		public BonusarioDbContextHealthCheck(IDbContextTransient dbContext)
+		public BonusarioDbContextHealthCheck(IDbContext dbContext)
 		{
 			this.dbContext = dbContext;
 		}

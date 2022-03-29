@@ -95,14 +95,20 @@ namespace Havit.Bonusario.DependencyInjection
 
 		private static void InstallHavitEntityFramework(IServiceCollection services, InstallConfiguration configuration)
 		{
-			DbContextOptions options = configuration.UseInMemoryDb
-				? new DbContextOptionsBuilder<BonusarioDbContext>().UseInMemoryDatabase(nameof(BonusarioDbContext)).Options
-				: new DbContextOptionsBuilder<BonusarioDbContext>().UseSqlServer(configuration.DatabaseConnectionString, c => c.MaxBatchSize(30)).Options;
-
 			services.WithEntityPatternsInstaller()
 				.AddEntityPatterns()
 				//.AddLocalizationServices<Language>()
-				.AddDbContext<BonusarioDbContext>(options)
+				.AddDbContext<BonusarioDbContext>(optionsBuilder =>
+				{
+					if (configuration.UseInMemoryDb)
+					{
+						optionsBuilder.UseInMemoryDatabase(nameof(BonusarioDbContext));
+					}
+					else
+					{
+						optionsBuilder.UseSqlServer(configuration.DatabaseConnectionString, c => c.MaxBatchSize(30));
+					}
+				})
 				.AddDataLayer(typeof(IApplicationSettingsDataSource).Assembly);
 
 			services.AddSingleton<IEntityValidator<object>, ValidatableObjectEntityValidator>();
