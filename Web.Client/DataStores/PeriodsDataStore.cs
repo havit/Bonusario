@@ -4,11 +4,11 @@ namespace Havit.Bonusario.Web.Client.DataStores;
 
 public class PeriodsDataStore : DictionaryStaticDataStore<int, PeriodDto>, IPeriodsDataStore
 {
-	private readonly IPeriodFacade PeriodFacade;
+	private readonly Func<IPeriodFacade> periodFacade;
 
-	public PeriodsDataStore(IPeriodFacade PeriodFacade)
+	public PeriodsDataStore(Func<IPeriodFacade> PeriodFacade)
 	{
-		this.PeriodFacade = PeriodFacade;
+		this.periodFacade = PeriodFacade;
 	}
 
 	protected override Func<PeriodDto, int> KeySelector { get; } = (dto) => dto.PeriodId;
@@ -42,7 +42,7 @@ public class PeriodsDataStore : DictionaryStaticDataStore<int, PeriodDto>, IPeri
 
 	protected override async Task<IEnumerable<PeriodDto>> LoadDataAsync()
 	{
-		return await PeriodFacade.GetAllPeriodsAsync();
+		return await periodFacade().GetAllPeriodsAsync();
 	}
 
 	protected override bool ShouldRefresh() => false;

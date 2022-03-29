@@ -10,7 +10,7 @@ public partial class EntriesTable
 	[Parameter] public int? PeriodId { get; set; }
 
 	[Inject] protected IEmployeesDataStore EmployeesDataStore { get; set; }
-	[Inject] protected IEntryFacade EntryFacade { get; set; }
+	[Inject] protected Func<IEntryFacade> EntryFacade { get; set; }
 	[Inject] protected IHxMessageBoxService MessageBox { get; set; }
 	[Inject] protected AuthenticationStateProvider AuthenticationStateProvider { get; set; }
 
@@ -34,10 +34,10 @@ public partial class EntriesTable
 	{
 		if (PeriodId != null)
 		{
-			var e = await EntryFacade.GetMyGivenEntriesAsync(Dto.FromValue(PeriodId.Value));
+			var e = await EntryFacade().GetMyGivenEntriesAsync(Dto.FromValue(PeriodId.Value));
 			entries = e.OrderByDescending(e => e.Created).ToList();
 
-			remainingPoints = (await EntryFacade.GetMyRemainingPoints(Dto.FromValue(PeriodId.Value))).Value;
+			remainingPoints = (await EntryFacade().GetMyRemainingPoints(Dto.FromValue(PeriodId.Value))).Value;
 
 			var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
 			var currentUserEmail = authState.User.FindFirst("preferred_username").Value;
@@ -78,7 +78,7 @@ public partial class EntriesTable
 			{
 				if (entry.HasValues())
 				{
-					entry.Id = (await EntryFacade.CreateEntryAsync(entry)).Value;
+					entry.Id = (await EntryFacade().CreateEntryAsync(entry)).Value;
 				}
 			}
 			await LoadData();
@@ -99,11 +99,11 @@ public partial class EntriesTable
 				{
 					if (entry.HasValues())
 					{
-						entry.Id = (await EntryFacade.CreateEntryAsync(entry)).Value;
+						entry.Id = (await EntryFacade().CreateEntryAsync(entry)).Value;
 					}
 				}
 				await LoadData(); // reload new entries
-				await EntryFacade.SubmitEntriesAsync(entries.Where(e => e.Submitted is null).Select(e => e.Id).ToList());
+				await EntryFacade().SubmitEntriesAsync(entries.Where(e => e.Submitted is null).Select(e => e.Id).ToList());
 				await LoadData();
 			}
 			catch (OperationFailedException)

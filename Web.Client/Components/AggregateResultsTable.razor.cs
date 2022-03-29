@@ -6,7 +6,7 @@ public partial class AggregateResultsTable
 {
 	[Parameter] public int? PeriodSetId { get; set; }
 
-	[Inject] protected IEntryFacade EntryFacade { get; set; }
+	[Inject] protected Func<IEntryFacade> EntryFacade { get; set; }
 	[Inject] protected IEmployeesDataStore EmployeesDataStore { get; set; }
 	[Inject] protected IPeriodSetsDataStore PeriodSetsDataStore { get; set; }
 
@@ -31,7 +31,7 @@ public partial class AggregateResultsTable
 	{
 		try
 		{
-			data = await EntryFacade.GetAggregateResultsAsync(Dto.FromValue(PeriodSetId.Value));
+			data = await EntryFacade().GetAggregateResultsAsync(Dto.FromValue(PeriodSetId.Value));
 			loadedPeriodSetId = PeriodSetId;
 			grandTotal = data.Sum(i => i.ValueSum);
 			budget = (await PeriodSetsDataStore.GetByKeyAsync(PeriodSetId.Value)).Budget;

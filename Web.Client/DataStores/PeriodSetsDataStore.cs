@@ -4,9 +4,9 @@ namespace Havit.Bonusario.Web.Client.DataStores;
 
 public class PeriodSetsDataStore : DictionaryStaticDataStore<int, PeriodSetDto>, IPeriodSetsDataStore
 {
-	private readonly IPeriodSetFacade PeriodSetFacade;
+	private readonly Func<IPeriodSetFacade> PeriodSetFacade;
 
-	public PeriodSetsDataStore(IPeriodSetFacade PeriodSetFacade)
+	public PeriodSetsDataStore(Func<IPeriodSetFacade> PeriodSetFacade)
 	{
 		this.PeriodSetFacade = PeriodSetFacade;
 	}
@@ -15,7 +15,7 @@ public class PeriodSetsDataStore : DictionaryStaticDataStore<int, PeriodSetDto>,
 
 	protected override async Task<IEnumerable<PeriodSetDto>> LoadDataAsync()
 	{
-		return await PeriodSetFacade.GetAllPeriodSetsAsync();
+		return await PeriodSetFacade().GetAllPeriodSetsAsync();
 	}
 
 	protected override bool ShouldRefresh() => false;
