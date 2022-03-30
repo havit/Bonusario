@@ -16,6 +16,6 @@ namespace Havit.Bonusario.Contracts.ModelMetadata
 	[System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
 	public static class EntryMetadata
 	{
-		public const int TextMaxLength = 0;
+		public const int TextMaxLength = 2147483647;
 	}
 }

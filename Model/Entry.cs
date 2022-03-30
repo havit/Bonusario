@@ -13,7 +13,7 @@ public class Entry
 	public Period Period { get; set; }
 	public int PeriodId { get; set; }
 
-	[MaxLength]
+	[MaxLength(Int32.MaxValue)]
 	public string Text { get; set; }
 
 	public int Value { get; set; }

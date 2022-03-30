@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using Havit.Bonusario.Contracts.ModelMetadata;
 
 namespace Havit.Bonusario.Contracts;
 
@@ -38,6 +39,7 @@ public class EntryDto
 		{
 			RuleFor(e => e.RecipientId).NotNull().WithMessage("Příjemce musí být určen.");
 			RuleFor(e => e.Value).InclusiveBetween(0, 100).WithMessage("Hodnota musí být v rozmezí 0 až 100.");
+			RuleFor(e => e.Text).MaximumLength(EntryMetadata.TextMaxLength);
 		}
 	}
 }
