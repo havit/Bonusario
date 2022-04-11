@@ -90,11 +90,9 @@
 
         @if ((entries?.Any(e => e.Submitted is null) ?? false) || (remainingPoints > 0))
         {
-            <HxButton EditContext="newEntriesEditContext" OnValidClick="HandleInsertAllClick" Text="Přidat nové záznamy" Color="ThemeColor.Primary" />
+            <HxButton EditContext="newEntriesEditContext" OnValidClick="HandleInsertAllClick" Text="Uložit vyplněné záznamy" Color="ThemeColor.Primary" />
             @*<HxButton EditContext="newEntriesEditContext" OnValidClick="HandleSubmitAllClick" Text="Potvrdit vše" Color="ThemeColor.Danger" />*@
         }
-
-        <p class="mt-4 text-muted"><small>(Záznamy již není nutné potvrzovat. Jsou editovatelné do okamžiku uzavření období, pak je všem potvrdíme hromadně.)</small></p>
     }
     else
     {
