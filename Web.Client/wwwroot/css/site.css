@@ -19,4 +19,17 @@
 
 :root {
   --bs-body-bg: white;
+  --hx-sidebar-brand-logo-background-color: var(--bs-yellow);
+  --hx-sidebar-brand-logo-color: var(--bs-dark);
+  --hx-sidebar-brand-logo-height: 2rem;
+  --hx-sidebar-brand-logo-width: 2rem;
+  --hx-sidebar-brand-logo-border-radius: 50%;
+}
+
+.logo-text {
+  font-size: 1.25rem;
+}
+
+.logo {
+  border: 2px solid var(--bs-dark);
 }
