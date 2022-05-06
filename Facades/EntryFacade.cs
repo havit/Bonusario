@@ -68,10 +68,23 @@ public class EntryFacade : IEntryFacade
 		// Anonymize creators of the entries.
 		foreach (var entry in entriesDto)
 		{
-			entry.CreatedById = null;
+			if (entry.AuthorIdentityVisibility == AuthorIdentityVisibility.Hidden)
+			{
+				entry.CreatedById = null;
+			}
 		}
 
 		return entriesDto;
+	}
+
+	public async Task<List<EntryDto>> GetAllPublicReceivedEntries(Dto<int> periodId, CancellationToken cancellationToken = default)
+	{
+		var entries = await entryRepository.GetPublicReceivedEntriesAsync(periodId.Value, cancellationToken);
+
+		var currentEmployee = await applicationAuthenticationService.GetCurrentEmployeeAsync(cancellationToken);
+		entries = entries.Where(e => e.RecipientId != currentEmployee.Id).ToList();
+
+		return entries.Select(e => entryMapper.MapToEntryDto(e)).ToList();
 	}
 
 	public async Task DeleteEntryAsync(Dto<int> entryId, CancellationToken cancellationToken = default)

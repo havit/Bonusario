@@ -21,6 +21,8 @@ public class EntryDto
 	public DateTime? Created { get; set; }
 	public int PeriodId { get; set; }
 
+	public AuthorIdentityVisibility AuthorIdentityVisibility { get; set; } = AuthorIdentityVisibility.Hidden;
+
 	public bool HasValues()
 	{
 		if (!String.IsNullOrWhiteSpace(Text)

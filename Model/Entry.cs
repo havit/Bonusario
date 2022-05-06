@@ -18,6 +18,8 @@ public class Entry
 
 	public int Value { get; set; }
 
+	public int AuthorIdentityVisibility { get; set; }
+
 	public List<EntryTag> Tags { get; } = new List<EntryTag>();
 
 	public DateTime? Submitted { get; set; }

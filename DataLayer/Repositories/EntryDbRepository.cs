@@ -27,6 +27,16 @@ public partial class EntryDbRepository : IEntryRepository
 			.ToListAsync(cancellationToken);
 	}
 
+	public Task<List<Entry>> GetPublicReceivedEntriesAsync(int periodId, CancellationToken cancellationToken = default)
+	{
+		return Data
+			.Where(e => e.PeriodId == periodId)
+			.Where(e => e.Submitted != null)
+			.Where(e => e.AuthorIdentityVisibility == (int)AuthorIdentityVisibility.Public)
+			.Include(GetLoadReferences)
+			.ToListAsync(cancellationToken);
+	}
+
 	public Task<int> GetPointsAssignedSumAsync(int periodId, int createdByEmployeeId, CancellationToken cancellationToken = default)
 	{
 		return Data

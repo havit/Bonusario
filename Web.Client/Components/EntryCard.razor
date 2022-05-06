@@ -7,18 +7,30 @@
 				<HxCard>
 					<BodyTemplate>
 						<div class="row g-4">
-								@if (!RecipientLocked)
-								{
-									<div class="col-lg-9">
-										<EmployeePicker @bind-Value="Entry.RecipientId" ExcludeCurrentEmployee="true" />
-									</div>
-								}
-								else if (Entry.RecipientId.HasValue)
-								{
-									<div class="col-lg-9 d-flex align-items-center">
-										<h5 class="mb-0">@EmployeesDataStore.GetByKey(Entry.RecipientId.Value).Name</h5>
-									</div>
-								}
+							@if (!RecipientLocked)
+							{
+								<div class="col-lg-6">
+									<EmployeePicker @bind-Value="Entry.RecipientId" ExcludeCurrentEmployee="true" />
+								</div>
+							}
+							else if (Entry.RecipientId.HasValue)
+							{
+								<div class="col-lg-9 d-flex align-items-center">
+									<h5 class="mb-0">@(RenderAuthor ? "pro " : null) @EmployeesDataStore.GetByKey(Entry.RecipientId.Value).Name
+
+                                    @if (RenderAuthor)
+									{
+										@(" od ") @EmployeesDataStore.GetByKey(Entry.CreatedById.Value).Name
+									}
+
+                                    </h5>
+								</div>
+							}
+
+                            <div class="@(Entry.Created is null ? "col-lg-3" : "col-lg-6")">
+								<HxSelect @bind-Value="Entry.AuthorIdentityVisibility" Nullable="false" AutoSort="false" TextSelector="v => EnumExt.GetDescription(typeof(AuthorIdentityVisibility), v)" Data="Enum.GetValues<AuthorIdentityVisibility>()" />
+							</div>
+                                
 							<div class="col-lg-3">
 								<HxInputNumber @bind-Value="@Entry.Value" >
 									<InputGroupStartTemplate>

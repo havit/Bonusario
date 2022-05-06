@@ -7,6 +7,7 @@ public partial class EntryCard
 {
 	[Parameter] public EntryDto Entry { get; set; }
 	[Parameter] public bool RecipientLocked { get; set; } = false;
+	[Parameter] public bool ShowAuthor { get; set; } = false;
 	[Parameter] public EventCallback OnEntryDeleted { get; set; }
 	[Parameter] public EventCallback<EntryDto> OnEntryCreated { get; set; }
 	[Parameter] public EventCallback<EntryDto> OnEntryUpdated { get; set; }
@@ -15,6 +16,7 @@ public partial class EntryCard
 	[Inject] protected IEntryFacade EntryFacade { get; set; }
 
 	private EditContext editContext;
+	private bool RenderAuthor => ShowAuthor && Entry.CreatedById.HasValue;
 
 	protected override void OnParametersSet()
 	{

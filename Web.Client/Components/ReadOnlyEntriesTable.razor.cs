@@ -31,7 +31,12 @@ public partial class ReadOnlyEntriesTable
 	{
 		if (ReceivedEntries)
 		{
-			entries = await EntryFacade.GetMyReceivedEntriesAsync(Dto.FromValue(PeriodId.Value));
+			var periodIdDto = Dto.FromValue(PeriodId.Value);
+
+			var myReceivedEntries = await EntryFacade.GetMyReceivedEntriesAsync(periodIdDto);
+			var allPublicReceivedEntries = await EntryFacade.GetAllPublicReceivedEntries(periodIdDto);
+
+			entries = myReceivedEntries.Concat(allPublicReceivedEntries).ToList();
 		}
 		else
 		{

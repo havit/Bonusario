@@ -23,14 +23,18 @@ public partial class ReadOnlyEntriesFeed
 
 			if (ReceivedEntries)
 			{
-				result = await EntryFacade.GetMyReceivedEntriesAsync(Dto.FromValue(PeriodId.Value));
+				var periodIdDto = Dto.FromValue(PeriodId.Value);
+
+				var myReceivedEntries = await EntryFacade.GetMyReceivedEntriesAsync(periodIdDto);
+				var allPublicReceivedEntries = await EntryFacade.GetAllPublicReceivedEntries(periodIdDto);
+
+				entries = myReceivedEntries.Concat(allPublicReceivedEntries).ToList();
 			}
 			else
 			{
 				result = await EntryFacade.GetMyGivenEntriesAsync(Dto.FromValue(PeriodId.Value));
+				entries = result.OrderByDescending(e => e.Created).ToList();
 			}
-
-			entries = result.OrderByDescending(e => e.Created).ToList();
 		}
 	}
 }
