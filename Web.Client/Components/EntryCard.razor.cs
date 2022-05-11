@@ -1,4 +1,5 @@
 ﻿using Havit.Bonusario.Web.Client.DataStores;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Forms;
 
 namespace Havit.Bonusario.Web.Client.Components;
@@ -11,6 +12,7 @@ public partial class EntryCard
 	[Parameter] public EventCallback OnEntryDeleted { get; set; }
 	[Parameter] public EventCallback<EntryDto> OnEntryCreated { get; set; }
 	[Parameter] public EventCallback<EntryDto> OnEntryUpdated { get; set; }
+	[Parameter] public EventCallback<AuthorIdentityVisibility> OnDefaultIdentityVisibilityChanged { get; set; }
 
 	[Inject] protected IEmployeesDataStore EmployeesDataStore { get; set; }
 	[Inject] protected IEntryFacade EntryFacade { get; set; }

@@ -5,6 +5,7 @@ public partial class MyEntriesFeed
 	[Parameter] public int? PeriodId { get; set; }
 
 	[Inject] protected IEntryFacade EntryFacade { get; set; }
+	[Inject] protected IEmployeeFacade EmployeeFacade { get; set; }
 
 	private EntryDto newEntry = new EntryDto();
 	private List<EntryDto> entries;
@@ -13,6 +14,7 @@ public partial class MyEntriesFeed
 	protected override async Task OnParametersSetAsync()
 	{
 		newEntry.PeriodId = this.PeriodId.Value;
+		newEntry.AuthorIdentityVisibility = await GetDefaultIdentityVisibility();
 		await LoadData();
 	}
 
@@ -36,7 +38,17 @@ public partial class MyEntriesFeed
 
 	private async Task HandleEntryCreated()
 	{
-		newEntry = new EntryDto() { PeriodId = PeriodId.Value };
+		newEntry = new EntryDto() { PeriodId = PeriodId.Value, AuthorIdentityVisibility = await GetDefaultIdentityVisibility() };
 		await LoadData();
+	}
+
+	private async Task<AuthorIdentityVisibility> GetDefaultIdentityVisibility()
+	{
+		return (AuthorIdentityVisibility)(await EmployeeFacade.GetCurrentEmployeeDefaultIdentityVisibility()).Value;
+	}
+
+	private async Task SetDefaultEntryAuthorIdentityVisibility(AuthorIdentityVisibility newDefaultIdentityVisibility)
+	{
+		await EmployeeFacade.UpdateCurrentEmployeeDefaultIdentityVisibility(Dto.FromValue((int)newDefaultIdentityVisibility));
 	}
 }

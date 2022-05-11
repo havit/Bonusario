@@ -9,7 +9,7 @@
 						<div class="row g-4">
 							@if (!RecipientLocked)
 							{
-								<div class="col-lg-6">
+								<div class="col-lg-5">
 									<EmployeePicker @bind-Value="Entry.RecipientId" ExcludeCurrentEmployee="true" />
 								</div>
 							}
@@ -27,8 +27,19 @@
 								</div>
 							}
 
-                            <div class="@(Entry.Created is null ? "col-lg-3" : "col-lg-6")">
-								<HxSelect @bind-Value="Entry.AuthorIdentityVisibility" Nullable="false" AutoSort="false" TextSelector="v => EnumExt.GetDescription(typeof(AuthorIdentityVisibility), v)" Data="Enum.GetValues<AuthorIdentityVisibility>()" />
+                            <div class="@CssClassHelper.Combine(Entry.Created is null ? "col-lg-4" : "col-lg-6")">
+								<HxSelect @bind-Value="Entry.AuthorIdentityVisibility" Nullable="false" AutoSort="false" TextSelector="v => EnumExt.GetDescription(typeof(AuthorIdentityVisibility), v)" Data="Enum.GetValues<AuthorIdentityVisibility>()">
+                                    <InputGroupStartTemplate>
+                                        @if (OnDefaultIdentityVisibilityChanged.HasDelegate){
+                                            <HxButton
+												Tooltip="Nastavit jako výchozí"
+												OnClick="() => OnDefaultIdentityVisibilityChanged.InvokeAsync(Entry.AuthorIdentityVisibility)"
+												CssClass="no-right-round-corners"
+												Color="ThemeColor.Primary"
+												Icon="@BootstrapIcon.BoxArrowInUpRight" />
+										}
+									</InputGroupStartTemplate>
+								</HxSelect>
 							</div>
                                 
 							<div class="col-lg-3">

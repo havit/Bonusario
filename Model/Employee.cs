@@ -13,6 +13,8 @@ public class Employee
 	[MaxLength(255)]
 	public string Email { get; set; }
 
+	public int DefaultIdentityVisibility { get; set; }
+
 	public DateTime Created { get; set; }
 
 	public DateTime? Deleted { get; set; }

@@ -6,4 +6,6 @@ namespace Havit.Bonusario.Contracts;
 public interface IEmployeeFacade
 {
 	Task<List<EmployeeReferenceDto>> GetAllEmployeeReferencesAsync(CancellationToken cancellationToken = default);
+	Task UpdateCurrentEmployeeDefaultIdentityVisibility(Dto<int> defaultVisibility, CancellationToken cancellationToken = default);
+	Task<Dto<int>> GetCurrentEmployeeDefaultIdentityVisibility(CancellationToken cancellationToken = default);
 }
