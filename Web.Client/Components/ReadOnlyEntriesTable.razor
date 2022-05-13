@@ -4,7 +4,7 @@
         <Columns>
             @if (ReceivedEntries)
             {
-                <HxGridColumn TItem="EntryDto" HeaderText="Autor" ItemTextSelector="i => EmployeesDataStore.GetByKey(i.CreatedById.Value)?.Name" />
+                <HxGridColumn TItem="EntryDto" HeaderText="Autor" ItemTextSelector="@(i => i.CreatedById.HasValue ? EmployeesDataStore.GetByKey(i.CreatedById.Value)?.Name : "")" />
             }
 
             <HxGridColumn  TItem="EntryDto" HeaderText="Příjemce" ItemTextSelector="i => EmployeesDataStore.GetByKey(i.RecipientId.Value)?.Name" />
