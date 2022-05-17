@@ -13,15 +13,23 @@ public partial class EntryCard
 	[Parameter] public EventCallback<EntryDto> OnEntryCreated { get; set; }
 	[Parameter] public EventCallback<EntryDto> OnEntryUpdated { get; set; }
 	[Parameter] public EventCallback<AuthorIdentityVisibility> OnDefaultIdentityVisibilityChanged { get; set; }
+	[Parameter] public AuthorIdentityVisibility InitialDefaultAuthorIdentityVisibility { get; set; }
 
 	[Inject] protected IEmployeesDataStore EmployeesDataStore { get; set; }
 	[Inject] protected IEntryFacade EntryFacade { get; set; }
 
 	private EditContext editContext;
+
+	private AuthorIdentityVisibility DefaultAuthorIdentityVisibility => defaultAuthorIdentityVisibility.GetValueOrDefault();
+	private AuthorIdentityVisibility? defaultAuthorIdentityVisibility = null;
+
 	private bool RenderAuthor => ShowAuthor && Entry.CreatedById.HasValue;
+	private bool DefaultSelected => Entry.AuthorIdentityVisibility == DefaultAuthorIdentityVisibility;
 
 	protected override void OnParametersSet()
 	{
+		defaultAuthorIdentityVisibility ??= InitialDefaultAuthorIdentityVisibility;
+
 		editContext = new EditContext(Entry);
 		editContext.OnFieldChanged += EditContext_OnFieldChanged;
 	}
@@ -76,5 +84,13 @@ public partial class EntryCard
 		{
 			// NOOP
 		}
+	}
+
+	private async Task SetDefaultAuthorIdentityVisibility()
+	{
+		AuthorIdentityVisibility newDefaultAuthorIdentityVisibility = Entry.AuthorIdentityVisibility;
+
+		defaultAuthorIdentityVisibility = newDefaultAuthorIdentityVisibility;
+		await OnDefaultIdentityVisibilityChanged.InvokeAsync(newDefaultAuthorIdentityVisibility);
 	}
 }

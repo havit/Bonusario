@@ -7,14 +7,18 @@ public partial class MyEntriesFeed
 	[Inject] protected IEntryFacade EntryFacade { get; set; }
 	[Inject] protected IEmployeeFacade EmployeeFacade { get; set; }
 
-	private EntryDto newEntry = new EntryDto();
+	private EntryDto newEntry = new();
 	private List<EntryDto> entries;
 	private int? remainingPoints;
 
+	private AuthorIdentityVisibility defaultAuthorIdentityVisibility;
+
 	protected override async Task OnParametersSetAsync()
 	{
+		defaultAuthorIdentityVisibility = await GetDefaultIdentityVisibility();
+
 		newEntry.PeriodId = this.PeriodId.Value;
-		newEntry.AuthorIdentityVisibility = await GetDefaultIdentityVisibility();
+		newEntry.AuthorIdentityVisibility = defaultAuthorIdentityVisibility;
 		await LoadData();
 	}
 

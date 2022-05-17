@@ -7,7 +7,9 @@ public partial class ReceivedEntries
 	[Inject] protected IPeriodsDataStore PeriodsDataStore { get; set; }
 
 	private int? periodId;
-	private bool displayTable;
+
+	private bool displayTableMyEntries;
+	private bool displayTablePublicEntries;
 
 	protected override async Task OnInitializedAsync()
 	{

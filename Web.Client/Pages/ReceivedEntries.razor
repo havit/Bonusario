@@ -6,14 +6,26 @@
 
 @if (periodId != null)
 {
-    <HxInputSwitch @bind-Value="displayTable" Label="tabulka" CssClass="mb-3" />
-    if (displayTable)
+    <h2>Moje</h2>
+    <HxInputSwitch @bind-Value="displayTableMyEntries" Label="tabulka" CssClass="mb-3" />
+    if (displayTableMyEntries)
     {
         <ReadOnlyEntriesTable ReceivedEntries="true" PeriodId="@periodId" />
     }
     else
     {
         <ReadOnlyEntriesFeed ReceivedEntries="true" PeriodId="@periodId" />
+    }
+
+    <h2>Ostatní</h2>
+    <HxInputSwitch @bind-Value="displayTablePublicEntries" Label="tabulka" CssClass="mb-3" />
+    if (displayTablePublicEntries)
+    {
+        <ReadOnlyEntriesTable PublicEntries="true" ReceivedEntries="true" PeriodId="@periodId" />
+    }
+    else
+    {
+        <ReadOnlyEntriesFeed PublicEntries="true" ReceivedEntries="true" PeriodId="@periodId" />
     }
 }
 else if (PeriodsDataStore.IsLoaded)

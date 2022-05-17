@@ -4,6 +4,7 @@ public partial class ReadOnlyEntriesFeed
 {
 	[Parameter] public int? PeriodId { get; set; }
 	[Parameter] public bool ReceivedEntries { get; set; } = true;
+	[Parameter] public bool PublicEntries { get; set; } = false;
 
 	[Inject] protected IEntryFacade EntryFacade { get; set; }
 
@@ -25,10 +26,14 @@ public partial class ReadOnlyEntriesFeed
 			{
 				var periodIdDto = Dto.FromValue(PeriodId.Value);
 
-				var myReceivedEntries = await EntryFacade.GetMyReceivedEntriesAsync(periodIdDto);
-				var allPublicReceivedEntries = await EntryFacade.GetAllPublicReceivedEntries(periodIdDto);
-
-				entries = myReceivedEntries.Concat(allPublicReceivedEntries).ToList();
+				if (PublicEntries)
+				{
+					entries = await EntryFacade.GetAllPublicReceivedEntries(periodIdDto);
+				}
+				else
+				{
+					entries = await EntryFacade.GetMyReceivedEntriesAsync(periodIdDto);
+				}
 			}
 			else
 			{
