@@ -9,12 +9,12 @@ namespace Havit.Bonusario.Contracts;
 
 public enum AuthorIdentityVisibility
 {
-	[Description("Anonymní")]
+	[Description("pro příjemce bez podpisu")]
 	Hidden,
 
-	[Description("Veřejné pro příjemce")]
+	[Description("pro příjemce s podpisem")]
 	VisibleOnlyForRecipient,
 
-	[Description("Veřejné")]
+	[Description("viditelné všem")]
 	Public
 }
