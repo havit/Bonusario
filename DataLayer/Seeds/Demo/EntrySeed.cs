@@ -1,5 +1,6 @@
 ﻿using Havit.Bonusario.DataLayer.Repositories;
 using Havit.Bonusario.Model;
+using Havit.Bonusario.Primitives;
 using Havit.Data.Patterns.DataSeeds;
 using Havit.Services.TimeServices;
 
@@ -44,7 +45,8 @@ public class EntrySeed : DataSeed<DemoProfile>
 					new EntryTag() { Tag = "znalosti" }
 				},
 				Created = now.AddMonths(-2),
-				Submitted = now.AddMonths(-2)
+				Submitted = now.AddMonths(-2),
+				AuthorIdentityVisibility = AuthorIdentityVisibility.Public
 			},
 			new Entry()
 			{
@@ -59,7 +61,8 @@ public class EntrySeed : DataSeed<DemoProfile>
 					new EntryTag() { Tag = "vášeň" },
 					new EntryTag() { Tag = "znalosti" }
 				},
-				Created = now
+				Created = now,
+				AuthorIdentityVisibility = AuthorIdentityVisibility.VisibleOnlyForRecipient
 			},
 			new Entry()
 			{
@@ -74,7 +77,8 @@ public class EntrySeed : DataSeed<DemoProfile>
 					new EntryTag() { Tag = "team" },
 					new EntryTag() { Tag = "znalosti" }
 				},
-				Created = now.AddMinutes(-123)
+				Created = now.AddMinutes(-123),
+				AuthorIdentityVisibility = AuthorIdentityVisibility.Hidden
 			},
 			new Entry()
 			{
@@ -83,7 +87,8 @@ public class EntrySeed : DataSeed<DemoProfile>
 				PeriodId = previousPeriod.Id,
 				Submitted = previousDate,
 				Value = 15,
-				Created = now
+				Created = now,
+				AuthorIdentityVisibility = AuthorIdentityVisibility.Hidden
 			},
 			new Entry()
 			{
@@ -91,7 +96,8 @@ public class EntrySeed : DataSeed<DemoProfile>
 				RecipientId = employees.Single(e => e.Email == "hruby@havit.cz").Id,
 				PeriodId = currentPeriod.Id,
 				Value = 15,
-				Created = now.AddMinutes(-32)
+				Created = now.AddMinutes(-32),
+				AuthorIdentityVisibility = AuthorIdentityVisibility.Public
 			},
 			new Entry()
 			{
@@ -105,7 +111,8 @@ public class EntrySeed : DataSeed<DemoProfile>
 					new EntryTag() { Tag = "znalosti" }
 				},
 				Value = 15,
-				Created = now
+				Created = now,
+				AuthorIdentityVisibility = AuthorIdentityVisibility.VisibleOnlyForRecipient
 			},
 			new Entry()
 			{
@@ -113,7 +120,8 @@ public class EntrySeed : DataSeed<DemoProfile>
 				RecipientId = employees.Single(e => e.Email == "kanda@havit.cz").Id,
 				PeriodId = currentPeriod.Id,
 				Value = 15,
-				Created = now
+				Created = now,
+				AuthorIdentityVisibility = AuthorIdentityVisibility.Public
 			},
 			new Entry()
 			{
@@ -128,7 +136,8 @@ public class EntrySeed : DataSeed<DemoProfile>
 					new EntryTag() { Tag = "team" },
 					new EntryTag() { Tag = "potěšení" },
 				},
-				Created = now
+				Created = now,
+				AuthorIdentityVisibility = AuthorIdentityVisibility.Hidden
 			},
 		};
 
