@@ -20,7 +20,7 @@ public class Entry
 
 	public int Value { get; set; }
 
-	public AuthorIdentityVisibility AuthorIdentityVisibility { get; set; }
+	public AuthorIdentityVisibility AuthorIdentityVisibility { get; set; } = AuthorIdentityVisibility.Hidden;
 
 	public List<EntryTag> Tags { get; } = new List<EntryTag>();
 

@@ -14,7 +14,7 @@ public class Employee
 	[MaxLength(255)]
 	public string Email { get; set; }
 
-	public AuthorIdentityVisibility DefaultIdentityVisibility { get; set; }
+	public AuthorIdentityVisibility DefaultIdentityVisibility { get; set; } = AuthorIdentityVisibility.Hidden;
 
 	public DateTime Created { get; set; }
 
