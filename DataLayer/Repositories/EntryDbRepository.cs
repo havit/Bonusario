@@ -3,6 +3,7 @@ using Havit.Bonusario.Model;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 using Havit.Bonusario.Contracts;
+using Havit.Bonusario.Primitives;
 
 namespace Havit.Bonusario.DataLayer.Repositories;
 
@@ -32,7 +33,7 @@ public partial class EntryDbRepository : IEntryRepository
 		return Data
 			.Where(e => e.PeriodId == periodId)
 			.Where(e => e.Submitted != null)
-			.Where(e => e.AuthorIdentityVisibility == (int)AuthorIdentityVisibility.Public)
+			.Where(e => e.AuthorIdentityVisibility == AuthorIdentityVisibility.Public)
 			.Include(GetLoadReferences)
 			.ToListAsync(cancellationToken);
 	}

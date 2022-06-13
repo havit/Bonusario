@@ -4,6 +4,7 @@ using Havit.Bonusario.Contracts;
 using Havit.Bonusario.DataLayer.Repositories;
 using Havit.Bonusario.Facades.Infrastructure.Security.Authentication;
 using Havit.Bonusario.Model;
+using Havit.Bonusario.Primitives;
 using Havit.Bonusario.Services;
 using Havit.Data.Patterns.UnitOfWorks;
 using Havit.Extensions.DependencyInjection.Abstractions;

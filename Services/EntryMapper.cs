@@ -1,5 +1,6 @@
 ﻿using Havit.Bonusario.Contracts;
 using Havit.Bonusario.Model;
+using Havit.Bonusario.Primitives;
 using Havit.Data.Patterns.UnitOfWorks;
 using Havit.Extensions.DependencyInjection.Abstractions;
 using Havit.Linq;
@@ -26,7 +27,7 @@ public class EntryMapper : IEntryMapper
 		entry.RecipientId = entryDto.RecipientId.Value;
 		entry.Text = entryDto.Text;
 		entry.Value = entryDto.Value;
-		entry.AuthorIdentityVisibility = (int)entryDto.AuthorIdentityVisibility;
+		entry.AuthorIdentityVisibility = entryDto.AuthorIdentityVisibility;
 
 		var result = entry.Tags.UpdateFrom(entryDto.Tags,
 			et => et.Tag,

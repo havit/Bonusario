@@ -2,6 +2,7 @@
 using Havit.Bonusario.DataLayer.Repositories;
 using Havit.Bonusario.Facades.Infrastructure.Security.Authentication;
 using Havit.Bonusario.Model;
+using Havit.Bonusario.Primitives;
 using Havit.Data.Patterns.UnitOfWorks;
 using Havit.Extensions.DependencyInjection.Abstractions;
 using Microsoft.AspNetCore.Authorization;
@@ -26,13 +27,13 @@ public class EmployeeFacade : IEmployeeFacade
 		this.unitOfWork = unitOfWork;
 	}
 
-	public async Task<Dto<int>> GetCurrentEmployeeDefaultIdentityVisibility(CancellationToken cancellationToken = default)
+	public async Task<Dto<AuthorIdentityVisibility>> GetCurrentEmployeeDefaultIdentityVisibility(CancellationToken cancellationToken = default)
 	{
 		var currentEmployee = await applicationAuthenticationService.GetCurrentEmployeeAsync(cancellationToken);
 		return Dto.FromValue(currentEmployee.DefaultIdentityVisibility);
 	}
 
-	public async Task UpdateCurrentEmployeeDefaultIdentityVisibility(Dto<int> defaultVisibility, CancellationToken cancellationToken = default)
+	public async Task UpdateCurrentEmployeeDefaultIdentityVisibility(Dto<AuthorIdentityVisibility> defaultVisibility, CancellationToken cancellationToken = default)
 	{
 		var currentEmployee = await applicationAuthenticationService.GetCurrentEmployeeAsync(cancellationToken);
 		currentEmployee.DefaultIdentityVisibility = defaultVisibility.Value;

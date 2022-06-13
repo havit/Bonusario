@@ -48,11 +48,11 @@ public partial class MyEntriesFeed
 
 	private async Task<AuthorIdentityVisibility> GetDefaultIdentityVisibility()
 	{
-		return (AuthorIdentityVisibility)(await EmployeeFacade.GetCurrentEmployeeDefaultIdentityVisibility()).Value;
+		return (await EmployeeFacade.GetCurrentEmployeeDefaultIdentityVisibility()).Value;
 	}
 
 	private async Task SetDefaultEntryAuthorIdentityVisibility(AuthorIdentityVisibility newDefaultIdentityVisibility)
 	{
-		await EmployeeFacade.UpdateCurrentEmployeeDefaultIdentityVisibility(Dto.FromValue((int)newDefaultIdentityVisibility));
+		await EmployeeFacade.UpdateCurrentEmployeeDefaultIdentityVisibility(Dto.FromValue(newDefaultIdentityVisibility));
 	}
 }

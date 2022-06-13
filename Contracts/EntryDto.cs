@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using Havit.Bonusario.Contracts.ModelMetadata;
+using Havit.Bonusario.Primitives;
 
 namespace Havit.Bonusario.Contracts;
 

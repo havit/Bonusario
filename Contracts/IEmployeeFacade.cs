@@ -1,4 +1,5 @@
-﻿using Havit.ComponentModel;
+﻿using Havit.Bonusario.Primitives;
+using Havit.ComponentModel;
 
 namespace Havit.Bonusario.Contracts;
 
@@ -6,6 +7,6 @@ namespace Havit.Bonusario.Contracts;
 public interface IEmployeeFacade
 {
 	Task<List<EmployeeReferenceDto>> GetAllEmployeeReferencesAsync(CancellationToken cancellationToken = default);
-	Task UpdateCurrentEmployeeDefaultIdentityVisibility(Dto<int> defaultVisibility, CancellationToken cancellationToken = default);
-	Task<Dto<int>> GetCurrentEmployeeDefaultIdentityVisibility(CancellationToken cancellationToken = default);
+	Task UpdateCurrentEmployeeDefaultIdentityVisibility(Dto<AuthorIdentityVisibility> defaultVisibility, CancellationToken cancellationToken = default);
+	Task<Dto<AuthorIdentityVisibility>> GetCurrentEmployeeDefaultIdentityVisibility(CancellationToken cancellationToken = default);
 }

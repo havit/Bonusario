@@ -1,4 +1,5 @@
-﻿using Havit.Data.EntityFrameworkCore.Attributes;
+﻿using Havit.Bonusario.Primitives;
+using Havit.Data.EntityFrameworkCore.Attributes;
 
 namespace Havit.Bonusario.Model;
 
@@ -13,7 +14,7 @@ public class Employee
 	[MaxLength(255)]
 	public string Email { get; set; }
 
-	public int DefaultIdentityVisibility { get; set; }
+	public AuthorIdentityVisibility DefaultIdentityVisibility { get; set; }
 
 	public DateTime Created { get; set; }
 

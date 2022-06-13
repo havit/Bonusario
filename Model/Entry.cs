@@ -1,4 +1,6 @@
-﻿namespace Havit.Bonusario.Model;
+﻿using Havit.Bonusario.Primitives;
+
+namespace Havit.Bonusario.Model;
 
 public class Entry
 {
@@ -18,7 +20,7 @@ public class Entry
 
 	public int Value { get; set; }
 
-	public int AuthorIdentityVisibility { get; set; }
+	public AuthorIdentityVisibility AuthorIdentityVisibility { get; set; }
 
 	public List<EntryTag> Tags { get; } = new List<EntryTag>();
 
