@@ -52,7 +52,7 @@ public class EmployeeFacade : IEmployeeFacade
 			Name = e.Name,
 			Email = e.Email,
 			IsDeleted = e.Deleted is not null,
-			DefaultVisibility = (AuthorIdentityVisibility)e.DefaultIdentityVisibility
+			DefaultVisibility = e.DefaultIdentityVisibility
 		}).ToList();
 	}
 }
