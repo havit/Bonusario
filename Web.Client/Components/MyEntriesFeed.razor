@@ -3,7 +3,7 @@
 		{
 			<h2>Přidej odměnu</h2>
 			<div class="col-lg-8">
-				<EntryCard Entry="newEntry" OnEntryCreated="HandleEntryCreated" InitialDefaultAuthorIdentityVisibility="defaultAuthorIdentityVisibility" OnDefaultIdentityVisibilityChanged="SetCurrentEmployeeDefaultIdentityVisibilityAsync" />
+				<EntryCard Entry="newEntry" OnEntryCreated="HandleEntryCreated" @ref="entryCard" SettingDefaultAuthorIdentityVisibilityEnabled="true" />
 			</div>
 		}
 

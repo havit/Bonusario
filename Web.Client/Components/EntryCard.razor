@@ -30,14 +30,22 @@
                             <div class="@(Entry.Created is null ? "col-lg-5" : "col-lg-6")">
 								<HxSelect @bind-Value="Entry.AuthorIdentityVisibility" Nullable="false" AutoSort="false" TextSelector="v => EnumExt.GetDescription(typeof(AuthorIdentityVisibility), v)" Data="Enum.GetValues<AuthorIdentityVisibility>()">
                                     <InputGroupStartTemplate>
-                                        @if (OnDefaultIdentityVisibilityChanged.HasDelegate){
-                                            <HxButton
-												Tooltip="@(DefaultSelected ? "Nastaveno jako výchozí" : "Nastavit jako výchozí")"
-												OnClick="SetDefaultAuthorIdentityVisibility"
-												CssClass="no-right-round-corners"
-												Color="ThemeColor.Light"
-												Icon="@BootstrapIcon.BoxArrowInUpRight"
-												Enabled="!DefaultSelected" />
+                                        @if (SettingDefaultAuthorIdentityVisibilityEnabled)
+										{
+											<HxPopover
+												Content="@(DefaultSelected ? "Nastaveno jako výchozí" : "Nastavit jako výchozí")"
+												Trigger="PopoverTrigger.Hover"
+												Placement="PopoverPlacement.Top"
+												@ref="popover">
+
+												<HxButton
+													OnClick="SetDefaultAuthorIdentityVisibility"
+													CssClass="no-right-round-corners"
+													Color="ThemeColor.Light"
+													Icon="@BootstrapIcon.BoxArrowInUpRight"
+													Enabled="!DefaultSelected" />
+
+											</HxPopover>
 										}
 									</InputGroupStartTemplate>
 								</HxSelect>

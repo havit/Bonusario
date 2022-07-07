@@ -12,26 +12,42 @@ public partial class EntryCard
 	[Parameter] public EventCallback OnEntryDeleted { get; set; }
 	[Parameter] public EventCallback<EntryDto> OnEntryCreated { get; set; }
 	[Parameter] public EventCallback<EntryDto> OnEntryUpdated { get; set; }
-	[Parameter] public EventCallback<AuthorIdentityVisibility> OnDefaultIdentityVisibilityChanged { get; set; }
-	[Parameter] public AuthorIdentityVisibility InitialDefaultAuthorIdentityVisibility { get; set; }
+	[Parameter] public bool SettingDefaultAuthorIdentityVisibilityEnabled { get; set; }
 
+	[Inject] protected IEmployeeFacade EmployeeFacade { get; set; }
 	[Inject] protected IEmployeesDataStore EmployeesDataStore { get; set; }
 	[Inject] protected IEntryFacade EntryFacade { get; set; }
 
 	private EditContext editContext;
 
-	private AuthorIdentityVisibility DefaultAuthorIdentityVisibility => defaultAuthorIdentityVisibility.GetValueOrDefault();
 	private AuthorIdentityVisibility? defaultAuthorIdentityVisibility = null;
 
 	private bool RenderAuthor => ShowAuthor && Entry.CreatedById.HasValue;
-	private bool DefaultSelected => Entry.AuthorIdentityVisibility == DefaultAuthorIdentityVisibility;
+	private bool DefaultSelected => Entry.AuthorIdentityVisibility == defaultAuthorIdentityVisibility;
 
-	protected override void OnParametersSet()
+	private bool parametersHaveBeenSet = false;
+
+	/// <summary>
+	/// Popover hinting that the user can set default <c>AuthorIdentityVisibility</c> by clicking wrapped button.
+	/// </summary>
+	private HxPopover popover;
+
+	protected override void OnInitialized()
 	{
-		defaultAuthorIdentityVisibility ??= InitialDefaultAuthorIdentityVisibility;
+		editContext = new(new EntryDto());
+	}
 
+	protected override async Task OnParametersSetAsync()
+	{
 		editContext = new EditContext(Entry);
 		editContext.OnFieldChanged += EditContext_OnFieldChanged;
+
+		if (!parametersHaveBeenSet)
+		{
+			Entry.AuthorIdentityVisibility = await GetDefaultIdentityVisibility();
+		}
+
+		parametersHaveBeenSet = true;
 	}
 
 	private void EditContext_OnFieldChanged(object sender, FieldChangedEventArgs e)
@@ -61,6 +77,11 @@ public partial class EntryCard
 	protected override async Task OnInitializedAsync()
 	{
 		await EmployeesDataStore.EnsureDataAsync();
+
+		if (SettingDefaultAuthorIdentityVisibilityEnabled)
+		{
+			await GetDefaultIdentityVisibility();
+		}
 	}
 
 	private async Task HandleDeleteClick()
@@ -86,11 +107,17 @@ public partial class EntryCard
 		}
 	}
 
+	public async Task<AuthorIdentityVisibility> GetDefaultIdentityVisibility()
+	{
+		defaultAuthorIdentityVisibility ??= (await EmployeeFacade.GetCurrentEmployeeDefaultIdentityVisibility()).Value;
+		return defaultAuthorIdentityVisibility.GetValueOrDefault();
+	}
+
 	private async Task SetDefaultAuthorIdentityVisibility()
 	{
-		AuthorIdentityVisibility newDefaultAuthorIdentityVisibility = Entry.AuthorIdentityVisibility;
+		await popover.HideAsync();
 
-		defaultAuthorIdentityVisibility = newDefaultAuthorIdentityVisibility;
-		await OnDefaultIdentityVisibilityChanged.InvokeAsync(newDefaultAuthorIdentityVisibility);
+		defaultAuthorIdentityVisibility = Entry.AuthorIdentityVisibility;
+		await EmployeeFacade.UpdateCurrentEmployeeDefaultIdentityVisibility(Dto.FromValue(await GetDefaultIdentityVisibility()));
 	}
 }

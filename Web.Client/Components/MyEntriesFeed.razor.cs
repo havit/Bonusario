@@ -10,15 +10,14 @@ public partial class MyEntriesFeed
 	private EntryDto newEntry = new();
 	private List<EntryDto> entries;
 	private int? remainingPoints;
-
-	private AuthorIdentityVisibility defaultAuthorIdentityVisibility;
+	/// <summary>
+	/// EntryCard for creating new entries.
+	/// </summary>
+	private EntryCard entryCard;
 
 	protected override async Task OnParametersSetAsync()
 	{
-		defaultAuthorIdentityVisibility = await GetDefaultIdentityVisibility();
-
 		newEntry.PeriodId = this.PeriodId.Value;
-		newEntry.AuthorIdentityVisibility = defaultAuthorIdentityVisibility;
 		await LoadData();
 	}
 
@@ -42,17 +41,7 @@ public partial class MyEntriesFeed
 
 	private async Task HandleEntryCreated()
 	{
-		newEntry = new EntryDto() { PeriodId = PeriodId.Value, AuthorIdentityVisibility = await GetDefaultIdentityVisibility() };
+		newEntry = new EntryDto() { PeriodId = PeriodId.Value, AuthorIdentityVisibility = await entryCard.GetDefaultIdentityVisibility() };
 		await LoadData();
-	}
-
-	private async Task<AuthorIdentityVisibility> GetDefaultIdentityVisibility()
-	{
-		return (await EmployeeFacade.GetCurrentEmployeeDefaultIdentityVisibility()).Value;
-	}
-
-	private async Task SetCurrentEmployeeDefaultIdentityVisibilityAsync(AuthorIdentityVisibility newDefaultIdentityVisibility)
-	{
-		await EmployeeFacade.UpdateCurrentEmployeeDefaultIdentityVisibility(Dto.FromValue(newDefaultIdentityVisibility));
 	}
 }
