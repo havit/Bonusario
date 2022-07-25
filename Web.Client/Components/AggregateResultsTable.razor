@@ -9,7 +9,7 @@
             <HxGridColumn HeaderText="Příjemce"
                       TItem="ResultItemDto"
                       ItemTextSelector="i => EmployeesDataStore.GetByKey(i.RecipientId)?.Name"
-                      SortKeySelector="i => EmployeesDataStore.GetByKey(i.RecipientId, default).Name"
+                      SortKeySelector="i => EmployeesDataStore.GetByKey(i.RecipientId, false).Name"
                       IsDefaultSortColumn="true"
                       FooterText="Celkový součet" />
             <HxGridColumn HeaderText="Celkem"
