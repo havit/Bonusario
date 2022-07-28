@@ -5,36 +5,17 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Havit.Data.EntityFrameworkCore.Patterns;
-using Havit.Data.Patterns.DataEntries;
-using Havit.Data.Patterns.Repositories;
+namespace Havit.Bonusario.DataLayer.DataEntries.Common;
 
-namespace Havit.Bonusario.DataLayer.DataEntries.Common
+[System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
+public class ApplicationSettingsEntries : Havit.Data.Patterns.DataEntries.DataEntries<Havit.Bonusario.Model.Common.ApplicationSettings>, IApplicationSettingsEntries 
 {
-	[System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
-	public class ApplicationSettingsEntries : DataEntries<Havit.Bonusario.Model.Common.ApplicationSettings>, IApplicationSettingsEntries 
-	{
-		public Havit.Bonusario.Model.Common.ApplicationSettings Current
-        {
-            get
-            {
-				if (current == null)
-				{
-					current = GetEntry(Havit.Bonusario.Model.Common.ApplicationSettings.Entry.Current);
-				}
-				return current;
-            }
-        }
-		private Havit.Bonusario.Model.Common.ApplicationSettings current;
+	private Havit.Bonusario.Model.Common.ApplicationSettings current;
 
-		public ApplicationSettingsEntries(Havit.Bonusario.DataLayer.Repositories.Common.IApplicationSettingsRepository repository)
-			: base(repository)
-		{
-		}
+	public Havit.Bonusario.Model.Common.ApplicationSettings Current => current ??= GetEntry(Havit.Bonusario.Model.Common.ApplicationSettings.Entry.Current);
+
+	public ApplicationSettingsEntries(Havit.Bonusario.DataLayer.Repositories.Common.IApplicationSettingsRepository repository)
+		: base(repository)
+	{
 	}
 }

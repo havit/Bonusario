@@ -5,18 +5,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+namespace Havit.Bonusario.Contracts.ModelMetadata;
 
-namespace Havit.Bonusario.Contracts.ModelMetadata
+[System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
+public static class EmployeeMetadata
 {
-	[System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
-	public static class EmployeeMetadata
-	{
-		public const int EmailMaxLength = 255;
-		public const int NameMaxLength = 100;
-	}
+	public const int EmailMaxLength = 255;
+	public const int NameMaxLength = 100;
 }

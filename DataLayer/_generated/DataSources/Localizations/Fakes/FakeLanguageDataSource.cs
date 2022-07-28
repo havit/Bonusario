@@ -5,29 +5,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Havit.Data.EntityFrameworkCore.Patterns.DataSources.Fakes;
 using Havit.Data.EntityFrameworkCore.Patterns.SoftDeletes;
 using Havit.Data.Patterns.Attributes;
 
-namespace Havit.Bonusario.DataLayer.DataSources.Localizations.Fakes
-{
-	[Fake]
-	[System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
-	public class FakeLanguageDataSource : FakeDataSource<Havit.Bonusario.Model.Localizations.Language>, Havit.Bonusario.DataLayer.DataSources.Localizations.ILanguageDataSource
-	{
-		public FakeLanguageDataSource(params Havit.Bonusario.Model.Localizations.Language[] data)
-			: this((IEnumerable<Havit.Bonusario.Model.Localizations.Language>)data)
-		{			
-		}
+namespace Havit.Bonusario.DataLayer.DataSources.Localizations.Fakes;
 
-		public FakeLanguageDataSource(IEnumerable<Havit.Bonusario.Model.Localizations.Language> data, ISoftDeleteManager softDeleteManager = null)
-			: base(data, softDeleteManager)
-		{
-		}
+[Fake]
+[System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
+public class FakeLanguageDataSource : FakeDataSource<Havit.Bonusario.Model.Localizations.Language>, Havit.Bonusario.DataLayer.DataSources.Localizations.ILanguageDataSource
+{
+	public FakeLanguageDataSource(params Havit.Bonusario.Model.Localizations.Language[] data)
+		: this((IEnumerable<Havit.Bonusario.Model.Localizations.Language>)data)
+	{			
+	}
+
+	public FakeLanguageDataSource(IEnumerable<Havit.Bonusario.Model.Localizations.Language> data, ISoftDeleteManager softDeleteManager = null)
+		: base(data, softDeleteManager)
+	{
 	}
 }

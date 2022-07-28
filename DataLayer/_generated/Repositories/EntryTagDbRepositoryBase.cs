@@ -5,11 +5,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Havit.Data.EntityFrameworkCore;
 using Havit.Data.EntityFrameworkCore.Patterns.Caching;
 using Havit.Data.EntityFrameworkCore.Patterns.Repositories;
@@ -18,15 +13,14 @@ using Havit.Data.Patterns.DataEntries;
 using Havit.Data.Patterns.DataLoaders;
 using Havit.Data.Patterns.Infrastructure;
 
-namespace Havit.Bonusario.DataLayer.Repositories
-{
-	[System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
-	public abstract class EntryTagDbRepositoryBase : DbRepository<Havit.Bonusario.Model.EntryTag>
-	{
-		protected EntryTagDbRepositoryBase(IDbContext dbContext, Havit.Bonusario.DataLayer.DataSources.IEntryTagDataSource dataSource, IEntityKeyAccessor<Havit.Bonusario.Model.EntryTag, int> entityKeyAccessor, IDataLoader dataLoader, ISoftDeleteManager softDeleteManager, IEntityCacheManager entityCacheManager)
-			: base(dbContext, dataSource, entityKeyAccessor, dataLoader, softDeleteManager, entityCacheManager)
-		{
-		}
+namespace Havit.Bonusario.DataLayer.Repositories;
 
+[System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
+public abstract class EntryTagDbRepositoryBase : DbRepository<Havit.Bonusario.Model.EntryTag>
+{
+	protected EntryTagDbRepositoryBase(IDbContext dbContext, Havit.Bonusario.DataLayer.DataSources.IEntryTagDataSource dataSource, IEntityKeyAccessor<Havit.Bonusario.Model.EntryTag, int> entityKeyAccessor, IDataLoader dataLoader, ISoftDeleteManager softDeleteManager, IEntityCacheManager entityCacheManager)
+		: base(dbContext, dataSource, entityKeyAccessor, dataLoader, softDeleteManager, entityCacheManager)
+	{
 	}
+
 }

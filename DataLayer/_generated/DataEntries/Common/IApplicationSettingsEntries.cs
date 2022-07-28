@@ -5,19 +5,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Havit.Data.Patterns.DataEntries;
+namespace Havit.Bonusario.DataLayer.DataEntries.Common;
 
-namespace Havit.Bonusario.DataLayer.DataEntries.Common
+[System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
+public interface IApplicationSettingsEntries : Havit.Data.Patterns.DataEntries.IDataEntries
 {
-	[System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
-	public interface IApplicationSettingsEntries : IDataEntries
-	{
-		Havit.Bonusario.Model.Common.ApplicationSettings Current { get; }
-			
-	}
+	Havit.Bonusario.Model.Common.ApplicationSettings Current { get; }
 }

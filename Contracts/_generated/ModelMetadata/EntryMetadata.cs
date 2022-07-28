@@ -5,17 +5,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+namespace Havit.Bonusario.Contracts.ModelMetadata;
 
-namespace Havit.Bonusario.Contracts.ModelMetadata
+[System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
+public static class EntryMetadata
 {
-	[System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
-	public static class EntryMetadata
-	{
-		public const int TextMaxLength = 2147483647;
-	}
+	public const int TextMaxLength = Int32.MaxValue;
 }
