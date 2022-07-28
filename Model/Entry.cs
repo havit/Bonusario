@@ -20,7 +20,7 @@ public class Entry
 
 	public int Value { get; set; }
 
-	public AuthorIdentityVisibility AuthorIdentityVisibility { get; set; } = AuthorIdentityVisibility.Hidden;
+	public EntryVisibility Visibility { get; set; } = EntryVisibility.RecipientOnlyAnonymous;
 
 	public List<EntryTag> Tags { get; } = new List<EntryTag>();
 

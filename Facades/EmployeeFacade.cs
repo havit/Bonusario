@@ -27,16 +27,16 @@ public class EmployeeFacade : IEmployeeFacade
 		this.unitOfWork = unitOfWork;
 	}
 
-	public async Task<Dto<AuthorIdentityVisibility>> GetCurrentEmployeeDefaultIdentityVisibility(CancellationToken cancellationToken = default)
+	public async Task<Dto<EntryVisibility>> GetCurrentEmployeeDefaultEntryVisibility(CancellationToken cancellationToken = default)
 	{
 		var currentEmployee = await applicationAuthenticationService.GetCurrentEmployeeAsync(cancellationToken);
-		return Dto.FromValue(currentEmployee.DefaultIdentityVisibility);
+		return Dto.FromValue(currentEmployee.DefaultEntryVisibility);
 	}
 
-	public async Task UpdateCurrentEmployeeDefaultIdentityVisibility(Dto<AuthorIdentityVisibility> defaultVisibility, CancellationToken cancellationToken = default)
+	public async Task UpdateCurrentEmployeeDefaultEntryVisibility(Dto<EntryVisibility> defaultVisibility, CancellationToken cancellationToken = default)
 	{
 		var currentEmployee = await applicationAuthenticationService.GetCurrentEmployeeAsync(cancellationToken);
-		currentEmployee.DefaultIdentityVisibility = defaultVisibility.Value;
+		currentEmployee.DefaultEntryVisibility = defaultVisibility.Value;
 
 		unitOfWork.AddForUpdate(currentEmployee);
 
@@ -52,7 +52,7 @@ public class EmployeeFacade : IEmployeeFacade
 			Name = e.Name,
 			Email = e.Email,
 			IsDeleted = e.Deleted is not null,
-			DefaultVisibility = e.DefaultIdentityVisibility
+			DefaultVisibility = e.DefaultEntryVisibility
 		}).ToList();
 	}
 }

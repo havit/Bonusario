@@ -28,9 +28,9 @@
 							}
 
                             <div class="@(Entry.Created is null ? "col-lg-5" : "col-lg-6")">
-								<HxSelect @bind-Value="Entry.AuthorIdentityVisibility" Nullable="false" AutoSort="false" TextSelector="v => EnumExt.GetDescription(typeof(AuthorIdentityVisibility), v)" Data="Enum.GetValues<AuthorIdentityVisibility>()">
+								<HxSelect @bind-Value="Entry.Visibility" Nullable="false" AutoSort="false" TextSelector="v => EnumExt.GetDescription(typeof(EntryVisibility), v)" Data="Enum.GetValues<EntryVisibility>()">
                                     <InputGroupStartTemplate>
-                                        @if (SettingDefaultAuthorIdentityVisibilityEnabled)
+                                        @if (SettingDefaultEntryVisibilityEnabled)
 										{
 											<HxPopover
 												Content="@(DefaultSelected ? "Nastaveno jako výchozí" : "Nastavit jako výchozí")"
@@ -39,7 +39,7 @@
 												@ref="popover">
 
 												<HxButton
-													OnClick="SetDefaultAuthorIdentityVisibility"
+													OnClick="SetDefaultEntryVisibility"
 													CssClass="no-right-round-corners"
 													Color="ThemeColor.Light"
 													Icon="@BootstrapIcon.BoxArrowInUpRight"

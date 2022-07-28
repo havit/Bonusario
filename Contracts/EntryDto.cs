@@ -22,7 +22,7 @@ public class EntryDto
 	public DateTime? Created { get; set; }
 	public int PeriodId { get; set; }
 
-	public AuthorIdentityVisibility AuthorIdentityVisibility { get; set; } = AuthorIdentityVisibility.Hidden;
+	public EntryVisibility Visibility { get; set; } = EntryVisibility.RecipientOnlyAnonymous;
 
 	public bool HasValues()
 	{

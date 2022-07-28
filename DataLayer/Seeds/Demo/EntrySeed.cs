@@ -46,7 +46,7 @@ public class EntrySeed : DataSeed<DemoProfile>
 				},
 				Created = now.AddMonths(-2),
 				Submitted = now.AddMonths(-2),
-				AuthorIdentityVisibility = AuthorIdentityVisibility.Public
+				Visibility = EntryVisibility.Public
 			},
 			new Entry()
 			{
@@ -62,7 +62,7 @@ public class EntrySeed : DataSeed<DemoProfile>
 					new EntryTag() { Tag = "znalosti" }
 				},
 				Created = now,
-				AuthorIdentityVisibility = AuthorIdentityVisibility.VisibleOnlyForRecipient
+				Visibility = EntryVisibility.RecipientOnlyWithAuthorIdentity
 			},
 			new Entry()
 			{
@@ -78,7 +78,7 @@ public class EntrySeed : DataSeed<DemoProfile>
 					new EntryTag() { Tag = "znalosti" }
 				},
 				Created = now.AddMinutes(-123),
-				AuthorIdentityVisibility = AuthorIdentityVisibility.Hidden
+				Visibility = EntryVisibility.RecipientOnlyAnonymous
 			},
 			new Entry()
 			{
@@ -88,7 +88,7 @@ public class EntrySeed : DataSeed<DemoProfile>
 				Submitted = previousDate,
 				Value = 15,
 				Created = now,
-				AuthorIdentityVisibility = AuthorIdentityVisibility.Hidden
+				Visibility = EntryVisibility.RecipientOnlyAnonymous
 			},
 			new Entry()
 			{
@@ -97,7 +97,7 @@ public class EntrySeed : DataSeed<DemoProfile>
 				PeriodId = currentPeriod.Id,
 				Value = 15,
 				Created = now.AddMinutes(-32),
-				AuthorIdentityVisibility = AuthorIdentityVisibility.Public
+				Visibility = EntryVisibility.Public
 			},
 			new Entry()
 			{
@@ -112,7 +112,7 @@ public class EntrySeed : DataSeed<DemoProfile>
 				},
 				Value = 15,
 				Created = now,
-				AuthorIdentityVisibility = AuthorIdentityVisibility.VisibleOnlyForRecipient
+				Visibility = EntryVisibility.RecipientOnlyWithAuthorIdentity
 			},
 			new Entry()
 			{
@@ -121,7 +121,7 @@ public class EntrySeed : DataSeed<DemoProfile>
 				PeriodId = currentPeriod.Id,
 				Value = 15,
 				Created = now,
-				AuthorIdentityVisibility = AuthorIdentityVisibility.Public
+				Visibility = EntryVisibility.Public
 			},
 			new Entry()
 			{
@@ -137,7 +137,7 @@ public class EntrySeed : DataSeed<DemoProfile>
 					new EntryTag() { Tag = "potěšení" },
 				},
 				Created = now,
-				AuthorIdentityVisibility = AuthorIdentityVisibility.Hidden
+				Visibility = EntryVisibility.RecipientOnlyAnonymous
 			},
 		};
 

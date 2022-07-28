@@ -27,7 +27,7 @@ public class EntryMapper : IEntryMapper
 		entry.RecipientId = entryDto.RecipientId.Value;
 		entry.Text = entryDto.Text;
 		entry.Value = entryDto.Value;
-		entry.AuthorIdentityVisibility = entryDto.AuthorIdentityVisibility;
+		entry.Visibility = entryDto.Visibility;
 
 		var result = entry.Tags.UpdateFrom(entryDto.Tags,
 			et => et.Tag,
@@ -52,7 +52,7 @@ public class EntryMapper : IEntryMapper
 			Value = entry.Value,
 			PeriodId = entry.PeriodId,
 			Tags = entry.Tags.Select(et => et.Tag).ToList(),
-			AuthorIdentityVisibility = (AuthorIdentityVisibility)entry.AuthorIdentityVisibility
+			Visibility = (EntryVisibility)entry.Visibility
 		};
 	}
 }

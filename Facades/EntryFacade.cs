@@ -69,7 +69,7 @@ public class EntryFacade : IEntryFacade
 		// Anonymize creators of the entries.
 		foreach (var entry in entriesDto)
 		{
-			if ((entry.AuthorIdentityVisibility != AuthorIdentityVisibility.Public) && (entry.AuthorIdentityVisibility != AuthorIdentityVisibility.VisibleOnlyForRecipient))
+			if ((entry.Visibility != EntryVisibility.Public) && (entry.Visibility != EntryVisibility.RecipientOnlyWithAuthorIdentity))
 			{
 				entry.CreatedById = null;
 			}

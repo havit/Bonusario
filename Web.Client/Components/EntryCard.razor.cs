@@ -12,7 +12,7 @@ public partial class EntryCard
 	[Parameter] public EventCallback OnEntryDeleted { get; set; }
 	[Parameter] public EventCallback<EntryDto> OnEntryCreated { get; set; }
 	[Parameter] public EventCallback<EntryDto> OnEntryUpdated { get; set; }
-	[Parameter] public bool SettingDefaultAuthorIdentityVisibilityEnabled { get; set; }
+	[Parameter] public bool SettingDefaultEntryVisibilityEnabled { get; set; }
 
 	[Inject] protected IEmployeeFacade EmployeeFacade { get; set; }
 	[Inject] protected IEmployeesDataStore EmployeesDataStore { get; set; }
@@ -20,15 +20,15 @@ public partial class EntryCard
 
 	private EditContext editContext;
 
-	private AuthorIdentityVisibility? defaultAuthorIdentityVisibility = null;
+	private EntryVisibility? defaultEntryVisibility = null;
 
 	private bool RenderAuthor => ShowAuthor && Entry.CreatedById.HasValue;
-	private bool DefaultSelected => Entry.AuthorIdentityVisibility == defaultAuthorIdentityVisibility;
+	private bool DefaultSelected => Entry.Visibility == defaultEntryVisibility;
 
 	private bool parametersHaveBeenSet = false;
 
 	/// <summary>
-	/// Popover hinting that the user can set default <c>AuthorIdentityVisibility</c> by clicking wrapped button.
+	/// Popover hinting that the user can set default <c>EntryVisibility</c> by clicking wrapped button.
 	/// </summary>
 	private HxPopover popover;
 
@@ -44,7 +44,7 @@ public partial class EntryCard
 
 		if (!parametersHaveBeenSet)
 		{
-			Entry.AuthorIdentityVisibility = await GetDefaultIdentityVisibility();
+			Entry.Visibility = await GetDefaultEntryVisibility();
 		}
 
 		parametersHaveBeenSet = true;
@@ -78,9 +78,9 @@ public partial class EntryCard
 	{
 		await EmployeesDataStore.EnsureDataAsync();
 
-		if (SettingDefaultAuthorIdentityVisibilityEnabled)
+		if (SettingDefaultEntryVisibilityEnabled)
 		{
-			await GetDefaultIdentityVisibility();
+			await GetDefaultEntryVisibility();
 		}
 	}
 
@@ -107,17 +107,17 @@ public partial class EntryCard
 		}
 	}
 
-	public async Task<AuthorIdentityVisibility> GetDefaultIdentityVisibility()
+	public async Task<EntryVisibility> GetDefaultEntryVisibility()
 	{
-		defaultAuthorIdentityVisibility ??= (await EmployeeFacade.GetCurrentEmployeeDefaultIdentityVisibility()).Value;
-		return defaultAuthorIdentityVisibility.GetValueOrDefault();
+		defaultEntryVisibility ??= (await EmployeeFacade.GetCurrentEmployeeDefaultEntryVisibility()).Value;
+		return defaultEntryVisibility.GetValueOrDefault();
 	}
 
-	private async Task SetDefaultAuthorIdentityVisibility()
+	private async Task SetDefaultEntryVisibility()
 	{
 		await popover.HideAsync();
 
-		defaultAuthorIdentityVisibility = Entry.AuthorIdentityVisibility;
-		await EmployeeFacade.UpdateCurrentEmployeeDefaultIdentityVisibility(Dto.FromValue(await GetDefaultIdentityVisibility()));
+		defaultEntryVisibility = Entry.Visibility;
+		await EmployeeFacade.UpdateCurrentEmployeeDefaultEntryVisibility(Dto.FromValue(await GetDefaultEntryVisibility()));
 	}
 }

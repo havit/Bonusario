@@ -33,7 +33,7 @@ public partial class EntryDbRepository : IEntryRepository
 		return Data
 			.Where(e => e.PeriodId == periodId)
 			.Where(e => e.Submitted != null)
-			.Where(e => e.AuthorIdentityVisibility == AuthorIdentityVisibility.Public)
+			.Where(e => e.Visibility == EntryVisibility.Public)
 			.Include(GetLoadReferences)
 			.ToListAsync(cancellationToken);
 	}

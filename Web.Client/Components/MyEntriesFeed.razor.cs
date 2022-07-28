@@ -41,7 +41,7 @@ public partial class MyEntriesFeed
 
 	private async Task HandleEntryCreated()
 	{
-		newEntry = new EntryDto() { PeriodId = PeriodId.Value, AuthorIdentityVisibility = await entryCard.GetDefaultIdentityVisibility() };
+		newEntry = new EntryDto() { PeriodId = PeriodId.Value, Visibility = await entryCard.GetDefaultEntryVisibility() };
 		await LoadData();
 	}
 }
