@@ -6,7 +6,7 @@
 
 @if (periodId != null)
 {
-    <HxInputSwitch @bind-Value="displayTable" Label="tabulka" CssClass="mb-3" />
+    <HxSwitch @bind-Value="displayTable" Label="tabulka" CssClass="mb-3" />
     if (displayTable)
     {
         <ReadOnlyEntriesTable ReceivedEntries="false" PeriodId="@periodId" />
