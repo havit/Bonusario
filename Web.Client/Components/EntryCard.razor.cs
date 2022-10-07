@@ -1,4 +1,5 @@
-﻿using Havit.Bonusario.Web.Client.DataStores;
+﻿using System.Text;
+using Havit.Bonusario.Web.Client.DataStores;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Forms;
 
@@ -6,13 +7,19 @@ namespace Havit.Bonusario.Web.Client.Components;
 
 public partial class EntryCard
 {
+	private static readonly Dictionary<EntryVisibility, BootstrapIcon> EntryVisibilityIcons = new()
+	{
+		{ EntryVisibility.RecipientOnlyAnonymous, BootstrapIcon.PersonXFill },
+		{ EntryVisibility.RecipientOnlyWithAuthorIdentity, BootstrapIcon.PersonHeart },
+		{ EntryVisibility.Public, BootstrapIcon.Globe }
+	};
+
 	[Parameter] public EntryDto Entry { get; set; }
 	[Parameter] public bool RecipientLocked { get; set; } = false;
 	[Parameter] public bool ShowAuthor { get; set; } = false;
 	[Parameter] public EventCallback OnEntryDeleted { get; set; }
 	[Parameter] public EventCallback<EntryDto> OnEntryCreated { get; set; }
 	[Parameter] public EventCallback<EntryDto> OnEntryUpdated { get; set; }
-	[Parameter] public bool SettingDefaultEntryVisibilityEnabled { get; set; }
 
 	[Inject] protected IEmployeeFacade EmployeeFacade { get; set; }
 	[Inject] protected IEmployeesDataStore EmployeesDataStore { get; set; }
@@ -20,68 +27,27 @@ public partial class EntryCard
 
 	private EditContext editContext;
 
-	private EntryVisibility? defaultEntryVisibility = null;
-
 	private bool RenderAuthor => ShowAuthor && Entry.CreatedById.HasValue;
-	private bool DefaultSelected => Entry.Visibility == defaultEntryVisibility;
-
-	private bool parametersHaveBeenSet = false;
-
-	/// <summary>
-	/// Popover hinting that the user can set default <c>EntryVisibility</c> by clicking wrapped button.
-	/// </summary>
-	private HxPopover popover;
 
 	protected override void OnInitialized()
 	{
 		editContext = new(new EntryDto());
 	}
 
-	protected override async Task OnParametersSetAsync()
+	protected override void OnParametersSet()
 	{
 		editContext = new EditContext(Entry);
 		editContext.OnFieldChanged += EditContext_OnFieldChanged;
-
-		if (!parametersHaveBeenSet)
-		{
-			Entry.Visibility = await GetDefaultEntryVisibility();
-		}
-
-		parametersHaveBeenSet = true;
 	}
 
 	private void EditContext_OnFieldChanged(object sender, FieldChangedEventArgs e)
 	{
-		if ((Entry.Id == default) || (Entry.Submitted is not null))
-		{
-			return;
-		}
-
-		if (editContext.Validate())
-		{
-			InvokeAsync(async () =>
-			{
-				try
-				{
-					await EntryFacade.UpdateEntryAsync(this.Entry);
-					await OnEntryUpdated.InvokeAsync(this.Entry);
-				}
-				catch (OperationFailedException)
-				{
-					// NOOP
-				}
-			});
-		}
+		HandleFieldChanged();
 	}
 
 	protected override async Task OnInitializedAsync()
 	{
 		await EmployeesDataStore.EnsureDataAsync();
-
-		if (SettingDefaultEntryVisibilityEnabled)
-		{
-			await GetDefaultEntryVisibility();
-		}
 	}
 
 	private async Task HandleDeleteClick()
@@ -107,17 +73,55 @@ public partial class EntryCard
 		}
 	}
 
-	public async Task<EntryVisibility> GetDefaultEntryVisibility()
+	private void ChangeEntryVisibility(EntryVisibility visibility)
 	{
-		defaultEntryVisibility ??= (await EmployeeFacade.GetCurrentEmployeeDefaultEntryVisibility()).Value;
-		return defaultEntryVisibility.GetValueOrDefault();
+		Entry.Visibility = visibility;
+		HandleFieldChanged();
 	}
 
-	private async Task SetDefaultEntryVisibility()
+	private string GetEntryVisibilityText(EntryVisibility entryVisibility)
 	{
-		await popover.HideAsync();
+		StringBuilder visibilityText = new(EnumExt.GetDescription(typeof(EntryVisibility), entryVisibility));
+		visibilityText[0] = char.ToUpper(visibilityText[0]);
 
-		defaultEntryVisibility = Entry.Visibility;
-		await EmployeeFacade.UpdateCurrentEmployeeDefaultEntryVisibility(Dto.FromValue(await GetDefaultEntryVisibility()));
+		return visibilityText.ToString();
+	}
+
+	private void HandleFieldChanged()
+	{
+		if ((Entry.Id == default) || (Entry.Submitted is not null))
+		{
+			return;
+		}
+
+		if (editContext.Validate())
+		{
+			InvokeAsync(async () =>
+			{
+				try
+				{
+					await EntryFacade.UpdateEntryAsync(this.Entry);
+					await OnEntryUpdated.InvokeAsync(this.Entry);
+				}
+				catch (OperationFailedException)
+				{
+					// NOOP
+				}
+			});
+		}
+	}
+
+	private BootstrapIcon GetIconForEntryVisibility(EntryVisibility visibility)
+	{
+		bool success = EntryVisibilityIcons.TryGetValue(visibility, out BootstrapIcon icon);
+
+		if (success)
+		{
+			return icon;
+		}
+		else
+		{
+			throw new InvalidOperationException("An icon has to be specified for all entry visibilities.");
+		}
 	}
 }

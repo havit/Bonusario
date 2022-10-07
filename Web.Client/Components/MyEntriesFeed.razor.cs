@@ -10,10 +10,6 @@ public partial class MyEntriesFeed
 	private EntryDto newEntry = new();
 	private List<EntryDto> entries;
 	private int? remainingPoints;
-	/// <summary>
-	/// EntryCard for creating new entries.
-	/// </summary>
-	private EntryCard entryCard;
 
 	private int? editedEntryId;
 
@@ -43,7 +39,7 @@ public partial class MyEntriesFeed
 
 	private async Task HandleEntryCreated()
 	{
-		newEntry = new EntryDto() { PeriodId = PeriodId.Value, Visibility = await entryCard.GetDefaultEntryVisibility() };
+		newEntry = new EntryDto() { PeriodId = PeriodId.Value, Visibility = EntryDto.DefaultVisibility };
 		await LoadData();
 	}
 }

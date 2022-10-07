@@ -1,4 +1,32 @@
+.entry-card {
+    --hx-form-spacing: 0;
+}
+
 ::deep .no-right-round-corners {
     border-bottom-right-radius: 0 !important;
     border-top-right-radius: 0 !important;
+}
+
+::deep .entry-visibility-dropdown-subtitle {
+    color: var(--bs-gray-500);
+}
+
+::deep .entry-visibility-dropdown-toggle {
+    color: var(--bs-gray-600);
+    cursor: pointer;
+}
+
+::deep .entry-visibility-icon {
+    width: 2rem;
+    height: 2rem;
+}
+
+::deep .dropdown-menu {
+    padding: 0.5rem 0.25rem 1rem;
+}
+
+::deep .dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }

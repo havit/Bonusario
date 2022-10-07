@@ -6,6 +6,8 @@ namespace Havit.Bonusario.Contracts;
 
 public class EntryDto
 {
+	public const EntryVisibility DefaultVisibility = EntryVisibility.RecipientOnlyWithAuthorIdentity;
+
 	public int Id { get; set; }
 
 	public int? CreatedById { get; set; }
@@ -22,7 +24,7 @@ public class EntryDto
 	public DateTime? Created { get; set; }
 	public int PeriodId { get; set; }
 
-	public EntryVisibility Visibility { get; set; } = EntryVisibility.RecipientOnlyAnonymous;
+	public EntryVisibility Visibility { get; set; } = DefaultVisibility;
 
 	public bool HasValues()
 	{
