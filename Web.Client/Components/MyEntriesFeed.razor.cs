@@ -15,6 +15,8 @@ public partial class MyEntriesFeed
 	/// </summary>
 	private EntryCard entryCard;
 
+	private int? editedEntryId;
+
 	protected override async Task OnParametersSetAsync()
 	{
 		newEntry.PeriodId = this.PeriodId.Value;

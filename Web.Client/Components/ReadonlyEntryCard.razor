@@ -1,29 +1,44 @@
-﻿@if (Entry is not null)
-{
-    <HxCard>
-        <BodyTemplate>
-            <div class="row">
+﻿<div @onclick="HandleClick">
+    @if (Entry is not null)
+    {
+        <HxCard>
+            <BodyTemplate>
                 <div class="row">
-                    <div class="col">
-                        @if (ShowAuthor && Entry.RecipientId.HasValue && Entry.CreatedById.HasValue)
-                        {
-                            <span>pro @EmployeesDataStore.GetByKey(Entry.RecipientId.Value).Name od @EmployeesDataStore.GetByKey(Entry.CreatedById.Value).Name</span>
-                        }
-                        else if (Entry.RecipientId.HasValue)
-                        {
-                            @EmployeesDataStore.GetByKey(Entry.RecipientId.Value).Name
-                        }
+                    <div class="col-auto">
+                        <div class="points">
+                            <h5>@Entry.Value</h5>
+                        </div>
                     </div>
-                    <div class="col">
-                        <EntryTagsPicker @bind-Value="Entry.Tags" Enabled="false" />
+                    <div class="col ps-0">
+                        <div class="@CssClassHelper.Combine("row", !HasTags && !HasText ? "h-100 d-flex align-items-center" : null)">
+                            <div class="@CssClassHelper.Combine(HasTags ? "col-auto" : "col-12")">
+                                @if (ShowAuthor && Entry.RecipientId.HasValue && Entry.CreatedById.HasValue)
+                                {
+                                    <h5>pro @EmployeesDataStore.GetByKey(Entry.RecipientId.Value)?.Name od @EmployeesDataStore.GetByKey(Entry.CreatedById.Value)?.Name</h5>
+                                }
+                                else if (Entry.RecipientId.HasValue)
+                                {
+                                    <h5>@EmployeesDataStore.GetByKey(Entry.RecipientId.Value)?.Name</h5>
+                                }
+                            </div>
+                            @if (HasTags)
+                            {
+                                <div class="col-auto ms-auto">
+                                    <EntryTagsPicker @bind-Value="Entry.Tags" Enabled="false" />
+                                </div>
+                            }
+                        </div>
+                        @if (HasText)
+                        {
+                            <div class="row">
+                                <div class="col">
+                                    <p>@Entry.Text</p>
+                                </div>
+                            </div>
+                        }
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col">
-                        <p>@Entry.Text</p>
-                    </div>
-                </div>
-            </div>
-        </BodyTemplate>
-    </HxCard>
-}
+            </BodyTemplate>
+        </HxCard>
+    }
+</div>

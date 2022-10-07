@@ -21,10 +21,17 @@
 			<HxRepeater Data="entries" Context="entry">
 				<ItemTemplate>
 					<div class="col-lg-12 mb-4">
-						<EntryCard Entry="entry"
-							RecipientLocked="true"
-							OnEntryDeleted="HandleEntryDeleted"
-							OnEntryUpdated="HandleEntryUpdated" />
+						@if (editedEntryId.HasValue && editedEntryId.Value == entry.Id)
+						{
+							<EntryCard Entry="entry"
+								RecipientLocked="true"
+								OnEntryDeleted="HandleEntryDeleted"
+								OnEntryUpdated="HandleEntryUpdated" />
+						}
+						else
+						{
+							<ReadonlyEntryCard Entry="entry" OnClick="() => editedEntryId = entry.Id" />
+						}
 					</div>
 				</ItemTemplate>
 			</HxRepeater>

@@ -1,0 +1,31 @@
+﻿::deep p {
+    margin: 0;
+}
+
+::deep .hx-input-tags-control {
+    justify-content: end;
+}
+
+::deep .hx-input-tags-control .dropdown {
+    display: none;
+}
+
+::deep .points {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    width: 50px;
+    background: gold;
+    border-radius: 50%;
+    box-shadow: 2px 0px #907E14;
+}
+
+::deep .points h5 {
+    opacity: 0.5;
+    font-weight: bold;
+}
+
+::deep h5 {
+    margin: 0;
+}
