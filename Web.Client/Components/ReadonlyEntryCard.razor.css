@@ -16,9 +16,10 @@
     justify-content: center;
     height: 50px;
     width: 50px;
-    background: gold;
+    background: var(--bs-warning);
     border-radius: 50%;
     box-shadow: 2px 0px #907E14;
+    border: 1px dashed #907E14;
 }
 
 ::deep .points h5 {

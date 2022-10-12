@@ -7,10 +7,6 @@
     border-top-right-radius: 0 !important;
 }
 
-::deep .entry-visibility-dropdown-subtitle {
-    color: var(--bs-gray-500);
-}
-
 ::deep .entry-visibility-dropdown-toggle {
     color: var(--bs-gray-600);
     cursor: pointer;
@@ -19,10 +15,6 @@
 ::deep .entry-visibility-icon {
     width: 2rem;
     height: 2rem;
-}
-
-::deep .dropdown-menu {
-    padding: 0.5rem 0.25rem 1rem;
 }
 
 ::deep .dropdown-item {

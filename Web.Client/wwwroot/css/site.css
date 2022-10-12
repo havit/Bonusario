@@ -19,17 +19,17 @@
 
 :root {
   --bs-body-bg: white;
-  --hx-sidebar-brand-logo-background-color: var(--bs-yellow);
-  --hx-sidebar-brand-logo-color: var(--bs-dark);
-  --hx-sidebar-brand-logo-height: 2rem;
-  --hx-sidebar-brand-logo-width: 2rem;
-  --hx-sidebar-brand-logo-border-radius: 50%;
+  --hx-sidebar-brand-shortname-background-color: var(--bs-yellow);
+  --hx-sidebar-brand-shortname-border-radius: 50%;
+  --hx-sidebar-brand-shortname-color: var(--bs-dark);
+  --hx-sidebar-brand-shortname-width: 2rem;
+  --hx-sidebar-brand-shortname-height: 2rem;
 }
 
 .logo-text {
   font-size: 1.25rem;
 }
 
-.hx-sidebar-brand-logo {
+.hx-sidebar-brand-shortname {
   border: 2px solid var(--bs-dark);
 }

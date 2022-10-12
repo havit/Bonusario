@@ -9,7 +9,7 @@ public partial class EntryCard
 {
 	private static readonly Dictionary<EntryVisibility, BootstrapIcon> EntryVisibilityIcons = new()
 	{
-		{ EntryVisibility.RecipientOnlyAnonymous, BootstrapIcon.PersonXFill },
+		{ EntryVisibility.RecipientOnlyAnonymous, BootstrapIcon.Incognito },
 		{ EntryVisibility.RecipientOnlyWithAuthorIdentity, BootstrapIcon.PersonHeart },
 		{ EntryVisibility.Public, BootstrapIcon.Globe }
 	};
