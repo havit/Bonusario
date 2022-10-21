@@ -1,36 +1,44 @@
-﻿<div class="row mb-4">
+﻿<div class="my-entries-feed">
+	<div class="entries">
 		@if (remainingPoints > 0)
 		{
-			<h2>Přidej odměnu</h2>
-			<div id="@entryCardFormWrapperId" class="col-lg-8">
+			<div id="@entryCardFormWrapperId" class="w-100 mb-4">
 				<EntryCard
 					Entry="editedEntry"
 					OnEntryCreated="HandleEntryCreated"
+					OnEntryUpdated="HandleEntryUpdated"
 					OnEntryDeleted="HandleEntryDeleted" />
 			</div>
 		}
 
-		@if (remainingPoints is not null)
+		@if (entries is not null)
 		{
-			<div class="col-lg-4 d-flex align-items-stretch ms-auto">
-				<RemainingPoints Points="remainingPoints.Value"/>
-			</div>
+			<HxRepeater Data="entries" Context="entry">
+				<ItemTemplate>
+					<div class="col-lg-12 mb-4">
+						<ReadonlyEntryCard Entry="entry" OnClick="async () => await EditEntry(entry)" />
+					</div>
+				</ItemTemplate>
+			</HxRepeater>
 		}
-</div>
-
-@if (entries is not null)
-{
-	<div class="row">
-		<HxRepeater Data="entries" Context="entry">
-			<ItemTemplate>
-				<div class="col-lg-12 mb-4">
-					<ReadonlyEntryCard Entry="entry" OnClick="async () => await EditEntry(entry)" />
-				</div>
-			</ItemTemplate>
-		</HxRepeater>
+		else
+		{
+			@* TODO Placeholders *@
+		}
 	</div>
-}
-else
-{
-	@* TODO Placeholders *@
-}
+
+	<div class="points-summary-table">
+		<HxCard>
+			<BodyTemplate>
+				<h5>Přehled rozdělených odměn</h5>
+
+				@if (remainingPoints is not null)
+				{
+					<RemainingPoints Points="remainingPoints.Value"/>
+				}
+
+				<GivenPointsSummary PeriodId="PeriodId" />
+			</BodyTemplate>
+		</HxCard>
+	</div>
+</div>

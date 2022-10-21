@@ -1,0 +1,10 @@
+﻿@if (employees is not null)
+{
+    @foreach (var employee in employees)
+    {
+        <div class="w-100 my-1">
+            @employee.Name
+            <span class="float-end">@GetPointsGivenToEmployee(employee)</span>
+        </div>
+    }
+}

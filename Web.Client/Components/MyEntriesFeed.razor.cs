@@ -58,23 +58,24 @@ public partial class MyEntriesFeed
 	}
 
 	[JSInvokable("HandleBodyClick")]
-	public void HandleBodyClick()
+	public async Task HandleBodyClick()
 	{
-		EditNewEntry();
+		await EditNewEntry();
+		StateHasChanged();
 	}
 
-	private void EditNewEntry()
+	private async Task EditNewEntry()
 	{
 		if (editedEntry.Id != default)
 		{
-			editedEntry = new();
-			StateHasChanged();
+			editedEntry = new EntryDto() { PeriodId = PeriodId.Value, Visibility = EntryDto.DefaultVisibility };
+			await LoadData();
 		}
 	}
 
 	private async Task HandleEntryDeleted()
 	{
-		EditNewEntry();
+		await EditNewEntry();
 		await LoadData();
 	}
 
@@ -85,7 +86,6 @@ public partial class MyEntriesFeed
 
 	private async Task HandleEntryCreated()
 	{
-		editedEntry = new EntryDto() { PeriodId = PeriodId.Value, Visibility = EntryDto.DefaultVisibility };
-		await LoadData();
+		await EditNewEntry();
 	}
 }
