@@ -2,8 +2,8 @@
 		@if (remainingPoints > 0)
 		{
 			<h2>Přidej odměnu</h2>
-			<div class="col-lg-8">
-				<EntryCard Entry="newEntry" OnEntryCreated="HandleEntryCreated" />
+			<div id="@entryCardFormWrapperId" class="col-lg-8">
+				<EntryCard Entry="editedEntry" OnEntryCreated="HandleEntryCreated" />
 			</div>
 		}
 
@@ -18,23 +18,13 @@
 @if (entries is not null)
 {
 	<div class="row">
-			<HxRepeater Data="entries" Context="entry">
-				<ItemTemplate>
-					<div class="col-lg-12 mb-4">
-						@if (editedEntryId.HasValue && editedEntryId.Value == entry.Id)
-						{
-							<EntryCard Entry="entry"
-								RecipientLocked="true"
-								OnEntryDeleted="HandleEntryDeleted"
-								OnEntryUpdated="HandleEntryUpdated" />
-						}
-						else
-						{
-							<ReadonlyEntryCard Entry="entry" OnClick="() => editedEntryId = entry.Id" />
-						}
-					</div>
-				</ItemTemplate>
-			</HxRepeater>
+		<HxRepeater Data="entries" Context="entry">
+			<ItemTemplate>
+				<div class="col-lg-12 mb-4">
+					<ReadonlyEntryCard Entry="entry" OnClick="async () => await EditEntry(entry)" />
+				</div>
+			</ItemTemplate>
+		</HxRepeater>
 	</div>
 }
 else

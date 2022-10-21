@@ -1,4 +1,6 @@
-﻿namespace Havit.Bonusario.Web.Client.Components;
+﻿using Microsoft.JSInterop;
+
+namespace Havit.Bonusario.Web.Client.Components;
 
 public partial class MyEntriesFeed
 {
@@ -7,15 +9,37 @@ public partial class MyEntriesFeed
 	[Inject] protected IEntryFacade EntryFacade { get; set; }
 	[Inject] protected IEmployeeFacade EmployeeFacade { get; set; }
 
-	private EntryDto newEntry = new();
+	[Inject] protected IJSRuntime JSRuntime { get; set; }
+
+	private IJSObjectReference jsModule;
+	private DotNetObjectReference<MyEntriesFeed> dotnetObjectReference;
+	private string entryCardFormWrapperId = "card" + Guid.NewGuid().ToString("N");
+	private EntryDto editedEntry = new();
 	private List<EntryDto> entries;
 	private int? remainingPoints;
 
-	private int? editedEntryId;
+	public MyEntriesFeed()
+	{
+		dotnetObjectReference = DotNetObjectReference.Create(this);
+	}
+
+	protected override async Task OnAfterRenderAsync(bool firstRender)
+	{
+		if (firstRender)
+		{
+			await EnsureJsModule();
+			await jsModule.InvokeVoidAsync("initialize", dotnetObjectReference, entryCardFormWrapperId);
+		}
+	}
+
+	protected async Task EnsureJsModule()
+	{
+		jsModule ??= await JSRuntime.InvokeAsync<IJSObjectReference>("import", "/js/MyEntriesFeed.js");
+	}
 
 	protected override async Task OnParametersSetAsync()
 	{
-		newEntry.PeriodId = this.PeriodId.Value;
+		editedEntry.PeriodId = this.PeriodId.Value;
 		await LoadData();
 	}
 
@@ -25,6 +49,27 @@ public partial class MyEntriesFeed
 		entries = result.OrderByDescending(e => e.Created).ToList();
 
 		remainingPoints = (await EntryFacade.GetMyRemainingPoints(Dto.FromValue(PeriodId.Value))).Value;
+	}
+
+	private async Task EditEntry(EntryDto entry)
+	{
+		editedEntry = entry;
+		await JSRuntime.InvokeVoidAsync("window.scrollTo", 0, 0);
+	}
+
+	[JSInvokable("HandleBodyClick")]
+	public void HandleBodyClick()
+	{
+		EditNewEntry();
+	}
+
+	private void EditNewEntry()
+	{
+		if (editedEntry.Id != default)
+		{
+			editedEntry = new();
+			StateHasChanged();
+		}
 	}
 
 	private async Task HandleEntryDeleted()
@@ -39,7 +84,7 @@ public partial class MyEntriesFeed
 
 	private async Task HandleEntryCreated()
 	{
-		newEntry = new EntryDto() { PeriodId = PeriodId.Value, Visibility = EntryDto.DefaultVisibility };
+		editedEntry = new EntryDto() { PeriodId = PeriodId.Value, Visibility = EntryDto.DefaultVisibility };
 		await LoadData();
 	}
 }
