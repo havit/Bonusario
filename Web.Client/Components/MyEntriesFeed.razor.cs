@@ -74,6 +74,7 @@ public partial class MyEntriesFeed
 
 	private async Task HandleEntryDeleted()
 	{
+		EditNewEntry();
 		await LoadData();
 	}
 
