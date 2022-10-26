@@ -9,7 +9,7 @@
 function handleClick(event, dotnetObjectReference, entryCardFormWrapperId) {
     let entryCardFormWrapper = document.getElementById(entryCardFormWrapperId);
 
-    if (!entryCardFormWrapper.contains(event.target)) {
+    if (!entryCardFormWrapper || !entryCardFormWrapper.contains(event.target)) {
         dotnetObjectReference.invokeMethodAsync("HandleBodyClick");
     }
 }
