@@ -7,6 +7,7 @@ public partial class ReadonlyEntryCard
 	[Parameter] public EntryDto Entry { get; set; }
 	[Parameter] public bool ShowAuthor { get; set; }
 	[Parameter] public EventCallback OnClick { get; set; }
+	[Parameter] public string CssClass { get; set; }
 
 	[Inject] protected IEmployeesDataStore EmployeesDataStore { get; set; }
 

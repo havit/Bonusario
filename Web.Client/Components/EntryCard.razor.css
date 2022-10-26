@@ -1,3 +1,8 @@
+.active ::deep .card {
+    box-shadow: rgb(0 157 224 / 25%) 0px 0px 0px 0.25rem;
+    border-color: var(--bs-primary);
+}
+
 .entry-card {
     --hx-form-spacing: 0;
 }

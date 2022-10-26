@@ -1,7 +1,7 @@
-﻿<div @onclick="HandleClick">
+﻿<div class="@CssClass" @onclick="HandleClick">
     @if (Entry is not null)
     {
-        <HxCard>
+        <HxCard CssClass="@(OnClick.HasDelegate ? "readonly-card-interactive" : null)">
             <BodyTemplate>
                 <div class="row">
                     <div class="col-auto">

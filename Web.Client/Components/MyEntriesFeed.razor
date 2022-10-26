@@ -5,6 +5,7 @@
 			<div id="@entryCardFormWrapperId" class="w-100 mb-4">
 				<EntryCard
 					Entry="editedEntry"
+					CssClass="@(editedEntry.Id != default ? "active" : null)"
 					OnEntryCreated="HandleEntryCreated"
 					OnEntryUpdated="HandleEntryUpdated"
 					OnEntryDeleted="HandleEntryDeleted" />
@@ -16,7 +17,10 @@
 			<HxRepeater Data="entries" Context="entry">
 				<ItemTemplate>
 					<div class="col-lg-12 mb-4">
-						<ReadonlyEntryCard Entry="entry" OnClick="async () => await EditEntry(entry)" />
+						<ReadonlyEntryCard
+							CssClass="@(editedEntry.Id == entry.Id ? "active" : null)"
+							Entry="entry"
+							OnClick="async () => await EditEntry(entry)" />
 					</div>
 				</ItemTemplate>
 			</HxRepeater>

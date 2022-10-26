@@ -1,4 +1,13 @@
-﻿::deep p {
+﻿::deep .readonly-card-interactive {
+    cursor: pointer;
+}
+
+::deep .readonly-card-interactive:hover,
+.active ::deep .readonly-card-interactive {
+    border-color: var(--bs-primary);
+}
+
+::deep p {
     margin: 0;
 }
 

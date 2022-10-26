@@ -20,6 +20,7 @@ public partial class EntryCard
 	[Parameter] public EventCallback OnEntryDeleted { get; set; }
 	[Parameter] public EventCallback<EntryDto> OnEntryCreated { get; set; }
 	[Parameter] public EventCallback<EntryDto> OnEntryUpdated { get; set; }
+	[Parameter] public string CssClass { get; set; }
 
 	[Inject] protected IEmployeeFacade EmployeeFacade { get; set; }
 	[Inject] protected IEmployeesDataStore EmployeesDataStore { get; set; }
