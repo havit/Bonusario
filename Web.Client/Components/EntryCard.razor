@@ -72,33 +72,23 @@
 						<div class="d-flex">
 							@if (Entry.Created is not null)
 							{
-								<small class="text-muted">vloženo @Entry.Created.Value.ToShortDateString()</small>
+								<small class="text-muted align-self-end">vloženo @Entry.Created.Value.ToShortDateString()</small>
 							}
 
 							@if (Entry.Submitted is null)
 							{
-								@if (Entry.Id != default)
-								{
-									@* <small class="text-muted">koncept</small> *@
+								<div class="ms-auto d-flex gap-1">
+									@if (Entry.Id != default)
+									{
+										<HxButton Icon="BootstrapIcon.Trash" 
+												Color="ThemeColor.Light" 
+												OnClick="HandleDeleteClick" />
 
-									<HxButton Color="ThemeColor.Primary"
-											OnValidClick="HandleSaveClick"
-											CssClass="ms-auto me-2"
-											Text="Uložit" />
-
-									<HxButton Icon="BootstrapIcon.Trash" 
-											Color="ThemeColor.Light" 
-											Size="ButtonSize.Small"
-											OnClick="HandleDeleteClick" />
-								}
-								else
-								{
-									@* <small class="text-muted">nový</small> *@
+									}
 									<HxButton Color="ThemeColor.Primary"
 											OnValidClick="HandleNewClick"
-											CssClass="ms-auto"
 											Text="Přidat" />
-								}
+								</div>
 							}
 						</div>
 					</BodyTemplate>
