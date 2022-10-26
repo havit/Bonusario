@@ -1,6 +1,6 @@
 ﻿<div class="my-entries-feed">
 	<div class="entries">
-		@if (remainingPoints > 0)
+		@if (remainingPoints > 0 || editedEntry.Id != default)
 		{
 			<div id="@entryCardFormWrapperId" class="w-100 mb-4">
 				<EntryCard
