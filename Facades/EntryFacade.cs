@@ -214,6 +214,12 @@ public class EntryFacade : IEntryFacade
 		await unitOfWork.CommitAsync();
 	}
 
+	public async Task<List<EntryDto>> GetEntriesOfPeriod(Dto<int> periodId, CancellationToken cancellationToken = default)
+	{
+		var entries = await entryRepository.GetEntriesOfPeriod(periodId.Value);
+		return entries?.Select(e => entryMapper.MapToEntryDto(e)).ToList();
+	}
+
 	public async Task<List<ResultItemDto>> GetResultsAsync(Dto<int> periodId, CancellationToken cancellationToken = default)
 	{
 		var period = await periodRepository.GetObjectAsync(periodId.Value, cancellationToken);

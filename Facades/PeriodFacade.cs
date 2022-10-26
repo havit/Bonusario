@@ -1,5 +1,7 @@
 ﻿using Havit.Bonusario.Contracts;
 using Havit.Bonusario.DataLayer.Repositories;
+using Havit.Bonusario.Model;
+using Havit.Data.Patterns.UnitOfWorks;
 using Havit.Extensions.DependencyInjection.Abstractions;
 using Microsoft.AspNetCore.Authorization;
 
@@ -10,10 +12,27 @@ namespace Havit.Bonusario.Facades;
 public class PeriodFacade : IPeriodFacade
 {
 	private readonly IPeriodRepository periodRepository;
+	private readonly IUnitOfWork unitOfWork;
 
-	public PeriodFacade(IPeriodRepository periodRepository)
+	public PeriodFacade(IPeriodRepository periodRepository, IUnitOfWork unitOfWork)
 	{
 		this.periodRepository = periodRepository;
+		this.unitOfWork = unitOfWork;
+	}
+
+	public async Task CreateNewPeriod(PeriodDto periodDto, CancellationToken cancellationToken = default)
+	{
+		Period period = new()
+		{
+			Name = periodDto.Name,
+			StartDate = periodDto.StartDate,
+			EndDate = periodDto.EndDate,
+			Created = DateTime.Now
+		};
+
+		unitOfWork.AddForInsert(period);
+
+		await unitOfWork.CommitAsync(cancellationToken);
 	}
 
 	public async Task<List<PeriodDto>> GetAllPeriodsAsync(CancellationToken cancellationToken = default)

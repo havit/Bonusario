@@ -28,6 +28,13 @@ public partial class EntryDbRepository : IEntryRepository
 			.ToListAsync(cancellationToken);
 	}
 
+	public Task<List<Entry>> GetEntriesOfPeriod(int periodId, CancellationToken cancellationToken = default)
+	{
+		return Data
+			.Where(e => e.PeriodId == periodId)
+			.ToListAsync(cancellationToken);
+	}
+
 	public Task<List<Entry>> GetPublicReceivedEntriesAsync(int periodId, CancellationToken cancellationToken = default)
 	{
 		return Data
