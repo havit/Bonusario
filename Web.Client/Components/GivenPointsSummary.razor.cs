@@ -20,6 +20,12 @@ public partial class GivenPointsSummary
 		employees ??= await EmployeesDataStore.GetAllAsync();
 	}
 
+	public async Task ReloadData()
+	{
+		await LoadData();
+		StateHasChanged();
+	}
+
 	protected override async Task OnParametersSetAsync()
 	{
 		await LoadData();

@@ -17,6 +17,7 @@ public partial class MyEntriesFeed
 	private EntryDto editedEntry = new();
 	private List<EntryDto> entries;
 	private int? remainingPoints;
+	private GivenPointsSummary givenPointsSummary;
 
 	public MyEntriesFeed()
 	{
@@ -49,6 +50,8 @@ public partial class MyEntriesFeed
 		entries = result.OrderByDescending(e => e.Created).ToList();
 
 		remainingPoints = (await EntryFacade.GetMyRemainingPoints(Dto.FromValue(PeriodId.Value))).Value;
+
+		await givenPointsSummary.ReloadData();
 	}
 
 	private async Task EditEntry(EntryDto entry)
@@ -87,5 +90,6 @@ public partial class MyEntriesFeed
 	private async Task HandleEntryCreated()
 	{
 		await EditNewEntry();
+		await LoadData();
 	}
 }
