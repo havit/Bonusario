@@ -1,4 +1,4 @@
-<div class="bg-warning rounded-3 p-2 my-3">
+<div class="@CssClassHelper.Combine(Points > 0 ? "bg-warning" : "bg-success", "rounded-3 p-2 my-3")">
 	@if (Points > 0)
 	{
 		<div>Máš ještě <span class="fw-bold">@Points bodů</span> k rozdělení.</div>
