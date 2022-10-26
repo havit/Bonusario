@@ -34,10 +34,6 @@
                                 <HxInputTextArea Placeholder="@(Entry.Submitted is null ? "Oceňuji... (volitelný text)" : null)" @bind-Value="@Entry.Text" />
 							</div>
 						</div>
-						@if (Entry.Created is not null)
-						{
-							<small class="text-muted">vloženo @Entry.Created.Value.ToShortDateString()</small>
-						}
 
 						<div class="d-flex my-2">
 							<EntryTagsPicker @bind-Value="Entry.Tags" />
@@ -74,6 +70,11 @@
 							</HxDropdown>
 						</div>
 						<div class="d-flex">
+							@if (Entry.Created is not null)
+							{
+								<small class="text-muted">vloženo @Entry.Created.Value.ToShortDateString()</small>
+							}
+
 							@if (Entry.Submitted is null)
 							{
 								@if (Entry.Id != default)
