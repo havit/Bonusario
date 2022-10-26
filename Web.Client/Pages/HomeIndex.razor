@@ -1,8 +1,13 @@
 ﻿@attribute [Route(Routes.Home)]
 
-<h1>Průběžný feed</h1>
+<div class="d-flex align-items-center justify-content-between mb-3">
+    <h1>Průběžný feed</h1>
 
-<PeriodPicker Label="Období" @bind-Value="periodId" Nullable="false" Mode="PeriodPicker.DataMode.ActiveForSubmission" CssClass="mb-3" />
+    <h3 class="text-secondary">
+        @period?.Name
+        <HxIcon Icon="BootstrapIcon.CalendarRange" />
+    </h3>
+</div>
 
 @if (periodId.HasValue)
 {
