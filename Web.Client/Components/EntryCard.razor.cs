@@ -38,12 +38,6 @@ public partial class EntryCard
 	protected override void OnParametersSet()
 	{
 		editContext = new EditContext(Entry);
-		editContext.OnFieldChanged += EditContext_OnFieldChanged;
-	}
-
-	private void EditContext_OnFieldChanged(object sender, FieldChangedEventArgs e)
-	{
-		HandleFieldChanged();
 	}
 
 	protected override async Task OnInitializedAsync()
@@ -74,21 +68,7 @@ public partial class EntryCard
 		}
 	}
 
-	private void ChangeEntryVisibility(EntryVisibility visibility)
-	{
-		Entry.Visibility = visibility;
-		HandleFieldChanged();
-	}
-
-	private string GetEntryVisibilityText(EntryVisibility entryVisibility)
-	{
-		StringBuilder visibilityText = new(EnumExt.GetDescription(typeof(EntryVisibility), entryVisibility));
-		visibilityText[0] = char.ToUpper(visibilityText[0]);
-
-		return visibilityText.ToString();
-	}
-
-	private void HandleFieldChanged()
+	private async Task HandleSaveClick()
 	{
 		if ((Entry.Id == default) || (Entry.Submitted is not null))
 		{
@@ -97,19 +77,29 @@ public partial class EntryCard
 
 		if (editContext.Validate())
 		{
-			InvokeAsync(async () =>
+			try
 			{
-				try
-				{
-					await EntryFacade.UpdateEntryAsync(this.Entry);
-					await OnEntryUpdated.InvokeAsync(this.Entry);
-				}
-				catch (OperationFailedException)
-				{
-					// NOOP
-				}
-			});
+				await EntryFacade.UpdateEntryAsync(this.Entry);
+				await OnEntryUpdated.InvokeAsync(this.Entry);
+			}
+			catch (OperationFailedException)
+			{
+				// NOOP
+			}
 		}
+	}
+
+	private void ChangeEntryVisibility(EntryVisibility visibility)
+	{
+		Entry.Visibility = visibility;
+	}
+
+	private string GetEntryVisibilityText(EntryVisibility entryVisibility)
+	{
+		StringBuilder visibilityText = new(EnumExt.GetDescription(typeof(EntryVisibility), entryVisibility));
+		visibilityText[0] = char.ToUpper(visibilityText[0]);
+
+		return visibilityText.ToString();
 	}
 
 	private BootstrapIcon GetIconForEntryVisibility(EntryVisibility visibility)

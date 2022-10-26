@@ -80,10 +80,15 @@
 								@if (Entry.Id != default)
 								{
 									@* <small class="text-muted">koncept</small> *@
+
+									<HxButton Color="ThemeColor.Primary"
+											OnValidClick="HandleSaveClick"
+											CssClass="ms-auto me-2"
+											Text="Uložit" />
+
 									<HxButton Icon="BootstrapIcon.Trash" 
 											Color="ThemeColor.Light" 
 											Size="ButtonSize.Small"
-											CssClass="ms-auto"
 											OnClick="HandleDeleteClick" />
 								}
 								else
