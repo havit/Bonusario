@@ -1,6 +1,6 @@
 ﻿.my-entries-feed {
     display: flex;
-    flex-direction: row;
+    flex-direction: column-reverse;
     gap: 1.5rem;
 }
 

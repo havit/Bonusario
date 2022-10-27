@@ -1,11 +1,11 @@
-﻿@if (employees is not null)
+﻿@if (employeeData is not null)
 {
-    @foreach (var employee in employees)
+    @foreach (var employee in employeeData)
     {
-        int pointsGivenToEmployee = GetPointsGivenToEmployee(employee);
+        int pointsGivenToEmployee = employee.Points;
 
         <div class="@CssClassHelper.Combine("w-100 my-1", pointsGivenToEmployee > 0 ? "fw-bold" : null)">
-            @employee.Name
+            @employee.EmployeeDto.Name
             <span class="float-end">@pointsGivenToEmployee</span>
         </div>
     }
