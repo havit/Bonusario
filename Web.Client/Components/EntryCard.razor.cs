@@ -7,13 +7,6 @@ namespace Havit.Bonusario.Web.Client.Components;
 
 public partial class EntryCard
 {
-	private static readonly Dictionary<EntryVisibility, BootstrapIcon> EntryVisibilityIcons = new()
-	{
-		{ EntryVisibility.RecipientOnlyAnonymous, BootstrapIcon.Incognito },
-		{ EntryVisibility.RecipientOnlyWithAuthorIdentity, BootstrapIcon.PersonHeart },
-		{ EntryVisibility.Public, BootstrapIcon.Globe }
-	};
-
 	[Parameter] public EntryDto Entry { get; set; }
 	[Parameter] public bool RecipientLocked { get; set; } = false;
 	[Parameter] public bool ShowAuthor { get; set; } = false;
@@ -98,33 +91,6 @@ public partial class EntryCard
 			{
 				// NOOP
 			}
-		}
-	}
-
-	private void ChangeEntryVisibility(EntryVisibility visibility)
-	{
-		Entry.Visibility = visibility;
-	}
-
-	private string GetEntryVisibilityText(EntryVisibility entryVisibility)
-	{
-		StringBuilder visibilityText = new(EnumExt.GetDescription(typeof(EntryVisibility), entryVisibility));
-		visibilityText[0] = char.ToUpper(visibilityText[0]);
-
-		return visibilityText.ToString();
-	}
-
-	private BootstrapIcon GetIconForEntryVisibility(EntryVisibility visibility)
-	{
-		bool success = EntryVisibilityIcons.TryGetValue(visibility, out BootstrapIcon icon);
-
-		if (success)
-		{
-			return icon;
-		}
-		else
-		{
-			throw new InvalidOperationException("An icon has to be specified for all entry visibilities.");
 		}
 	}
 }

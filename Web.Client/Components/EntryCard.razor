@@ -37,37 +37,7 @@
 
 						<div class="d-flex my-2">
 							<EntryTagsPicker @bind-Value="Entry.Tags" />
-							<HxDropdown CssClass="ms-auto">
-								<HxDropdownToggleElement CssClass="entry-visibility-dropdown-toggle float-end" ElementName="div">
-									<div class="d-flex gap-1">									
-										<HxIcon Icon="GetIconForEntryVisibility(Entry.Visibility)" />				
-										<div class="small">@GetEntryVisibilityText(Entry.Visibility)</div>
-									</div>
-								</HxDropdownToggleElement>
-
-								<HxDropdownMenu Alignment="DropdownMenuAlignment.End">
-									<HxDropdownHeader>
-										<div class="text-black">Kdo to uvidí?</div>
-										<div class="mt-1 fw-normal text-secondary">Vyberte kdo uvidí tento záznam.</div>
-									</HxDropdownHeader>
-
-									@foreach (var visibility in Enum.GetValues<EntryVisibility>().Reverse())
-									{
-										<HxDropdownItem OnClick="() => ChangeEntryVisibility(visibility)">
-											<div class="bg-primary d-inline-flex justify-content-center text-white p-1 rounded-circle entry-visibility-icon">
-												<HxIcon Icon="GetIconForEntryVisibility(visibility)" />
-											</div>
-															
-											<small>@GetEntryVisibilityText(visibility)</small>
-															
-											@if (visibility.Equals(Entry.Visibility))
-											{
-												<HxIcon Icon="BootstrapIcon.Check2" CssClass="ms-auto text-primary float-end" />
-											}
-										</HxDropdownItem>
-									}
-								</HxDropdownMenu>
-							</HxDropdown>
+							<EntryVisibilityPicker @bind-Value="Entry.Visibility" CssClass="ms-auto" />
 						</div>
 						<div class="d-flex">
 							@if (Entry.Created is not null)

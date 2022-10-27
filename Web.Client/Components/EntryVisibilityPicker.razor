@@ -1,0 +1,45 @@
+﻿<div class="@CssClass">
+    @{
+        RenderFragment entryVisibilityIndicator =
+                @<div class="d-flex gap-1 entry-visibility-dropdown-toggle-content">
+                    <HxIcon Icon="GetIconForEntryVisibility(Value)" />
+                    <div class="small">@GetEntryVisibilityText(Value)</div>
+                </div>;
+    }
+    
+    @if (Readonly)
+    {
+        @entryVisibilityIndicator
+    }
+    else
+    {
+        <HxDropdown>
+            <HxDropdownToggleElement CssClass="float-end" ElementName="div">
+                @entryVisibilityIndicator
+            </HxDropdownToggleElement>
+
+            <HxDropdownMenu Alignment="DropdownMenuAlignment.End">
+                <HxDropdownHeader>
+                    <div class="text-black">Kdo to uvidí?</div>
+                    <div class="mt-1 fw-normal text-secondary">Vyberte kdo uvidí tento záznam.</div>
+                </HxDropdownHeader>
+
+                @foreach (var visibility in Enum.GetValues<EntryVisibility>().Reverse())
+                {
+                    <HxDropdownItem OnClick="() => HandleEntryVisibilityChanged(visibility)">
+                        <div class="bg-primary d-inline-flex justify-content-center text-white p-1 rounded-circle entry-visibility-icon">
+                            <HxIcon Icon="GetIconForEntryVisibility(visibility)" />
+                        </div>
+
+                        <small>@GetEntryVisibilityText(visibility)</small>
+
+                        @if (visibility.Equals(Value))
+                        {
+                            <HxIcon Icon="BootstrapIcon.Check2" CssClass="ms-auto text-primary float-end" />
+                        }
+                    </HxDropdownItem>
+                }
+            </HxDropdownMenu>
+        </HxDropdown>
+    }
+</div>

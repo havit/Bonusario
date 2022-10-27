@@ -1,0 +1,15 @@
+﻿::deep .entry-visibility-dropdown-toggle-content {
+    color: var(--bs-gray-600);
+    cursor: pointer;
+}
+
+::deep .entry-visibility-icon {
+    width: 2rem;
+    height: 2rem;
+}
+
+::deep .dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
