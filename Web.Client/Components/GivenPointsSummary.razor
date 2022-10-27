@@ -1,12 +1,46 @@
 ﻿@if (employeeData is not null)
 {
-    @foreach (var employee in employeeData)
-    {
-        int pointsGivenToEmployee = employee.Points;
+    string itemCssClass = "w-100 my-1";
+    string pointsCssClass = "float-end";
 
-        <div class="@CssClassHelper.Combine("w-100 my-1", pointsGivenToEmployee > 0 ? "fw-bold" : null)">
+    @foreach (var employee in employeeData.TakeWhile(e => e.Points > 0))
+    {
+        <div class="@CssClassHelper.Combine(itemCssClass, "fw-bold")">
             @employee.EmployeeDto.Name
-            <span class="float-end">@pointsGivenToEmployee</span>
+            <span class="@pointsCssClass">@employee.Points</span>
         </div>
     }
+
+    @* Mobile version - employees who weren't given any points are hidden in a collapse. *@
+    <div class="d-md-none">
+        <HxCollapseToggleElement
+            ElementName="div"
+            CollapseTarget="#employeeCollapse"
+            CssClass="mb-1 d-flex justify-content-center"
+            role="button">
+
+            <HxIcon Icon="@(employeeInformationCollapseExpanded ? BootstrapIcon.CaretUp : BootstrapIcon.CaretDown)" />
+
+        </HxCollapseToggleElement>
+        <HxCollapse Id="employeeCollapse" OnShown="HandleCollapseShown" OnHidden="HandleCollapseHidden" >
+            @foreach (var employee in employeeData.SkipWhile(e => e.Points > 0))
+            {
+                <div class="@itemCssClass">
+                    @employee.EmployeeDto.Name
+                    <span class="@pointsCssClass">@employee.Points</span>
+                </div>
+            }
+        </HxCollapse>
+    </div>
+
+    @* Desktop version - all employees are visible form the start. *@
+    <div class="d-none d-md-block">
+        @foreach (var employee in employeeData.SkipWhile(e => e.Points > 0))
+        {
+            <div class="@itemCssClass">
+                @employee.EmployeeDto.Name
+                <span class="@pointsCssClass">@employee.Points</span>
+            </div>
+        }
+    </div>
 }

@@ -16,6 +16,8 @@ public partial class GivenPointsSummary
 	private List<EmployeeInformation> employeeData;
 	private IEnumerable<EmployeeReferenceDto> employees;
 
+	private bool employeeInformationCollapseExpanded;
+
 	protected override async Task OnInitializedAsync()
 	{
 		employees ??= await EmployeesDataStore.GetAllAsync();
@@ -54,6 +56,15 @@ public partial class GivenPointsSummary
 
 			employeeData = employeeData.OrderByDescending(e => e.Points).ThenBy(e => e.EmployeeDto.Name).ToList();
 		}
+	}
+
+	private void HandleCollapseShown()
+	{
+		employeeInformationCollapseExpanded = true;
+	}
+	private void HandleCollapseHidden()
+	{
+		employeeInformationCollapseExpanded = false;
 	}
 
 	/// <summary>
