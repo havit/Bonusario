@@ -86,8 +86,8 @@
 
 									}
 									<HxButton Color="ThemeColor.Primary"
-											OnValidClick="HandleNewClick"
-											Text="Přidat" />
+											OnValidClick="HandleCreateOrUpdateButtonClick"
+											Text="@(Entry.Id == default ? "Přidat" : "Uložit")" />
 								</div>
 							}
 						</div>

@@ -52,7 +52,19 @@ public partial class EntryCard
 		await OnEntryDeleted.InvokeAsync();
 	}
 
-	private async Task HandleNewClick()
+	private async Task HandleCreateOrUpdateButtonClick()
+	{
+		if (Entry.Id == default && Entry.Submitted is null)
+		{
+			await CreateNewEntry();
+		}
+		else
+		{
+			await UpdateEntry();
+		}
+	}
+
+	private async Task CreateNewEntry()
 	{
 		Contract.Assert(Entry.Id == default, "Záznam již není nový.");
 		Contract.Assert(Entry.PeriodId != default, "PeriodId musí být nastaven.");
@@ -68,7 +80,7 @@ public partial class EntryCard
 		}
 	}
 
-	private async Task HandleSaveClick()
+	private async Task UpdateEntry()
 	{
 		if ((Entry.Id == default) || (Entry.Submitted is not null))
 		{
