@@ -5,7 +5,10 @@ namespace Havit.Bonusario.Web.Client.Components;
 public partial class ReadonlyEntryCard
 {
 	[Parameter] public EntryDto Entry { get; set; }
+
 	[Parameter] public bool ShowAuthor { get; set; }
+	[Parameter] public bool ShowVisibility { get; set; } = true;
+
 	[Parameter] public EventCallback OnClick { get; set; }
 	[Parameter] public string CssClass { get; set; }
 

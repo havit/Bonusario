@@ -9,7 +9,7 @@
                             <h5>@Entry.Value</h5>
                         </div>
                     </div>
-                    <div class="col ps-0">
+                    <div class="@CssClassHelper.Combine("col ps-0", !HasTags && !HasText && !ShowVisibility ? "d-flex align-items-center" : null)">
                         <div class="row">
                             <div class="@CssClassHelper.Combine(HasTags ? "col-auto" : "col-12")">
                                 <h5>
@@ -38,11 +38,14 @@
                                 </div>
                             </div>
                         }
-                        <div class="row">
-                            <div class="@CssClassHelper.Combine("d-flex", HasText || HasTags ? "justify-content-end" : null)">
-                                <EntryVisibilityPicker Value="@Entry.Visibility" Readonly />
+                        @if (ShowVisibility)
+                        {
+                            <div class="row">
+                                <div class="@CssClassHelper.Combine("d-flex", HasText || HasTags ? "justify-content-end" : null)">
+                                    <EntryVisibilityPicker Value="@Entry.Visibility" Readonly />
+                                </div>
                             </div>
-                        </div>
+                        }
                     </div>
                 </div>
             </BodyTemplate>
