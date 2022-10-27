@@ -3,6 +3,10 @@
     cursor: pointer;
 }
 
+.readonly ::deep .entry-visibility-dropdown-toggle-content {
+    cursor: default;
+}
+
 ::deep .entry-visibility-icon {
     width: 2rem;
     height: 2rem;

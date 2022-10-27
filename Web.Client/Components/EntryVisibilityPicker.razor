@@ -1,4 +1,4 @@
-﻿<div class="@CssClass">
+﻿<div class="@CssClassHelper.Combine(Readonly ? "readonly" : null, CssClass)">
     @{
         RenderFragment entryVisibilityIndicator =
                 @<div class="d-flex gap-1 entry-visibility-dropdown-toggle-content">
