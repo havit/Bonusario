@@ -15,13 +15,9 @@ public class EmployeeFacade : IEmployeeFacade
 {
 	private readonly IEmployeeRepository employeeRepository;
 
-	public EmployeeFacade(IEmployeeRepository employeeRepository,
-		IApplicationAuthenticationService applicationAuthenticationService,
-		IUnitOfWork unitOfWork)
+	public EmployeeFacade(IEmployeeRepository employeeRepository)
 	{
 		this.employeeRepository = employeeRepository;
-		this.applicationAuthenticationService = applicationAuthenticationService;
-		this.unitOfWork = unitOfWork;
 	}
 
 	public async Task<List<EmployeeReferenceDto>> GetAllEmployeeReferencesAsync(CancellationToken cancellationToken = default)
