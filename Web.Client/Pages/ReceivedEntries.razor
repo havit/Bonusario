@@ -7,7 +7,7 @@
 @if (periodId != null)
 {
     <h2>Moje</h2>
-    <HxSwitch @bind-Value="displayTableMyEntries" Label="tabulka" CssClass="mb-3" />
+    <HxSwitch @bind-Value="displayTableMyEntries" Text="tabulka" CssClass="mb-3" />
     if (displayTableMyEntries)
     {
         <ReadOnlyEntriesTable ReceivedEntries="true" PeriodId="@periodId" />
@@ -18,7 +18,7 @@
     }
 
     <h2>Ostatní</h2>
-    <HxSwitch @bind-Value="displayTablePublicEntries" Label="tabulka" CssClass="mb-3" />
+    <HxSwitch @bind-Value="displayTablePublicEntries" Text="tabulka" CssClass="mb-3" />
     if (displayTablePublicEntries)
     {
         <ReadOnlyEntriesTable PublicEntries="true" ReceivedEntries="true" PeriodId="@periodId" />
