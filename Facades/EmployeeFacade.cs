@@ -11,12 +11,9 @@ namespace Havit.Bonusario.Facades;
 
 [Service]
 [Authorize]
-
 public class EmployeeFacade : IEmployeeFacade
 {
 	private readonly IEmployeeRepository employeeRepository;
-	private readonly IApplicationAuthenticationService applicationAuthenticationService;
-	private readonly IUnitOfWork unitOfWork;
 
 	public EmployeeFacade(IEmployeeRepository employeeRepository,
 		IApplicationAuthenticationService applicationAuthenticationService,
@@ -27,22 +24,6 @@ public class EmployeeFacade : IEmployeeFacade
 		this.unitOfWork = unitOfWork;
 	}
 
-	public async Task<Dto<EntryVisibility>> GetCurrentEmployeeDefaultEntryVisibility(CancellationToken cancellationToken = default)
-	{
-		var currentEmployee = await applicationAuthenticationService.GetCurrentEmployeeAsync(cancellationToken);
-		return Dto.FromValue(currentEmployee.DefaultEntryVisibility);
-	}
-
-	public async Task UpdateCurrentEmployeeDefaultEntryVisibility(Dto<EntryVisibility> defaultVisibility, CancellationToken cancellationToken = default)
-	{
-		var currentEmployee = await applicationAuthenticationService.GetCurrentEmployeeAsync(cancellationToken);
-		currentEmployee.DefaultEntryVisibility = defaultVisibility.Value;
-
-		unitOfWork.AddForUpdate(currentEmployee);
-
-		await unitOfWork.CommitAsync(cancellationToken);
-	}
-
 	public async Task<List<EmployeeReferenceDto>> GetAllEmployeeReferencesAsync(CancellationToken cancellationToken = default)
 	{
 		var employees = await employeeRepository.GetAllIncludingDeletedAsync(cancellationToken);
@@ -51,8 +32,7 @@ public class EmployeeFacade : IEmployeeFacade
 			EmployeeId = e.Id,
 			Name = e.Name,
 			Email = e.Email,
-			IsDeleted = e.Deleted is not null,
-			DefaultVisibility = e.DefaultEntryVisibility
+			IsDeleted = e.Deleted is not null
 		}).ToList();
 	}
 }

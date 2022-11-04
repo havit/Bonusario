@@ -14,8 +14,6 @@ public class Employee
 	[MaxLength(255)]
 	public string Email { get; set; }
 
-	public EntryVisibility DefaultEntryVisibility { get; set; } = EntryVisibility.RecipientOnlyAnonymous;
-
 	public DateTime Created { get; set; }
 
 	public DateTime? Deleted { get; set; }
