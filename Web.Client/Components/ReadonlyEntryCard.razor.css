@@ -36,9 +36,10 @@
     font-weight: bold;
 }
 
-/* Center the Employee name vertically when tags nor text is present. */
-::deep h5.transform-down {
-    transform: translateY(50%);
+::deep .row.expanded {
+    height: 50px;
+    display: flex;
+    align-items: center;
 }
 
 ::deep h5 {
