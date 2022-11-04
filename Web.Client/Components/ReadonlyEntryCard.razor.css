@@ -36,6 +36,11 @@
     font-weight: bold;
 }
 
+/* Center the Employee name vertically when tags nor text is present. */
+::deep h5.transform-down {
+    transform: translateY(50%);
+}
+
 ::deep h5 {
     margin: 0;
 }
