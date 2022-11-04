@@ -2,6 +2,8 @@
 
 public partial class LoginDisplay
 {
+	[Parameter] public bool SidebarCollapsed { get; set; }
+
 	private async Task BeginSignOut()
 	{
 		await SignOutManager.SetSignOutState();

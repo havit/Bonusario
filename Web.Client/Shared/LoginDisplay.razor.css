@@ -1,4 +1,4 @@
-﻿.initials {
+﻿::deep .initials {
 	width: 2em;
 	height: 2em;
 	background-color: var(--sidebar-link-hover);
@@ -6,4 +6,8 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
+}
+
+::deep .log-out-toggle {
+	cursor: pointer;
 }
