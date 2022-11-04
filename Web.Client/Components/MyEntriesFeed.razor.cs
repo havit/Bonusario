@@ -79,17 +79,15 @@ public partial class MyEntriesFeed
 	private async Task HandleEntryDeleted()
 	{
 		await EditNewEntry();
-		await LoadData();
 	}
 
 	private async Task HandleEntryUpdated()
 	{
-		await LoadData();
+		await EditNewEntry();
 	}
 
 	private async Task HandleEntryCreated()
 	{
 		await EditNewEntry();
-		await LoadData();
 	}
 }
