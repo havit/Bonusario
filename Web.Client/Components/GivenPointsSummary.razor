@@ -11,6 +11,8 @@
         </div>
     }
 
+    var employeesWithNoPoints = employeeData.SkipWhile(e => e.Points > 0);
+
     @* Mobile version - employees who weren't given any points are hidden in a collapse. *@
     <div class="d-md-none">
         <HxCollapseToggleElement
@@ -23,7 +25,7 @@
 
         </HxCollapseToggleElement>
         <HxCollapse Id="employeeCollapse" OnShown="HandleCollapseShown" OnHidden="HandleCollapseHidden" >
-            @foreach (var employee in employeeData.SkipWhile(e => e.Points > 0))
+            @foreach (var employee in employeesWithNoPoints)
             {
                 <div class="@itemCssClass">
                     @employee.EmployeeDto.Name
@@ -35,7 +37,7 @@
 
     @* Desktop version - all employees are visible form the start. *@
     <div class="d-none d-md-block">
-        @foreach (var employee in employeeData.SkipWhile(e => e.Points > 0))
+        @foreach (var employee in employeesWithNoPoints)
         {
             <div class="@itemCssClass">
                 @employee.EmployeeDto.Name

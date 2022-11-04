@@ -14,10 +14,19 @@ namespace Havit.Bonusario.Facades;
 public class EmployeeFacade : IEmployeeFacade
 {
 	private readonly IEmployeeRepository employeeRepository;
+	private readonly IApplicationAuthenticationService applicationAuthenticationService;
 
-	public EmployeeFacade(IEmployeeRepository employeeRepository)
+	public EmployeeFacade(IEmployeeRepository employeeRepository,
+		IApplicationAuthenticationService applicationAuthenticationService)
 	{
 		this.employeeRepository = employeeRepository;
+		this.applicationAuthenticationService = applicationAuthenticationService;
+	}
+
+	public async Task<Dto<int>> GetCurrentEmployeeId(CancellationToken cancellationToken = default)
+	{
+		var currentEmployee = await applicationAuthenticationService.GetCurrentEmployeeAsync(cancellationToken);
+		return Dto.FromValue(currentEmployee.Id);
 	}
 
 	public async Task<List<EmployeeReferenceDto>> GetAllEmployeeReferencesAsync(CancellationToken cancellationToken = default)

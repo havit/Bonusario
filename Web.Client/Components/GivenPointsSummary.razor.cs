@@ -10,8 +10,7 @@ public partial class GivenPointsSummary
 
 	[Inject] protected IEmployeesDataStore EmployeesDataStore { get; set; }
 	[Inject] protected Func<IEntryFacade> EntryFacade { get; set; }
-	[Inject] protected IHxMessageBoxService MessageBox { get; set; }
-	[Inject] protected AuthenticationStateProvider AuthenticationStateProvider { get; set; }
+	[Inject] protected IEmployeeFacade EmployeeFacade { get; set; }
 
 	private List<EmployeeInformation> employeeData;
 	private IEnumerable<EmployeeReferenceDto> employees;
@@ -20,7 +19,8 @@ public partial class GivenPointsSummary
 
 	protected override async Task OnInitializedAsync()
 	{
-		employees ??= await EmployeesDataStore.GetAllAsync();
+		int currentEmployeeId = (await EmployeeFacade.GetCurrentEmployeeId()).Value;
+		employees ??= (await EmployeesDataStore.GetAllAsync()).Where(e => e.EmployeeId != currentEmployeeId);
 	}
 
 	public async Task ReloadData()
