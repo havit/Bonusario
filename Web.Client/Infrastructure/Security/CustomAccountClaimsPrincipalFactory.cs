@@ -21,7 +21,7 @@ public class CustomAccountClaimsPrincipalFactory : AccountClaimsPrincipalFactory
 
 			if (identity.HasClaim("preferred_username", "crha@havit.cz")
 				|| identity.HasClaim("preferred_username", "haken@havit.cz")
-# if DEBUG
+#if DEBUG
 				|| identity.HasClaim("preferred_username", "hoblik@havit.cz")
 #endif
 				)
