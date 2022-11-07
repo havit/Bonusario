@@ -2,22 +2,25 @@
 @inject INavigationLocalizer NavigationLocalizer
 
 <HxSidebar CssClass="sticky-top bg-white">
-	<HeaderTemplate>
-		<HxSidebarBrand BrandName="Bonusario" BrandNameShort="₿" />
-	</HeaderTemplate>
+    <HeaderTemplate>
+        <HxSidebarBrand BrandName="Bonusario" BrandNameShort="₿" />
+    </HeaderTemplate>
 
-	<ItemsTemplate>
-		<HxSidebarItem Text="Průběžný feed" Href="@Routes.Home" Icon="@BootstrapIcon.Columns" Match="NavLinkMatch.All" />
-		@*<HxSidebarItem Text="Plachta" Href="@Routes.SubmissionBoard" Icon="@BootstrapIcon.CardChecklist" />*@
-		<HxSidebarItem Text="Výsledky" Href="@Routes.Results" Icon="@BootstrapIcon.Calculator" />
-		<HxSidebarItem Text="Historie obdržených" Href="@Routes.ReceivedEntries" Icon="@BootstrapIcon.BoxArrowInRight" />
-		<HxSidebarItem Text="Historie vložených" Href="@Routes.GivenEntries" Icon="@BootstrapIcon.BoxArrowRight" />
-		<HxSidebarItem Text="Souhrnné výsledky" Href="@Routes.AggregateResults" Icon="@BootstrapIcon.Calculator" />
-		@*<HxSidebarItem Text="@NavigationLocalizer.Administration" Href="@Routes.Administration.Index" Icon="@BootstrapIcon.Gear" />
-		<HxSidebarItem Text="Development" Href="/development" Icon="@BootstrapIcon.FileCode" />*@
-	</ItemsTemplate>
+    <ItemsTemplate>
+        <HxSidebarItem Text="Průběžný feed" Href="@Routes.Home" Icon="@BootstrapIcon.Columns" Match="NavLinkMatch.All" />
+        @*<HxSidebarItem Text="Plachta" Href="@Routes.SubmissionBoard" Icon="@BootstrapIcon.CardChecklist" />*@
+        <HxSidebarItem Text="Výsledky" Href="@Routes.Results" Icon="@BootstrapIcon.Calculator" />
+        <HxSidebarItem Text="Historie obdržených" Href="@Routes.ReceivedEntries" Icon="@BootstrapIcon.BoxArrowInRight" />
+        <HxSidebarItem Text="Historie vložených" Href="@Routes.GivenEntries" Icon="@BootstrapIcon.BoxArrowRight" />
+        <HxSidebarItem Text="Souhrnné výsledky" Href="@Routes.AggregateResults" Icon="@BootstrapIcon.Calculator" />
 
-	<FooterTemplate>
-		<LoginDisplay SidebarCollapsed="context.SidebarCollapsed" />
-	</FooterTemplate>
+        <AuthorizeView Roles="Administrator">
+            <HxSidebarItem Text="@NavigationLocalizer.Administration" Href="@Routes.Administration.Index" Icon="@BootstrapIcon.Gear" />
+        </AuthorizeView>
+        @*<HxSidebarItem Text="Development" Href="/development" Icon="@BootstrapIcon.FileCode" />*@
+    </ItemsTemplate>
+
+    <FooterTemplate>
+        <LoginDisplay SidebarCollapsed="context.SidebarCollapsed" />
+    </FooterTemplate>
 </HxSidebar>

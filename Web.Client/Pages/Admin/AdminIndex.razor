@@ -1,4 +1,5 @@
 ﻿@attribute [Route(Routes.Administration.Index)]
+@attribute [Authorize(Roles = "Administrator")]
 
 <h5>User Settings</h5>
 <div class="row row-cols-2 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-6 g-3 mb-4">

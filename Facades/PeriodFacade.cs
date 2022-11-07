@@ -20,6 +20,7 @@ public class PeriodFacade : IPeriodFacade
 		this.unitOfWork = unitOfWork;
 	}
 
+	[Authorize(Roles = "Administrator")]
 	public async Task CreateNewPeriod(PeriodDto periodDto, CancellationToken cancellationToken = default)
 	{
 		Period period = new()

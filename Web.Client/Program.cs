@@ -7,6 +7,7 @@ using Havit.Blazor.Grpc.Client.WebAssembly;
 using Havit.Bonusario.Contracts.Infrastructure;
 using Havit.Bonusario.Web.Client.DataStores;
 using Havit.Bonusario.Web.Client.Infrastructure.Grpc;
+using Havit.Bonusario.Web.Client.Infrastructure.Security;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
@@ -56,9 +57,10 @@ public class Program
 		{
 			builder.Configuration.Bind("AzureAd", options.ProviderOptions);
 			options.ProviderOptions.LoginMode = "redirect";
+			options.UserOptions.RoleClaim = "role";
 		});
 
-		//builder.Services.AddScoped(typeof(AccountClaimsPrincipalFactory<RemoteUserAccount>), typeof(CustomAccountClaimsPrincipalFactory));
+		builder.Services.AddScoped(typeof(AccountClaimsPrincipalFactory<RemoteUserAccount>), typeof(CustomAccountClaimsPrincipalFactory));
 		builder.Services.AddApiAuthorization();
 	}
 

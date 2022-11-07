@@ -19,6 +19,7 @@ public static class AuthConfig
 		services.Configure<JwtBearerOptions>(JwtBearerDefaults.AuthenticationScheme, options =>
 		{
 			options.TokenValidationParameters.NameClaimType = "name";
+			options.TokenValidationParameters.RoleClaimType = "role";
 		});
 
 		services.AddScoped<IApplicationAuthenticationService, ApplicationAuthenticationService>();
@@ -31,6 +32,7 @@ public static class AuthConfig
 			configuration.Events.OnRedirectToAccessDenied = (context) => RedirectOrApiStatus(context, HttpStatusCode.Forbidden);
 		});
 
+		services.AddScoped<IClaimsTransformation, ApplicationClaimsTransformation>();
 		services.AddScoped<IApplicationAuthenticationService, ApplicationAuthenticationService>();
 	}
 
