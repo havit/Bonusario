@@ -4,9 +4,9 @@ namespace Havit.Bonusario.Web.Client.DataStores;
 
 public class EmployeesDataStore : DictionaryStaticDataStore<int, EmployeeReferenceDto>, IEmployeesDataStore
 {
-	private readonly Func<IEmployeeFacade> employeeFacade;
+	private readonly IEmployeeFacade employeeFacade;
 
-	public EmployeesDataStore(Func<IEmployeeFacade> employeeFacade)
+	public EmployeesDataStore(IEmployeeFacade employeeFacade)
 	{
 		this.employeeFacade = employeeFacade;
 	}
@@ -15,7 +15,7 @@ public class EmployeesDataStore : DictionaryStaticDataStore<int, EmployeeReferen
 
 	protected override async Task<IEnumerable<EmployeeReferenceDto>> LoadDataAsync()
 	{
-		return await employeeFacade().GetAllEmployeeReferencesAsync();
+		return await employeeFacade.GetAllEmployeeReferencesAsync();
 	}
 
 	protected override bool ShouldRefresh() => false;
