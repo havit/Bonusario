@@ -181,8 +181,8 @@
 	<assembly fullname="System.Runtime.Serialization.Json.dll"											 preserve="all" />
 	<assembly fullname="System.Runtime.Serialization.Primitives.dll"									 preserve="all" />
 	<assembly fullname="System.Runtime.Serialization.Xml.dll"											 preserve="all" />
--->
-	<assembly fullname="System.Security.AccessControl.dll"												 preserve="all" />
+
+    <assembly fullname="System.Security.AccessControl.dll"												 preserve="all" />
 	<assembly fullname="System.Security.Claims.dll"														 preserve="all" />
 	<assembly fullname="System.Security.Cryptography.Algorithms.dll"									 preserve="all" />
 	<assembly fullname="System.Security.Cryptography.Cng.dll"											 preserve="all" />
@@ -198,6 +198,7 @@
 	<assembly fullname="System.Security.SecureString.dll"												 preserve="all" />
 	<assembly fullname="System.ServiceModel.Web.dll"													 preserve="all" />
 	<assembly fullname="System.ServiceProcess.dll"														 preserve="all" />
+-->
 	<assembly fullname="System.Text.Encoding.CodePages.dll"												 preserve="all" />
 	<assembly fullname="System.Text.Encoding.dll"														 preserve="all" />
 	<assembly fullname="System.Text.Encoding.Extensions.dll"											 preserve="all" />
