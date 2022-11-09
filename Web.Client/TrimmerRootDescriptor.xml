@@ -230,8 +230,10 @@
 	<assembly fullname="System.Xml.XDocument.dll"														 preserve="all" />
 	<assembly fullname="System.Xml.XmlDocument.dll"														 preserve="all" />
 	<assembly fullname="System.Xml.XmlSerializer.dll"													 preserve="all" />
--->
-	<assembly fullname="System.Xml.XPath.dll"															 preserve="all" />
+
+<assembly fullname="System.Xml.XPath.dll"															 preserve="all" />
 	<assembly fullname="System.Xml.XPath.XDocument.dll"													 preserve="all" />
 	<assembly fullname="WindowsBase.dll"														 preserve="all" />
+
+-->
 </linker>
