@@ -3,7 +3,7 @@
     string itemCssClass = "w-100 my-1";
     string pointsCssClass = "float-end";
 
-    @foreach (var employee in employeeData.TakeWhile(e => e.Points > 0))
+    @foreach (var employee in employeeData.Where(e => e.Points > 0))
     {
         <div class="@CssClassHelper.Combine(itemCssClass, "fw-bold")">
             @employee.EmployeeDto.Name
@@ -11,7 +11,7 @@
         </div>
     }
 
-    var employeesWithNoPoints = employeeData.SkipWhile(e => e.Points > 0);
+    var employeesWithNoPoints = employeeData.Where(e => e.Points == 0);
 
     @* Mobile version - employees who weren't given any points are hidden in a collapse. *@
     <div class="d-md-none">
