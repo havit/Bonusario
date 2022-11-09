@@ -24,6 +24,7 @@
 	<assembly fullname="Havit.Bonusario.Web.Client"													 preserve="all" />
 	<assembly fullname="Havit.Core"																	 preserve="all" />
 	<assembly fullname="Havit.Extensions.Localization"												 preserve="all" />
+	<!--
 	<assembly fullname="Microsoft.AspNetCore.Authorization"											 preserve="all" />
 	<assembly fullname="Microsoft.AspNetCore.Components.Authorization"								 preserve="all" />
 	<assembly fullname="Microsoft.AspNetCore.Components"											 preserve="all" />
@@ -34,7 +35,7 @@
 	<assembly fullname="Microsoft.AspNetCore.Metadata"												 preserve="all" />
 	<assembly fullname="Microsoft.Authentication.WebAssembly.Msal"									 preserve="all" />
 	<assembly fullname="Microsoft.CSharp"															 preserve="all" />
-<!--
+
 	<assembly fullname="Microsoft.Extensions.Configuration.Abstractions"							 preserve="all" />
 	<assembly fullname="Microsoft.Extensions.Configuration.Binder"									 preserve="all" />
 	<assembly fullname="Microsoft.Extensions.Configuration"											 preserve="all" />
