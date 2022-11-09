@@ -163,8 +163,8 @@
 	<assembly fullname="System.Reflection.TypeExtensions.dll"											 preserve="all" />
 	<assembly fullname="System.Resources.Reader.dll"													 preserve="all" />
 	<assembly fullname="System.Resources.ResourceManager.dll"											 preserve="all" />
--->	
-	<assembly fullname="System.Resources.Writer.dll"													 preserve="all" />
+
+    <assembly fullname="System.Resources.Writer.dll"													 preserve="all" />
 	<assembly fullname="System.Runtime.CompilerServices.Unsafe.dll"										 preserve="all" />
 	<assembly fullname="System.Runtime.CompilerServices.VisualC.dll"									 preserve="all" />
 	<assembly fullname="System.Runtime.dll"																 preserve="all" />
@@ -181,6 +181,7 @@
 	<assembly fullname="System.Runtime.Serialization.Json.dll"											 preserve="all" />
 	<assembly fullname="System.Runtime.Serialization.Primitives.dll"									 preserve="all" />
 	<assembly fullname="System.Runtime.Serialization.Xml.dll"											 preserve="all" />
+-->
 	<assembly fullname="System.Security.AccessControl.dll"												 preserve="all" />
 	<assembly fullname="System.Security.Claims.dll"														 preserve="all" />
 	<assembly fullname="System.Security.Cryptography.Algorithms.dll"									 preserve="all" />
