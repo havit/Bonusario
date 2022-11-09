@@ -198,7 +198,7 @@
 	<assembly fullname="System.Security.SecureString.dll"												 preserve="all" />
 	<assembly fullname="System.ServiceModel.Web.dll"													 preserve="all" />
 	<assembly fullname="System.ServiceProcess.dll"														 preserve="all" />
--->
+
 	<assembly fullname="System.Text.Encoding.CodePages.dll"												 preserve="all" />
 	<assembly fullname="System.Text.Encoding.dll"														 preserve="all" />
 	<assembly fullname="System.Text.Encoding.Extensions.dll"											 preserve="all" />
@@ -215,6 +215,7 @@
 	<assembly fullname="System.Threading.Thread.dll"													 preserve="all" />
 	<assembly fullname="System.Threading.ThreadPool.dll"												 preserve="all" />
 	<assembly fullname="System.Threading.Timer.dll"														 preserve="all" />
+-->
 	<assembly fullname="System.Transactions.dll"														 preserve="all" />
 	<assembly fullname="System.Transactions.Local.dll"													 preserve="all" />
 	<assembly fullname="System.ValueTuple.dll"															 preserve="all" />
