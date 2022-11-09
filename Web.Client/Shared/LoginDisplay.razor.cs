@@ -10,7 +10,7 @@ public partial class LoginDisplay
 
 	private void BeginSignOut()
 	{
-		Navigation.NavigateToLogout("authentication/logout");
+		NavigationManager.NavigateToLogout("authentication/logout");
 	}
 
 	/// <summary>

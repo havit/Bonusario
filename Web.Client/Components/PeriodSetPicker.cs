@@ -6,6 +6,7 @@ public class PeriodSetPicker : HxSelectBase<int?, PeriodSetDto>
 {
 	[Parameter] public string NullText { get; set; }
 
+#pragma warning disable BL0007 // Component parameter should be auto-property
 	[Parameter]
 	public bool? Nullable
 	{
@@ -18,6 +19,7 @@ public class PeriodSetPicker : HxSelectBase<int?, PeriodSetDto>
 			this.NullableImpl = value;
 		}
 	}
+#pragma warning restore BL0007 // Component parameter should be auto-property
 
 	[Inject] protected IPeriodSetsDataStore PeriodSetsDataStore { get; set; }
 
