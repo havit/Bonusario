@@ -108,7 +108,6 @@
 	<assembly fullname="System.IO.Compression.dll"														 preserve="all" />
 	<assembly fullname="System.IO.Compression.FileSystem.dll"											 preserve="all" />
 	<assembly fullname="System.IO.Compression.ZipFile.dll"												 preserve="all" />
--->
 	<assembly fullname="System.IO.dll"																	 preserve="all" />
 	<assembly fullname="System.IO.FileSystem.AccessControl.dll"											 preserve="all" />
 	<assembly fullname="System.IO.FileSystem.dll"														 preserve="all" />
@@ -164,6 +163,7 @@
 	<assembly fullname="System.Reflection.TypeExtensions.dll"											 preserve="all" />
 	<assembly fullname="System.Resources.Reader.dll"													 preserve="all" />
 	<assembly fullname="System.Resources.ResourceManager.dll"											 preserve="all" />
+-->	
 	<assembly fullname="System.Resources.Writer.dll"													 preserve="all" />
 	<assembly fullname="System.Runtime.CompilerServices.Unsafe.dll"										 preserve="all" />
 	<assembly fullname="System.Runtime.CompilerServices.VisualC.dll"									 preserve="all" />
