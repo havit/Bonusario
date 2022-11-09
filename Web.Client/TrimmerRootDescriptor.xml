@@ -163,7 +163,7 @@
 	<assembly fullname="System.Reflection.TypeExtensions.dll"											 preserve="all" />
 	<assembly fullname="System.Resources.Reader.dll"													 preserve="all" />
 	<assembly fullname="System.Resources.ResourceManager.dll"											 preserve="all" />
-
+-->
     <assembly fullname="System.Resources.Writer.dll"													 preserve="all" />
 	<assembly fullname="System.Runtime.CompilerServices.Unsafe.dll"										 preserve="all" />
 	<assembly fullname="System.Runtime.CompilerServices.VisualC.dll"									 preserve="all" />
@@ -235,5 +235,5 @@
 	<assembly fullname="System.Xml.XPath.XDocument.dll"													 preserve="all" />
 	<assembly fullname="WindowsBase.dll"														 preserve="all" />
 
--->
+
 </linker>

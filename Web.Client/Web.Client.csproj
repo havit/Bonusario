@@ -6,7 +6,6 @@
 		<AssemblyName>Havit.Bonusario.Web.Client</AssemblyName>
 		<RootNamespace>Havit.Bonusario.Web.Client</RootNamespace>
 		<BlazorWebAssemblyLoadAllGlobalizationData>true</BlazorWebAssemblyLoadAllGlobalizationData>
-		<PublishTrimmed>false</PublishTrimmed>
 	</PropertyGroup>
 
 	<ItemGroup>
