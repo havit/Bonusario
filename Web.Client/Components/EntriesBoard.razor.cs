@@ -43,7 +43,7 @@ public partial class EntriesBoard
 		{
 			try
 			{
-				await EntryFacade.SubmitEntriesAsync(entries.Where(e => e.Submitted is null).Select(e => e.Id).ToList());
+				// await EntryFacade.SubmitEntriesAsync(entries.Where(e => e.Submitted is null).Select(e => e.Id).ToList());
 				await LoadData();
 			}
 			catch (OperationFailedException)

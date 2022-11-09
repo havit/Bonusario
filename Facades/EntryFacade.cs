@@ -178,17 +178,13 @@ public class EntryFacade : IEntryFacade
 		return Dto.FromValue(PointsAvailable - pointsAssigned);
 	}
 
+	[Authorize(Roles = "Administrator")]
 	public async Task SubmitEntriesAsync(List<int> entryIds, CancellationToken cancellationToken = default)
 	{
 		Contract.Requires<ArgumentNullException>(entryIds is not null, nameof(entryIds));
 		Contract.Requires<ArgumentException>(entryIds.Any(), nameof(entryIds));
 
-		var currentEmployee = await applicationAuthenticationService.GetCurrentEmployeeAsync(cancellationToken);
-
 		var entries = await entryRepository.GetObjectsAsync(entryIds.ToArray(), cancellationToken);
-
-		Contract.Requires<SecurityException>(entries.TrueForAll(e => e.CreatedById == currentEmployee.Id), nameof(Entry.CreatedById));
-
 		var periodId = entries.First().PeriodId;
 		Contract.Requires<OperationFailedException>(entries.TrueForAll(e => e.PeriodId == periodId), "Potvrzované záznamy musí být ze stejného období.");
 
@@ -198,10 +194,6 @@ public class EntryFacade : IEntryFacade
 			throw new OperationFailedException("Nelze zapisovat do neotevřeného období.");
 		}
 
-		var pointsAssigned = await entryRepository.GetPointsAssignedSumAsync(periodId, currentEmployee.Id, cancellationToken);
-		Contract.Requires<OperationFailedException>(pointsAssigned <= PointsAvailable, "Limit celkového počtu bodů za období překročen, zkontrolujte záznamy.");
-
-		Contract.Requires<OperationFailedException>(entries.TrueForAll(e => e.RecipientId != currentEmployee.Id), "Nelze potrvrdit záznam, který přiřazuje body aktuálnímu uživateli.");
 		Contract.Requires<OperationFailedException>(entries.TrueForAll(e => e.RecipientId != e.CreatedById), "Nelze potrvrdit záznam, který přiřazuje body sám sobě.");
 		Contract.Requires<OperationFailedException>(entries.TrueForAll(e => e.Value >= 0), "Nelze potrvrdit záznam, který má záporné body.");
 
@@ -211,7 +203,7 @@ public class EntryFacade : IEntryFacade
 			unitOfWork.AddForUpdate(entry);
 		}
 
-		await unitOfWork.CommitAsync();
+		await unitOfWork.CommitAsync(cancellationToken);
 	}
 
 	public async Task<List<EntryDto>> GetEntriesOfPeriod(Dto<int> periodId, CancellationToken cancellationToken = default)
