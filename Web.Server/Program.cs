@@ -33,7 +33,10 @@ public class Program
 				logging.AddDebug();
 				logging.AddAzureWebAppDiagnostics();
 #if !DEBUG
-				logging.AddEventLog();
+				if (OperatingSystem.IsWindows())
+				{
+					logging.AddEventLog();
+				}
 #endif
 			});
 }
