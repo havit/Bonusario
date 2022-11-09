@@ -24,13 +24,15 @@
 	<assembly fullname="Havit.Bonusario.Web.Client"													 preserve="all" />
 	<assembly fullname="Havit.Core"																	 preserve="all" />
 	<assembly fullname="Havit.Extensions.Localization"												 preserve="all" />
--->
+
 	<assembly fullname="Microsoft.AspNetCore.Authorization"											 preserve="all" />
-	<!--
 	<assembly fullname="Microsoft.AspNetCore.Components.Authorization"								 preserve="all" />
 	<assembly fullname="Microsoft.Authentication.WebAssembly.Msal"									 preserve="all" />
+-->
 	<assembly fullname="Microsoft.AspNetCore.Components.WebAssembly.Authentication"					 preserve="all" />
-	<assembly fullname="Microsoft.AspNetCore.Components"											 preserve="all" />
+	<!--
+
+<assembly fullname="Microsoft.AspNetCore.Components"											 preserve="all" />
 	<assembly fullname="Microsoft.AspNetCore.Components.Forms"										 preserve="all" />
 	<assembly fullname="Microsoft.AspNetCore.Components.Web"										 preserve="all" />
 	<assembly fullname="Microsoft.AspNetCore.Components.WebAssembly"								 preserve="all" />
