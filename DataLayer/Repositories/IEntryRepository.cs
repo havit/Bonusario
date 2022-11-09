@@ -10,7 +10,7 @@ public partial interface IEntryRepository
 	Task<int> GetPointsAssignedSumAsync(int periodId, int createdByEmployeeId, CancellationToken cancellationToken = default);
 	Task<List<Entry>> GetPublicReceivedEntriesAsync(int periodId, CancellationToken cancellationToken = default);
 	/// <summary>
-	/// Doesn't load entries' references (tags).
+	/// Finds all entries in the specified period. Doesn't load entries' references (tags).
 	/// </summary>
 	/// <param name="periodId"></param>
 	/// <param name="cancellationToken"></param>
