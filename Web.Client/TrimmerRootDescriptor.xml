@@ -6,7 +6,6 @@
 	<assembly fullname="Microsoft.Authentication.WebAssembly.Msal" preserve="all" />
 
 
-	<!--
 	<assembly fullname="BlazorApplicationInsights"													 preserve="all" />
 	<assembly fullname="Blazored.FluentValidation"													 preserve="all" />
 	<assembly fullname="FluentValidation.DependencyInjectionExtensions"								 preserve="all" />
@@ -79,6 +78,7 @@
 	<assembly fullname="System.ComponentModel.EventBasedAsync"										 preserve="all" />
 	<assembly fullname="System.ComponentModel.Primitives"											 preserve="all" />
 	<assembly fullname="System.ComponentModel.TypeConverter"										 preserve="all" />
+<!--
 	<assembly fullname="System.Configuration"														 preserve="all" />
 	<assembly fullname="System.Console"																 preserve="all" />
 	<assembly fullname="System.Core"																 preserve="all" />
@@ -163,9 +163,9 @@
 	<assembly fullname="System.Reflection.TypeExtensions"											 preserve="all" />
 	<assembly fullname="System.Resources.Reader"													 preserve="all" />
 	<assembly fullname="System.Resources.ResourceManager"											 preserve="all" />
--->
     <assembly fullname="System.Resources.Writer"													 preserve="all" />
-	<assembly fullname="System.Runtime.CompilerServices.Unsafe"										 preserve="all" />
+
+<assembly fullname="System.Runtime.CompilerServices.Unsafe"										 preserve="all" />
 	<assembly fullname="System.Runtime.CompilerServices.VisualC"									 preserve="all" />
 	<assembly fullname="System.Runtime"																 preserve="all" />
 	<assembly fullname="System.Runtime.Extensions"													 preserve="all" />
@@ -234,6 +234,7 @@
 <assembly fullname="System.Xml.XPath"															 preserve="all" />
 	<assembly fullname="System.Xml.XPath.XDocument"													 preserve="all" />
 	<assembly fullname="WindowsBase"														 preserve="all" />
+-->
 
 
 </linker>
