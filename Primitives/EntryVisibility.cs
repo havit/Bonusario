@@ -4,12 +4,12 @@ namespace Havit.Bonusario.Primitives;
 
 public enum EntryVisibility
 {
-	[Description("pro příjemce bez podpisu")]
+	[Description("Pro příjemce bez podpisu")]
 	RecipientOnlyAnonymous = 0,
 
-	[Description("pro příjemce s podpisem")]
+	[Description("Pro příjemce s podpisem")]
 	RecipientOnlyWithAuthorIdentity = 1,
 
-	[Description("viditelné všem")]
+	[Description("Viditelné všem")]
 	Public = 2
 }

@@ -29,10 +29,7 @@ public partial class EntryVisibilityPicker
 
 	private string GetEntryVisibilityText(EntryVisibility entryVisibility)
 	{
-		StringBuilder visibilityText = new(EnumExt.GetDescription(typeof(EntryVisibility), entryVisibility));
-		visibilityText[0] = char.ToUpper(visibilityText[0]);
-
-		return visibilityText.ToString();
+		return EnumExt.GetDescription(typeof(EntryVisibility), entryVisibility);
 	}
 
 	private BootstrapIcon GetIconForEntryVisibility(EntryVisibility visibility)
