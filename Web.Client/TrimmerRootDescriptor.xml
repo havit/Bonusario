@@ -5,7 +5,6 @@
 	<!--https://github.com/dotnet/aspnetcore/issues/33312-->
 	<assembly fullname="Microsoft.Authentication.WebAssembly.Msal" preserve="all" />
 
-<!--
 	<assembly fullname="BlazorApplicationInsights"													 preserve="all" />
 	<assembly fullname="Blazored.FluentValidation"													 preserve="all" />
 	<assembly fullname="FluentValidation.DependencyInjectionExtensions"								 preserve="all" />
@@ -35,7 +34,7 @@
 	<assembly fullname="Microsoft.AspNetCore.Metadata"												 preserve="all" />
 	<assembly fullname="Microsoft.Authentication.WebAssembly.Msal"									 preserve="all" />
 	<assembly fullname="Microsoft.CSharp"															 preserve="all" />
--->
+<!--
 	<assembly fullname="Microsoft.Extensions.Configuration.Abstractions"							 preserve="all" />
 	<assembly fullname="Microsoft.Extensions.Configuration.Binder"									 preserve="all" />
 	<assembly fullname="Microsoft.Extensions.Configuration"											 preserve="all" />
@@ -79,7 +78,7 @@
 	<assembly fullname="System.ComponentModel.EventBasedAsync"										 preserve="all" />
 	<assembly fullname="System.ComponentModel.Primitives"											 preserve="all" />
 	<assembly fullname="System.ComponentModel.TypeConverter"										 preserve="all" />
-<!--
+
 	<assembly fullname="System.Configuration"														 preserve="all" />
 	<assembly fullname="System.Console"																 preserve="all" />
 	<assembly fullname="System.Core"																 preserve="all" />
