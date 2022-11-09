@@ -1,13 +1,16 @@
-﻿namespace Havit.Bonusario.Web.Client.Shared;
+﻿using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
+
+namespace Havit.Bonusario.Web.Client.Shared;
 
 public partial class LoginDisplay
 {
 	[Parameter] public bool SidebarCollapsed { get; set; }
 
-	private async Task BeginSignOut()
+	[Inject] protected NavigationManager NavigationManager { get; set; }
+
+	private void BeginSignOut()
 	{
-		await SignOutManager.SetSignOutState();
-		Navigation.NavigateTo("authentication/logout");
+		Navigation.NavigateToLogout("authentication/logout");
 	}
 
 	/// <summary>

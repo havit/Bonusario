@@ -5,26 +5,24 @@
 @inject SignOutSessionStateManager SignOutManager
 
 <div class="login-display d-flex align-items-center w-100">
-	<AuthorizeView>
-		<Authorized>
-			<HxDropdown Direction="DropdownDirection.Up">
-				<HxDropdownToggleElement ElementName="div" Caret="false" CssClass="log-out-toggle d-flex align-items-center">
-					<div class="initials rounded-circle text-primary p-1 mx-1">@NameToInitials(@context.User?.Identity?.Name)</div>
-					@if (!SidebarCollapsed)
-					{
-						<a class="login-display-nickname text-truncate mx-3">@context?.User?.Identity?.Name</a>
-					}
-				</HxDropdownToggleElement>
+    <AuthorizeView>
+        <Authorized>
+            <HxDropdown Direction="DropdownDirection.Up">
+                <HxDropdownToggleElement ElementName="div" Caret="false" CssClass="log-out-toggle d-flex align-items-center">
+                    <div class="initials rounded-circle text-primary p-1 mx-1">@NameToInitials(@context.User?.Identity?.Name)</div>
+                    @if (!SidebarCollapsed)
+                    {
+                        <a class="login-display-nickname text-truncate mx-3">@context?.User?.Identity?.Name</a>
+                    }
+                </HxDropdownToggleElement>
 
-				<HxDropdownMenu>
-					<HxDropdownItem OnClick="BeginSignOut">
-						Log out
-					</HxDropdownItem>
-				</HxDropdownMenu>
-			</HxDropdown>
-		</Authorized>
-		<NotAuthorized>
-			<span><a href="authentication/register">Register</a> or <a href="authentication/login">Log in</a></span>
-		</NotAuthorized>
-	</AuthorizeView>
+                <HxDropdownMenu>
+                    <HxDropdownItem OnClick="BeginSignOut">Log out</HxDropdownItem>
+                </HxDropdownMenu>
+            </HxDropdown>
+        </Authorized>
+        <NotAuthorized>
+            <span><a href="authentication/register">Register</a> or <a href="authentication/login">Log in</a></span>
+        </NotAuthorized>
+    </AuthorizeView>
 </div>
