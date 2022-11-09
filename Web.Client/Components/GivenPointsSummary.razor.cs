@@ -9,7 +9,7 @@ public partial class GivenPointsSummary
 	[Parameter] public int? PeriodId { get; set; }
 
 	[Inject] protected IEmployeesDataStore EmployeesDataStore { get; set; }
-	[Inject] protected Func<IEntryFacade> EntryFacade { get; set; }
+	[Inject] protected IEntryFacade EntryFacade { get; set; }
 	[Inject] protected IEmployeeFacade EmployeeFacade { get; set; }
 
 	private List<EmployeeInformation> employeeData;
@@ -38,7 +38,7 @@ public partial class GivenPointsSummary
 	{
 		if (PeriodId != null)
 		{
-			var entries = await EntryFacade().GetMyGivenEntriesAsync(Dto.FromValue(PeriodId.Value));
+			var entries = await EntryFacade.GetMyGivenEntriesAsync(Dto.FromValue(PeriodId.Value));
 
 			employeeData = new();
 

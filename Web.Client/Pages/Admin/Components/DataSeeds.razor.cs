@@ -4,7 +4,7 @@ namespace Havit.Bonusario.Web.Client.Pages.Admin.Components;
 
 public partial class DataSeeds : ComponentBase
 {
-	[Inject] protected Func<IDataSeedFacade> DataSeedFacade { get; set; }
+	[Inject] protected IDataSeedFacade DataSeedFacade { get; set; }
 	[Inject] protected IHxMessengerService Messenger { get; set; }
 	[Inject] protected IHxMessageBoxService MessageBox { get; set; }
 	[Inject] protected NavigationManager NavigationManager { get; set; }
@@ -17,7 +17,7 @@ public partial class DataSeeds : ComponentBase
 	{
 		if (selectedSeedProfile is not null && await MessageBox.ConfirmAsync($"Do you really want to seed {selectedSeedProfile}?"))
 		{
-			await DataSeedFacade().SeedDataProfile(selectedSeedProfile);
+			await DataSeedFacade.SeedDataProfile(selectedSeedProfile);
 
 			NavigationManager.NavigateTo("/", forceLoad: true);
 		}
@@ -25,7 +25,7 @@ public partial class DataSeeds : ComponentBase
 
 	public async Task ShowAsync()
 	{
-		seedProfiles ??= (await DataSeedFacade().GetDataSeedProfiles()).Value;
+		seedProfiles ??= (await DataSeedFacade.GetDataSeedProfiles()).Value;
 
 		await offcanvasComponent.ShowAsync();
 	}
