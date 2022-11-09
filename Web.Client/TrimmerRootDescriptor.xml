@@ -215,7 +215,7 @@
 	<assembly fullname="System.Threading.Thread.dll"													 preserve="all" />
 	<assembly fullname="System.Threading.ThreadPool.dll"												 preserve="all" />
 	<assembly fullname="System.Threading.Timer.dll"														 preserve="all" />
--->
+
 	<assembly fullname="System.Transactions.dll"														 preserve="all" />
 	<assembly fullname="System.Transactions.Local.dll"													 preserve="all" />
 	<assembly fullname="System.ValueTuple.dll"															 preserve="all" />
@@ -224,6 +224,7 @@
 	<assembly fullname="System.Windows.dll"																 preserve="all" />
 	<assembly fullname="System.Xml.dll"																	 preserve="all" />
 	<assembly fullname="System.Xml.Linq.dll"															 preserve="all" />
+-->
 	<assembly fullname="System.Xml.ReaderWriter.dll"													 preserve="all" />
 	<assembly fullname="System.Xml.Serialization.dll"													 preserve="all" />
 	<assembly fullname="System.Xml.XDocument.dll"														 preserve="all" />
