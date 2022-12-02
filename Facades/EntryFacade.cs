@@ -188,12 +188,6 @@ public class EntryFacade : IEntryFacade
 		var periodId = entries.First().PeriodId;
 		Contract.Requires<OperationFailedException>(entries.TrueForAll(e => e.PeriodId == periodId), "Potvrzované záznamy musí být ze stejného období.");
 
-		var period = await periodRepository.GetObjectAsync(periodId, cancellationToken);
-		if ((period.StartDate > timeService.GetCurrentDate()) || (period.EndDate < timeService.GetCurrentDate()))
-		{
-			throw new OperationFailedException("Nelze zapisovat do neotevřeného období.");
-		}
-
 		Contract.Requires<OperationFailedException>(entries.TrueForAll(e => e.RecipientId != e.CreatedById), "Nelze potrvrdit záznam, který přiřazuje body sám sobě.");
 		Contract.Requires<OperationFailedException>(entries.TrueForAll(e => e.Value >= 0), "Nelze potrvrdit záznam, který má záporné body.");
 
