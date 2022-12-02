@@ -28,5 +28,6 @@ public partial class AdminIndex : ComponentBase
 	private async Task ShiftPeriods()
 	{
 		await AdministrationOperations.SubmitEntriesAndOpenNewPeriod();
+		Messenger.AddInformation("Záznamy byly úspěšně potvrzeny a bylo založeno nové období.");
 	}
 }
