@@ -12,8 +12,6 @@ public partial interface IEntryRepository
 	/// <summary>
 	/// Finds all entries in the specified period. Doesn't load entries' references (tags).
 	/// </summary>
-	/// <param name="periodId"></param>
-	/// <param name="cancellationToken"></param>
 	/// <returns>A list of entries in the selected period.</returns>
 	Task<List<Entry>> GetEntriesOfPeriod(int periodId, CancellationToken cancellationToken = default);
 	Task<List<ResultItemDto>> GetResultsAsync(int periodId, CancellationToken cancellationToken = default);
