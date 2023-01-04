@@ -20,7 +20,7 @@ public partial class GivenPointsSummary
 	protected override async Task OnInitializedAsync()
 	{
 		int currentEmployeeId = (await EmployeeFacade.GetCurrentEmployeeId()).Value;
-		employees ??= (await EmployeesDataStore.GetAllAsync()).Where(e => e.EmployeeId != currentEmployeeId);
+		employees ??= (await EmployeesDataStore.GetAllAsync()).Where(e => e.EmployeeId != currentEmployeeId && !e.IsDeleted);
 	}
 
 	public async Task ReloadData()

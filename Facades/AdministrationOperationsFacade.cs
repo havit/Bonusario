@@ -30,7 +30,12 @@ public class AdministrationOperationsFacade : IAdministrationOperationsFacade
 		// Submit all entries in the last period.
 
 		var entries = await entryFacade.GetEntriesOfPeriod(Dto.FromValue(newestPeriod.PeriodId), cancellationToken);
-		await entryFacade.SubmitEntriesAsync(entries.Where(e => e.Submitted is null).Select(e => e.Id).ToList(), cancellationToken);
+		var entryIds = entries.Where(e => e.Submitted is null).Select(e => e.Id).ToList();
+
+		if (entryIds is not null && entryIds.Any())
+		{
+			await entryFacade.SubmitEntriesAsync(entryIds, cancellationToken);
+		}
 
 		// Create new period following the last period.
 
