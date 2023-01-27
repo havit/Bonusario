@@ -13,6 +13,7 @@ public partial class EntryCard
 	[Parameter] public EventCallback OnEntryDeleted { get; set; }
 	[Parameter] public EventCallback<EntryDto> OnEntryCreated { get; set; }
 	[Parameter] public EventCallback<EntryDto> OnEntryUpdated { get; set; }
+	[Parameter] public EventCallback OnCloseButtonClicked { get; set; }
 	[Parameter] public string CssClass { get; set; }
 
 	[Inject] protected IEmployeeFacade EmployeeFacade { get; set; }
@@ -22,6 +23,8 @@ public partial class EntryCard
 	private EditContext editContext;
 
 	private bool RenderAuthor => ShowAuthor && Entry.CreatedById.HasValue;
+
+	private bool RenderCloseButton => OnCloseButtonClicked.HasDelegate;
 
 	protected override void OnInitialized()
 	{
@@ -92,5 +95,10 @@ public partial class EntryCard
 				// NOOP
 			}
 		}
+	}
+
+	private async Task HandleCloseButtonClick()
+	{
+		await OnCloseButtonClicked.InvokeAsync();
 	}
 }

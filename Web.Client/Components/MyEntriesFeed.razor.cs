@@ -9,38 +9,38 @@ public partial class MyEntriesFeed
 	[Inject] protected IEntryFacade EntryFacade { get; set; }
 	[Inject] protected IEmployeeFacade EmployeeFacade { get; set; }
 
-	[Inject] protected IJSRuntime JSRuntime { get; set; }
+	private EntryDto newEntry = new();
+	private EntryDto editedEntry;
 
-	private IJSObjectReference jsModule;
-	private DotNetObjectReference<MyEntriesFeed> dotnetObjectReference;
-	private string entryCardFormWrapperId = "card" + Guid.NewGuid().ToString("N");
-	private EntryDto editedEntry = new();
 	private List<EntryDto> entries;
 	private int? remainingPoints;
 	private GivenPointsSummary givenPointsSummary;
 
-	public MyEntriesFeed()
-	{
-		dotnetObjectReference = DotNetObjectReference.Create(this);
-	}
-
-	protected override async Task OnAfterRenderAsync(bool firstRender)
-	{
-		if (firstRender)
-		{
-			await EnsureJsModule();
-			await jsModule.InvokeVoidAsync("initialize", dotnetObjectReference, entryCardFormWrapperId);
-		}
-	}
-
-	protected async Task EnsureJsModule()
-	{
-		jsModule ??= await JSRuntime.InvokeAsync<IJSObjectReference>("import", "/js/MyEntriesFeed.js");
-	}
-
 	protected override async Task OnParametersSetAsync()
 	{
-		editedEntry.PeriodId = this.PeriodId.Value;
+		newEntry.PeriodId = PeriodId.Value;
+		await LoadData();
+	}
+
+	private async Task HandleEntryUpdatedOrDeleted()
+	{
+		await LoadData();
+		CloseEdit();
+	}
+
+	private void EditEntry(EntryDto entry)
+	{
+		editedEntry = entry;
+	}
+
+	private void CloseEdit()
+	{
+		editedEntry = null;
+	}
+
+	private async Task HandleEntryCreated()
+	{
+		EditNewEntry();
 		await LoadData();
 	}
 
@@ -54,40 +54,8 @@ public partial class MyEntriesFeed
 		await givenPointsSummary.ReloadData();
 	}
 
-	private async Task EditEntry(EntryDto entry)
+	private void EditNewEntry()
 	{
-		editedEntry = entry;
-		await JSRuntime.InvokeVoidAsync("window.scrollTo", 0, 0);
-	}
-
-	[JSInvokable("HandleBodyClick")]
-	public async Task HandleBodyClick()
-	{
-		await EditNewEntry();
-		StateHasChanged();
-	}
-
-	private async Task EditNewEntry()
-	{
-		if (editedEntry.Id != default)
-		{
-			editedEntry = new EntryDto() { PeriodId = PeriodId.Value, Visibility = EntryDto.DefaultVisibility };
-			await LoadData();
-		}
-	}
-
-	private async Task HandleEntryDeleted()
-	{
-		await EditNewEntry();
-	}
-
-	private async Task HandleEntryUpdated()
-	{
-		await EditNewEntry();
-	}
-
-	private async Task HandleEntryCreated()
-	{
-		await EditNewEntry();
+		newEntry = new EntryDto() { PeriodId = PeriodId.Value, Visibility = EntryDto.DefaultVisibility };
 	}
 }

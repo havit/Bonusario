@@ -27,9 +27,17 @@
 								</div>
 							}
 
-							<div class="col-lg-4">
+							<div class="@(RenderCloseButton ? "col-lg-2" : "col-lg-4")">
 								<HxInputNumber @bind-Value="@Entry.Value" />
 							</div>
+
+							@if (RenderCloseButton)
+							{
+								<div class="col-lg-2 d-flex align-items-center justify-content-center">
+									<HxCloseButton OnClick="HandleCloseButtonClick" />
+								</div>
+							}
+
 							<div class="col-lg-12">
                                 <HxInputTextArea Placeholder="@(Entry.Submitted is null ? "Oceňuji... (volitelný text)" : null)" @bind-Value="@Entry.Text" />
 							</div>

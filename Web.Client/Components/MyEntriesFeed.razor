@@ -1,14 +1,11 @@
 ﻿<div class="my-entries-feed flex-md-row">
 	<div class="entries">
-		@if (remainingPoints > 0 || editedEntry.Id != default)
+		@if (remainingPoints > 0)
 		{
-			<div id="@entryCardFormWrapperId" class="w-100 mb-4">
+			<div class="w-100 mb-4">
 				<EntryCard
-					Entry="editedEntry"
-					CssClass="@(editedEntry.Id != default ? "active" : null)"
-					OnEntryCreated="HandleEntryCreated"
-					OnEntryUpdated="HandleEntryUpdated"
-					OnEntryDeleted="HandleEntryDeleted" />
+					Entry="newEntry"
+					OnEntryCreated="HandleEntryCreated" />
 			</div>
 		}
 
@@ -17,10 +14,18 @@
 			<HxRepeater Data="entries" Context="entry">
 				<ItemTemplate>
 					<div class="col-lg-12 mb-4">
-						<ReadonlyEntryCard
-							CssClass="@(editedEntry.Id == entry.Id ? "active" : null)"
-							Entry="entry"
-							OnClick="async () => await EditEntry(entry)" />
+						@if (editedEntry?.Id == entry.Id)
+						{
+							<EntryCard
+								Entry="entry"
+								OnEntryUpdated="HandleEntryUpdatedOrDeleted"
+								OnEntryDeleted="HandleEntryUpdatedOrDeleted"
+								OnCloseButtonClicked="CloseEdit" />
+						}
+						else
+						{
+							<ReadonlyEntryCard Entry="entry" OnClick="() => EditEntry(entry)" />
+						}
 					</div>
 				</ItemTemplate>
 			</HxRepeater>
