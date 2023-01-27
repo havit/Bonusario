@@ -3,13 +3,8 @@
     {
         <HxCard CssClass="@(OnClick.HasDelegate ? "readonly-card-interactive" : null)">
             <BodyTemplate>
-                <div class="row">
-                    <div class="col-auto">
-                        <div class="points">
-                            <h5>@Entry.Value</h5>
-                        </div>
-                    </div>
-                    <div class="col ps-0">
+                <div class="row mb-2">
+                    <div class="col">
                         <div class="@CssClassHelper.Combine("row flex-nowrap overflow-hidden", !HasText ? "expanded" : null)">
                             <div class="@CssClassHelper.Combine(HasTags ? "col-auto" : "col-12")">
                                 <h5>
@@ -23,12 +18,6 @@
                                     }
                                 </h5>
                             </div>
-                            @if (HasTags)
-                            {
-                                <div class="col-auto ms-auto">
-                                    <EntryTagsPicker @bind-Value="Entry.Tags" Enabled="false" />
-                                </div>
-                            }
                         </div>
                         @if (HasText)
                         {
@@ -39,16 +28,29 @@
                             </div>
                         }
                     </div>
-                </div>
 
-                @if (ShowVisibility)
-                {
-                    <div class="row">
-                        <div class="d-flex justify-content-end">
-                            <EntryVisibilityPicker Value="@Entry.Visibility" Readonly />
+                    <div class="col-auto">
+                        <div class="points">
+                            <h5>@Entry.Value</h5>
                         </div>
                     </div>
-                }
+                </div>
+
+                <div class="row">
+                    @if (HasTags)
+                    {
+                        <div class="col">
+                            <EntryTagsPicker @bind-Value="Entry.Tags" Enabled="false" />
+                        </div>
+                    }
+
+                    @if (ShowVisibility)
+                    {
+                        <div class="col-auto ms-auto">
+                            <EntryVisibilityPicker Value="@Entry.Visibility" Readonly />
+                        </div>
+                    }
+                </div>
             </BodyTemplate>
         </HxCard>
     }

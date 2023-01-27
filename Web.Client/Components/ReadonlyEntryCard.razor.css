@@ -11,10 +11,6 @@
     margin: 0;
 }
 
-::deep .hx-input-tags-control {
-    justify-content: end;
-}
-
 ::deep .hx-input-tags-control .dropdown {
     display: none;
 }
