@@ -27,13 +27,14 @@
 								</div>
 							}
 
-							<div class="@(RenderCloseButton ? "col-lg-2" : "col-lg-4")">
+							<div class="@(RenderCloseButton ? "col-lg-3" : "col-lg-4")">
 								<HxInputNumber @bind-Value="@Entry.Value" />
 							</div>
 
+							@* TODO: don't take up the entire available width in the mobile version *@
 							@if (RenderCloseButton)
 							{
-								<div class="col-lg-2 d-flex align-items-center justify-content-center">
+								<div class="col-lg-1 px-0 px-lg-2 d-flex align-items-center justify-content-center">
 									<HxCloseButton OnClick="HandleCloseButtonClick" />
 								</div>
 							}

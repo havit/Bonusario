@@ -15,15 +15,6 @@
 
     @* Mobile version - employees who weren't given any points are hidden in a collapse. *@
     <div class="d-md-none">
-        <HxCollapseToggleElement
-            ElementName="div"
-            CollapseTarget="#employeeCollapse"
-            CssClass="mb-1 d-flex justify-content-center"
-            role="button">
-
-            <HxIcon Icon="@(employeeInformationCollapseExpanded ? BootstrapIcon.CaretUp : BootstrapIcon.CaretDown)" />
-
-        </HxCollapseToggleElement>
         <HxCollapse Id="employeeCollapse" OnShown="HandleCollapseShown" OnHidden="HandleCollapseHidden" >
             @foreach (var employee in employeesWithNoPoints)
             {

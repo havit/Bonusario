@@ -39,14 +39,24 @@
 	<div class="points-summary-table">
 		<HxCard>
 			<BodyTemplate>
-				<h5>Přehled rozdělených odměn</h5>
+				<h5 class="d-flex justify-content-between">
+
+					Přehled rozdělených odměn
+
+					<HxCollapseToggleElement ElementName="div"
+											 CollapseTarget="#employeeCollapse"
+											 CssClass="d-inline-flex justify-content-center ms-auto"
+											 role="button">
+						<HxIcon Icon="@(givenPointsSummaryCollapseExpanded ? BootstrapIcon.ChevronUp : BootstrapIcon.ChevronDown)" />
+					</HxCollapseToggleElement>
+				</h5>
 
 				@if (remainingPoints is not null)
 				{
 					<RemainingPoints Points="remainingPoints.Value"/>
 				}
 
-				<GivenPointsSummary @ref="givenPointsSummary" PeriodId="PeriodId" />
+				<GivenPointsSummary @ref="givenPointsSummary" PeriodId="PeriodId" OnCollapseStateChanged="HandleGivenPointsSummaryCollapseStateChanged" />
 			</BodyTemplate>
 		</HxCard>
 	</div>

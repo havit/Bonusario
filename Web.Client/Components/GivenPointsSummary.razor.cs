@@ -8,14 +8,14 @@ public partial class GivenPointsSummary
 {
 	[Parameter] public int? PeriodId { get; set; }
 
+	[Parameter] public EventCallback<bool> OnCollapseStateChanged { get; set; }
+
 	[Inject] protected IEmployeesDataStore EmployeesDataStore { get; set; }
 	[Inject] protected IEntryFacade EntryFacade { get; set; }
 	[Inject] protected IEmployeeFacade EmployeeFacade { get; set; }
 
 	private List<EmployeeInformation> employeeData;
 	private IEnumerable<EmployeeReferenceDto> employees;
-
-	private bool employeeInformationCollapseExpanded;
 
 	protected override async Task OnInitializedAsync()
 	{
@@ -58,13 +58,13 @@ public partial class GivenPointsSummary
 		}
 	}
 
-	private void HandleCollapseShown()
+	private async Task HandleCollapseShown()
 	{
-		employeeInformationCollapseExpanded = true;
+		await OnCollapseStateChanged.InvokeAsync(true);
 	}
-	private void HandleCollapseHidden()
+	private async Task HandleCollapseHidden()
 	{
-		employeeInformationCollapseExpanded = false;
+		await OnCollapseStateChanged.InvokeAsync(false);
 	}
 
 	/// <summary>

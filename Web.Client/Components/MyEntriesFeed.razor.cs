@@ -1,6 +1,4 @@
-﻿using Microsoft.JSInterop;
-
-namespace Havit.Bonusario.Web.Client.Components;
+﻿namespace Havit.Bonusario.Web.Client.Components;
 
 public partial class MyEntriesFeed
 {
@@ -16,6 +14,8 @@ public partial class MyEntriesFeed
 	private int? remainingPoints;
 	private GivenPointsSummary givenPointsSummary;
 
+	private bool givenPointsSummaryCollapseExpanded;
+
 	protected override async Task OnParametersSetAsync()
 	{
 		newEntry.PeriodId = PeriodId.Value;
@@ -26,6 +26,11 @@ public partial class MyEntriesFeed
 	{
 		await LoadData();
 		CloseEdit();
+	}
+
+	private void HandleGivenPointsSummaryCollapseStateChanged(bool expanded)
+	{
+		givenPointsSummaryCollapseExpanded = expanded;
 	}
 
 	private void EditEntry(EntryDto entry)
