@@ -17,7 +17,7 @@
 						@if (editedEntry?.Id == entry.Id)
 						{
 							<EntryCard
-								Entry="entry"
+								Entry="editedEntry"
 								OnEntryUpdated="HandleEntryUpdatedOrDeleted"
 								OnEntryDeleted="HandleEntryUpdatedOrDeleted"
 								OnCloseButtonClicked="CloseEdit" />

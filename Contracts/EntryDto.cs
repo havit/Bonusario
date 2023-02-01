@@ -38,6 +38,22 @@ public class EntryDto
 		return false;
 	}
 
+	public EntryDto() { }
+
+	public EntryDto(EntryDto entryDto)
+	{
+		this.Id = entryDto.Id;
+		this.PeriodId = entryDto.PeriodId;
+		this.RecipientId = entryDto.RecipientId;
+		this.Text = entryDto.Text;
+		this.Value = entryDto.Value;
+		this.Tags = entryDto.Tags;
+		this.Submitted = entryDto.Submitted;
+		this.Created = entryDto.Created;
+		this.Visibility = entryDto.Visibility;
+		this.CreatedById = entryDto.CreatedById;
+	}
+
 	public class EntryDtoValidator : AbstractValidator<EntryDto>
 	{
 		public EntryDtoValidator()
