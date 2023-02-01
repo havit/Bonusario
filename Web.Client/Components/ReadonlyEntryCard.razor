@@ -5,7 +5,7 @@
             <BodyTemplate>
                 <div class="row mb-2">
                     <div class="col">
-                        <div class="@CssClassHelper.Combine("row flex-nowrap overflow-hidden", !HasText ? "expanded" : null)">
+                        <div class="row flex-nowrap overflow-hidden expanded">
                             <div class="@CssClassHelper.Combine(HasTags ? "col-auto" : "col-12")">
                                 <h5>
                                     @if (ShowAuthor && Entry.RecipientId.HasValue && Entry.CreatedById.HasValue)
@@ -19,14 +19,6 @@
                                 </h5>
                             </div>
                         </div>
-                        @if (HasText)
-                        {
-                            <div class="row">
-                                <div class="col">
-                                    <p>@Entry.Text</p>
-                                </div>
-                            </div>
-                        }
                     </div>
 
                     <div class="col-auto">
@@ -35,6 +27,15 @@
                         </div>
                     </div>
                 </div>
+
+                @if (HasText)
+                {
+                    <div class="row">
+                        <div class="col">
+                            <p>@Entry.Text</p>
+                        </div>
+                    </div>
+                }
 
                 <div class="row">
                     @if (HasTags)

@@ -7,15 +7,19 @@
 				<HxCard>
 					<BodyTemplate>
 						<div class="row g-4">
+							@{
+								string employeePickerBaseCssClass = (RenderCloseButton ? "col-10" : null) + " col-lg-8";
+							}
+
 							@if (!RecipientLocked)
 							{
-								<div class="col-lg-8">
+								<div class="@employeePickerBaseCssClass">
 									<EmployeePicker @bind-Value="Entry.RecipientId" ExcludeCurrentEmployee="true" />
 								</div>
 							}
 							else if (Entry.RecipientId.HasValue)
 							{
-								<div class="col-lg-8 d-flex align-items-center">
+								<div class="@CssClassHelper.Combine(employeePickerBaseCssClass, "d-flex align-items-center")">
 									<h5 class="mb-0">@(RenderAuthor ? "pro " : null) @EmployeesDataStore.GetByKey(Entry.RecipientId.Value).Name
 
                                     @if (RenderAuthor)
@@ -27,14 +31,20 @@
 								</div>
 							}
 
+							@if (RenderCloseButton)
+							{
+								<div class="col-1 d-flex d-lg-none align-items-center justify-content-center px-0">
+									<HxCloseButton OnClick="HandleCloseButtonClick" />
+								</div>
+							}
+
 							<div class="@(RenderCloseButton ? "col-lg-3" : "col-lg-4")">
 								<HxInputNumber @bind-Value="@Entry.Value" />
 							</div>
 
-							@* TODO: don't take up the entire available width in the mobile version *@
 							@if (RenderCloseButton)
 							{
-								<div class="col-lg-1 px-0 px-lg-2 d-flex align-items-center justify-content-center">
+								<div class="col-1 d-none d-lg-flex align-items-center justify-content-center px-lg-2">
 									<HxCloseButton OnClick="HandleCloseButtonClick" />
 								</div>
 							}
