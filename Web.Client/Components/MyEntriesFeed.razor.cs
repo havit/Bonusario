@@ -35,7 +35,7 @@ public partial class MyEntriesFeed
 
 	private void EditEntry(EntryDto entry)
 	{
-		editedEntry = new(entry);
+		editedEntry = entry with { };
 	}
 
 	private void CloseEdit()

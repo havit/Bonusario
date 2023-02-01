@@ -4,7 +4,7 @@ using Havit.Bonusario.Primitives;
 
 namespace Havit.Bonusario.Contracts;
 
-public class EntryDto
+public record EntryDto
 {
 	public const EntryVisibility DefaultVisibility = EntryVisibility.RecipientOnlyWithAuthorIdentity;
 
@@ -36,22 +36,6 @@ public class EntryDto
 			return true;
 		}
 		return false;
-	}
-
-	public EntryDto() { }
-
-	public EntryDto(EntryDto entryDto)
-	{
-		this.Id = entryDto.Id;
-		this.PeriodId = entryDto.PeriodId;
-		this.RecipientId = entryDto.RecipientId;
-		this.Text = entryDto.Text;
-		this.Value = entryDto.Value;
-		this.Tags = entryDto.Tags;
-		this.Submitted = entryDto.Submitted;
-		this.Created = entryDto.Created;
-		this.Visibility = entryDto.Visibility;
-		this.CreatedById = entryDto.CreatedById;
 	}
 
 	public class EntryDtoValidator : AbstractValidator<EntryDto>
