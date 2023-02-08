@@ -1,8 +1,8 @@
 ﻿<div class="my-entries-feed flex-md-row">
-	<div class="entries">
+	<div class="entries d-flex flex-column">
 		@if (remainingPoints > 0)
 		{
-			<div class="w-100 mb-4">
+			<div class="new-entry-form w-100 mb-4">
 				<EntryCard
 					Entry="newEntry"
 					OnEntryCreated="HandleEntryCreated" />
@@ -11,24 +11,26 @@
 
 		@if (entries is not null)
 		{
-			<HxRepeater Data="entries" Context="entry">
-				<ItemTemplate>
-					<div class="col-lg-12 mb-4">
-						@if (editedEntry?.Id == entry.Id)
-						{
-							<EntryCard
-								Entry="editedEntry"
-								OnEntryUpdated="HandleEntryUpdatedOrDeleted"
-								OnEntryDeleted="HandleEntryUpdatedOrDeleted"
-								OnCloseButtonClicked="CloseEdit" />
-						}
-						else
-						{
-							<ReadonlyEntryCard Entry="entry" OnClick="() => EditEntry(entry)" />
-						}
-					</div>
-				</ItemTemplate>
-			</HxRepeater>
+			<div class="entries-list overflow-auto pe-1">
+				<HxRepeater Data="entries" Context="entry">
+					<ItemTemplate>
+						<div class="col-lg-12 mb-4">
+							@if (editedEntry?.Id == entry.Id)
+							{
+								<EntryCard
+									Entry="editedEntry"
+									OnEntryUpdated="HandleEntryUpdatedOrDeleted"
+									OnEntryDeleted="HandleEntryUpdatedOrDeleted"
+									OnCloseButtonClicked="CloseEdit" />
+							}
+							else
+							{
+								<ReadonlyEntryCard Entry="entry" OnClick="() => EditEntry(entry)" />
+							}
+						</div>
+					</ItemTemplate>
+				</HxRepeater>
+			</div>
 		}
 		else
 		{
