@@ -1,0 +1,15 @@
+﻿<div class="@CssClassHelper.Combine("d-flex", CssClass)">
+    <div style="@GetFirstPartStyle()">
+        @FirstPartTemplate
+    </div>
+    <div @onmousedown="HandleMouseDown"
+        @onmouseup="HandleMouseUp"
+         @onmouseleave="HandleMouseUp"
+         @onmousemove="HandleMouseMove"
+        class="@CssClassHelper.Combine("handle p-1 d-flex justify-content-center align-items-center", HandleCssClass)">
+        <HxIcon Icon="BootstrapIcon.ArrowsExpand"  />
+    </div>
+    <div class="second-part">
+        @SecondPartTemplate
+    </div>
+</div>

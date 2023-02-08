@@ -1,0 +1,30 @@
+﻿.second-part {
+    flex: 1 1 auto;
+}
+
+.handle {
+    flex: 0 0 auto;
+    transition: 0.3s;
+    cursor: col-resize;
+}
+
+.handle:hover {
+    background-color: var(--bs-gray-200);
+}
+
+.handle:active {
+    background-color: var(--bs-gray-500);
+    cursor: grab;
+}
+
+.handle:hover ::deep .hx-icon {
+    color: var(--bs-gray-800);
+}
+
+.handle:active ::deep .hx-icon {
+    color: var(--bs-gray-100);
+}
+
+.handle ::deep .hx-icon {
+    transform: rotateZ(90deg);
+}
