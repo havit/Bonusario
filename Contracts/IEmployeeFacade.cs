@@ -1,5 +1,4 @@
-﻿using Havit.Bonusario.Primitives;
-using Havit.ComponentModel;
+﻿using Havit.ComponentModel;
 
 namespace Havit.Bonusario.Contracts;
 

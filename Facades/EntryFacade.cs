@@ -1,10 +1,10 @@
-﻿using System.Security;
+﻿using System.Net.Http.Headers;
+using System.Security;
 using FluentValidation;
 using Havit.Bonusario.Contracts;
 using Havit.Bonusario.DataLayer.Repositories;
 using Havit.Bonusario.Facades.Infrastructure.Security.Authentication;
 using Havit.Bonusario.Model;
-using Havit.Bonusario.Primitives;
 using Havit.Bonusario.Services;
 using Havit.Data.Patterns.UnitOfWorks;
 using Havit.Extensions.DependencyInjection.Abstractions;
@@ -64,16 +64,9 @@ public class EntryFacade : IEntryFacade
 
 		var entries = await entryRepository.GetEntriesReceivedByAsync(periodId.Value, currentEmployee.Id, cancellationToken);
 
-		var entriesDto = entries.Select(e => entryMapper.MapToEntryDto(e)).ToList();
+		var entriesDto = entries.Select(entryMapper.MapToEntryDto).ToList();
 
-		// Anonymize creators of the entries.
-		foreach (var entry in entriesDto)
-		{
-			if ((entry.Visibility != EntryVisibility.Public) && (entry.Visibility != EntryVisibility.RecipientOnlyWithAuthorIdentity))
-			{
-				entry.CreatedById = null;
-			}
-		}
+		AnonymizeCreatorsOfUnsignedEntries(entriesDto);
 
 		return entriesDto;
 	}
@@ -85,7 +78,11 @@ public class EntryFacade : IEntryFacade
 		var currentEmployee = await applicationAuthenticationService.GetCurrentEmployeeAsync(cancellationToken);
 		entries = entries.Where(e => e.RecipientId != currentEmployee.Id).ToList();
 
-		return entries.Select(e => entryMapper.MapToEntryDto(e)).ToList();
+		var entryDtos = entries.Select(entryMapper.MapToEntryDto).ToList();
+
+		AnonymizeCreatorsOfUnsignedEntries(entryDtos);
+
+		return entryDtos;
 	}
 
 	public async Task DeleteEntryAsync(Dto<int> entryId, CancellationToken cancellationToken = default)
@@ -203,7 +200,7 @@ public class EntryFacade : IEntryFacade
 	public async Task<List<EntryDto>> GetEntriesOfPeriod(Dto<int> periodId, CancellationToken cancellationToken = default)
 	{
 		var entries = await entryRepository.GetEntriesOfPeriod(periodId.Value);
-		return entries?.Select(e => entryMapper.MapToEntryDto(e)).ToList();
+		return entries?.Select(entryMapper.MapToEntryDto).ToList();
 	}
 
 	public async Task<List<ResultItemDto>> GetResultsAsync(Dto<int> periodId, CancellationToken cancellationToken = default)
@@ -220,5 +217,16 @@ public class EntryFacade : IEntryFacade
 	public async Task<List<ResultItemDto>> GetAggregateResultsAsync(Dto<int> periodSetId, CancellationToken cancellationToken = default)
 	{
 		return await entryRepository.GetAggregateResultsAsync(periodSetId.Value, cancellationToken);
+	}
+
+	private void AnonymizeCreatorsOfUnsignedEntries(List<EntryDto> entries)
+	{
+		foreach (var entry in entries)
+		{
+			if (!entry.Signed)
+			{
+				entry.CreatedById = null;
+			}
+		}
 	}
 }

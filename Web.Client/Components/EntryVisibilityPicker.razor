@@ -2,8 +2,8 @@
     @{
         RenderFragment entryVisibilityIndicator =
                 @<div class="d-flex gap-1 entry-visibility-dropdown-toggle-content">
-                    <HxIcon Icon="GetIconForEntryVisibility(Value)" />
-                    <div class="small">@GetEntryVisibilityText(Value)</div>
+                    <HxIcon Icon="GetIconForValue(Value)" />
+                    <div class="small">@GetTextForValue(Value)</div>
                 </div>;
     }
     
@@ -24,16 +24,16 @@
                     <div class="mt-1 fw-normal text-secondary">Vyberte kdo uvidí tento záznam.</div>
                 </HxDropdownHeader>
 
-                @foreach (var visibility in Enum.GetValues<EntryVisibility>().Reverse())
+                @foreach (var entryPublic in possibleValues)
                 {
-                    <HxDropdownItem OnClick="() => HandleEntryVisibilityChanged(visibility)">
+                    <HxDropdownItem OnClick="() => HandleEntryVisibilityChanged(entryPublic)">
                         <div class="bg-primary d-inline-flex justify-content-center text-white p-1 rounded-circle entry-visibility-icon">
-                            <HxIcon Icon="GetIconForEntryVisibility(visibility)" />
+                            <HxIcon Icon="@GetIconForValue(entryPublic)" />
                         </div>
 
-                        <small>@GetEntryVisibilityText(visibility)</small>
+                        <small>@GetTextForValue(entryPublic)</small>
 
-                        @if (visibility.Equals(Value))
+                        @if (Value == entryPublic)
                         {
                             <HxIcon Icon="BootstrapIcon.Check2" CssClass="ms-auto text-primary float-end" />
                         }

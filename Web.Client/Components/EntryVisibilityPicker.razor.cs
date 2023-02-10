@@ -4,45 +4,34 @@ namespace Havit.Bonusario.Web.Client.Components;
 
 public partial class EntryVisibilityPicker
 {
-	private static readonly Dictionary<EntryVisibility, BootstrapIcon> EntryVisibilityIcons = new()
-	{
-		{ EntryVisibility.RecipientOnlyAnonymous, BootstrapIcon.Incognito },
-		{ EntryVisibility.RecipientOnlyWithAuthorIdentity, BootstrapIcon.PersonHeart },
-		{ EntryVisibility.Public, BootstrapIcon.Globe }
-	};
+	private const string publicEntryText = "Viditelné všem";
+	private const string visibleOnlyToRecipientText = "Viditelné příjemci";
 
-	[Parameter] public EntryVisibility Value { get; set; }
-	[Parameter] public EventCallback<EntryVisibility> ValueChanged { get; set; }
+	[Parameter] public bool Value { get; set; }
+	[Parameter] public EventCallback<bool> ValueChanged { get; set; }
 
 	[Parameter] public bool Readonly { get; set; }
 
 	[Parameter] public string CssClass { get; set; }
 
-	private async Task HandleEntryVisibilityChanged(EntryVisibility entryVisibility)
+	private bool[] possibleValues = { true, false };
+
+	private async Task HandleEntryVisibilityChanged(bool entryPublic)
 	{
-		if (entryVisibility != Value)
+		if (entryPublic != Value)
 		{
-			Value = entryVisibility;
-			await ValueChanged.InvokeAsync(entryVisibility);
+			Value = entryPublic;
+			await ValueChanged.InvokeAsync(entryPublic);
 		}
 	}
 
-	private string GetEntryVisibilityText(EntryVisibility entryVisibility)
+	private string GetTextForValue(bool entryPublic)
 	{
-		return EnumExt.GetDescription(typeof(EntryVisibility), entryVisibility);
+		return entryPublic ? publicEntryText : visibleOnlyToRecipientText;
 	}
 
-	private BootstrapIcon GetIconForEntryVisibility(EntryVisibility visibility)
+	private BootstrapIcon GetIconForValue(bool entryPublic)
 	{
-		bool success = EntryVisibilityIcons.TryGetValue(visibility, out BootstrapIcon icon);
-
-		if (success)
-		{
-			return icon;
-		}
-		else
-		{
-			throw new InvalidOperationException("An icon has to be specified for all entry visibilities.");
-		}
+		return entryPublic ? BootstrapIcon.Globe : BootstrapIcon.PersonHeart;
 	}
 }

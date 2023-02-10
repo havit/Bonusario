@@ -1,6 +1,4 @@
-﻿using Havit.Bonusario.Primitives;
-
-namespace Havit.Bonusario.Contracts;
+﻿namespace Havit.Bonusario.Contracts;
 
 public class EmployeeReferenceDto
 {

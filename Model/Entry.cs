@@ -1,6 +1,4 @@
-﻿using Havit.Bonusario.Primitives;
-
-namespace Havit.Bonusario.Model;
+﻿namespace Havit.Bonusario.Model;
 
 public class Entry
 {
@@ -20,7 +18,14 @@ public class Entry
 
 	public int Value { get; set; }
 
-	public EntryVisibility Visibility { get; set; } = EntryVisibility.RecipientOnlyAnonymous;
+	public bool Public { get; set; }
+
+	public bool Signed { get; set; }
+
+	/// <summary>
+	/// TODO: Once the data in the production database is transformed, remove this property and the enum.
+	/// </summary>
+	public Primitives.EntryVisibility Visibility { get; set; } = Primitives.EntryVisibility.RecipientOnlyAnonymous;
 
 	public List<EntryTag> Tags { get; } = new List<EntryTag>();
 

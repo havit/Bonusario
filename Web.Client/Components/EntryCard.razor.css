@@ -11,3 +11,9 @@
     border-bottom-right-radius: 0 !important;
     border-top-right-radius: 0 !important;
 }
+
+/* Checkbox fix - put the check and the text on the same line. */
+::deep .form-check {
+    display: inline;
+    padding-left: 0;
+}

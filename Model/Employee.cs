@@ -1,5 +1,4 @@
-﻿using Havit.Bonusario.Primitives;
-using Havit.Data.EntityFrameworkCore.Attributes;
+﻿using Havit.Data.EntityFrameworkCore.Attributes;
 
 namespace Havit.Bonusario.Model;
 

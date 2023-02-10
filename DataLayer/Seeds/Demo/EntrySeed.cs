@@ -1,6 +1,5 @@
 ﻿using Havit.Bonusario.DataLayer.Repositories;
 using Havit.Bonusario.Model;
-using Havit.Bonusario.Primitives;
 using Havit.Data.Patterns.DataSeeds;
 using Havit.Services.TimeServices;
 
@@ -46,7 +45,7 @@ public class EntrySeed : DataSeed<DemoProfile>
 				},
 				Created = now.AddMonths(-2),
 				Submitted = now.AddMonths(-2),
-				Visibility = EntryVisibility.Public
+				Public = true, Signed = true
 			},
 			new Entry()
 			{
@@ -62,7 +61,7 @@ public class EntrySeed : DataSeed<DemoProfile>
 					new EntryTag() { Tag = "znalosti" }
 				},
 				Created = now,
-				Visibility = EntryVisibility.RecipientOnlyWithAuthorIdentity
+				Public = false, Signed = true
 			},
 			new Entry()
 			{
@@ -78,7 +77,7 @@ public class EntrySeed : DataSeed<DemoProfile>
 					new EntryTag() { Tag = "znalosti" }
 				},
 				Created = now.AddMinutes(-123),
-				Visibility = EntryVisibility.RecipientOnlyAnonymous
+				Public = true, Signed = false
 			},
 			new Entry()
 			{
@@ -88,7 +87,7 @@ public class EntrySeed : DataSeed<DemoProfile>
 				Submitted = previousDate,
 				Value = 15,
 				Created = now,
-				Visibility = EntryVisibility.RecipientOnlyAnonymous
+				Public = false, Signed = false
 			},
 			new Entry()
 			{
@@ -97,7 +96,7 @@ public class EntrySeed : DataSeed<DemoProfile>
 				PeriodId = currentPeriod.Id,
 				Value = 15,
 				Created = now.AddMinutes(-32),
-				Visibility = EntryVisibility.Public
+				Public = true, Signed = true
 			},
 			new Entry()
 			{
@@ -112,7 +111,7 @@ public class EntrySeed : DataSeed<DemoProfile>
 				},
 				Value = 15,
 				Created = now,
-				Visibility = EntryVisibility.RecipientOnlyWithAuthorIdentity
+				Public = false, Signed = true
 			},
 			new Entry()
 			{
@@ -121,7 +120,7 @@ public class EntrySeed : DataSeed<DemoProfile>
 				PeriodId = currentPeriod.Id,
 				Value = 15,
 				Created = now,
-				Visibility = EntryVisibility.Public
+				Public = true, Signed = true
 			},
 			new Entry()
 			{
@@ -137,7 +136,7 @@ public class EntrySeed : DataSeed<DemoProfile>
 					new EntryTag() { Tag = "potěšení" },
 				},
 				Created = now,
-				Visibility = EntryVisibility.RecipientOnlyAnonymous
+				Public = false, Signed = false
 			},
 		};
 

@@ -47,8 +47,13 @@
 
                     @if (ShowVisibility)
                     {
-                        <div class="col-auto ms-auto">
-                            <EntryVisibilityPicker Value="@Entry.Visibility" Readonly />
+                        <div class="col d-flex justify-content-end gap-2">
+                            <HxSwitch @bind-Value="Entry.Signed" Enabled="false" >
+                                <LabelTemplate>
+                                    S&nbsp;podpisem
+                                </LabelTemplate>
+                            </HxSwitch>
+                            <EntryVisibilityPicker Value="@Entry.Public" Readonly />
                         </div>
                     }
                 </div>

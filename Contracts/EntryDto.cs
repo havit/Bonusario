@@ -1,13 +1,10 @@
 ﻿using FluentValidation;
 using Havit.Bonusario.Contracts.ModelMetadata;
-using Havit.Bonusario.Primitives;
 
 namespace Havit.Bonusario.Contracts;
 
 public record EntryDto
 {
-	public const EntryVisibility DefaultVisibility = EntryVisibility.RecipientOnlyWithAuthorIdentity;
-
 	public int Id { get; set; }
 
 	public int? CreatedById { get; set; }
@@ -24,7 +21,9 @@ public record EntryDto
 	public DateTime? Created { get; set; }
 	public int PeriodId { get; set; }
 
-	public EntryVisibility Visibility { get; set; } = DefaultVisibility;
+	public bool Public { get; set; }
+
+	public bool Signed { get; set; }
 
 	public bool HasValues()
 	{

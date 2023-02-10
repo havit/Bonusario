@@ -61,6 +61,6 @@ public partial class MyEntriesFeed
 
 	private void EditNewEntry()
 	{
-		newEntry = new EntryDto() { PeriodId = PeriodId.Value, Visibility = EntryDto.DefaultVisibility };
+		newEntry = new EntryDto() { PeriodId = PeriodId.Value };
 	}
 }

@@ -1,9 +1,9 @@
 ﻿using Havit.Bonusario.Contracts;
 using Havit.Bonusario.Model;
-using Havit.Bonusario.Primitives;
 using Havit.Data.Patterns.UnitOfWorks;
 using Havit.Extensions.DependencyInjection.Abstractions;
 using Havit.Linq;
+using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
 namespace Havit.Bonusario.Services;
 
@@ -27,7 +27,8 @@ public class EntryMapper : IEntryMapper
 		entry.RecipientId = entryDto.RecipientId.Value;
 		entry.Text = entryDto.Text;
 		entry.Value = entryDto.Value;
-		entry.Visibility = entryDto.Visibility;
+		entry.Public = entryDto.Public;
+		entry.Signed = entryDto.Signed;
 
 		var result = entry.Tags.UpdateFrom(entryDto.Tags,
 			et => et.Tag,
@@ -52,7 +53,8 @@ public class EntryMapper : IEntryMapper
 			Value = entry.Value,
 			PeriodId = entry.PeriodId,
 			Tags = entry.Tags.Select(et => et.Tag).ToList(),
-			Visibility = (EntryVisibility)entry.Visibility
+			Public = entry.Public,
+			Signed = entry.Signed
 		};
 	}
 }

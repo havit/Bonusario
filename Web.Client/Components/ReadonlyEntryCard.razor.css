@@ -41,3 +41,9 @@
 ::deep h5 {
     margin: 0;
 }
+
+/* Checkbox fix - put the check and the text on the same line. */
+::deep .form-check {
+    display: inline;
+    padding-left: 0;
+}
