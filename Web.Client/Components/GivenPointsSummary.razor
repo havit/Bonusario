@@ -14,7 +14,7 @@
     var employeesWithNoPoints = employeeData.Where(e => e.Points == 0);
 
     @* Mobile version - employees who weren't given any points are hidden in a collapse. *@
-    <div class="d-md-none">
+    <div class="d-lg-none">
         <HxCollapse Id="employeeCollapse" OnShown="HandleCollapseShown" OnHidden="HandleCollapseHidden" >
             @foreach (var employee in employeesWithNoPoints)
             {
@@ -27,7 +27,7 @@
     </div>
 
     @* Desktop version - all employees are visible form the start. *@
-    <div class="d-none d-md-block">
+    <div class="d-none d-lg-block">
         @foreach (var employee in employeesWithNoPoints)
         {
             <div class="@itemCssClass">
