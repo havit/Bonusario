@@ -1,10 +1,14 @@
-﻿using FluentValidation;
+﻿using System.Runtime.CompilerServices;
+using FluentValidation;
 using Havit.Bonusario.Contracts.ModelMetadata;
 
 namespace Havit.Bonusario.Contracts;
 
 public record EntryDto
 {
+	public const bool PublicDefault = false;
+	public const bool SignedDefault = true;
+
 	public int Id { get; set; }
 
 	public int? CreatedById { get; set; }
@@ -21,9 +25,9 @@ public record EntryDto
 	public DateTime? Created { get; set; }
 	public int PeriodId { get; set; }
 
-	public bool Public { get; set; }
+	public bool Public { get; set; } = PublicDefault;
 
-	public bool Signed { get; set; }
+	public bool Signed { get; set; } = SignedDefault;
 
 	public bool HasValues()
 	{
