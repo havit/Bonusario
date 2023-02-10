@@ -10,5 +10,5 @@
 }
 
 .points-summary-table {
-    flex: 0.2 0.5 auto;
+    flex: 0 1 auto;
 }

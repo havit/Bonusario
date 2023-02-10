@@ -35,31 +35,34 @@
 }
 
 /* Custom scrollbars */
-::-webkit-scrollbar {
-    background-color: transparent;
-    width: .25rem;
-}
 
-.overflow-auto::-webkit-scrollbar,
-.overflow-auto *::-webkit-scrollbar {
-    width: .25rem !important;
-}
+@media screen and (min-width: 768px) {
+    ::-webkit-scrollbar {
+        background-color: transparent;
+        width: .25rem;
+    }
 
-.overflow-auto::-webkit-scrollbar-thumb,
-.overflow-auto *::-webkit-scrollbar-thumb {
-    background-color: var(--bs-gray-500);
-}
+    .overflow-auto::-webkit-scrollbar,
+    .overflow-auto *::-webkit-scrollbar {
+        width: .25rem !important;
+    }
 
-.overflow-auto:hover::-webkit-scrollbar-thumb,
-.overflow-auto:hover *::-webkit-scrollbar-thumb {
-    background-color: var(--bs-gray-500);
-}
+    .overflow-auto::-webkit-scrollbar-thumb,
+    .overflow-auto *::-webkit-scrollbar-thumb {
+        background-color: var(--bs-gray-500);
+    }
 
-::-webkit-scrollbar:horizontal {
-    height: .25rem;
-}
+    .overflow-auto:hover::-webkit-scrollbar-thumb,
+    .overflow-auto:hover *::-webkit-scrollbar-thumb {
+        background-color: var(--bs-gray-500);
+    }
 
-::-webkit-scrollbar-thumb {
-    background-color: var(--bs-gray-300);
-    border-radius: 5px;
+    ::-webkit-scrollbar:horizontal {
+        height: .25rem;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background-color: var(--bs-gray-300);
+        border-radius: 5px;
+    }
 }
