@@ -25,6 +25,10 @@ namespace Havit.Bonusario.Entity.Migrations
                 type: "bit",
                 nullable: false,
                 defaultValue: false);
+
+			migrationBuilder.Sql("UPDATE Entry SET [Public] = 0, Signed = 0 WHERE Visibility = 0");
+			migrationBuilder.Sql("UPDATE Entry SET [Public] = 0, Signed = 1 WHERE Visibility = 1");
+			migrationBuilder.Sql("UPDATE Entry SET [Public] = 1, Signed = 1 WHERE Visibility = 2");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -43,6 +47,11 @@ namespace Havit.Bonusario.Entity.Migrations
                 type: "int",
                 nullable: false,
                 defaultValue: 0);
-        }
+
+			migrationBuilder.Sql("UPDATE Entry SET Visibility = 0 WHERE [Public] = 0, Signed = 0");
+			migrationBuilder.Sql("UPDATE Entry SET Visibility = 0 WHERE [Public] = 1, Signed = 0");
+			migrationBuilder.Sql("UPDATE Entry SET Visibility = 1 WHERE [Public] = 0, Signed = 1");
+			migrationBuilder.Sql("UPDATE Entry SET Visibility = 2 WHERE [Public] = 1, Signed = 1");
+		}
     }
 }
