@@ -1,41 +1,56 @@
 ﻿<div class="my-entries-feed flex-lg-row">
-	<div class="entries d-flex flex-column">
-		@if (remainingPoints > 0)
-		{
-			<div class="new-entry-form w-100 mb-4">
-				<EntryCard
-					Entry="newEntry"
-					OnEntryCreated="HandleEntryCreated" />
-			</div>
-		}
-
-		@if (entries is not null)
-		{
-			<div class="entries-list overflow-auto flex-grow-1 pe-lg-1">
-				<HxRepeater Data="entries" Context="entry">
-					<ItemTemplate>
-						<div class="col-lg-12 mb-4">
-							@if (editedEntry?.Id == entry.Id)
-							{
+	<div class="entries">
+		<HxTabPanel>
+			<HxTab Title="Moje">
+				<Content>
+					<div class="d-flex flex-column mt-3">
+						@if (remainingPoints > 0)
+						{
+							<div class="new-entry-form w-100 mb-4">
 								<EntryCard
-									Entry="editedEntry"
-									OnEntryUpdated="HandleEntryUpdatedOrDeleted"
-									OnEntryDeleted="HandleEntryUpdatedOrDeleted"
-									OnCloseButtonClicked="CloseEdit" />
-							}
-							else
-							{
-								<ReadonlyEntryCard Entry="entry" OnClick="() => EditEntry(entry)" />
-							}
-						</div>
-					</ItemTemplate>
-				</HxRepeater>
-			</div>
-		}
-		else
-		{
-			@* TODO Placeholders *@
-		}
+									Entry="newEntry"
+									OnEntryCreated="HandleEntryCreated" />
+							</div>
+						}
+
+						@if (entries is not null)
+						{
+							<div class="entries-list overflow-auto flex-grow-1 pe-lg-1">
+								<HxRepeater Data="entries" Context="entry">
+									<ItemTemplate>
+										<div class="col-lg-12 mb-4">
+											@if (editedEntry?.Id == entry.Id)
+											{
+												<EntryCard
+													Entry="editedEntry"
+													OnEntryUpdated="HandleEntryUpdatedOrDeleted"
+													OnEntryDeleted="HandleEntryUpdatedOrDeleted"
+													OnCloseButtonClicked="CloseEdit" />
+											}
+											else
+											{
+												<ReadonlyEntryCard Entry="entry" OnClick="() => EditEntry(entry)" />
+											}
+										</div>
+									</ItemTemplate>
+								</HxRepeater>
+							</div>
+						}
+						else
+						{
+							@* TODO Placeholders *@
+						}
+					</div>
+				</Content>
+			</HxTab>
+			<HxTab Title="Ostatní">
+				<Content>
+					<div class="mt-3">
+						<ReadOnlyEntriesFeed PublicEntries="true" ReceivedEntries="true" PeriodId="PeriodId" />
+					</div>
+				</Content>
+			</HxTab>
+		</HxTabPanel>
 	</div>
 
 	<div class="points-summary-table">

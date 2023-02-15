@@ -38,7 +38,6 @@ public partial class EntryDbRepository : IEntryRepository
 	{
 		return Data
 			.Where(e => e.PeriodId == periodId)
-			.Where(e => e.Submitted != null)
 			.Where(e => e.Public)
 			.Include(GetLoadReferences)
 			.ToListAsync(cancellationToken);
