@@ -27,7 +27,7 @@ public partial class EntryVisibilityPicker
 
 	private string GetTextForValue(bool entryPublic)
 	{
-		return entryPublic ? publicEntryText : visibleOnlyToRecipientText;
+		return (entryPublic ? publicEntryText : visibleOnlyToRecipientText).Replace(" ", "&nbsp;");
 	}
 
 	private BootstrapIcon GetIconForValue(bool entryPublic)

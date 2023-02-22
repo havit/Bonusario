@@ -17,3 +17,7 @@
     display: inline;
     padding-left: 0;
 }
+
+::deep .signature-and-visibility {
+    width: fit-content;
+}

@@ -3,7 +3,7 @@
         RenderFragment entryVisibilityIndicator =
                 @<div class="d-flex gap-1 entry-visibility-dropdown-toggle-content">
                     <HxIcon Icon="GetIconForValue(Value)" />
-                    <div class="small">@GetTextForValue(Value)</div>
+                    <div class="small">@((MarkupString)GetTextForValue(Value))</div>
                 </div>;
     }
     
@@ -31,7 +31,7 @@
                             <HxIcon Icon="@GetIconForValue(entryPublic)" />
                         </div>
 
-                        <small class="text-nowrap">@GetTextForValue(entryPublic)</small>
+                        <small class="text-nowrap">@((MarkupString)GetTextForValue(entryPublic))</small>
 
                         @if (Value == entryPublic)
                         {

@@ -23,7 +23,11 @@ public partial class EntryCard
 	private EditContext editContext;
 
 	private bool RenderAuthor => ShowAuthor && Entry.CreatedById.HasValue;
-
+	/// <summary>
+	/// Indicates whether the entry is being edited or created.
+	/// If <c>true</c>, it is being edited. If <c>false</c> it is a new entry.
+	/// </summary>
+	private bool EdittingEntry => Entry.Id != default;
 	private bool RenderCloseButton => OnCloseButtonClicked.HasDelegate;
 
 	protected override void OnInitialized()
