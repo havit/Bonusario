@@ -22,11 +22,6 @@ public class Entry
 
 	public bool Signed { get; set; }
 
-	/// <summary>
-	/// TODO: Once the data in the production database is transformed, remove this property and the enum.
-	/// </summary>
-	public Primitives.EntryVisibility Visibility { get; set; } = Primitives.EntryVisibility.RecipientOnlyAnonymous;
-
 	public List<EntryTag> Tags { get; } = new List<EntryTag>();
 
 	public DateTime? Submitted { get; set; }
