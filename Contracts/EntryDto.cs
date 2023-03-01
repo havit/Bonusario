@@ -1,5 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-using FluentValidation;
+﻿using FluentValidation;
 using Havit.Bonusario.Contracts.ModelMetadata;
 
 namespace Havit.Bonusario.Contracts;

@@ -17,6 +17,7 @@ public class EntrySeed : DataSeed<DemoProfile>
 		this.employeeRepository = employeeRepository;
 		this.periodRepository = periodRepository;
 	}
+
 	public override void SeedData()
 	{
 		var employees = employeeRepository.GetAll();
@@ -45,7 +46,8 @@ public class EntrySeed : DataSeed<DemoProfile>
 				},
 				Created = now.AddMonths(-2),
 				Submitted = now.AddMonths(-2),
-				Public = true, Signed = true
+				Public = true,
+				Signed = true
 			},
 			new Entry()
 			{
@@ -61,7 +63,8 @@ public class EntrySeed : DataSeed<DemoProfile>
 					new EntryTag() { Tag = "znalosti" }
 				},
 				Created = now,
-				Public = false, Signed = true
+				Public = false,
+				Signed = true
 			},
 			new Entry()
 			{
@@ -77,7 +80,8 @@ public class EntrySeed : DataSeed<DemoProfile>
 					new EntryTag() { Tag = "znalosti" }
 				},
 				Created = now.AddMinutes(-123),
-				Public = true, Signed = false
+				Public = true,
+				Signed = false
 			},
 			new Entry()
 			{
@@ -87,7 +91,8 @@ public class EntrySeed : DataSeed<DemoProfile>
 				Submitted = previousDate,
 				Value = 15,
 				Created = now,
-				Public = false, Signed = false
+				Public = false,
+				Signed = false
 			},
 			new Entry()
 			{
@@ -96,7 +101,8 @@ public class EntrySeed : DataSeed<DemoProfile>
 				PeriodId = currentPeriod.Id,
 				Value = 15,
 				Created = now.AddMinutes(-32),
-				Public = true, Signed = true
+				Public = true,
+				Signed = true
 			},
 			new Entry()
 			{
@@ -111,7 +117,8 @@ public class EntrySeed : DataSeed<DemoProfile>
 				},
 				Value = 15,
 				Created = now,
-				Public = false, Signed = true
+				Public = false,
+				Signed = true
 			},
 			new Entry()
 			{
@@ -120,7 +127,8 @@ public class EntrySeed : DataSeed<DemoProfile>
 				PeriodId = currentPeriod.Id,
 				Value = 15,
 				Created = now,
-				Public = true, Signed = true
+				Public = true,
+				Signed = true
 			},
 			new Entry()
 			{
@@ -136,7 +144,8 @@ public class EntrySeed : DataSeed<DemoProfile>
 					new EntryTag() { Tag = "potěšení" },
 				},
 				Created = now,
-				Public = false, Signed = false
+				Public = false,
+				Signed = false
 			},
 		};
 

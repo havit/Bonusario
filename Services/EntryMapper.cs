@@ -3,7 +3,6 @@ using Havit.Bonusario.Model;
 using Havit.Data.Patterns.UnitOfWorks;
 using Havit.Extensions.DependencyInjection.Abstractions;
 using Havit.Linq;
-using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
 namespace Havit.Bonusario.Services;
 

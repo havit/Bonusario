@@ -20,14 +20,15 @@
 							else if (Entry.RecipientId.HasValue)
 							{
 								<div class="@CssClassHelper.Combine(employeePickerBaseCssClass, "d-flex align-items-center")">
-									<h5 class="mb-0">@(RenderAuthor ? "pro " : null) @EmployeesDataStore.GetByKey(Entry.RecipientId.Value).Name
+									<h5 class="mb-0">
+										@(RenderAuthor ? "pro " : null) @EmployeesDataStore.GetByKey(Entry.RecipientId.Value).Name
 
-                                    @if (RenderAuthor)
-									{
-										@(" od ") @EmployeesDataStore.GetByKey(Entry.CreatedById.Value).Name
-									}
+										@if (RenderAuthor)
+										{
+											<text> od @EmployeesDataStore.GetByKey(Entry.CreatedById.Value).Name</text>
+										}
 
-                                    </h5>
+									</h5>
 								</div>
 							}
 
@@ -50,7 +51,7 @@
 							}
 
 							<div class="col-lg-12">
-                                <HxInputTextArea Placeholder="@(Entry.Submitted is null ? "Oceňuji... (volitelný text)" : null)" @bind-Value="@Entry.Text" />
+								<HxInputTextArea Placeholder="@(Entry.Submitted is null ? "Oceňuji... (volitelný text)" : null)" @bind-Value="@Entry.Text" />
 							</div>
 						</div>
 
@@ -77,15 +78,15 @@
 								<div class="d-lg-flex gap-1 ms-lg-auto flex-grow-1 flex-lg-grow-0">
 									@if (Entry.Id != default)
 									{
-										<HxButton Icon="BootstrapIcon.Trash" 
-												Color="ThemeColor.Light" 
-												OnClick="HandleDeleteClick" />
+										<HxButton Icon="BootstrapIcon.Trash"
+									  Color="ThemeColor.Light"
+									  OnClick="HandleDeleteClick" />
 
 									}
 									<HxButton Color="ThemeColor.Primary"
-											OnValidClick="HandleCreateOrUpdateButtonClick"
-											CssClass="w-100"
-											Text="@(EdittingEntry ? "Uložit" : "Přidat")" />
+									  OnValidClick="HandleCreateOrUpdateButtonClick"
+									  CssClass="w-100"
+									  Text="@(EdittingEntry ? "Uložit" : "Přidat")" />
 								</div>
 							}
 						</div>
