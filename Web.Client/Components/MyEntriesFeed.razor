@@ -1,9 +1,9 @@
 ﻿<div class="my-entries-feed flex-lg-row">
 	<div class="entries">
 		<HxTabPanel>
-			<HxTab Title="Moje">
+			<HxTab Title="Moje" ContentCssClass="h-100">
 				<Content>
-					<div class="d-flex flex-column mt-3">
+					<div class="h-100 d-flex flex-column mt-3">
 						@if (remainingPoints > 0)
 						{
 							<div class="new-entry-form w-100 mb-4">
@@ -43,7 +43,7 @@
 					</div>
 				</Content>
 			</HxTab>
-			<HxTab Title="Ostatní">
+			<HxTab Title="Ostatní" ContentCssClass="h-100">
 				<Content>
 					<div class="mt-3">
 						<ReadOnlyEntriesFeed PublicEntries="true" ReceivedEntries="true" PeriodId="PeriodId" />

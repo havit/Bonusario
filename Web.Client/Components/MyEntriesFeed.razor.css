@@ -12,3 +12,7 @@
 .points-summary-table {
     flex: 0 1 auto;
 }
+
+::deep .tab-content {
+    height: 100%;
+}
