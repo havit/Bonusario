@@ -43,7 +43,7 @@ public class PeriodSetPicker : HxSelectBase<int?, PeriodSetDto>
 	{
 		if (this.DataImpl is null)
 		{
-			this.DataImpl ??= (await PeriodSetsDataStore.GetAllAsync());
+			this.DataImpl ??= (await PeriodSetsDataStore.GetAllAsync()).OrderByDescending(p => p.Name);
 		}
 	}
 
@@ -55,7 +55,7 @@ public class PeriodSetPicker : HxSelectBase<int?, PeriodSetDto>
 			var appendPeriodSet = await ResolveItemFromId(this.Value);
 			if (appendPeriodSet != null)
 			{
-				this.DataImpl = this.DataImpl.Append(appendPeriodSet).OrderBy(u => u.Name);
+				this.DataImpl = this.DataImpl.Append(appendPeriodSet).OrderByDescending(u => u.Name);
 			}
 			else
 			{
