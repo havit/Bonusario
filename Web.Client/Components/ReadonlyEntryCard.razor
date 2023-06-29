@@ -3,7 +3,7 @@
     {
         <HxCard CssClass="@(OnClick.HasDelegate ? "readonly-card-interactive" : null)">
             <BodyTemplate>
-                <div class="row mb-2">
+                <div class="row mb-1">
                     <div class="col">
                         <div class="row flex-nowrap overflow-hidden expanded">
                             <div class="@CssClassHelper.Combine(HasTags ? "col-auto" : "col-12")">
@@ -30,7 +30,7 @@
 
                 @if (HasText)
                 {
-                    <div class="row">
+                    <div class="row mb-2">
                         <div class="col">
                             <p>@Entry.Text</p>
                         </div>
