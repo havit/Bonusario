@@ -39,10 +39,14 @@ public class AdministrationOperationsFacade : IAdministrationOperationsFacade
 
 		// Create new period following the last period.
 
-		PeriodDto newPeriod = new();
-
-		newPeriod.StartDate = newestPeriod.StartDate.AddMonths(1);
-		newPeriod.EndDate = newestPeriod.EndDate.AddMonths(1);
+		PeriodDto newPeriod = new()
+		{
+			StartDate = newestPeriod.StartDate.AddMonths(1)
+		};
+		newPeriod.EndDate = new DateTime(
+			newPeriod.StartDate.Year,
+			newPeriod.StartDate.Month,
+			DateTime.DaysInMonth(newPeriod.StartDate.Year, newPeriod.StartDate.Month));
 
 		newPeriod.Name = $"{newPeriod.StartDate.Month}/{newPeriod.StartDate.Year}";
 
