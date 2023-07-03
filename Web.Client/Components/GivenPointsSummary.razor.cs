@@ -36,7 +36,7 @@ public partial class GivenPointsSummary
 
 	private async Task LoadData()
 	{
-		if (PeriodId != null)
+		if (PeriodId != null && employees is not null)
 		{
 			var entries = await EntryFacade.GetMyGivenEntriesAsync(Dto.FromValue(PeriodId.Value));
 
