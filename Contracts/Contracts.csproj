@@ -1,18 +1,18 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net7.0</TargetFramework>
+		<TargetFramework>net8.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<AssemblyName>Havit.Bonusario.Contracts</AssemblyName>
 		<RootNamespace>Havit.Bonusario.Contracts</RootNamespace>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="FluentValidation" Version="10.4.0" />
-		<PackageReference Include="Havit.Blazor.Grpc.Core" Version="1.3.0" />
-		<PackageReference Include="Havit.Core" Version="2.0.26" />
-		<PackageReference Include="protobuf-net" Version="3.1.26" />
-		<PackageReference Include="protobuf-net.Grpc" Version="1.0.179" />
+		<PackageReference Include="FluentValidation" Version="11.8.1" />
+		<PackageReference Include="Havit.Blazor.Grpc.Core" Version="1.5.0" />
+		<PackageReference Include="Havit.Core" Version="2.0.28" />
+		<PackageReference Include="protobuf-net" Version="3.2.30" />
+		<PackageReference Include="protobuf-net.Grpc" Version="1.1.1" />
 	</ItemGroup>
 
 	<ItemGroup>

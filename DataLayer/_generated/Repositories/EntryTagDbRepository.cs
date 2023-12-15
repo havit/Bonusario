@@ -18,8 +18,8 @@ namespace Havit.Bonusario.DataLayer.Repositories;
 [System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
 public partial class EntryTagDbRepository : EntryTagDbRepositoryBase, IEntryTagRepository
 {
-	public EntryTagDbRepository(IDbContext dbContext, Havit.Bonusario.DataLayer.DataSources.IEntryTagDataSource dataSource, IEntityKeyAccessor<Havit.Bonusario.Model.EntryTag, int> entityKeyAccessor, IDataLoader dataLoader, ISoftDeleteManager softDeleteManager, IEntityCacheManager entityCacheManager)
-		: base(dbContext, dataSource, entityKeyAccessor, dataLoader, softDeleteManager, entityCacheManager)
+	public EntryTagDbRepository(IDbContext dbContext, IEntityKeyAccessor<Havit.Bonusario.Model.EntryTag, int> entityKeyAccessor, IDataLoader dataLoader, ISoftDeleteManager softDeleteManager, IEntityCacheManager entityCacheManager, IRepositoryQueryProvider repositoryQueryProvider)
+		: base(dbContext, entityKeyAccessor, dataLoader, softDeleteManager, entityCacheManager, repositoryQueryProvider)
 	{
 	}
 }

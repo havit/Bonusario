@@ -18,8 +18,8 @@ namespace Havit.Bonusario.DataLayer.Repositories;
 [System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
 public abstract class PeriodSetDbRepositoryBase : DbRepository<Havit.Bonusario.Model.PeriodSet>
 {
-	protected PeriodSetDbRepositoryBase(IDbContext dbContext, Havit.Bonusario.DataLayer.DataSources.IPeriodSetDataSource dataSource, IEntityKeyAccessor<Havit.Bonusario.Model.PeriodSet, int> entityKeyAccessor, IDataLoader dataLoader, ISoftDeleteManager softDeleteManager, IEntityCacheManager entityCacheManager)
-		: base(dbContext, dataSource, entityKeyAccessor, dataLoader, softDeleteManager, entityCacheManager)
+	protected PeriodSetDbRepositoryBase(IDbContext dbContext, IEntityKeyAccessor<Havit.Bonusario.Model.PeriodSet, int> entityKeyAccessor, IDataLoader dataLoader, ISoftDeleteManager softDeleteManager, IEntityCacheManager entityCacheManager, IRepositoryQueryProvider repositoryQueryProvider)
+		: base(dbContext, entityKeyAccessor, dataLoader, softDeleteManager, entityCacheManager, repositoryQueryProvider)
 	{
 	}
 

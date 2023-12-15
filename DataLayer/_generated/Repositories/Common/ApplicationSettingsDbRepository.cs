@@ -18,8 +18,8 @@ namespace Havit.Bonusario.DataLayer.Repositories.Common;
 [System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
 public partial class ApplicationSettingsDbRepository : ApplicationSettingsDbRepositoryBase, IApplicationSettingsRepository
 {
-	public ApplicationSettingsDbRepository(IDbContext dbContext, Havit.Bonusario.DataLayer.DataSources.Common.IApplicationSettingsDataSource dataSource, IEntityKeyAccessor<Havit.Bonusario.Model.Common.ApplicationSettings, int> entityKeyAccessor, IDataLoader dataLoader, ISoftDeleteManager softDeleteManager, IEntityCacheManager entityCacheManager)
-		: base(dbContext, dataSource, entityKeyAccessor, dataLoader, softDeleteManager, entityCacheManager)
+	public ApplicationSettingsDbRepository(IDbContext dbContext, IEntityKeyAccessor<Havit.Bonusario.Model.Common.ApplicationSettings, int> entityKeyAccessor, IDataLoader dataLoader, ISoftDeleteManager softDeleteManager, IEntityCacheManager entityCacheManager, IRepositoryQueryProvider repositoryQueryProvider)
+		: base(dbContext, entityKeyAccessor, dataLoader, softDeleteManager, entityCacheManager, repositoryQueryProvider)
 	{
 	}
 }

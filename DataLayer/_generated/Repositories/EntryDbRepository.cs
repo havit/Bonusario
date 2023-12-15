@@ -18,8 +18,8 @@ namespace Havit.Bonusario.DataLayer.Repositories;
 [System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
 public partial class EntryDbRepository : EntryDbRepositoryBase, IEntryRepository
 {
-	public EntryDbRepository(IDbContext dbContext, Havit.Bonusario.DataLayer.DataSources.IEntryDataSource dataSource, IEntityKeyAccessor<Havit.Bonusario.Model.Entry, int> entityKeyAccessor, IDataLoader dataLoader, ISoftDeleteManager softDeleteManager, IEntityCacheManager entityCacheManager)
-		: base(dbContext, dataSource, entityKeyAccessor, dataLoader, softDeleteManager, entityCacheManager)
+	public EntryDbRepository(IDbContext dbContext, IEntityKeyAccessor<Havit.Bonusario.Model.Entry, int> entityKeyAccessor, IDataLoader dataLoader, ISoftDeleteManager softDeleteManager, IEntityCacheManager entityCacheManager, IRepositoryQueryProvider repositoryQueryProvider)
+		: base(dbContext, entityKeyAccessor, dataLoader, softDeleteManager, entityCacheManager, repositoryQueryProvider)
 	{
 	}
 }
