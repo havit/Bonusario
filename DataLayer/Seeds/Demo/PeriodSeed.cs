@@ -31,7 +31,7 @@ public class PeriodSeed : DataSeed<DemoProfile>
 				Created = timeService.GetCurrentTime(),
 			});
 			date = date.AddMonths(1);
-		};
+		}
 
 		Seed(For(periods.ToArray()).PairBy(p => p.Name));
 	}
